@@ -1,4 +1,4 @@
-package msms.comp3350.msms;
+package msms.comp3350.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
