@@ -1,4 +1,4 @@
-package DomainObjects;
+package msms.comp3350.objects;
 
 public class User
 {
@@ -11,16 +11,20 @@ public class User
 	private String password;
 	private int age;
 	private Gender userGender;
-	private int subscriptionEndDate;
+	private int endYear;
+	private int endMonth;
+	private int endDay;
 	
 	//Constructor
-	public User (String name, String password, int age, String gender, int subscriptionEndDate)
+	public User (String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
 	{
 		this.name = name;
 		this.password = password;
 		this.age = age;
 		this.userGender = getGender(gender);
-		this.subscriptionEndDate = subscriptionEndDate;
+		this.endMonth = endMonth;
+		this.endDay = endDay;
+		this.endYear = endYear;
 	}
 	
 	public Gender getGender(String test)
@@ -57,9 +61,9 @@ public class User
 	public void print()
 	{
 		printUserName();
-		System.out.println("Age: " + age + "/t" +"Gender: " + userGender);
+		System.out.println("Age: " + age + "\t" +"Gender: " + userGender);
 		System.out.println("Password: " + password);
-		System.out.println("Subscription expries: " + subscriptionEndDate);
+		System.out.println("Subscription expires: " + endMonth + "/" + endDay + "/" + endYear);
 		System.out.println();
 	}
 }
