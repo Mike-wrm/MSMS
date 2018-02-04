@@ -18,6 +18,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.MovieListActivity"
+            android:label="@string/title_activity_movies" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="msms.comp3350.main.presentation.MovieListActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.UserListActivity"
+            android:label="@string/title_activity_users" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="msms.comp3350.main.presentation.UserListActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.AddActivity"
+            android:label="@string/title_activity_add" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="msms.comp3350.main.presentation.AddActivity" />
+        </activity>
     </application>
 
 </manifest>
