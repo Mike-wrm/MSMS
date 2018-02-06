@@ -44,9 +44,15 @@ public class User
 	public String getName()     {return name;}
 	public String getPass()     {return password;}
 	public int getAge()         {return age;}
-	public Gender getGender()   {return userGender;}
 	public String getEndDate()  {return endMonth + "/" + endDay + "/" + endYear;}
-
+    public String getGender() {
+        if (userGender == Gender.MALE){
+            return "male";
+        }
+        else {
+            return "female";
+        }
+    }
 
     public Boolean compareTo(String test)
 	{
