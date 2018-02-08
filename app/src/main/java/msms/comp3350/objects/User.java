@@ -19,7 +19,7 @@ public class User
 	public User (String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
 	{
 		this.name = name;
-		this.password = password;
+		this.password = password;	// this is clearly just an abstraction
 		this.age = age;
 		this.userGender = getGender(gender);
 		this.endMonth = endMonth;
