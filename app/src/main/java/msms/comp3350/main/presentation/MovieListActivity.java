@@ -1,15 +1,12 @@
 package msms.comp3350.main.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +18,7 @@ public class MovieListActivity extends Activity {
 
     // TODO change this to our "Movie" type later
     private ArrayList<String> courseList;
-    private ArrayAdapter<String> courseArrayAdapter;
+    private ArrayAdapter<String> movieArrayAdapter;
     private int selectedMoviePosition = -1;
 
     @Override
@@ -39,7 +36,7 @@ public class MovieListActivity extends Activity {
         if (result != null) {
             Messages.fatalError(this, result);
         } else {
-            courseArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, courseList) {
+            movieArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, courseList) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
@@ -54,7 +51,7 @@ public class MovieListActivity extends Activity {
             };
 
             final ListView listView = (ListView) findViewById(R.id.listMovies);
-            listView.setAdapter(courseArrayAdapter);
+            listView.setAdapter(movieArrayAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -66,8 +63,12 @@ public class MovieListActivity extends Activity {
                     } else {
                         listView.setItemChecked(position, true);
                         selectedMoviePosition = position;
-                        // TODO move to new activity, pass the the movie that we have selected
-                        //selectMovieAtPosition(position);
+
+                        Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
+                        // TODO change the passed 'selectedMoviePosition' to an instance of the actual Movie object
+                        // TODO note class Movie must implement Parcelable for this to work
+                        movieDisplay.putExtra("SelectedMovie", selectedMoviePosition);
+                        MovieListActivity.this.startActivity(movieDisplay);
                     }
                 }
             });

@@ -39,6 +39,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="msms.comp3350.main.presentation.AddActivity" />
         </activity>
+        <activity
+            android:name=".presentation.MovieDisplayActivity"
+            android:label="@string/title_activity_movie_info" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="msms.comp3350.main.presentation.MovieDisplayActivity" />
+        </activity>
+        <activity
+            android:name=".presentation.UserDisplayActivity"
+            android:label="@string/title_activity_user_info" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="msms.comp3350.main.presentation.UserDisplayActivity" />
+        </activity>
     </application>
 
 </manifest>
