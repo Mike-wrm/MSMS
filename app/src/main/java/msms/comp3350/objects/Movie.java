@@ -33,7 +33,49 @@ public class Movie
 		this.description = description;
 	}
 
-	public Category getCategory(String test)
+	public String getTitle(){return title;}
+	public int getReleaseYear() {return releaseYear;}
+	public int getUserScore() {return userScore;}
+	public String getEnd() {return endMonth + "/" + endDay + "/" + endYear;}
+	public String getDescription() {return description;}
+	public String getCategory() {
+        if (cat1 == Category.COMEDY)
+        {
+            return "comedy";
+        }
+        else if (cat1 == Category.DRAMA)
+        {
+            return "drama";
+        }
+        else if (cat1 == Category.HORROR)
+        {
+            return "horror";
+        }
+        else if (cat1 == Category.ACTION)
+        {
+            return "action";
+        }
+        else if (cat1 == Category.FANTASY)
+        {
+            return "fantasy";
+        }
+        else if (cat1 == Category.FAMILY)
+        {
+            return "family";
+        }
+        else if (cat1 == Category.RECENT)
+        {
+            return "recent";
+        }
+        else if (cat1 == Category.TRENDING)
+        {
+            return "trending";
+        }
+
+        return null;
+	}
+
+	private Category getCategory(String test)
 	{
 		if (test.equalsIgnoreCase("comedy"))
 		{
@@ -70,6 +112,11 @@ public class Movie
 
 		return null;
 	}
+
+
+
+
+
 
 	public Boolean compareTo(String test)
 	{

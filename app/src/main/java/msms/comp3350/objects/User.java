@@ -27,7 +27,7 @@ public class User
 		this.endYear = endYear;
 	}
 	
-	public Gender getGender(String test)
+	private Gender getGender(String test)
 	{
 		if (test.equalsIgnoreCase("male"))
 		{
@@ -40,8 +40,21 @@ public class User
 	
 		return null;
 	}
-	
-	public Boolean compareTo(String test)
+
+	public String getName()     {return name;}
+	public String getPass()     {return password;}
+	public int getAge()         {return age;}
+	public String getEndDate()  {return endMonth + "/" + endDay + "/" + endYear;}
+    public String getGender() {
+        if (userGender == Gender.MALE){
+            return "male";
+        }
+        else {
+            return "female";
+        }
+    }
+
+    public Boolean compareTo(String test)
 	{
 		if (test.equalsIgnoreCase(name))
 		{
