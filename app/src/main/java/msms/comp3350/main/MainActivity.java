@@ -41,9 +41,5 @@ public class MainActivity extends AppCompatActivity {
         Intent coursesIntent = new Intent(MainActivity.this, UserListActivity.class);
         MainActivity.this.startActivity(coursesIntent);
     }
-    public void buttonAddOnClick(View v) {
-        Intent coursesIntent = new Intent(MainActivity.this, AddActivity.class);
-        MainActivity.this.startActivity(coursesIntent);
-    }
 
 }

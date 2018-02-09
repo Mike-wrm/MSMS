@@ -32,13 +32,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="msms.comp3350.main.presentation.UserListActivity" />
         </activity>
-        <activity
-            android:name=".presentation.AddActivity"
-            android:label="@string/title_activity_add" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="msms.comp3350.main.presentation.AddActivity" />
-        </activity>
     </application>
 
 </manifest>
