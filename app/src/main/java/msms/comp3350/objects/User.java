@@ -1,5 +1,7 @@
 package msms.comp3350.objects;
 
+import java.util.Calendar;
+
 public class User
 {
 	enum Gender 
@@ -11,20 +13,16 @@ public class User
 	private String password;
 	private int age;
 	private Gender userGender;
-	private int endYear;
-	private int endMonth;
-	private int endDay;
-	
+	private Calendar endDate;
+
 	//Constructor
-	public User (String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
+	public User (String name, String password, int age, String gender, Calendar endDate)
 	{
 		this.name = name;
 		this.password = password;	// this is clearly just an abstraction
 		this.age = age;
 		this.userGender = getGender(gender);
-		this.endMonth = endMonth;
-		this.endDay = endDay;
-		this.endYear = endYear;
+		this.endDate = endDate;
 	}
 	
 	private Gender getGender(String test)
@@ -44,7 +42,7 @@ public class User
 	public String getName()     {return name;}
 	public String getPass()     {return password;}
 	public int getAge()         {return age;}
-	public String getEndDate()  {return endMonth + "/" + endDay + "/" + endYear;}
+	public Calendar getEndDate(){return endDate;}
     public String getGender() {
         if (userGender == Gender.MALE){
             return "male";
@@ -76,7 +74,7 @@ public class User
 		printUserName();
 		System.out.println("Age: " + age + "\t" +"Gender: " + userGender);
 		System.out.println("Password: " + password);
-		System.out.println("Subscription expires: " + endMonth + "/" + endDay + "/" + endYear);
+		System.out.println("Subscription expires: " + endDate);
 		System.out.println();
 	}
 }
