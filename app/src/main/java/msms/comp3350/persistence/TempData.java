@@ -17,18 +17,30 @@ public class TempData {
     public TempData() {
         Movie movie;
         User user;
+        ArrayList<String> drama = new ArrayList<>();
+        drama.add("DRAMA");
+        ArrayList<String> fantasy = new ArrayList<>();
+        drama.add("FANTASY");
+        ArrayList<String> horror = new ArrayList<>();
+        drama.add("HORROR");
+        ArrayList<String> action = new ArrayList<>();
+        drama.add("ACTION");
+        ArrayList<String> comedy = new ArrayList<>();
+        drama.add("COMEDY");
+
         allMovies = new ArrayList<Movie>();
         allUsers = new ArrayList<User>();
 
-        movie = new Movie("The Shawshank Redemption", 1994, 9, "DRAMA", 1, 1, 2021, "ipsum lorem");
+
+        movie = new Movie("The Shawshank Redemption", 1994, 9, drama, 1, 1, 2021, "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("The Lord of the Rings", 2001, 8, "FANTASY", 2, 2, 2022, "ipsum lorem");
+        movie = new Movie("The Lord of the Rings", 2001, 8, fantasy, 2, 2, 2022, "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("A Nightmare on Elm Street", 1984, 7, "HORROR", 3, 3, 2023, "ipsum lorem");
+        movie = new Movie("A Nightmare on Elm Street", 1984, 7, horror, 3, 3, 2023, "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("Raiders of the Lost Ark", 1981, 6, "ACTION", 4, 4, 2024, "ipsum lorem");
+        movie = new Movie("Raiders of the Lost Ark", 1981, 6, action, 4, 4, 2024, "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("A Fish Called Wanda", 1988, 5, "COMEDY", 5, 5, 2021, "ipsum lorem");
+        movie = new Movie("A Fish Called Wanda", 1988, 5, comedy, 5, 5, 2021, "ipsum lorem");
         allMovies.add(movie);
 
         user = new User("Mike McMahon", "anime4life", 21, "MALE", 1, 1, 2021);
