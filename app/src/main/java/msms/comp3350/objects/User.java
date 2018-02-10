@@ -16,12 +16,8 @@ public class User
 	private Gender userGender;
 	private Calendar endDate;
 
-	//Constructor
-<<<<<<< HEAD
-	public User (String name, String password, int age, String gender, Calendar endDate)
-=======
+
 	public User (int uID, String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
->>>>>>> objectV2.1
 	{
 		this.uID = uID;
 		this.name = name;
@@ -45,14 +41,7 @@ public class User
 		return null;
 	}
 
-<<<<<<< HEAD
-	public String getName()     {return name;}
-	public String getPass()     {return password;}
-	public int getAge()         {return age;}
-	public Calendar getEndDate(){return endDate;}
-    public String getGender() {
-        if (userGender == Gender.MALE){
-=======
+
 	public int getuID()
 	{
 		return uID;
@@ -73,16 +62,16 @@ public class User
 		return age;
 	}
 
-	public String getEndDate()
+	public Calendar getEndDate()
 	{
-		return endMonth + "/" + endDay + "/" + endYear;
+		return endDate;
 	}
 
     public String getGender()
 	{
         if (userGender == Gender.MALE)
         {
->>>>>>> objectV2.1
+
             return "male";
         }
         else
