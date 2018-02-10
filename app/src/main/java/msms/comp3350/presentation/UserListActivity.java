@@ -11,15 +11,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import msms.comp3350.business.AccessUsers;
 import msms.comp3350.main.R;
-//TODO make business classes and object methods for this
-//import msms.comp3350.main.business.AccessUsers; --> something like this
-//import msms.comp3350.main.objects.User;
+import msms.comp3350.objects.User;
 
 public class UserListActivity extends Activity {
 
     // TODO change this to our "User" type later
     private ArrayList<User> userList;
+    private AccessUsers userAccessor;
     private ArrayAdapter<User> userArrayAdapter;
 
     private int selectedUserPosition = -1;
@@ -28,14 +28,11 @@ public class UserListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO make a user list layout
-        setContentView(R.layout.activity_user_list);
+        setContentView(R.layout.activity_movie_list);
 
         userList = new ArrayList<User>();
-        // TODO change this to the method that will grab the list of users
-        String result = null;
-        for (int i = 0; i < 20; i++){
-            userList.add("User Name " + i);
-        }
+        userAccessor = new AccessUsers();
+        String result = userAccessor.getUsers(userList);
 
         // Perform error handling on getting the list of users
         if (result != null) {
@@ -48,16 +45,15 @@ public class UserListActivity extends Activity {
 
                     TextView text1 = (TextView) view.findViewById(android.R.id.text1);
 
-                    // TODO change this to corresponding "Get User Name" method from our "User" class
-                    text1.setText(userList.get(position));
+                    text1.setText(userList.get(position).getName());
 
                     return view;
                 }
             };
 
             //TODO create ID for User list
-            final ListView listView = (ListView) findViewById(R.id.ListUsers);
-            listView.setAdapter(selectedUserPosition);
+            final ListView listView = (ListView) findViewById(R.id.listMovies);
+            listView.setAdapter(userArrayAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

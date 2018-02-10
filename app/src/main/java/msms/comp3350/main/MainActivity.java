@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-import msms.comp3350.presentation.AddActivity;
 import msms.comp3350.presentation.MovieListActivity;
 import msms.comp3350.presentation.UserListActivity;
 

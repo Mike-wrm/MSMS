@@ -12,15 +12,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
+import msms.comp3350.objects.Movie;
 //import msms.comp3350.main.business.AccessMovies; --> something like this
 //import msms.comp3350.main.objects.Movie;
 
 public class MovieListActivity extends Activity {
 
-    // TODO change this to our "Movie" type later
     private ArrayList<Movie> movieList;
     private ArrayAdapter<Movie> movieArrayAdapter;
+    private AccessMovies movieAccessor;
     private int selectedMoviePosition = -1;
 
 
@@ -30,11 +32,9 @@ public class MovieListActivity extends Activity {
         setContentView(R.layout.activity_movie_list);
 
         movieList = new ArrayList<Movie>();
-        // TODO change this to the method that will grab the list of movies from BUSINESS
-        String result = null;
-        for (int i = 0; i < 20; i++){
-            movieList.add("Movie Title " + i);
-        }
+        // use accessor to grab the list of movies from BUSINESS
+        movieAccessor = new AccessMovies();
+        String result = movieAccessor.getMovies(movieList);
 
         // Perform error handling on getting the list of movies
         if (result != null) {
@@ -47,8 +47,7 @@ public class MovieListActivity extends Activity {
 
                     TextView text1 = (TextView) view.findViewById(android.R.id.text1);
 
-                    // TODO change this to corresponding "Get Movie Title" method from our "Movie" class
-                    text1.setText(movieList.get(position));
+                    text1.setText(movieList.get(position).getTitle());
 
                     return view;
                 }
