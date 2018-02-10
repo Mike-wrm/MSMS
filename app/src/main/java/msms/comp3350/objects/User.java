@@ -6,7 +6,8 @@ public class User
 	{
 	    MALE, FEMALE
 	}
-	
+
+	private int uID;
 	private String name;
 	private String password;
 	private int age;
@@ -16,8 +17,9 @@ public class User
 	private int endDay;
 	
 	//Constructor
-	public User (String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
+	public User (int uID, String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
 	{
+		this.uID = uID;
 		this.name = name;
 		this.password = password;	// this is clearly just an abstraction
 		this.age = age;
@@ -41,24 +43,58 @@ public class User
 		return null;
 	}
 
-	public String getName()     {return name;}
-	public String getPass()     {return password;}
-	public int getAge()         {return age;}
-	public String getEndDate()  {return endMonth + "/" + endDay + "/" + endYear;}
-    public String getGender() {
-        if (userGender == Gender.MALE){
+	public int getuID()
+	{
+		return uID;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getPass()
+	{
+		return password;
+	}
+
+	public int getAge()
+	{
+		return age;
+	}
+
+	public String getEndDate()
+	{
+		return endMonth + "/" + endDay + "/" + endYear;
+	}
+
+    public String getGender()
+	{
+        if (userGender == Gender.MALE)
+        {
             return "male";
         }
-        else {
+        else
+		{
             return "female";
         }
     }
 
-    public Boolean compareTo(String test)
+    public boolean equals (Object object)
 	{
-		if (test.equalsIgnoreCase(name))
+		User test;
+
+		if (object instanceof User)
 		{
-			return true;
+			test = (User) object;
+
+			if (test.getuID() == uID)
+			{
+				if ((test.getName()).equals(name))
+				{
+					return true;
+				}
+			}
 		}
 		
 		return false;

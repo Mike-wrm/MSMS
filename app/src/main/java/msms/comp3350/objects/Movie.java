@@ -8,6 +8,7 @@ public class Movie
 	    COMEDY, DRAMA, HORROR, ACTION, FANTASY, FAMILY, RECENT, TRENDING
 	}
 
+	private int mID;
 	private String title;
 	private int releaseYear;
 	private int userScore;
@@ -33,12 +34,38 @@ public class Movie
 		this.description = description;
 	}
 
-	public String getTitle(){return title;}
-	public int getReleaseYear() {return releaseYear;}
-	public int getUserScore() {return userScore;}
-	public String getEnd() {return endMonth + "/" + endDay + "/" + endYear;}
-	public String getDescription() {return description;}
-	public String getCategory() {
+	public int getmID()
+    {
+	    return mID;
+    }
+
+	public String getTitle()
+    {
+        return title;
+    }
+
+	public int getReleaseYear()
+    {
+	    return releaseYear;
+	}
+
+	public int getUserScore()
+    {
+	    return userScore;
+    }
+
+	public String getEnd()
+    {
+        return endMonth + "/" + endDay + "/" + endYear;
+    }
+
+	public String getDescription()
+    {
+        return description;
+    }
+
+	public String getCategory()
+    {
         if (cat1 == Category.COMEDY)
         {
             return "comedy";
@@ -114,15 +141,24 @@ public class Movie
 	}
 
 
-
-
-
-
-	public Boolean compareTo(String test)
+	public boolean equals (Object object)
 	{
-		if (test.equalsIgnoreCase(title))
+		Movie test;
+
+		if (object instanceof Movie)
 		{
-			return true;
+			test = (Movie) object;
+
+			if (test.getmID() == mID)
+			{
+				if ((test.getTitle()).equals(title))
+				{
+				    if ((test.getReleaseYear()) == releaseYear)
+				    {
+                        return true;
+                    }
+				}
+			}
 		}
 
 		return false;
@@ -131,7 +167,7 @@ public class Movie
 	//Prints just the title (when clicking to see entire list of movies)
 	public void printTitle()
 	{
-		System.out.println(title);
+	    System.out.println(title);
 	}
 
 	//Prints all movie details (when movie clicked on in UI)
