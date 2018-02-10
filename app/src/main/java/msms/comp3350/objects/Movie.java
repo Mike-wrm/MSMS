@@ -26,6 +26,10 @@ public class Movie
 		this.description = description;
 	}
 
+	public int getmID()
+	{
+		return mID;
+	}
 	public String getTitle()
 	{
 		return title;

@@ -46,28 +46,28 @@ public class TempData {
         allUsers = new ArrayList<User>();
 
 
-        movie = new Movie("The Shawshank Redemption", 1994, 9, drama, date1, "ipsum lorem");
+        movie = new Movie(1, "The Shawshank Redemption", 1994, 9, drama, date1, "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("The Lord of the Rings", 2001, 8, fantasy, date2 , "ipsum lorem");
+        movie = new Movie(2, "The Lord of the Rings", 2001, 8, fantasy, date2 , "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("A Nightmare on Elm Street", 1984, 7, horror, date3, "ipsum lorem");
+        movie = new Movie(3, "A Nightmare on Elm Street", 1984, 7, horror, date3, "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("Raiders of the Lost Ark", 1981, 6, action, date4 , "ipsum lorem");
+        movie = new Movie(4, "Raiders of the Lost Ark", 1981, 6, action, date4 , "ipsum lorem");
         allMovies.add(movie);
-        movie = new Movie("A Fish Called Wanda", 1988, 5, comedy, date5 ,"ipsum lorem");
+        movie = new Movie(5, "A Fish Called Wanda", 1988, 5, comedy, date5 ,"ipsum lorem");
         allMovies.add(movie);
 
-        user = new User("Mike McMahon", "anime4life", 21, "MALE", date1);
+        user = new User(1, "Mike McMahon", "anime4life", 21, "MALE", date1);
         allUsers.add(user);
-        user = new User("Chris Scatliff", "getoffmylawn", 82, "MALE", date2);
+        user = new User(2, "Chris Scatliff", "getoffmylawn", 82, "MALE", date2);
         allUsers.add(user);
-        user = new User("Andrew Kozar", "iheartmybeard", 23, "MALE", date3);
+        user = new User(3, "Andrew Kozar", "iheartmybeard", 23, "MALE", date3);
         allUsers.add(user);
-        user = new User("Alex Carriere", "supertester", 24, "MALE", date4);
+        user = new User(4, "Alex Carriere", "supertester", 24, "MALE", date4);
         allUsers.add(user);
-        user = new User("Jaivir Bali", "walmartisevil", 25, "MALE", date5);
+        user = new User(5, "Jaivir Bali", "walmartisevil", 25, "MALE", date5);
         allUsers.add(user);
-        user = new User("Diana Prince", "wonderwoman", 86, "FEMALE", date6);
+        user = new User(6, "Diana Prince", "wonderwoman", 86, "FEMALE", date6);
         allUsers.add(user);
     }
 

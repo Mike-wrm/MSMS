@@ -4,43 +4,24 @@ import java.util.Calendar;
 
 public class User
 {
-	enum Gender 
-	{
-	    MALE, FEMALE
-	}
 
 	private int uID;
 	private String name;
 	private String password;
 	private int age;
-	private Gender userGender;
+	private String userGender;
 	private Calendar endDate;
 
 
-	public User (int uID, String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
+	public User (int uID, String name, String password, int age, String gender, Calendar endDate)
 	{
 		this.uID = uID;
 		this.name = name;
 		this.password = password;	// this is clearly just an abstraction
 		this.age = age;
-		this.userGender = getGender(gender);
+		this.userGender = gender;
 		this.endDate = endDate;
 	}
-	
-	private Gender getGender(String test)
-	{
-		if (test.equalsIgnoreCase("male"))
-		{
-			return Gender.MALE;
-		}
-		else if (test.equalsIgnoreCase("female"))
-		{
-			return Gender.FEMALE;
-		}
-	
-		return null;
-	}
-
 
 	public int getuID()
 	{
@@ -69,15 +50,7 @@ public class User
 
     public String getGender()
 	{
-        if (userGender == Gender.MALE)
-        {
-
-            return "male";
-        }
-        else
-		{
-            return "female";
-        }
+  		return userGender;
     }
 
     public boolean equals (Object object)
