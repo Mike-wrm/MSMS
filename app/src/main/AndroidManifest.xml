@@ -19,18 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.MovieListActivity"
+            android:name="msms.comp3350.presentation.MovieListActivity"
             android:label="@string/title_activity_movies" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="msms.comp3350.main.presentation.MovieListActivity" />
+                android:value="msms.comp3350.presentation.MovieListActivity" />
         </activity>
         <activity
-            android:name=".presentation.UserListActivity"
+            android:name="msms.comp3350.presentation.UserListActivity"
             android:label="@string/title_activity_users" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="msms.comp3350.main.presentation.UserListActivity" />
+                android:value="msms.comp3350.presentation.UserListActivity" />
         </activity>
     </application>
 

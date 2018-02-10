@@ -1,4 +1,4 @@
-package msms.comp3350.main.presentation;
+package msms.comp3350.presentation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
