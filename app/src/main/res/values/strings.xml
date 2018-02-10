@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">MSMS</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_movies">MSMS: Movies</string>
+    <string name="title_activity_users">MSMS: Users</string>
+    <string name="title_activity_add">MSMS: Add</string>
+    <string name="title_activity_movie_info">MSMS: Movie Info</string>
+    <string name="title_activity_user_info">MSMS: User Info</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_users">Users</string>
+    <string name="title_add">Add</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
 </resources>
