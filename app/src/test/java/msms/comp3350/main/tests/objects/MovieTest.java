@@ -14,33 +14,37 @@ public class MovieTest extends TestCase{
     public MovieTest(String arg0) {super(arg0);}
 
     public void testMovie(){
-        Movie movie;
-        ArrayList<String> categories = new ArrayList<>();
-        categories.add("family");
+        Movie family;
+        Movie comedy;
+
+        ArrayList<String> familyCat = new ArrayList<>();
+        familyCat.add("family");
+        ArrayList<String> comedyCat = new ArrayList<>();
+        comedyCat.add("comedy");
+
         Calendar endDate = Calendar.getInstance();
         endDate.set(5,2,20);
 
 
         System.out.println("\nStarting Movie tests");
 
-        movie = new Movie("Shrek", 2001, 84, categories, endDate, "Ogre Saves Princess but gets unexpected suprise");
+        family = new Movie(1, "Shrek", 2001, 84, familyCat, endDate, "Ogre Saves Princess but gets unexpected suprise");
+        comedy = new Movie(2, "Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
+
+        assertNotNull(family);
+
+        assertEquals(1, family.getmID());
+        assertEquals("Shrek", family.getTitle());
+        assertEquals(2001, family.getReleaseYear());
+        assertEquals(84, family.getUserScore());
+        assertEquals(endDate, family.getEndDate());
+        assertEquals("Ogre Saves Princess but gets unexpected suprise", family.getDescription());
+
+        assertEquals(familyCat, family.getCategory());
 
 
-
-
-        assertNotNull(movie);
-
-        assertEquals("Shrek", movie.getTitle());
-        assertEquals(2001, movie.getReleaseYear());
-        assertEquals(84, movie.getUserScore());
-        assertEquals(endDate, movie.getEndDate());
-        assertEquals("Ogre Saves Princess but gets unexpected suprise", movie.getDescription());
-
-        assertEquals(categories, movie.getCategory());
-
-
-        // assertTrue(movie.compareTo(movie.getTitle()));
-        //assertFalse(movie.compareTo(comedy.getTitle()));
+        assertTrue(family.compareTo(family.getTitle()));
+        assertFalse(family.compareTo(comedy.getTitle()));
 
     }
 

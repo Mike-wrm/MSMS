@@ -20,10 +20,11 @@ public class UserTest extends TestCase{
 
             System.out.println("\nStarting testUser");
 
-            user = new User("Alex Carriere", "password", 21, "male", endDate);
-            user2 = new User("Alexa Carriere", "pass123", 21, "female", endDate);
+            user = new User(1,"Alex Carriere", "password", 21, "male", endDate);
+            user2 = new User(2,"Alexa Carriere", "pass123", 21, "female", endDate);
 
             assertNotNull(user);
+            assertEquals(1, user.getuID());
             assertEquals("Alex Carriere", user.getName());
             assertEquals("password", user.getPass());
             assertEquals(21, user.getAge());
@@ -31,8 +32,8 @@ public class UserTest extends TestCase{
             assertEquals("female", user2.getGender());
             assertEquals(endDate, user.getEndDate());
 
-            assertTrue(user.compareTo(user.getName()));
-            assertFalse(user.compareTo(user2.getName()));
+            assertTrue(user.equals(user));
+            assertFalse(user.equals(user2));
 
 
 
