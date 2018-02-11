@@ -21,4 +21,10 @@ public class AccessUsers {
         users.clear();
         return dataAccess.getUsersAll(users);
     }
+
+    public String insertUser(User currentUser) { return dataAccess.insertUser(currentUser); }
+
+    public String updateUser(User currentUser) { return dataAccess.updateUser(currentUser); }
+
+    public String deleteUser(User currentUser) { return dataAccess.deleteUser(currentUser); }
 }

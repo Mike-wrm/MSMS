@@ -12,8 +12,8 @@ import msms.comp3350.objects.User;
 
 public class TempData {
 
-    private ArrayList<Movie> allMovies;
-    private ArrayList<User> allUsers;
+    private ArrayList<Movie> movies;
+    private ArrayList<User> users;
 
     public TempData() {
         Movie movie;
@@ -69,15 +69,73 @@ public class TempData {
         allUsers.add(user);
         user = new User(6, "Diana Prince", "wonderwoman", 86, "FEMALE", date6);
         allUsers.add(user);
-    }
-
-    public String getMoviesAll(ArrayList<Movie> movies) {
-        movies.addAll(allMovies);
+    public String getMoviesAll(ArrayList<Movie> currentMovies) {
+        currentMovies.addAll(movies);
         return null;
     }
 
-    public String getUsersAll(ArrayList<User> users) {
-        users.addAll(allUsers);
+    public String insertMovie(Movie currentMovie) {
+        int index = movies.indexOf(currentMovie);
+        if(index != -1) {
+            return "'" + currentMovie.getTitle() + "' is already added.";
+        } else {
+            movies.add(currentMovie);
+        }
+        return null;
+    }
+
+    public String updateMovie(Movie currentMovie) {
+        int index = movies.indexOf(currentMovie);
+        if(index == -1) {
+            return "'" + currentMovie.getTitle() + "' cannot be found.";
+        } else {
+            movies.set(index, currentMovie);
+        }
+        return null;
+    }
+
+    public String deleteMovie(Movie currentMovie) {
+        int index = movies.indexOf(currentMovie);
+        if(index == -1) {
+            return "'" + currentMovie.getTitle() + "' cannot be found.";
+        } else {
+            movies.remove(index);
+        }
+        return null;
+    }
+
+    public String getUsersAll(ArrayList<User> currentUsers) {
+        currentUsers.addAll(users);
+        return null;
+    }
+
+    public String insertUser(User currentUser) {
+        int index = users.indexOf(currentUser);
+        if(index != -1) {
+            return "'" + currentUser.getName() + "' is already added.";
+        } else {
+            users.add(currentUser);
+        }
+        return null;
+    }
+
+    public String updateUser(User currentUser) {
+        int index = users.indexOf(currentUser);
+        if(index == -1) {
+            return "'" + currentUser.getName() + "' cannot be found.";
+        } else {
+            users.set(index, currentUser);
+        }
+        return null;
+    }
+
+    public String deleteUser(User currentUser) {
+        int index = users.indexOf(currentUser);
+        if(index == -1) {
+            return "'" + currentUser.getName() + "' cannot be found.";
+        } else {
+            movies.remove(index);
+        }
         return null;
     }
 }
