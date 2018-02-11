@@ -9,7 +9,7 @@ public class User
 	private String name;
 	private String password;
 	private int age;
-	private String userGender;
+	private String gender;
 	private Calendar endDate;
 
 
@@ -19,41 +19,61 @@ public class User
 		this.name = name;
 		this.password = password;	// this is clearly just an abstraction
 		this.age = age;
-		this.userGender = gender;
+		this.gender = gender;
 		this.endDate = endDate;
 	}
 
+	//getters
 	public int getuID()
 	{
 		return uID;
 	}
-
 	public String getName()
 	{
 		return name;
 	}
-
 	public String getPass()
 	{
 		return password;
 	}
-
 	public int getAge()
 	{
 		return age;
 	}
-
 	public Calendar getEndDate()
 	{
 		return endDate;
 	}
-
     public String getGender()
 	{
-  		return userGender;
+  		return gender;
     }
 
-    public boolean equals (Object object)
+    //setters
+	public void setuID(int uID)
+	{
+		this.uID = uID;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+    public void setPass(String password)
+	{
+		this.password = password;
+	}
+	public void setAge(int age)
+	{
+		this.age = age;
+	}
+	public void setEndDate(Calendar endDate){
+		this.endDate = endDate;
+	}
+	public void setGender(String gender){
+		this.gender = gender;
+	}
+
+	public boolean equals (Object object)
 	{
 		User test;
 

@@ -26,6 +26,7 @@ public class Movie
 		this.description = description;
 	}
 
+	// getters
 	public int getmID()
 	{
 		return mID;
@@ -42,6 +43,10 @@ public class Movie
 	{
 		return userScore;
 	}
+	public ArrayList<String> getCategory()
+	{
+		return category;
+	}
 	public Calendar getEndDate()
 	{
 		return endDate;
@@ -50,15 +55,35 @@ public class Movie
 	{
 		return description;
 	}
-	public ArrayList<String> getCategory()
-	{
-		return category;
-	}
-	public Calendar getEnd()
-    {
-        return endDate;
-    }
 
+	// setters
+	public void setmID(int mID)
+	{
+		this.mID = mID;
+	}
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+	public void setReleaseYear(int releaseYear)
+	{
+		this.releaseYear = releaseYear;
+	}
+	public void setUserScore(int userScore)
+	{
+		this.userScore = userScore;
+	}
+	public void setCategory(ArrayList<String> category){
+		this.category = category;
+	}
+	public void setEndDate(Calendar endDate)
+	{
+		this.endDate = endDate;
+	}
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
 
 	public Boolean compareTo(String test)
 	{
