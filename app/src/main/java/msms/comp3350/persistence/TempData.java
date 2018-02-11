@@ -30,45 +30,46 @@ public class TempData {
         drama.add("COMEDY");
 
         Calendar date1 = Calendar.getInstance(); // Obviously, each object  should get their own date object
-        date1.set(2021,1,1);  // But for the sake of my time and sanity, I'm making them share
+        date1.set(2021, 1, 1);  // But for the sake of my time and sanity, I'm making them share
         Calendar date2 = Calendar.getInstance();
-        date2.set(2022,2,2);
+        date2.set(2022, 2, 2);
         Calendar date3 = Calendar.getInstance();
-        date3.set(2023,3,3);
+        date3.set(2023, 3, 3);
         Calendar date4 = Calendar.getInstance();
-        date4.set(2024,4,4);
+        date4.set(2024, 4, 4);
         Calendar date5 = Calendar.getInstance();
-        date1.set(2025,5,5);
+        date1.set(2025, 5, 5);
         Calendar date6 = Calendar.getInstance();
-        date1.set(2025,6,6);
+        date1.set(2025, 6, 6);
 
-        allMovies = new ArrayList<Movie>();
-        allUsers = new ArrayList<User>();
+        movies = new ArrayList<Movie>();
+        users = new ArrayList<User>();
 
 
         movie = new Movie(1, "The Shawshank Redemption", 1994, 9, drama, date1, "ipsum lorem");
-        allMovies.add(movie);
-        movie = new Movie(2, "The Lord of the Rings", 2001, 8, fantasy, date2 , "ipsum lorem");
-        allMovies.add(movie);
+        movies.add(movie);
+        movie = new Movie(2, "The Lord of the Rings", 2001, 8, fantasy, date2, "ipsum lorem");
+        movies.add(movie);
         movie = new Movie(3, "A Nightmare on Elm Street", 1984, 7, horror, date3, "ipsum lorem");
-        allMovies.add(movie);
-        movie = new Movie(4, "Raiders of the Lost Ark", 1981, 6, action, date4 , "ipsum lorem");
-        allMovies.add(movie);
-        movie = new Movie(5, "A Fish Called Wanda", 1988, 5, comedy, date5 ,"ipsum lorem");
-        allMovies.add(movie);
+        movies.add(movie);
+        movie = new Movie(4, "Raiders of the Lost Ark", 1981, 6, action, date4, "ipsum lorem");
+        movies.add(movie);
+        movie = new Movie(5, "A Fish Called Wanda", 1988, 5, comedy, date5, "ipsum lorem");
+        movies.add(movie);
 
         user = new User(1, "Mike McMahon", "anime4life", 21, "MALE", date1);
-        allUsers.add(user);
+        users.add(user);
         user = new User(2, "Chris Scatliff", "getoffmylawn", 82, "MALE", date2);
-        allUsers.add(user);
+        users.add(user);
         user = new User(3, "Andrew Kozar", "iheartmybeard", 23, "MALE", date3);
-        allUsers.add(user);
+        users.add(user);
         user = new User(4, "Alex Carriere", "supertester", 24, "MALE", date4);
-        allUsers.add(user);
+        users.add(user);
         user = new User(5, "Jaivir Bali", "walmartisevil", 25, "MALE", date5);
-        allUsers.add(user);
+        users.add(user);
         user = new User(6, "Diana Prince", "wonderwoman", 86, "FEMALE", date6);
-        allUsers.add(user);
+        users.add(user);
+    }
     public String getMoviesAll(ArrayList<Movie> currentMovies) {
         currentMovies.addAll(movies);
         return null;
