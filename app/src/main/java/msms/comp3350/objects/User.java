@@ -103,7 +103,7 @@ public class User
 	public void print()
 	{
 		printUserName();
-		System.out.println("Age: " + age + "\t" +"Gender: " + userGender);
+		System.out.println("Age: " + age + "\t" +"Gender: " + gender);
 		System.out.println("Password: " + password);
 		System.out.println("Subscription expires: " + endDate);
 		System.out.println();
