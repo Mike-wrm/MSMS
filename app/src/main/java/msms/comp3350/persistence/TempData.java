@@ -135,7 +135,7 @@ public class TempData {
         if(index == -1) {
             return "'" + currentUser.getName() + "' cannot be found.";
         } else {
-            movies.remove(index);
+            users.remove(index);
         }
         return null;
     }
