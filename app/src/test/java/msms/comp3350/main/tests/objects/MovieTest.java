@@ -21,8 +21,10 @@ public class MovieTest extends TestCase{
         comedyCat.add("comedy");
 
         Calendar endDate = Calendar.getInstance();
-        endDate.set(5,2,20);
+        endDate.set(2020,2,20);
 
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(2021,3,15);
 
         System.out.println("\nStarting Movie tests");
 
@@ -31,16 +33,32 @@ public class MovieTest extends TestCase{
 
         assertNotNull(family);
 
+        //Testing the getters
         assertEquals(1, family.getmID());
         assertEquals("Shrek", family.getTitle());
         assertEquals(2001, family.getReleaseYear());
         assertEquals(84, family.getUserScore());
         assertEquals(endDate, family.getEndDate());
         assertEquals("Ogre Saves Princess but gets unexpected suprise", family.getDescription());
-
         assertEquals(familyCat, family.getCategory());
 
+        //Testing the setters
+        family.setmID(3);
+        assertEquals(3, family.getmID());
+        family.setTitle("newMovie");
+        assertEquals("newMovie", family.getTitle());
+        family.setReleaseYear(2002);
+        assertEquals(2002, family.getReleaseYear());
+        family.setUserScore(85);
+        assertEquals(85, family.getUserScore());
+        family.setEndDate(newDate);
+        assertEquals(newDate, family.getEndDate());
+        family.setDescription("New Description");
+        assertEquals("New Description", family.getDescription());
+        family.setCategory(comedyCat);
+        assertEquals(comedyCat, family.getCategory());
 
+        //testing the equals
         assertTrue(family.compareTo(family.getTitle()));
         assertFalse(family.compareTo(comedy.getTitle()));
 
