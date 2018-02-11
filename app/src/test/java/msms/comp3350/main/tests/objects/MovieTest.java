@@ -3,10 +3,8 @@
 package msms.comp3350.main.tests.objects;
 
 import junit.framework.TestCase;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import msms.comp3350.objects.Movie;
 
 public class MovieTest extends TestCase{

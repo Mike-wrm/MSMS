@@ -1,9 +1,7 @@
 package msms.comp3350.main.tests.objects;
 
 import junit.framework.TestCase;
-
 import java.util.Calendar;
-
 import msms.comp3350.objects.User;
 
 public class UserTest extends TestCase{
