@@ -2,12 +2,28 @@
     <string name="app_name">MSMS</string>
     <string name="title_activity_movies">MSMS: Movies</string>
     <string name="title_activity_users">MSMS: Users</string>
-    <string name="title_activity_add">MSMS: Add</string>
     <string name="title_activity_movie_info">MSMS: Movie Info</string>
     <string name="title_activity_user_info">MSMS: User Info</string>
     <string name="title_movies">Movies</string>
     <string name="title_users">Users</string>
-    <string name="title_add">Add</string>
     <string name="fatalError">Fatal error</string>
     <string name="warning">Warning</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="movie_name">Movie Name:</string>
+    <string name="movie_genre">Genre:</string>
+    <string-array name="movie_genres">
+        <item>None</item>
+        <item>Comedy</item>
+        <item>Drama</item>
+        <item>Horror</item>
+        <item>Action</item>
+        <item>Fantasy</item>
+        <item>Family</item>
+        <item>Recent</item>
+        <item>Trending</item>
+    </string-array>
+    <string name="ok">OK</string>
+    <string name="movie_length">Length (min):</string>
+    <string name="movie_genre2">Genre 2 (optional):</string>
+    <string name="movie_genre3">Genre 3 (optional):</string>
 </resources>

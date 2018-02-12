@@ -1,6 +1,7 @@
 package msms.comp3350.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import msms.comp3350.objects.User;
 
 public class UserListActivity extends Activity {
 
-    // TODO change this to our "User" type later
     private ArrayList<User> userList;
     private AccessUsers userAccessor;
     private ArrayAdapter<User> userArrayAdapter;
@@ -27,8 +27,7 @@ public class UserListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO make a user list layout
-        setContentView(R.layout.activity_movie_list);
+        setContentView(R.layout.activity_user_list);
 
         userList = new ArrayList<User>();
         userAccessor = new AccessUsers();
@@ -51,8 +50,7 @@ public class UserListActivity extends Activity {
                 }
             };
 
-            //TODO create ID for User list
-            final ListView listView = (ListView) findViewById(R.id.listMovies);
+            final ListView listView = (ListView) findViewById(R.id.listUsers);
             listView.setAdapter(userArrayAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,8 +63,11 @@ public class UserListActivity extends Activity {
                     } else {
                         listView.setItemChecked(position, true);
                         selectedUserPosition = position;
-                        // TODO move to new activity, pass the the user that we have selected
-                        //selectUserAtPosition(position);
+
+                        Intent userDisplay = new Intent(getApplicationContext(), UserDisplayActivity.class);
+                        // note class User must implement Parcelable for this to work
+                        userDisplay.putExtra("SelectedUser", userList.get(position));
+                        UserListActivity.this.startActivity(userDisplay);
                     }
                 }
             });
