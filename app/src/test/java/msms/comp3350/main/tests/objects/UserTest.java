@@ -1,6 +1,7 @@
 package msms.comp3350.main.tests.objects;
 
 import junit.framework.TestCase;
+import java.util.Calendar;
 import msms.comp3350.objects.User;
 
 public class UserTest extends TestCase{
@@ -12,23 +13,43 @@ public class UserTest extends TestCase{
             User user;
             User user2;
 
+            Calendar endDate = Calendar.getInstance();
+            endDate.set(2020,11,19);
+
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(2022,12,20);
+
             System.out.println("\nStarting testUser");
 
-            user = new User("Alex Carriere", "password", 21, "male", 11, 21, 2019);
-            user2 = new User("Alexa Carriere", "pass123", 21, "female", 12, 15, 2020);
+            user = new User(1,"John Doe", "password", 21, 'm', endDate);
+            user2 = new User(2, "Jane Doe", "pass", 22, 'f', endDate);
 
             assertNotNull(user);
-            assertEquals("Alex Carriere", user.getName());
+
+            // testing the getters
+            assertEquals(1, user.getuID());
+            assertEquals("John Doe", user.getName());
             assertEquals("password", user.getPass());
             assertEquals(21, user.getAge());
-            assertEquals("male", user.getGender());
-            assertEquals("female", user2.getGender());
-            assertEquals("11/21/2019", user.getEndDate());
+            assertEquals('m', user.getGender());
+            assertEquals(endDate, user.getEndDate());
 
-            assertTrue(user.compareTo(user.getName()));
-            assertFalse(user.compareTo(user2.getName()));
+            //testing the setters
+            user.setuID(3);
+            assertEquals(3, user.getuID());
+            user.setName("newName");
+            assertEquals("newName", user.getName());
+            user.setPass("newPass");
+            assertEquals("newPass", user.getPass());
+            user.setAge(22);
+            assertEquals(22, user.getAge());
+            user.setGender('f');
+            assertEquals('f', user.getGender());
+            user.setEndDate(newDate);
+            assertEquals(newDate, user.getEndDate());
 
-
+            assertTrue(user.equals(user));
+            assertFalse(user.equals(user2));
 
         }
 }

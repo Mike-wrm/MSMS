@@ -1,64 +1,96 @@
 package msms.comp3350.objects;
 
-public class User
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.Calendar;
+
+public class User implements Parcelable
 {
-	enum Gender 
-	{
-	    MALE, FEMALE
-	}
-	
+
+	private int uID;
 	private String name;
 	private String password;
 	private int age;
-	private Gender userGender;
-	private int endYear;
-	private int endMonth;
-	private int endDay;
-	
-	//Constructor
-	public User (String name, String password, int age, String gender, int endMonth, int endDay, int endYear)
+	private char gender;
+	private Calendar endDate;
+
+
+	public User (int uID, String name, String password, int age, char gender, Calendar endDate)
 	{
+		this.uID = uID;
 		this.name = name;
 		this.password = password;	// this is clearly just an abstraction
 		this.age = age;
-		this.userGender = getGender(gender);
-		this.endMonth = endMonth;
-		this.endDay = endDay;
-		this.endYear = endYear;
-	}
-	
-	private Gender getGender(String test)
-	{
-		if (test.equalsIgnoreCase("male"))
-		{
-			return Gender.MALE;
-		}
-		else if (test.equalsIgnoreCase("female"))
-		{
-			return Gender.FEMALE;
-		}
-	
-		return null;
+		this.gender = gender;
+		this.endDate = endDate;
 	}
 
-	public String getName()     {return name;}
-	public String getPass()     {return password;}
-	public int getAge()         {return age;}
-	public String getEndDate()  {return endMonth + "/" + endDay + "/" + endYear;}
-    public String getGender() {
-        if (userGender == Gender.MALE){
-            return "male";
-        }
-        else {
-            return "female";
-        }
+	//getters
+	public int getuID()
+	{
+		return uID;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public String getPass()
+	{
+		return password;
+	}
+	public int getAge()
+	{
+		return age;
+	}
+	public Calendar getEndDate()
+	{
+		return endDate;
+	}
+    public char getGender()
+	{
+  		return gender;
     }
 
-    public Boolean compareTo(String test)
+    //setters
+	public void setuID(int uID)
 	{
-		if (test.equalsIgnoreCase(name))
+		this.uID = uID;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+    public void setPass(String password)
+	{
+		this.password = password;
+	}
+	public void setAge(int age)
+	{
+		this.age = age;
+	}
+	public void setEndDate(Calendar endDate){
+		this.endDate = endDate;
+	}
+	public void setGender(char gender){
+		this.gender = gender;
+	}
+
+	public boolean equals (Object object)
+	{
+		User test;
+
+		if (object instanceof User)
 		{
-			return true;
+			test = (User) object;
+
+			if (test.getuID() == uID)
+			{
+				if ((test.getName()).equals(name))
+				{
+					return true;
+				}
+			}
 		}
 		
 		return false;
@@ -74,9 +106,53 @@ public class User
 	public void print()
 	{
 		printUserName();
-		System.out.println("Age: " + age + "\t" +"Gender: " + userGender);
+		System.out.println("Age: " + age + "\t" +"Gender: " + gender);
 		System.out.println("Password: " + password);
-		System.out.println("Subscription expires: " + endMonth + "/" + endDay + "/" + endYear);
+		System.out.println("Subscription expires: " + endDate);
 		System.out.println();
 	}
+
+	// Code for implementing Parcelable
+    protected User(Parcel in)
+    {
+        uID = in.readInt();
+        name = in.readString();
+        password = in.readString();
+        age = in.readInt();
+        gender = (char) in.readValue(char.class.getClassLoader());
+        endDate = (Calendar) in.readValue(Calendar.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeInt(uID);
+        dest.writeString(name);
+        dest.writeString(password);
+        dest.writeInt(age);
+        dest.writeValue(gender);
+        dest.writeValue(endDate);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>()
+    {
+        @Override
+        public User createFromParcel(Parcel in)
+        {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size)
+        {
+            return new User[size];
+        }
+    };
 }

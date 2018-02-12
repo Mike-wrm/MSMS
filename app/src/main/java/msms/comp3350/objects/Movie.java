@@ -1,122 +1,92 @@
 package msms.comp3350.objects;
 
-public class Movie
-{
-	//Implementation of genres for now...
-	enum Category
-	{
-	    COMEDY, DRAMA, HORROR, ACTION, FANTASY, FAMILY, RECENT, TRENDING
-	}
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
+public class Movie implements Parcelable
+{
+
+	private int mID;
 	private String title;
 	private int releaseYear;
 	private int userScore;
-	private Category cat1;
-	private Category cat2;
-	private Category cat3;
-	private int endYear;
-	private int endMonth;
-	private int endDay;
+	private ArrayList<String> category = new ArrayList<>();
+	private Calendar endDate;
 	private String description;
 
-	//Constructor 1 (only 1 category) --> need more for additional possibilities
-	public Movie (String title, int releaseYear, int userScore, String category1, int endMonth, int endDay, int endYear, String description)
+
+	public Movie (int mID, String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
 	{
+		this.mID = mID;
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.userScore = userScore;
-		this.cat1 = getCategory(category1);
-		cat2 = cat3 = null;						//for now...
-		this.endMonth = endMonth;
-		this.endDay = endDay;
-		this.endYear = endYear;
+		this.category = category;
+		this.endDate = endDate;
 		this.description = description;
 	}
 
-	public String getTitle(){return title;}
-	public int getReleaseYear() {return releaseYear;}
-	public int getUserScore() {return userScore;}
-	public String getEnd() {return endMonth + "/" + endDay + "/" + endYear;}
-	public String getDescription() {return description;}
-	public String getCategory() {
-        if (cat1 == Category.COMEDY)
-        {
-            return "comedy";
-        }
-        else if (cat1 == Category.DRAMA)
-        {
-            return "drama";
-        }
-        else if (cat1 == Category.HORROR)
-        {
-            return "horror";
-        }
-        else if (cat1 == Category.ACTION)
-        {
-            return "action";
-        }
-        else if (cat1 == Category.FANTASY)
-        {
-            return "fantasy";
-        }
-        else if (cat1 == Category.FAMILY)
-        {
-            return "family";
-        }
-        else if (cat1 == Category.RECENT)
-        {
-            return "recent";
-        }
-        else if (cat1 == Category.TRENDING)
-        {
-            return "trending";
-        }
-
-        return null;
-	}
-
-	private Category getCategory(String test)
+	// getters
+	public int getmID()
 	{
-		if (test.equalsIgnoreCase("comedy"))
-		{
-			return Category.COMEDY;
-		}
-		else if (test.equalsIgnoreCase("drama"))
-		{
-			return Category.DRAMA;
-		}
-		else if (test.equalsIgnoreCase("horror"))
-		{
-			return Category.HORROR;
-		}
-		else if (test.equalsIgnoreCase("action"))
-		{
-			return Category.ACTION;
-		}
-		else if (test.equalsIgnoreCase("fantasy"))
-		{
-			return Category.FANTASY;
-		}
-		else if (test.equalsIgnoreCase("family"))
-		{
-			return Category.FAMILY;
-		}
-		else if (test.equalsIgnoreCase("recent"))
-		{
-			return Category.RECENT;
-		}
-		else if (test.equalsIgnoreCase("trending"))
-		{
-			return Category.TRENDING;
-		}
-
-		return null;
+		return mID;
+	}
+	public String getTitle()
+	{
+		return title;
+	}
+	public int getReleaseYear()
+	{
+		return releaseYear;
+	}
+	public int getUserScore()
+	{
+		return userScore;
+	}
+	public ArrayList<String> getCategory()
+	{
+		return category;
+	}
+	public Calendar getEndDate()
+	{
+		return endDate;
+	}
+	public String getDescription()
+	{
+		return description;
 	}
 
-
-
-
-
+	// setters
+	public void setmID(int mID)
+	{
+		this.mID = mID;
+	}
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+	public void setReleaseYear(int releaseYear)
+	{
+		this.releaseYear = releaseYear;
+	}
+	public void setUserScore(int userScore)
+	{
+		this.userScore = userScore;
+	}
+	public void setCategory(ArrayList<String> category){
+		this.category = category;
+	}
+	public void setEndDate(Calendar endDate)
+	{
+		this.endDate = endDate;
+	}
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
 
 	public Boolean compareTo(String test)
 	{
@@ -138,9 +108,55 @@ public class Movie
 	public void print()
 	{
 		printTitle();
-		System.out.println("Released in " + releaseYear + "\tLicense Expires: " + endMonth + "/" + endDay + "/" + endYear);
-		System.out.println("User Score: " + userScore + "\tCategory: " + cat1);
+		System.out.println("Released in " + releaseYear + "\tLicense Expires: " + endDate);
+		System.out.println("User Score: " + userScore + "\tCategory: " + category);
 		System.out.println("Description: " + description + "\n");
 		System.out.println();
 	}
+
+	// Parcelable implementation code
+	protected Movie(Parcel in)
+	{
+		mID = in.readInt();
+		title = in.readString();
+		releaseYear = in.readInt();
+		userScore = in.readInt();
+		in.readStringList(category);
+		endDate = (Calendar) in.readValue(Calendar.class.getClassLoader());
+		description = in.readString();
+	}
+
+	@Override
+	public int describeContents()
+	{
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags)
+	{
+		dest.writeInt(mID);
+		dest.writeString(title);
+		dest.writeInt(releaseYear);
+		dest.writeInt(userScore);
+		dest.writeStringList(category);
+		dest.writeValue(endDate);
+		dest.writeString(description);
+	}
+
+	@SuppressWarnings("unused")
+	public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>()
+	{
+		@Override
+		public Movie createFromParcel(Parcel in)
+		{
+			return new Movie(in);
+		}
+
+		@Override
+		public Movie[] newArray(int size)
+		{
+			return new Movie[size];
+		}
+	};
 }

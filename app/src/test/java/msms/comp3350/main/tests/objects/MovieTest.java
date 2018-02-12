@@ -3,6 +3,8 @@
 package msms.comp3350.main.tests.objects;
 
 import junit.framework.TestCase;
+import java.util.ArrayList;
+import java.util.Calendar;
 import msms.comp3350.objects.Movie;
 
 public class MovieTest extends TestCase{
@@ -12,43 +14,51 @@ public class MovieTest extends TestCase{
     public void testMovie(){
         Movie family;
         Movie comedy;
-        Movie drama;
-        Movie horror;
-        Movie action;
-        Movie fantasy;
-        Movie recent;
-        Movie trending;
+
+        ArrayList<String> familyCat = new ArrayList<>();
+        familyCat.add("family");
+        ArrayList<String> comedyCat = new ArrayList<>();
+        comedyCat.add("comedy");
+
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2020,2,20);
+
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(2021,3,15);
 
         System.out.println("\nStarting Movie tests");
 
-        family = new Movie("Shrek", 2001, 84, "family", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-        comedy = new Movie("Shrek 2", 2004, 75, "comedy", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise again");
-        drama = new Movie("Shrek", 2001, 84, "drama", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-        horror = new Movie("Shrek", 2001, 84, "horror", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-        action = new Movie("Shrek", 2001, 84, "action", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-        fantasy = new Movie("Shrek", 2001, 84, "fantasy", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-        recent = new Movie("Shrek", 2001, 84, "recent", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-        trending = new Movie("Shrek", 2001, 84, "trending", 5, 2, 2020, "Ogre Saves Princess but gets unexpected suprise");
-
-
+        family = new Movie(1, "Shrek", 2001, 84, familyCat, endDate, "Ogre Saves Princess but gets unexpected suprise");
+        comedy = new Movie(2, "Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
 
         assertNotNull(family);
 
+        //Testing the getters
+        assertEquals(1, family.getmID());
         assertEquals("Shrek", family.getTitle());
         assertEquals(2001, family.getReleaseYear());
         assertEquals(84, family.getUserScore());
-        assertEquals("5/2/2020", family.getEnd());
+        assertEquals(endDate, family.getEndDate());
         assertEquals("Ogre Saves Princess but gets unexpected suprise", family.getDescription());
+        assertEquals(familyCat, family.getCategory());
 
-        assertEquals("family", family.getCategory());
-        assertEquals("comedy", comedy.getCategory());
-        assertEquals("drama", drama.getCategory());
-        assertEquals("horror", horror.getCategory());
-        assertEquals("action", action.getCategory());
-        assertEquals("fantasy", fantasy.getCategory());
-        assertEquals("recent", recent.getCategory());
-        assertEquals("trending", trending.getCategory());
+        //Testing the setters
+        family.setmID(3);
+        assertEquals(3, family.getmID());
+        family.setTitle("newMovie");
+        assertEquals("newMovie", family.getTitle());
+        family.setReleaseYear(2002);
+        assertEquals(2002, family.getReleaseYear());
+        family.setUserScore(85);
+        assertEquals(85, family.getUserScore());
+        family.setEndDate(newDate);
+        assertEquals(newDate, family.getEndDate());
+        family.setDescription("New Description");
+        assertEquals("New Description", family.getDescription());
+        family.setCategory(comedyCat);
+        assertEquals(comedyCat, family.getCategory());
 
+        //testing the equals
         assertTrue(family.compareTo(family.getTitle()));
         assertFalse(family.compareTo(comedy.getTitle()));
 
