@@ -48,7 +48,7 @@ public class UserDisplayActivity extends Activity {
         outputText = outputText + "Password: " + inputUser.getPass() + "\n";
         outputText = outputText + "Age: " + inputUser.getAge() + "\n";
         outputText = outputText + "Gender: " + inputUser.getGender() + "\n";
-        outputText = outputText + "End Date: " + inputUser.getEndDate().getTime();
+        outputText = outputText + "Subscription End Date: " + inputUser.getEndDate().getTime();
 
         TextView output = (TextView) findViewById(R.id.user_info_text);
         output.setText((CharSequence) outputText);

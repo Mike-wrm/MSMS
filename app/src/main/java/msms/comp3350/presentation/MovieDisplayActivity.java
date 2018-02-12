@@ -50,9 +50,9 @@ public class MovieDisplayActivity extends Activity {
         outputText = outputText + "User Score: " + inputMovie.getUserScore() + " out of 100\n";
         ArrayList<String> categories = inputMovie.getCategory();
         for (int i = 0; i < categories.size(); i++){
-            outputText = outputText + "Category " + i + " : " + categories.get(i) + "\n";
+            outputText = outputText + "Category " + (i+1) + " : " + categories.get(i) + "\n";
         }
-        outputText = outputText + "End Date: " + inputMovie.getEndDate().getTime() + "\n\n";
+        outputText = outputText + "Licence Expiry Date: " + inputMovie.getEndDate().getTime() + "\n\n";
         outputText = outputText + inputMovie.getDescription();
 
         TextView output = (TextView) findViewById(R.id.movie_info_text);

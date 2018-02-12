@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MSMS</string>
+    <string name="app_name_full">Media Streaming Management Service</string>
     <string name="title_activity_movies">MSMS: Movies</string>
     <string name="title_activity_users">MSMS: Users</string>
     <string name="title_activity_movie_info">MSMS: Movie Info</string>
