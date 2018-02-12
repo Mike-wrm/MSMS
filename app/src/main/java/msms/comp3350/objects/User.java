@@ -1,8 +1,11 @@
 package msms.comp3350.objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
-public class User
+public class User implements Parcelable
 {
 
 	private int uID;
@@ -108,4 +111,48 @@ public class User
 		System.out.println("Subscription expires: " + endDate);
 		System.out.println();
 	}
+
+	// Code for implementing Parcelable
+    protected User(Parcel in)
+    {
+        uID = in.readInt();
+        name = in.readString();
+        password = in.readString();
+        age = in.readInt();
+        gender = (char) in.readValue(char.class.getClassLoader());
+        endDate = (Calendar) in.readValue(Calendar.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeInt(uID);
+        dest.writeString(name);
+        dest.writeString(password);
+        dest.writeInt(age);
+        dest.writeValue(gender);
+        dest.writeValue(endDate);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>()
+    {
+        @Override
+        public User createFromParcel(Parcel in)
+        {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size)
+        {
+            return new User[size];
+        }
+    };
 }
