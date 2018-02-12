@@ -15,12 +15,9 @@ import java.util.ArrayList;
 import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
-//import msms.comp3350.main.business.AccessMovies; --> something like this
-//import msms.comp3350.main.objects.Movie;
 
 public class MovieListActivity extends Activity
 {
-
     private ArrayList<Movie> movieList;
     private ArrayAdapter<Movie> movieArrayAdapter;
     private AccessMovies movieAccessor;

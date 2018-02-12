@@ -4,11 +4,15 @@ import junit.framework.TestCase;
 import java.util.Calendar;
 import msms.comp3350.objects.User;
 
-public class UserTest extends TestCase{
+public class UserTest extends TestCase
+{
+        public UserTest(String arg0)
+        {
+            super(arg0);
+        }
 
-        public UserTest(String arg0) {super(arg0);}
-
-        public void testUser1(){
+        public void testUser1()
+        {
 
             User user;
             User user2;
@@ -21,14 +25,14 @@ public class UserTest extends TestCase{
 
             System.out.println("\nStarting testUser");
 
-            user = new User(1,"John Doe", "password", 21, 'm', endDate);
-            user2 = new User(2, "Jane Doe", "pass", 22, 'f', endDate);
+            user = new User(1,"JohnDoe", "password", 21, 'm', endDate);
+            user2 = new User(2, "JaneDoe", "pass", 22, 'f', endDate);
 
             assertNotNull(user);
 
             // testing the getters
             assertEquals(1, user.getuID());
-            assertEquals("John Doe", user.getName());
+            assertEquals("JohnDoe", user.getName());
             assertEquals("password", user.getPass());
             assertEquals(21, user.getAge());
             assertEquals('m', user.getGender());
@@ -50,6 +54,5 @@ public class UserTest extends TestCase{
 
             assertTrue(user.equals(user));
             assertFalse(user.equals(user2));
-
         }
 }

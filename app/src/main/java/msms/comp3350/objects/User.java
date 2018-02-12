@@ -8,17 +8,17 @@ import java.util.Calendar;
 public class User implements Parcelable
 {
 	private int uID;
-	private String name;
+	private String userName;
 	private String password;
 	private int age;
 	private char gender;
 	private Calendar endDate;
 
 
-	public User (int uID, String name, String password, int age, char gender, Calendar endDate)
+	public User (int uID, String userName, String password, int age, char gender, Calendar endDate)
 	{
 		this.uID = uID;
-		this.name = name;
+		this.userName = userName;
 		this.password = password;
 		this.age = age;
 		this.gender = gender;
@@ -32,7 +32,7 @@ public class User implements Parcelable
 	}
 	public String getName()
 	{
-		return name;
+		return userName;
 	}
 	public String getPass()
 	{
@@ -56,9 +56,9 @@ public class User implements Parcelable
 	{
 		this.uID = uID;
 	}
-	public void setName(String name)
+	public void setName(String userName)
 	{
-		this.name = name;
+		this.userName = userName;
 	}
     public void setPass(String password)
 	{
@@ -78,6 +78,7 @@ public class User implements Parcelable
 	public boolean equals (Object object)
 	{
 		User test;
+		boolean returnValue = false;
 
 		if (object instanceof User)
 		{
@@ -85,21 +86,20 @@ public class User implements Parcelable
 
 			if (test.getuID() == uID)
 			{
-				if ((test.getName()).equals(name))
+				if ((test.getName()).equals(userName))
 				{
-					return true;
+                    returnValue = true;
 				}
 			}
 		}
-		
-		return false;
+		return returnValue;
 	}
 
 	// Code for implementing Parcelable
     protected User(Parcel in)
     {
         uID = in.readInt();
-        name = in.readString();
+		userName = in.readString();
         password = in.readString();
         age = in.readInt();
         gender = (char) in.readValue(char.class.getClassLoader());
@@ -116,7 +116,7 @@ public class User implements Parcelable
     public void writeToParcel(Parcel dest, int flags)
     {
         dest.writeInt(uID);
-        dest.writeString(name);
+        dest.writeString(userName);
         dest.writeString(password);
         dest.writeInt(age);
         dest.writeValue(gender);

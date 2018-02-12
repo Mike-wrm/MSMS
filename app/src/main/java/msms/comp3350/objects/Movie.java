@@ -94,14 +94,27 @@ public class Movie implements Parcelable
 		this.description = description;
 	}
 
-	public Boolean compareTo(String test)
+	public boolean equals (Object object)
 	{
-		if (test.equalsIgnoreCase(title))
-		{
-			return true;
-		}
+		Movie test;
+		boolean returnValue = false;
 
-		return false;
+		if (object instanceof Movie)
+		{
+			test = (Movie) object;
+
+			if (test.getmID() == mID)
+			{
+				if ((test.getTitle()).equals(title))
+				{
+					if ((test.getReleaseYear()) == releaseYear)
+					{
+						returnValue = true;
+					}
+				}
+			}
+		}
+		return returnValue;
 	}
 
 	// Parcelable implementation code
