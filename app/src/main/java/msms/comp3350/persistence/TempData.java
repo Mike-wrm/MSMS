@@ -38,9 +38,9 @@ public class TempData {
         Calendar date4 = Calendar.getInstance();
         date4.set(2024, 4, 4);
         Calendar date5 = Calendar.getInstance();
-        date1.set(2025, 5, 5);
+        date5.set(2025, 5, 5);
         Calendar date6 = Calendar.getInstance();
-        date1.set(2025, 6, 6);
+        date6.set(2025, 6, 6);
 
         movies = new ArrayList<Movie>();
         users = new ArrayList<User>();
