@@ -13,7 +13,6 @@ public class UserTest extends TestCase
 
         public void testUser1()
         {
-
             User user;
             User user2;
 
