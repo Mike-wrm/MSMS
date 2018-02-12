@@ -68,9 +68,8 @@ public class MovieListActivity extends Activity {
                         selectedMoviePosition = position;
 
                         Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
-                        // TODO change the passed 'selectedMoviePosition' to an instance of the actual Movie object
-                        // TODO note class Movie must implement Parcelable for this to work
-                        movieDisplay.putExtra("SelectedMovie", selectedMoviePosition);
+                        // note class Movie must implement Parcelable for this to work
+                        movieDisplay.putExtra("SelectedMovie", movieList.get(position));
                         MovieListActivity.this.startActivity(movieDisplay);
                     }
                 }
