@@ -19,15 +19,15 @@ public class TempData {
         Movie movie;
         User user;
         ArrayList<String> drama = new ArrayList<>();
-        drama.add("DRAMA");
+        drama.add("Drama");
         ArrayList<String> fantasy = new ArrayList<>();
-        fantasy.add("FANTASY");
+        fantasy.add("Fantasy");
         ArrayList<String> horror = new ArrayList<>();
-        horror.add("HORROR");
+        horror.add("Horror");
         ArrayList<String> action = new ArrayList<>();
-        action.add("ACTION");
+        action.add("Action");
         ArrayList<String> comedy = new ArrayList<>();
-        comedy.add("COMEDY");
+        comedy.add("Comedy");
 
         Calendar date1 = Calendar.getInstance(); // Obviously, each object  should get their own date object
         date1.set(2021, 1, 1);  // But for the sake of my time and sanity, I'm making them share
