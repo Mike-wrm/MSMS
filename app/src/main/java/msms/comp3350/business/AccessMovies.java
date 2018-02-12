@@ -21,4 +21,10 @@ public class AccessMovies {
         movies.clear();
         return dataAccess.getMoviesAll(movies);
     }
+
+    public String insertMovie(Movie currentMovie) { return dataAccess.insertMovie(currentMovie); }
+
+    public String updateMovie(Movie currentMovie) { return dataAccess.updateMovie(currentMovie); }
+
+    public String deleteMovie(Movie currentMovie) { return dataAccess.deleteMovie(currentMovie); }
 }

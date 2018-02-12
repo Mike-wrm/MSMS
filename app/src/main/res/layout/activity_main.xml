@@ -25,13 +25,4 @@
         android:layout_below="@+id/MovieButton"
         android:text="Users"
         android:onClick="buttonUsersOnClick"/>
-
-    <Button
-        android:id="@+id/AddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/UsersButton"
-        android:layout_below="@+id/UsersButton"
-        android:text="Add"
-        android:onClick="buttonAddOnClick"/>
 </RelativeLayout>
