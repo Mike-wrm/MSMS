@@ -8,7 +8,6 @@ import java.util.Calendar;
 
 public class Movie implements Parcelable
 {
-
 	private int mID;
 	private String title;
 	private int releaseYear;
@@ -17,18 +16,8 @@ public class Movie implements Parcelable
 	private Calendar endDate;
 	private String description;
 
-	private static String[] categories = {
-			"none",
-			"Action",
-			"Children's",
-			"Comedy",
-			"Drama",
-			"Fantasy",
-			"Horror",
-			"Sci-Fi",
-			"Recent",
-			"Trending"
-	};
+	private static String[] categories = {"None", "Action", "Children's", "Comedy", "Drama",
+            "Fantasy", "Horror", "Sci-Fi", "Recent", "Trending"};
 
 	public Movie (int mID, String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
 	{
@@ -113,22 +102,6 @@ public class Movie implements Parcelable
 		}
 
 		return false;
-	}
-
-	//Prints just the title (when clicking to see entire list of movies)
-	public void printTitle()
-	{
-		System.out.println(title);
-	}
-
-	//Prints all movie details (when movie clicked on in UI)
-	public void print()
-	{
-		printTitle();
-		System.out.println("Released in " + releaseYear + "\tLicense Expires: " + endDate);
-		System.out.println("User Score: " + userScore + "\tCategory: " + category);
-		System.out.println("Description: " + description + "\n");
-		System.out.println();
 	}
 
 	// Parcelable implementation code

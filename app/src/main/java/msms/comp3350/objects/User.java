@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 public class User implements Parcelable
 {
-
 	private int uID;
 	private String name;
 	private String password;
@@ -20,7 +19,7 @@ public class User implements Parcelable
 	{
 		this.uID = uID;
 		this.name = name;
-		this.password = password;	// this is clearly just an abstraction
+		this.password = password;
 		this.age = age;
 		this.gender = gender;
 		this.endDate = endDate;
@@ -94,22 +93,6 @@ public class User implements Parcelable
 		}
 		
 		return false;
-	}
-	
-	//Prints just the title (when clicking to see entire list of movies)
-	public void printUserName()
-	{
-		System.out.println(name);
-	}
-	
-	//Prints all movie details (when movie clicked on in UI)
-	public void print()
-	{
-		printUserName();
-		System.out.println("Age: " + age + "\t" +"Gender: " + gender);
-		System.out.println("Password: " + password);
-		System.out.println("Subscription expires: " + endDate);
-		System.out.println();
 	}
 
 	// Code for implementing Parcelable
