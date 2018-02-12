@@ -11,9 +11,4 @@
         android:icon="@drawable/ic_menu_allfriends"
         android:title="@string/title_users" />
 
-    <item
-        android:id="@+id/navigation_add"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/title_add" />
-
 </menu>
