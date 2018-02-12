@@ -17,6 +17,18 @@ public class Movie implements Parcelable
 	private Calendar endDate;
 	private String description;
 
+	private static String[] categories = {
+			"none",
+			"Action",
+			"Children's",
+			"Comedy",
+			"Drama",
+			"Fantasy",
+			"Horror",
+			"Sci-Fi",
+			"Recent",
+			"Trending"
+	};
 
 	public Movie (int mID, String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
 	{
@@ -30,6 +42,11 @@ public class Movie implements Parcelable
 	}
 
 	// getters
+	public static String[] getCategories()
+	{
+		return categories;
+	}
+
 	public int getmID()
 	{
 		return mID;
