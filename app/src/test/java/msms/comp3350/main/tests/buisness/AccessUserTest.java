@@ -31,7 +31,7 @@ public class AccessUserTest extends TestCase
         user = new User(1,"Alex Carriere", "password", 21, "male", endDate);
 
         // All these methods do is call other methods in TempData, so all the major testing will be done there
-        assertNotNull(list.insertUser(user));
+        assertNull(list.insertUser(user));
         assertNull(list.updateUser(user));
         assertNull(list.deleteUser(user));
     }
