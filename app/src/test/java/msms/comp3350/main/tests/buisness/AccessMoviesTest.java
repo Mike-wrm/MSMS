@@ -32,7 +32,6 @@ public class AccessMoviesTest extends TestCase
         Movie movie = new Movie(999, "testMovie", 1999, 84, familyCat, endDate, "testing");
         Movie movie2 = new Movie(999, "testMovie2", 1998, 84, familyCat, endDate, "testing");
 
-        // All these methods do is call other methods in TempData, so all the major testing will be done there
         assertNull(list.insertMovie(movie));
         assertEquals("'testMovie' is already added.", list.insertMovie(movie));
 
