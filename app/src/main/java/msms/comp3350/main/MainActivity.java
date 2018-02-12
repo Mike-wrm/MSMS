@@ -32,13 +32,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonMoviesOnClick(View v) {
-        Intent studentsIntent = new Intent(MainActivity.this, MovieListActivity.class);
-        MainActivity.this.startActivity(studentsIntent);
+        Intent movieListActivity = new Intent(MainActivity.this, MovieListActivity.class);
+        MainActivity.this.startActivity(movieListActivity);
     }
 
     public void buttonUsersOnClick(View v) {
-        Intent coursesIntent = new Intent(MainActivity.this, UserListActivity.class);
-        MainActivity.this.startActivity(coursesIntent);
+        Intent userListActivity = new Intent(MainActivity.this, UserListActivity.class);
+        MainActivity.this.startActivity(userListActivity);
     }
-
 }

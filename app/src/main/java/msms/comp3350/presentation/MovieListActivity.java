@@ -18,7 +18,8 @@ import msms.comp3350.objects.Movie;
 //import msms.comp3350.main.business.AccessMovies; --> something like this
 //import msms.comp3350.main.objects.Movie;
 
-public class MovieListActivity extends Activity {
+public class MovieListActivity extends Activity
+{
 
     private ArrayList<Movie> movieList;
     private ArrayAdapter<Movie> movieArrayAdapter;
@@ -27,7 +28,8 @@ public class MovieListActivity extends Activity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
@@ -37,9 +39,12 @@ public class MovieListActivity extends Activity {
         String result = movieAccessor.getMovies(movieList);
 
         // Perform error handling on getting the list of movies
-        if (result != null) {
+        if (result != null)
+        {
             Messages.fatalError(this, result);
-        } else {
+        }
+        else
+        {
             movieArrayAdapter = new ArrayAdapter<Movie>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, movieList) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
@@ -56,14 +61,19 @@ public class MovieListActivity extends Activity {
             final ListView listView = (ListView) findViewById(R.id.listMovies);
             listView.setAdapter(movieArrayAdapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
 
-                    if (position == selectedMoviePosition) {
+                    if (position == selectedMoviePosition)
+                    {
                         listView.setItemChecked(position, false);
                         selectedMoviePosition = -1;
-                    } else {
+                    }
+                    else
+                    {
                         listView.setItemChecked(position, true);
                         selectedMoviePosition = position;
 
@@ -77,4 +87,9 @@ public class MovieListActivity extends Activity {
         }
     }
 
+    public void openAddMovie (View view)
+    {
+        Intent addMovieIntent = new Intent(this, AddMovieActivity.class);
+        startActivity(addMovieIntent);
+    }
 }
