@@ -56,8 +56,8 @@ public class TempDataTest extends TestCase
         Movie movie = new Movie(999, "testMovie", 1999, 84, familyCat, endDate, "testing");
         Movie movie2 = new Movie(999, "testMovie2", 1998, 84, familyCat, endDate, "testing");
 
-        User user = new User(999,"John Doe", "password", 21, "female", endDate);
-        User user2 = new User(999,"Jane Doe", "password", 21, "female", endDate);
+        User user = new User(999,"John Doe", "password", 21, 'm', endDate);
+        User user2 = new User(999,"Jane Doe", "password", 21, 'f', endDate);
 
         setup(list, movies, users);
 

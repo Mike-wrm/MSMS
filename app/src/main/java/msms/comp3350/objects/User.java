@@ -9,11 +9,11 @@ public class User
 	private String name;
 	private String password;
 	private int age;
-	private String gender;
+	private char gender;
 	private Calendar endDate;
 
 
-	public User (int uID, String name, String password, int age, String gender, Calendar endDate)
+	public User (int uID, String name, String password, int age, char gender, Calendar endDate)
 	{
 		this.uID = uID;
 		this.name = name;
@@ -44,7 +44,7 @@ public class User
 	{
 		return endDate;
 	}
-    public String getGender()
+    public char getGender()
 	{
   		return gender;
     }
@@ -69,7 +69,7 @@ public class User
 	public void setEndDate(Calendar endDate){
 		this.endDate = endDate;
 	}
-	public void setGender(String gender){
+	public void setGender(char gender){
 		this.gender = gender;
 	}
 

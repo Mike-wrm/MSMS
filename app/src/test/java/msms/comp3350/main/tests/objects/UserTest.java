@@ -21,8 +21,8 @@ public class UserTest extends TestCase{
 
             System.out.println("\nStarting testUser");
 
-            user = new User(1,"John Doe", "password", 21, "male", endDate);
-            user2 = new User(2, "Jane Doe", "pass", 22, "female", endDate);
+            user = new User(1,"John Doe", "password", 21, 'm', endDate);
+            user2 = new User(2, "Jane Doe", "pass", 22, 'f', endDate);
 
             assertNotNull(user);
 
@@ -31,7 +31,7 @@ public class UserTest extends TestCase{
             assertEquals("John Doe", user.getName());
             assertEquals("password", user.getPass());
             assertEquals(21, user.getAge());
-            assertEquals("male", user.getGender());
+            assertEquals('m', user.getGender());
             assertEquals(endDate, user.getEndDate());
 
             //testing the setters
@@ -43,8 +43,8 @@ public class UserTest extends TestCase{
             assertEquals("newPass", user.getPass());
             user.setAge(22);
             assertEquals(22, user.getAge());
-            user.setGender("female");
-            assertEquals("female", user.getGender());
+            user.setGender('f');
+            assertEquals('f', user.getGender());
             user.setEndDate(newDate);
             assertEquals(newDate, user.getEndDate());
 

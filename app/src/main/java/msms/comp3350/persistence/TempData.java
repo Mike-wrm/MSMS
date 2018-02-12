@@ -57,17 +57,17 @@ public class TempData {
         movie = new Movie(5, "A Fish Called Wanda", 1988, 5, comedy, date5, "ipsum lorem");
         movies.add(movie);
 
-        user = new User(1, "Mike McMahon", "anime4life", 21, "MALE", date1);
+        user = new User(1, "Mike McMahon", "anime4life", 21, 'm', date1);
         users.add(user);
-        user = new User(2, "Chris Scatliff", "getoffmylawn", 82, "MALE", date2);
+        user = new User(2, "Chris Scatliff", "getoffmylawn", 82, 'm', date2);
         users.add(user);
-        user = new User(3, "Andrew Kozar", "iheartmybeard", 23, "MALE", date3);
+        user = new User(3, "Andrew Kozar", "iheartmybeard", 23, 'm', date3);
         users.add(user);
-        user = new User(4, "Alex Carriere", "supertester", 24, "MALE", date4);
+        user = new User(4, "Alex Carriere", "supertester", 24, 'm', date4);
         users.add(user);
-        user = new User(5, "Jaivir Bali", "walmartisevil", 25, "MALE", date5);
+        user = new User(5, "Jaivir Bali", "walmartisevil", 25, 'm', date5);
         users.add(user);
-        user = new User(6, "Diana Prince", "wonderwoman", 86, "FEMALE", date6);
+        user = new User(6, "Diana Prince", "wonderwoman", 86, 'f', date6);
         users.add(user);
     }
     public String getMoviesAll(ArrayList<Movie> currentMovies) {

@@ -28,7 +28,7 @@ public class AccessUserTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(2020,11,19);
 
-        user = new User(1,"Alex Carriere", "password", 21, "male", endDate);
+        user = new User(1,"Alex Carriere", "password", 21, 'm', endDate);
 
         // All these methods do is call other methods in TempData, so all the major testing will be done there
         assertNull(list.insertUser(user));
