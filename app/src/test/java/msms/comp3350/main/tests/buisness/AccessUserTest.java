@@ -18,7 +18,6 @@ public class AccessUserTest extends TestCase
     {
         AccessUsers list = new AccessUsers();
         ArrayList<User> users = new ArrayList<>();
-        User user;
 
         list.getUsers(users);
 
@@ -28,12 +27,17 @@ public class AccessUserTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(2020,11,19);
 
-        user = new User(1,"Alex Carriere", "password", 21, 'm', endDate);
+        User user = new User(999,"John Doe", "password", 21, 'm', endDate);
+        User user2 = new User(999,"Jane Doe", "password", 21, 'f', endDate);
 
-        // All these methods do is call other methods in TempData, so all the major testing will be done there
         assertNull(list.insertUser(user));
+        assertEquals("'John Doe' is already added.", list.insertUser(user));
+
         assertNull(list.updateUser(user));
+        assertEquals("'Jane Doe' cannot be found.", list.updateUser(user2));
+
         assertNull(list.deleteUser(user));
+        assertEquals("'John Doe' cannot be found.", list.deleteUser(user));
     }
 
 }

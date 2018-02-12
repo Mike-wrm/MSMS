@@ -29,12 +29,18 @@ public class AccessMoviesTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(5,2,20);
 
-        Movie newMovie = new Movie(1, "Shrek", 2001, 84, familyCat, endDate, "Ogre Saves Princess but gets unexpected suprise");
+        Movie movie = new Movie(999, "testMovie", 1999, 84, familyCat, endDate, "testing");
+        Movie movie2 = new Movie(999, "testMovie2", 1998, 84, familyCat, endDate, "testing");
 
         // All these methods do is call other methods in TempData, so all the major testing will be done there
-        assertNull(list.insertMovie(newMovie));
-        assertNull(list.updateMovie(newMovie));
-        assertNull(list.deleteMovie(newMovie));
+        assertNull(list.insertMovie(movie));
+        assertEquals("'testMovie' is already added.", list.insertMovie(movie));
+
+        assertNull(list.updateMovie(movie));
+        assertEquals("'testMovie2' cannot be found.", list.updateMovie(movie2));
+
+        assertNull(list.deleteMovie(movie));
+        assertEquals("'testMovie' cannot be found.", list.deleteMovie(movie));
     }
 
 
