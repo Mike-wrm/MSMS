@@ -33,7 +33,6 @@ public class AccessMoviesTest extends TestCase
 
         Movie testMovie1 = new Movie("testMovie", 1999, 84, familyCat, endDate, "testing");
         Movie testMovie2 = new Movie("testMovie2", 1998, 84, familyCat, endDate, "testing");
-        Movie movie; //used for temporary movie
 
         assertNull(list.insertMovie(testMovie1));
         assertEquals("'testMovie' is already added.", list.insertMovie(testMovie1));
@@ -43,6 +42,10 @@ public class AccessMoviesTest extends TestCase
 
         assertNull(list.deleteMovie(testMovie1));
         assertEquals("'testMovie' cannot be found.", list.deleteMovie(testMovie1));
+
+        // We cant test on an empty list because we cant delete them without knowing thier mID which we would have to set manually, and because we set it manually, we are not sure if
+        // the testMovie file ran first, which would creat different movies first, meaning that we would rely on the order of the methods were called, and that is a no-no
+
 
     }
 

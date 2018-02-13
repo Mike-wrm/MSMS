@@ -37,7 +37,7 @@ public class MovieTest extends TestCase
         assertNotNull(family);
 
         //Testing the getters
-        assertEquals(1, family.getmID());
+
         assertEquals("Shrek", family.getTitle());
         assertEquals(2001, family.getReleaseYear());
         assertEquals(84, family.getUserScore());
@@ -46,8 +46,8 @@ public class MovieTest extends TestCase
         assertEquals(familyCat, family.getCategory());
 
         //Testing the setters
-        family.setmID(3);
-        assertEquals(3, family.getmID());
+        family.setmID(999);
+        assertEquals(999, family.getmID());
         family.setTitle("newMovie");
         assertEquals("newMovie", family.getTitle());
         family.setReleaseYear(2002);
