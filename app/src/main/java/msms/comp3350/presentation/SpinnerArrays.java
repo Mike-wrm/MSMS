@@ -1,4 +1,4 @@
-package msms.comp3350.objects;
+package msms.comp3350.presentation;
 
 // Stores the (read-only) arrays needed for populating spinners in the UI
 public abstract class SpinnerArrays
