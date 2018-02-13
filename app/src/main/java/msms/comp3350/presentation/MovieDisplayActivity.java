@@ -54,7 +54,7 @@ public class MovieDisplayActivity extends Activity {
         if (inputMovie != null) {
             outputText = "Title: " + inputMovie.getTitle() + "\n";
             outputText = outputText + "Year: " + inputMovie.getReleaseYear() + "\n";
-            outputText = outputText + "User Score: " + inputMovie.getUserScore() + " out of 100\n";
+            outputText = outputText + "User Score: " + inputMovie.getUserScore() + " out of 10\n";
             ArrayList<String> categories = inputMovie.getCategory();
             for (int i = 0; i < categories.size(); i++) {
                 outputText = outputText + "Category " + (i + 1) + " : " + categories.get(i) + "\n";
