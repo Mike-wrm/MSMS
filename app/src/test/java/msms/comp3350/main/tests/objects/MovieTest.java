@@ -1,5 +1,3 @@
-
-
 package msms.comp3350.main.tests.objects;
 
 import junit.framework.TestCase;
@@ -7,11 +5,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import msms.comp3350.objects.Movie;
 
-public class MovieTest extends TestCase{
+public class MovieTest extends TestCase
+{
+    public MovieTest(String arg0)
+    {
+        super(arg0);
+    }
 
-    public MovieTest(String arg0) {super(arg0);}
-
-    public void testMovie(){
+    public void testMovie()
+    {
         Movie family;
         Movie comedy;
 
@@ -59,9 +61,7 @@ public class MovieTest extends TestCase{
         assertEquals(comedyCat, family.getCategory());
 
         //testing the equals
-        assertTrue(family.compareTo(family.getTitle()));
-        assertFalse(family.compareTo(comedy.getTitle()));
-
+        assertTrue(family.equals(family));
+        assertFalse(family.equals(comedy));
     }
-
 }
