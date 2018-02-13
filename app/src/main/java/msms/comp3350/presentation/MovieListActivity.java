@@ -77,16 +77,65 @@ public class MovieListActivity extends Activity
                         Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
                         // note class Movie must implement Parcelable for this to work
                         movieDisplay.putExtra("SelectedMovie", movieList.get(position));
-                        MovieListActivity.this.startActivity(movieDisplay);
+                        MovieListActivity.this.startActivityForResult(movieDisplay, 1000);
                     }
                 }
             });
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // If we press the "back" button, then when we return to this activity input "Intent data" will be null.
+        // This is expected behaviour, and in this case we do not need to check for any update or delete from the user.
+        if (data != null) {
+            Bundle extras = data.getExtras();
+            Movie movieToDelete = null;
+            Movie movieToUpdate = null;
+            String result;
+
+            if (extras != null) {
+                //The key argument here must match that used in the other activity
+                movieToDelete = (Movie) extras.getParcelable("DeleteKey");
+                movieToUpdate = (Movie) extras.getParcelable("UpdateKey");
+            }
+
+            if (movieToDelete != null && resultCode == 1000) {
+                result = movieAccessor.deleteMovie(movieToDelete);
+                if (result != null) {
+                    Messages.fatalError(this, result);
+                } else {
+                    int pos = movieList.indexOf(movieToDelete);
+                    if (pos >= 0) {
+                        ListView listView = (ListView) findViewById(R.id.listMovies);
+                        listView.setSelection(pos);
+                    }
+                    movieAccessor.getMovies(movieList);
+                    movieArrayAdapter.notifyDataSetChanged();
+                }
+            } else if (movieToUpdate != null && resultCode == 1000) {
+                result = movieAccessor.updateMovie(movieToUpdate);
+                if (result != null) {
+                    Messages.fatalError(this, result);
+                } else {
+                    int pos = movieList.indexOf(movieToUpdate);
+                    if (pos >= 0) {
+                        ListView listView = (ListView) findViewById(R.id.listMovies);
+                        listView.setSelection(pos);
+                    }
+                    movieAccessor.getMovies(movieList);
+                    movieArrayAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+    }
+
     public void openAddMovie (View view)
     {
         Intent addMovieIntent = new Intent(this, AddMovieActivity.class);
-        startActivity(addMovieIntent);
+        MovieListActivity.this.startActivity(addMovieIntent);
     }
 }

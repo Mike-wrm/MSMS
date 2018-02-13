@@ -27,4 +27,7 @@
     <string name="movie_length">Length (min):</string>
     <string name="movie_genre2">Genre 2 (optional):</string>
     <string name="movie_genre3">Genre 3 (optional):</string>
+    <string name="back">Back</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

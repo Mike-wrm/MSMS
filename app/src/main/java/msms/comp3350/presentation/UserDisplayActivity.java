@@ -10,7 +10,7 @@ import msms.comp3350.main.R;
 import msms.comp3350.objects.User;
 
 public class UserDisplayActivity extends Activity {
-    User inputUser;
+    private User inputUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
