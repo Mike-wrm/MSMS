@@ -165,10 +165,12 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
         {
             Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
+            return;
         }
         else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
         {
             Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
+            return;
         }
 
         int checkReleaseYear = Integer.parseInt(releaseYear);
@@ -176,10 +178,12 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         if (checkReleaseYear < 1900)
         {
             Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
+            return;
         }
         else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
         {
             Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
+            return;
         }
 
 
