@@ -82,7 +82,8 @@ public class Movie implements Parcelable
 	{
 		this.userScore = userScore;
 	}
-	public void setCategory(ArrayList<String> category){
+	public void setCategory(ArrayList<String> category)
+	{
 		this.category = category;
 	}
 	public void setEndDate(Calendar endDate)
