@@ -105,13 +105,7 @@ public class Movie implements Parcelable
 
 			if (test.getmID() == mID)
 			{
-				if ((test.getTitle()).equals(title))
-				{
-					if ((test.getReleaseYear()) == releaseYear)
-					{
-						returnValue = true;
-					}
-				}
+				returnValue = true;
 			}
 		}
 		return returnValue;

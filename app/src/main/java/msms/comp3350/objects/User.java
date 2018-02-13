@@ -86,10 +86,7 @@ public class User implements Parcelable
 
 			if (test.getuID() == uID)
 			{
-				if ((test.getName()).equals(userName))
-				{
                     returnValue = true;
-				}
 			}
 		}
 		return returnValue;
