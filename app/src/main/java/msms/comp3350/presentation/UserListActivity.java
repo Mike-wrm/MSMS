@@ -65,7 +65,7 @@ public class UserListActivity extends Activity {
                         selectedUserPosition = position;
 
                         Intent userDisplay = new Intent(getApplicationContext(), UserDisplayActivity.class);
-                        // note class User must implement Parcelable for this to work
+                        // note class User must implement Serializable for this to work
                         userDisplay.putExtra("SelectedUser", userList.get(position));
                         UserListActivity.this.startActivity(userDisplay);
                     }

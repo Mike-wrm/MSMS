@@ -10,7 +10,7 @@ import msms.comp3350.main.R;
 import msms.comp3350.objects.User;
 
 public class UserDisplayActivity extends Activity {
-    User inputUser;
+    private User inputUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class UserDisplayActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //The key argument here must match that used in the other activity
-            inputUser = (User) extras.getParcelable("SelectedUser");
+            inputUser = (User) extras.getSerializable("SelectedUser");
         }
         else{
             //Error getting extra value
@@ -48,7 +48,7 @@ public class UserDisplayActivity extends Activity {
         outputText = outputText + "Password: " + inputUser.getPass() + "\n";
         outputText = outputText + "Age: " + inputUser.getAge() + "\n";
         outputText = outputText + "Gender: " + inputUser.getGender() + "\n";
-        outputText = outputText + "End Date: " + inputUser.getEndDate().getTime();
+        outputText = outputText + "Subscription End Date: " + inputUser.getEndDate().getTime();
 
         TextView output = (TextView) findViewById(R.id.user_info_text);
         output.setText((CharSequence) outputText);
