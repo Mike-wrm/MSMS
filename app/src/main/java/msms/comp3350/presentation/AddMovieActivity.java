@@ -1,8 +1,6 @@
 package msms.comp3350.presentation;
 
-import msms.comp3350.objects.SpinnerArrays;
 import msms.comp3350.objects.Movie;
-import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import android.app.Activity;
 import android.content.Intent;
