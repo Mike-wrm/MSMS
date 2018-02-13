@@ -29,17 +29,38 @@ public class AccessMoviesTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(5,2,20);
 
-        Movie movie = new Movie(999, "testMovie", 1999, 84, familyCat, endDate, "testing");
-        Movie movie2 = new Movie(999, "testMovie2", 1998, 84, familyCat, endDate, "testing");
+        System.out.println("\nStarting testAccessMovie");
 
-        assertNull(list.insertMovie(movie));
-        assertEquals("'testMovie' is already added.", list.insertMovie(movie));
+        Movie testMovie1 = new Movie(999, "testMovie", 1999, 84, familyCat, endDate, "testing");
+        Movie testMovie2 = new Movie(998, "testMovie2", 1998, 84, familyCat, endDate, "testing");
+        Movie movie; //used for temporary movie
 
-        assertNull(list.updateMovie(movie));
-        assertEquals("'testMovie2' cannot be found.", list.updateMovie(movie2));
+        assertNull(list.insertMovie(testMovie1));
+        assertEquals("'testMovie' is already added.", list.insertMovie(testMovie1));
 
+        assertNull(list.updateMovie(testMovie1));
+        assertEquals("'testMovie2' cannot be found.", list.updateMovie(testMovie2));
+
+        assertNull(list.deleteMovie(testMovie1));
+        assertEquals("'testMovie' cannot be found.", list.deleteMovie(testMovie1));
+
+        movie = new Movie(1, "The Shawshank Redemption", 1994, 9, familyCat, endDate, "ipsum lorem");
         assertNull(list.deleteMovie(movie));
-        assertEquals("'testMovie' cannot be found.", list.deleteMovie(movie));
+        movie = new Movie(2, "The Lord of the Rings", 2001, 8, familyCat, endDate, "ipsum lorem");
+        assertNull(list.deleteMovie(movie));
+        movie = new Movie(3, "A Nightmare on Elm Street", 1984, 7, familyCat, endDate, "ipsum lorem");
+        assertNull(list.deleteMovie(movie));
+        movie = new Movie(4, "Raiders of the Lost Ark", 1981, 6, familyCat, endDate,"ipsum lorem");
+        assertNull(list.deleteMovie(movie));
+        movie = new Movie(5, "A Fish Called Wanda", 1988, 5, familyCat, endDate, "ipsum lorem");
+        assertNull(list.deleteMovie(movie));
+
+        assertEquals("'testMovie' cannot be found.", list.updateMovie(testMovie1));
+
+        assertEquals("'testMovie' cannot be found.", list.deleteMovie(testMovie1));
+
+        assertNull(list.insertMovie(testMovie1));
+
     }
 
 

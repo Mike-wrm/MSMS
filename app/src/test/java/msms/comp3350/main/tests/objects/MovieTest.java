@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Calendar;
 import msms.comp3350.objects.Movie;
+import msms.comp3350.objects.User;
 
 public class MovieTest extends TestCase
 {
@@ -60,8 +61,24 @@ public class MovieTest extends TestCase
         family.setCategory(comedyCat);
         assertEquals(comedyCat, family.getCategory());
 
-        //testing the equals
+        // testing the equals
+        // it should be equal unless the id is not equal
+        Movie idChanged = new Movie(999, "Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
+        Movie nameChanged = new Movie(2, "newMovie", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
+        Movie passChanged = new Movie(2, "Shrek 2", 2006, 99, comedyCat, endDate, "Ogre saves princess again..");
+        Movie ageChanged = new Movie(2, "Shrek 2", 2004, 76, familyCat, endDate, "Ogre saves princess again..");
+        Movie genderChanged = new Movie(2, "Shrek 2", 2004, 76, comedyCat, newDate, "Ogre saves princess again..");
+        Movie dateChanged = new Movie(2, "Shrek 2", 2004, 76, comedyCat, endDate, "newDescription");
+
         assertTrue(family.equals(family));
+
+        assertFalse(comedy.equals(idChanged));
+        assertTrue(comedy.equals(nameChanged));
+        assertTrue(comedy.equals(passChanged));
+        assertTrue(comedy.equals(ageChanged));
+        assertTrue(comedy.equals(genderChanged));
+        assertTrue(comedy.equals(dateChanged));
+
         assertFalse(family.equals(comedy));
     }
 }
