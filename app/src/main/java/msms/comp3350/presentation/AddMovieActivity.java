@@ -145,21 +145,23 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         releaseYear = releaseYearText.getText().toString();
         description = descriptionText.getText().toString();
 
-        // TODO: add error handling
-        // error checking of year field
+        // error checking
+        if(null == name)
+        {
+            Messages.warning(this, "You need to name your movie.");
+            return;
+        }
 
         try
         {
             Integer.parseInt(expYear);
             Integer.parseInt(releaseYear);
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             Messages.warning(this, "Year must be a number.");
             return;
         }
 
-        // Convert selectedCategories into ArrayList:
         int checkExpYear = Integer.parseInt(expYear);
 
         if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
@@ -186,7 +188,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
             return;
         }
 
-
+        // Convert selectedCategories into ArrayList:
         ArrayList<String> categoriesAL = new ArrayList<String>();
         for (int i=0; i<3; i++)
             if (!selectedCategories[i].equals(""))
