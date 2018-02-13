@@ -104,8 +104,8 @@ public class MovieListActivity extends Activity
             if (extras != null)
             {
                 //The key argument here must match that used in the other activity
-                movieToDelete = (Movie) extras.getSerializable("DeleteKey");
-                movieToUpdate = (Movie) extras.getSerializable("UpdateKey");
+                movieToDelete = (Movie) extras.getSerializable("DeleteMovieKey");
+                movieToUpdate = (Movie) extras.getSerializable("UpdateMovieKey");
                 movieToAdd = (Movie) extras.getSerializable("AddKey");
             }
 

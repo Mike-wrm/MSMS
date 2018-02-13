@@ -1,6 +1,9 @@
 package msms.comp3350.presentation;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,20 +40,56 @@ public class UserDisplayActivity extends Activity {
             }
         });
 
-        displayData(inputUser);
+        displayData();
     }
 
-    private void displayData(User inputUser){
+    private void displayData(){
         String outputText;
 
-        outputText = "User ID: " + inputUser.getuID() + "\n";
-        outputText = outputText + "Name: " + inputUser.getName() + "\n";
-        outputText = outputText + "Password: " + inputUser.getPass() + "\n";
-        outputText = outputText + "Age: " + inputUser.getAge() + "\n";
-        outputText = outputText + "Gender: " + inputUser.getGender() + "\n";
-        outputText = outputText + "Subscription End Date: " + inputUser.getEndDate().getTime();
+        if (inputUser != null) {
+            outputText = "User ID: " + inputUser.getuID() + "\n";
+            outputText = outputText + "Name: " + inputUser.getName() + "\n";
+            outputText = outputText + "Password: " + inputUser.getPass() + "\n";
+            outputText = outputText + "Age: " + inputUser.getAge() + "\n";
+            outputText = outputText + "Gender: " + inputUser.getGender() + "\n";
+            outputText = outputText + "Subscription End Date: " + inputUser.getEndDate().getTime();
 
-        TextView output = (TextView) findViewById(R.id.user_info_text);
-        output.setText((CharSequence) outputText);
+            TextView output = (TextView) findViewById(R.id.user_info_text);
+            output.setText((CharSequence) outputText);
+        }
+        else {
+            Messages.fatalError(this, "User was not found.");
+        }
+    }
+
+    public void buttonUserDeleteOnClick(View v) {
+        if (inputUser != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(UserDisplayActivity.this);
+            builder.setTitle(R.string.app_name);
+            builder.setMessage("Are you sure you want to delete this User ?\n" + inputUser.getName());
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                    //Starting the previous Intent
+                    Intent previousScreen = new Intent(getApplicationContext(), UserListActivity.class);
+                    previousScreen.putExtra("DeleteUserKey", inputUser);
+                    setResult(1002, previousScreen);
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        else{
+            Messages.fatalError(this, "User was not found.");
+        }
+    }
+
+    public void buttonUserUpdateOnClick(View v){
     }
 }

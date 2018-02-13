@@ -67,10 +67,93 @@ public class UserListActivity extends Activity {
                         Intent userDisplay = new Intent(getApplicationContext(), UserDisplayActivity.class);
                         // note class User must implement Serializable for this to work
                         userDisplay.putExtra("SelectedUser", userList.get(position));
-                        UserListActivity.this.startActivity(userDisplay);
+                        UserListActivity.this.startActivityForResult(userDisplay, 1002);
                     }
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // If we press the "back" button, then when we return to this activity input "Intent data" will be null.
+        // This is expected behaviour, and in this case we do not need to check for any update or delete from the user.
+        if (data != null)
+        {
+            Bundle extras = data.getExtras();
+            User userToDelete = null;
+            User userToUpdate = null;
+            User userToAdd = null;
+            String result;
+
+            if (extras != null)
+            {
+                //The key argument here must match that used in the other activity
+                userToDelete = (User) extras.getSerializable("DeleteUserKey");
+                userToUpdate = (User) extras.getSerializable("UpdateUserKey");
+                userToAdd = (User) extras.getSerializable("AddUserKey");
+            }
+
+            if (userToDelete != null && resultCode == 1002)
+            {
+                result = userAccessor.deleteUser(userToDelete);
+                if (result != null)
+                {
+                    Messages.fatalError(this, result);
+                }
+                else
+                {
+                    int pos = userList.indexOf(userToDelete);
+                    if (pos >= 0)
+                    {
+                        ListView listView = (ListView) findViewById(R.id.listUsers);
+                        listView.setSelection(pos);
+                    }
+                    userAccessor.getUsers(userList);
+                    userArrayAdapter.notifyDataSetChanged();
+                }
+            }
+            else if (userToUpdate != null && resultCode == 1002)
+            {
+                result = userAccessor.updateUser(userToUpdate);
+                if (result != null)
+                {
+                    Messages.fatalError(this, result);
+                }
+                else
+                {
+                    int pos = userList.indexOf(userToUpdate);
+                    if (pos >= 0)
+                    {
+                        ListView listView = (ListView) findViewById(R.id.listUsers);
+                        listView.setSelection(pos);
+                    }
+                    userAccessor.getUsers(userList);
+                    userArrayAdapter.notifyDataSetChanged();
+                }
+            }
+            else if (userToAdd != null && resultCode == 1003)
+            {
+                result = userAccessor.insertUser(userToAdd);
+                if (result != null)
+                {
+                    Messages.fatalError(this, result);
+                }
+                else
+                {
+                    int pos = userList.indexOf(userToAdd);
+                    if (pos >= 0)
+                    {
+                        ListView listView = (ListView) findViewById(R.id.listUsers);
+                        listView.setSelection(pos);
+                    }
+                    userAccessor.getUsers(userList);
+                    userArrayAdapter.notifyDataSetChanged();
+                }
+            }
         }
     }
 }

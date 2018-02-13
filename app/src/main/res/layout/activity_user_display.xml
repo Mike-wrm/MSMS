@@ -26,4 +26,22 @@
         android:layout_alignParentTop="true"
         android:text="@string/back" />
 
+    <Button
+        android:id="@+id/updateUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/update"
+        android:enabled="false"
+        android:onClick="buttonUserUpdateOnClick"/>
+
+    <Button
+        android:id="@+id/deleteUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/delete"
+        android:onClick="buttonUserDeleteOnClick"/>
 </RelativeLayout>

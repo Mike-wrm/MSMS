@@ -80,7 +80,7 @@ public class MovieDisplayActivity extends Activity {
                     dialog.dismiss();
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-                    previousScreen.putExtra("DeleteKey", inputMovie);
+                    previousScreen.putExtra("DeleteMovieKey", inputMovie);
                     setResult(1000, previousScreen);
                     finish();
                 }
