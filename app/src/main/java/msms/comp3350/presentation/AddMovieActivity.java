@@ -146,6 +146,30 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         // TODO: add error handling
         // Convert selectedCategories into ArrayList:
+
+        int checkExpYear = 2019;
+
+        if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
+        {
+            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
+        }
+        else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
+        {
+            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
+        }
+
+        int checkReleaseYear = 2000;
+
+        if (checkReleaseYear < 1900)
+        {
+            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
+        }
+        else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
+        {
+            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
+        }
+
+
         ArrayList<String> categoriesAL = new ArrayList<String>();
         for (int i=0; i<3; i++)
             if (!selectedCategories[i].equals(""))
@@ -156,6 +180,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         // New movie is created and added here:
         // TODO create a new movieID per movie created
+
         Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
                 categoriesAL, expDate, description);
 
