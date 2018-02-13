@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -79,7 +80,6 @@ public class MovieDisplayActivity extends Activity {
                     dialog.dismiss();
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-                    //Sending the data to Activity_A
                     previousScreen.putExtra("DeleteKey", inputMovie);
                     setResult(1000, previousScreen);
                     finish();
@@ -99,6 +99,6 @@ public class MovieDisplayActivity extends Activity {
     }
 
     public void buttonMovieUpdateOnClick(View v){
-
     }
+
 }

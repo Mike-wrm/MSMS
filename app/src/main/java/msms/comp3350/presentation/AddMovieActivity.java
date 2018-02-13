@@ -5,6 +5,7 @@ import msms.comp3350.objects.Movie;
 import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -155,12 +156,15 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         Calendar expDate = Calendar.getInstance();
         expDate.set(Integer.parseInt(expYear), Integer.parseInt(selectedMonth), Integer.parseInt(selectedDay));
 
-        // TODO: New movie is created and added here:
+        // New movie is created and added here:
+        // TODO create a new movieID per movie created
         Movie newMovie = new Movie(1, name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
                 categoriesAL, expDate, description);
-        AccessMovies accessor = new AccessMovies();
-        accessor.insertMovie(newMovie);
 
+        //Starting the previous Intent
+        Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+        previousScreen.putExtra("AddKey", newMovie);
+        setResult(1001, previousScreen);
         finish();
     }
 
