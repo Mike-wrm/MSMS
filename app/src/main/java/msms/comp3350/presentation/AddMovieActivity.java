@@ -1,6 +1,7 @@
 package msms.comp3350.presentation;
 
 import msms.comp3350.objects.Movie;
+
 import msms.comp3350.main.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -145,6 +146,18 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         description = descriptionText.getText().toString();
 
         // TODO: add error handling
+        // error checking of year field
+        try
+        {
+            Integer.parseInt(expYear);
+            Integer.parseInt(releaseYear);
+        }
+        catch (NumberFormatException e)
+        {
+            Messages.warning(this, "Year must be a number.");
+            return;
+        }
+
         // Convert selectedCategories into ArrayList:
         ArrayList<String> categoriesAL = new ArrayList<String>();
         for (int i=0; i<3; i++)
