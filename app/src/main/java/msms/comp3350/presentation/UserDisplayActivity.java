@@ -21,7 +21,7 @@ public class UserDisplayActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //The key argument here must match that used in the other activity
-            inputUser = (User) extras.getParcelable("SelectedUser");
+            inputUser = (User) extras.getSerializable("SelectedUser");
         }
         else{
             //Error getting extra value

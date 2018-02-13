@@ -18,7 +18,6 @@ import msms.comp3350.objects.Movie;
 
 public class MovieDisplayActivity extends Activity {
     private Movie inputMovie;
-    private AccessMovies movieAccessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class MovieDisplayActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //The key argument here must match that used in the other activity
-            inputMovie = (Movie) extras.getParcelable("SelectedMovie");
+            inputMovie = (Movie) extras.getSerializable("SelectedMovie");
         }
         else{
             //Error getting extra value

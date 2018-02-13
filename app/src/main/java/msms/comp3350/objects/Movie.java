@@ -1,12 +1,10 @@
 package msms.comp3350.objects;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Movie implements Parcelable
+public class Movie implements Serializable
 {
 	private int mID;
 	private String title;
@@ -110,50 +108,4 @@ public class Movie implements Parcelable
 		}
 		return returnValue;
 	}
-
-	// Parcelable implementation code
-	protected Movie(Parcel in)
-	{
-		mID = in.readInt();
-		title = in.readString();
-		releaseYear = in.readInt();
-		userScore = in.readInt();
-		in.readStringList(category);
-		endDate = (Calendar) in.readValue(Calendar.class.getClassLoader());
-		description = in.readString();
-	}
-
-	@Override
-	public int describeContents()
-	{
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags)
-	{
-		dest.writeInt(mID);
-		dest.writeString(title);
-		dest.writeInt(releaseYear);
-		dest.writeInt(userScore);
-		dest.writeStringList(category);
-		dest.writeValue(endDate);
-		dest.writeString(description);
-	}
-
-	@SuppressWarnings("unused")
-	public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>()
-	{
-		@Override
-		public Movie createFromParcel(Parcel in)
-		{
-			return new Movie(in);
-		}
-
-		@Override
-		public Movie[] newArray(int size)
-		{
-			return new Movie[size];
-		}
-	};
 }

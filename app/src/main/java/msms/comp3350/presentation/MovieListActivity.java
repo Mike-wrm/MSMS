@@ -75,7 +75,7 @@ public class MovieListActivity extends Activity
                         selectedMoviePosition = position;
 
                         Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
-                        // note class Movie must implement Parcelable for this to work
+                        // note class Movie must implement Serializable for this to work
                         movieDisplay.putExtra("SelectedMovie", movieList.get(position));
                         MovieListActivity.this.startActivityForResult(movieDisplay, 1000);
                     }
@@ -99,8 +99,8 @@ public class MovieListActivity extends Activity
 
             if (extras != null) {
                 //The key argument here must match that used in the other activity
-                movieToDelete = (Movie) extras.getParcelable("DeleteKey");
-                movieToUpdate = (Movie) extras.getParcelable("UpdateKey");
+                movieToDelete = (Movie) extras.getSerializable("DeleteKey");
+                movieToUpdate = (Movie) extras.getSerializable("UpdateKey");
             }
 
             if (movieToDelete != null && resultCode == 1000) {
