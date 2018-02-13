@@ -147,6 +147,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         // TODO: add error handling
         // error checking of year field
+
         try
         {
             Integer.parseInt(expYear);
@@ -159,8 +160,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         }
 
         // Convert selectedCategories into ArrayList:
-
-        int checkExpYear = 2019;
+        int checkExpYear = Integer.parseInt(expYear);
 
         if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
         {
@@ -171,7 +171,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
             Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
         }
 
-        int checkReleaseYear = 2000;
+        int checkReleaseYear = Integer.parseInt(releaseYear);
 
         if (checkReleaseYear < 1900)
         {
