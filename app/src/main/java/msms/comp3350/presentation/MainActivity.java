@@ -1,4 +1,4 @@
-package msms.comp3350.main;
+package msms.comp3350.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-import msms.comp3350.presentation.MovieListActivity;
-import msms.comp3350.presentation.UserListActivity;
+import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity {
 
