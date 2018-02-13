@@ -44,15 +44,15 @@ public class TempData
         users = new ArrayList<User>();
 
 
-        movie = new Movie(1, "The Shawshank Redemption", 1994, 9, drama, date1, "ipsum lorem");
+        movie = new Movie("The Shawshank Redemption", 1994, 9, drama, date1, "ipsum lorem");
         movies.add(movie);
-        movie = new Movie(2, "The Lord of the Rings", 2001, 8, fantasy, date2, "ipsum lorem");
+        movie = new Movie("The Lord of the Rings", 2001, 8, fantasy, date2, "ipsum lorem");
         movies.add(movie);
-        movie = new Movie(3, "A Nightmare on Elm Street", 1984, 7, horror, date3, "ipsum lorem");
+        movie = new Movie("A Nightmare on Elm Street", 1984, 7, horror, date3, "ipsum lorem");
         movies.add(movie);
-        movie = new Movie(4, "Raiders of the Lost Ark", 1981, 6, action, date4, "ipsum lorem");
+        movie = new Movie("Raiders of the Lost Ark", 1981, 6, action, date4, "ipsum lorem");
         movies.add(movie);
-        movie = new Movie(5, "A Fish Called Wanda", 1988, 5, comedy, date5, "ipsum lorem");
+        movie = new Movie("A Fish Called Wanda", 1988, 5, comedy, date5, "ipsum lorem");
         movies.add(movie);
 
         user = new User(1, "Mike McMahon", "anime4life", 21, 'm', date1);

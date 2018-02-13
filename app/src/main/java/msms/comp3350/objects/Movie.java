@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 public class Movie implements Serializable
 {
+	private static int currID = 1;
 	private int mID;
 	private String title;
 	private int releaseYear;
@@ -14,9 +15,9 @@ public class Movie implements Serializable
 	private Calendar endDate;
 	private String description;
 
-	public Movie (int mID, String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
+	public Movie (String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
 	{
-		this.mID = mID;
+		mID = currID++;
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.userScore = userScore;

@@ -31,8 +31,8 @@ public class MovieTest extends TestCase
 
         System.out.println("\nStarting Movie tests");
 
-        family = new Movie(1, "Shrek", 2001, 84, familyCat, endDate, "Ogre Saves Princess but gets unexpected suprise");
-        comedy = new Movie(2, "Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
+        family = new Movie("Shrek", 2001, 84, familyCat, endDate, "Ogre Saves Princess but gets unexpected suprise");
+        comedy = new Movie("Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
 
         assertNotNull(family);
 
@@ -63,12 +63,17 @@ public class MovieTest extends TestCase
 
         // testing the equals
         // it should be equal unless the id is not equal
-        Movie idChanged = new Movie(999, "Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
-        Movie nameChanged = new Movie(2, "newMovie", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
-        Movie passChanged = new Movie(2, "Shrek 2", 2006, 99, comedyCat, endDate, "Ogre saves princess again..");
-        Movie ageChanged = new Movie(2, "Shrek 2", 2004, 76, familyCat, endDate, "Ogre saves princess again..");
-        Movie genderChanged = new Movie(2, "Shrek 2", 2004, 76, comedyCat, newDate, "Ogre saves princess again..");
-        Movie dateChanged = new Movie(2, "Shrek 2", 2004, 76, comedyCat, endDate, "newDescription");
+        Movie idChanged = new Movie("Shrek 2", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
+        Movie nameChanged = new Movie("newMovie", 2004, 76, comedyCat, endDate, "Ogre saves princess again..");
+        nameChanged.setmID(comedy.getmID());
+        Movie passChanged = new Movie("Shrek 2", 2006, 99, comedyCat, endDate, "Ogre saves princess again..");
+        passChanged.setmID(comedy.getmID());
+        Movie ageChanged = new Movie("Shrek 2", 2004, 76, familyCat, endDate, "Ogre saves princess again..");
+        ageChanged.setmID(comedy.getmID());
+        Movie genderChanged = new Movie( "Shrek 2", 2004, 76, comedyCat, newDate, "Ogre saves princess again..");
+        genderChanged.setmID(comedy.getmID());
+        Movie dateChanged = new Movie("Shrek 2", 2004, 76, comedyCat, endDate, "newDescription");
+        dateChanged.setmID(comedy.getmID());
 
         assertTrue(family.equals(family));
 

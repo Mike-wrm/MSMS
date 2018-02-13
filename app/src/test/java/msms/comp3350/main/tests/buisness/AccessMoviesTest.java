@@ -31,8 +31,8 @@ public class AccessMoviesTest extends TestCase
 
         System.out.println("\nStarting testAccessMovie");
 
-        Movie testMovie1 = new Movie(999, "testMovie", 1999, 84, familyCat, endDate, "testing");
-        Movie testMovie2 = new Movie(998, "testMovie2", 1998, 84, familyCat, endDate, "testing");
+        Movie testMovie1 = new Movie("testMovie", 1999, 84, familyCat, endDate, "testing");
+        Movie testMovie2 = new Movie("testMovie2", 1998, 84, familyCat, endDate, "testing");
         Movie movie; //used for temporary movie
 
         assertNull(list.insertMovie(testMovie1));
@@ -43,23 +43,6 @@ public class AccessMoviesTest extends TestCase
 
         assertNull(list.deleteMovie(testMovie1));
         assertEquals("'testMovie' cannot be found.", list.deleteMovie(testMovie1));
-
-        movie = new Movie(1, "The Shawshank Redemption", 1994, 9, familyCat, endDate, "ipsum lorem");
-        assertNull(list.deleteMovie(movie));
-        movie = new Movie(2, "The Lord of the Rings", 2001, 8, familyCat, endDate, "ipsum lorem");
-        assertNull(list.deleteMovie(movie));
-        movie = new Movie(3, "A Nightmare on Elm Street", 1984, 7, familyCat, endDate, "ipsum lorem");
-        assertNull(list.deleteMovie(movie));
-        movie = new Movie(4, "Raiders of the Lost Ark", 1981, 6, familyCat, endDate,"ipsum lorem");
-        assertNull(list.deleteMovie(movie));
-        movie = new Movie(5, "A Fish Called Wanda", 1988, 5, familyCat, endDate, "ipsum lorem");
-        assertNull(list.deleteMovie(movie));
-
-        assertEquals("'testMovie' cannot be found.", list.updateMovie(testMovie1));
-
-        assertEquals("'testMovie' cannot be found.", list.deleteMovie(testMovie1));
-
-        assertNull(list.insertMovie(testMovie1));
 
     }
 

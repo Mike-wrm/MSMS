@@ -158,7 +158,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         // New movie is created and added here:
         // TODO create a new movieID per movie created
-        Movie newMovie = new Movie(1, name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
+        Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
                 categoriesAL, expDate, description);
 
         //Starting the previous Intent
