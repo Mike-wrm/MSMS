@@ -66,10 +66,12 @@ public class User implements Serializable
 	{
 		this.age = age;
 	}
-	public void setEndDate(Calendar endDate){
+	public void setEndDate(Calendar endDate)
+	{
 		this.endDate = endDate;
 	}
-	public void setGender(char gender){
+	public void setGender(char gender)
+	{
 		this.gender = gender;
 	}
 

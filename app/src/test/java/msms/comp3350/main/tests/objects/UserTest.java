@@ -51,7 +51,24 @@ public class UserTest extends TestCase
             user.setEndDate(newDate);
             assertEquals(newDate, user.getEndDate());
 
+
+            // Test out the equals -- the id has to be the same
+            User idChanged = new User(999, "JaneDoe", "pass", 22, 'f', endDate);
+            User nameChanged = new User(2, "newName", "pass", 22, 'f', endDate);
+            User passChanged = new User(2, "JaneDoe", "newPass", 2, 'f', endDate);
+            User ageChanged = new User(2, "JaneDoe", "pass", 25, 'f', endDate);
+            User genderChanged = new User(2, "JaneDoe", "pass", 22, 'm', endDate);
+            User dateChanged = new User(2, "JaneDoe", "pass", 22, 'f', newDate);
+
             assertTrue(user.equals(user));
+
+            assertFalse(user2.equals(idChanged));
+            assertTrue(user2.equals(nameChanged));
+            assertTrue(user2.equals(passChanged));
+            assertTrue(user2.equals(ageChanged));
+            assertTrue(user2.equals(genderChanged));
+            assertTrue(user2.equals(dateChanged));
+
             assertFalse(user.equals(user2));
         }
 }
