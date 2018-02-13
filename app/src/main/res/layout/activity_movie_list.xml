@@ -8,23 +8,20 @@
     android:orientation="vertical"
     tools:context="msms.comp3350.presentation.MovieListActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/plus_movie_button"
-        android:layout_width="64dp"
-        android:layout_height="74dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:onClick="openAddMovie"
-        android:src="@android:drawable/ic_input_add"
-        android:visibility="visible"
-        app:backgroundTint="@android:color/darker_gray" />
-
     <ListView
         android:id="@+id/listMovies"
-        android:layout_width="match_parent"
-        android:layout_height="767dp"
+        android:layout_width="wrap_content"
+        android:layout_height="736dp"
         android:layout_gravity="top"
         android:layout_weight="1"
         android:choiceMode="singleChoice" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="openAddMovie"
+        android:text="@string/add_movie"
+        android:textSize="18sp" />
 
 </LinearLayout>
