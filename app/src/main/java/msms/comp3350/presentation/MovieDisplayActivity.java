@@ -315,4 +315,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         finish();
     }
 
+    public void buttonCancelOnClick(View v) { finish(); }
+
 }

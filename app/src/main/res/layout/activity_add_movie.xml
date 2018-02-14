@@ -188,10 +188,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:gravity="top"
         android:hint="@string/movie_description_hint"
         android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
