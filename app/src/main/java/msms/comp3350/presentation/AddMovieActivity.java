@@ -6,13 +6,11 @@ import msms.comp3350.main.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.content.DialogInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -166,7 +164,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
         {
-            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
+            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights.");
             return;
         }
         else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
@@ -198,8 +196,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         expDate.set(Integer.parseInt(expYear), Integer.parseInt(selectedMonth), Integer.parseInt(selectedDay));
 
         // New movie is created and added here:
-        // TODO create a new movieID per movie created
-
         Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
                 categoriesAL, expDate, description);
 
@@ -208,23 +204,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         previousScreen.putExtra("AddKey", newMovie);
         setResult(1001, previousScreen);
         finish();
-    }
-
-    // Displays a dialogue with the provided message
-    public void showWarning(String warningMsg)
-    {
-        AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-
-
-        builder.setMessage(warningMsg)
-        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // do stuff...
-            }
-        })
-        .setIcon(android.R.drawable.ic_dialog_alert)
-        .show();
     }
 
     public void cancel(View view)
