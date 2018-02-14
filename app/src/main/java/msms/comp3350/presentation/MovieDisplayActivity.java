@@ -75,7 +75,7 @@ public class MovieDisplayActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(MovieDisplayActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setMessage("Are you sure you want to delete this Movie ?\n" + inputMovie.getTitle());
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.dismiss();
                     //Starting the previous Intent
@@ -85,7 +85,7 @@ public class MovieDisplayActivity extends Activity {
                     finish();
                 }
             });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.dismiss();
                 }
