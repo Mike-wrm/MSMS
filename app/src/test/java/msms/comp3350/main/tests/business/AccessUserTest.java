@@ -3,6 +3,8 @@ package msms.comp3350.main.tests.business;
 import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import msms.comp3350.application.Services;
 import msms.comp3350.objects.User;
 import msms.comp3350.business.AccessUsers;
 
@@ -16,6 +18,7 @@ public class AccessUserTest extends TestCase
 
     public void testAccessUser()
     {
+        Services.createDataAccess("test");
         AccessUsers list = new AccessUsers();
         ArrayList<User> users = new ArrayList<>();
 

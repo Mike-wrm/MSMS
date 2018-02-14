@@ -3,6 +3,8 @@ package msms.comp3350.main.tests.business;
 import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import msms.comp3350.application.Services;
 import msms.comp3350.business.AccessMovies;
 import msms.comp3350.objects.Movie;
 
@@ -15,6 +17,7 @@ public class AccessMoviesTest extends TestCase
 
     public void testAccessMovie()
     {
+        Services.createDataAccess("test");
         AccessMovies list = new AccessMovies();
         ArrayList<Movie> movies = new ArrayList<>();
 
@@ -28,6 +31,7 @@ public class AccessMoviesTest extends TestCase
 
         Calendar endDate = Calendar.getInstance();
         endDate.set(5,2,20);
+
 
         System.out.println("\nStarting testAccessMovie");
 
