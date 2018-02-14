@@ -144,9 +144,9 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         description = descriptionText.getText().toString();
 
         // error checking
-        if(null == name)
+        if(name.equals("") || name == null)
         {
-            Messages.warning(this, "You need to name your movie.");
+            Messages.warning(this, "Please enter a movie name");
             return;
         }
 
@@ -156,7 +156,7 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
             Integer.parseInt(releaseYear);
         }
         catch (NumberFormatException e) {
-            Messages.warning(this, "Year must be a number.");
+            Messages.warning(this, "Year must be a number");
             return;
         }
 
@@ -164,12 +164,12 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
         {
-            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights.");
+            Messages.warning(this, "Invalid year entry: can't enter movie with expired rights");
             return;
         }
         else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
         {
-            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
+            Messages.warning(this, "Invalid year entry: can't acquire movie rights beyond 5 years");
             return;
         }
 
@@ -177,20 +177,19 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         if (checkReleaseYear < 1900)
         {
-            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
+            Messages.warning(this, "Invalid year entry: movies did not exist during this time");
             return;
         }
         else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
         {
-            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
+            Messages.warning(this, "Invalid year entry: can't add movies from beyond current year");
             return;
         }
 
         // Convert selectedCategories into ArrayList:
         ArrayList<String> categoriesAL = new ArrayList<String>();
         for (int i=0; i<3; i++)
-            if (!selectedCategories[i].equals(""))
-                categoriesAL.add(selectedCategories[i]);
+            categoriesAL.add(selectedCategories[i]);
 
         Calendar expDate = Calendar.getInstance();
         expDate.set(Integer.parseInt(expYear), Integer.parseInt(selectedMonth), Integer.parseInt(selectedDay));
