@@ -1,14 +1,12 @@
 package msms.comp3350.objects;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Movie implements Parcelable
+public class Movie implements Serializable
 {
-
+	private static int currID = 1;
 	private int mID;
 	private String title;
 	private int releaseYear;
@@ -17,10 +15,9 @@ public class Movie implements Parcelable
 	private Calendar endDate;
 	private String description;
 
-
-	public Movie (int mID, String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
+	public Movie (String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
 	{
-		this.mID = mID;
+		mID = currID++;
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.userScore = userScore;
@@ -76,7 +73,8 @@ public class Movie implements Parcelable
 	{
 		this.userScore = userScore;
 	}
-	public void setCategory(ArrayList<String> category){
+	public void setCategory(ArrayList<String> category)
+	{
 		this.category = category;
 	}
 	public void setEndDate(Calendar endDate)
@@ -88,75 +86,20 @@ public class Movie implements Parcelable
 		this.description = description;
 	}
 
-	public Boolean compareTo(String test)
+	public boolean equals (Object object)
 	{
-		if (test.equalsIgnoreCase(title))
+		Movie test;
+		boolean returnValue = false;
+
+		if (object instanceof Movie)
 		{
-			return true;
+			test = (Movie) object;
+
+			if (test.getmID() == mID)
+			{
+				returnValue = true;
+			}
 		}
-
-		return false;
+		return returnValue;
 	}
-
-	//Prints just the title (when clicking to see entire list of movies)
-	public void printTitle()
-	{
-		System.out.println(title);
-	}
-
-	//Prints all movie details (when movie clicked on in UI)
-	public void print()
-	{
-		printTitle();
-		System.out.println("Released in " + releaseYear + "\tLicense Expires: " + endDate);
-		System.out.println("User Score: " + userScore + "\tCategory: " + category);
-		System.out.println("Description: " + description + "\n");
-		System.out.println();
-	}
-
-	// Parcelable implementation code
-	protected Movie(Parcel in)
-	{
-		mID = in.readInt();
-		title = in.readString();
-		releaseYear = in.readInt();
-		userScore = in.readInt();
-		in.readStringList(category);
-		endDate = (Calendar) in.readValue(Calendar.class.getClassLoader());
-		description = in.readString();
-	}
-
-	@Override
-	public int describeContents()
-	{
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags)
-	{
-		dest.writeInt(mID);
-		dest.writeString(title);
-		dest.writeInt(releaseYear);
-		dest.writeInt(userScore);
-		dest.writeStringList(category);
-		dest.writeValue(endDate);
-		dest.writeString(description);
-	}
-
-	@SuppressWarnings("unused")
-	public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>()
-	{
-		@Override
-		public Movie createFromParcel(Parcel in)
-		{
-			return new Movie(in);
-		}
-
-		@Override
-		public Movie[] newArray(int size)
-		{
-			return new Movie[size];
-		}
-	};
 }

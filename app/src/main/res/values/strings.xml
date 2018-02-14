@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MSMS</string>
+    <string name="app_name_full">Media Streaming Management Service</string>
     <string name="title_activity_movies">MSMS: Movies</string>
     <string name="title_activity_users">MSMS: Users</string>
     <string name="title_activity_movie_info">MSMS: Movie Info</string>
@@ -9,21 +10,18 @@
     <string name="fatalError">Fatal error</string>
     <string name="warning">Warning</string>
     <string name="add_movie">Add Movie</string>
-    <string name="movie_name">Movie Name:</string>
-    <string name="movie_genre">Genre:</string>
-    <string-array name="movie_genres">
-        <item>None</item>
-        <item>Comedy</item>
-        <item>Drama</item>
-        <item>Horror</item>
-        <item>Action</item>
-        <item>Fantasy</item>
-        <item>Family</item>
-        <item>Recent</item>
-        <item>Trending</item>
-    </string-array>
+    <string name="movie_name">Name:</string>
+    <string name="movie_category">Category 1:</string>
     <string name="ok">OK</string>
-    <string name="movie_length">Length (min):</string>
-    <string name="movie_genre2">Genre 2 (optional):</string>
-    <string name="movie_genre3">Genre 3 (optional):</string>
+    <string name="back">Back</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="movie_category2">Category 2:</string>
+    <string name="movie_category3">Category 3:</string>
+    <string name="movie_license">License Expiration Date (M/D/Y):</string>
+    <string name="movie_release">Release Year:</string>
+    <string name="movie_score">Score:</string>
+    <string name="movie_description">Description:</string>
+    <string name="movie_description_hint">What is the movie about?</string>
+    <string name="movie_release_hint">YYYY</string>
 </resources>
