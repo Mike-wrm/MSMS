@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.User;
 import msms.comp3350.persistence.TempData;
-import msms.comp3350.presentation.MainActivity;
 
 public class AccessUsers
 {
@@ -13,7 +12,7 @@ public class AccessUsers
 
     public AccessUsers()
     {
-        dataAccess = (TempData) Services.getDataAccess(MainActivity.dbName);
+        dataAccess = (TempData) Services.getDataAccess();
     }
 
     public String getUsers(ArrayList<User> users)

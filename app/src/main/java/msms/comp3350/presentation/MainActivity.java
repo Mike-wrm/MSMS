@@ -9,8 +9,8 @@ import android.view.View;
 import msms.comp3350.application.Services;
 import msms.comp3350.main.R;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     public static final String dbName = "temp";
 
     @Override
@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -37,12 +38,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buttonMoviesOnClick(View v) {
+    public void buttonMoviesOnClick(View v)
+    {
         Intent movieListActivity = new Intent(MainActivity.this, MovieListActivity.class);
         MainActivity.this.startActivity(movieListActivity);
     }
 
-    public void buttonUsersOnClick(View v) {
+    public void buttonUsersOnClick(View v)
+    {
         Intent userListActivity = new Intent(MainActivity.this, UserListActivity.class);
         MainActivity.this.startActivity(userListActivity);
     }

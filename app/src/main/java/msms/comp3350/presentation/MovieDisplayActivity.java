@@ -50,17 +50,20 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private ArrayAdapter<CharSequence> dayAdapter = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_display);
 
         // Get the passed Movie
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras != null)
+        {
             //The key argument here must match that used in the other activity
             inputMovie = (Movie) extras.getSerializable("SelectedMovie");
         }
-        else{
+        else
+        {
             //Error getting extra value
             finish();
         }
@@ -160,14 +163,17 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
     public void onNothingSelected(AdapterView<?> parent) {}
 
-    private void displayData(){
-
-        if (inputMovie != null) {
+    private void displayData()
+    {
+        if (inputMovie != null)
+        {
             movieNameText.setText(inputMovie.getTitle());
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
             scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
             ArrayList<String> categories = inputMovie.getCategory();
-            for (int i = 0; i < categories.size(); i++) {
+
+            for (int i = 0; i < categories.size(); i++)
+            {
                 switch(i)
                 {
                     case 0:
@@ -181,6 +187,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                         break;
                 }
             }
+
             Calendar expDate = inputMovie.getEndDate();
 
             // We must ensure our daySpinner adapter is set first before we set what day of the month it is
@@ -208,13 +215,16 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
             descriptionText.setText(inputMovie.getDescription());
         }
-        else{
+        else
+        {
             Messages.fatalError(this, "Movie was not found.");
         }
     }
 
-    public void buttonMovieDeleteOnClick(View v) {
-        if (inputMovie != null) {
+    public void buttonMovieDeleteOnClick(View v)
+    {
+        if (inputMovie != null)
+        {
             AlertDialog.Builder builder = new AlertDialog.Builder(MovieDisplayActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setMessage("Are you sure you want to delete this Movie ?\n" + inputMovie.getTitle());
@@ -236,12 +246,14 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             AlertDialog alert = builder.create();
             alert.show();
         }
-        else{
+        else
+        {
             Messages.fatalError(this, "Movie was not found.");
         }
     }
 
-    public void buttonMovieUpdateOnClick(View v){
+    public void buttonMovieUpdateOnClick(View v)
+    {
         // Grab text input:
         name = movieNameText.getText().toString();
         expYear = expYearText.getText().toString();
@@ -315,6 +327,9 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         finish();
     }
 
-    public void buttonCancelOnClick(View v) { finish(); }
+    public void buttonCancelOnClick(View v)
+    {
+        finish();
+    }
 
 }

@@ -27,7 +27,10 @@ public abstract class SpinnerArrays
     };
 
     // Getters:
-    public static String[] getDays() { return DAYS; }
+    public static String[] getDays()
+    {
+        return DAYS;
+    }
     public static String[] getMonths()
     {
         return MONTHS;

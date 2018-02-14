@@ -16,8 +16,8 @@ import msms.comp3350.business.AccessUsers;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.User;
 
-public class UserListActivity extends Activity {
-
+public class UserListActivity extends Activity
+{
     private ArrayList<User> userList;
     private AccessUsers userAccessor;
     private ArrayAdapter<User> userArrayAdapter;
@@ -25,7 +25,8 @@ public class UserListActivity extends Activity {
     private int selectedUserPosition = -1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
@@ -34,12 +35,17 @@ public class UserListActivity extends Activity {
         String result = userAccessor.getUsers(userList);
 
         // Perform error handling on getting the list of users
-        if (result != null) {
+        if (result != null)
+        {
             Messages.fatalError(this, result);
-        } else {
-            userArrayAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, userList) {
+        }
+        else
+        {
+            userArrayAdapter = new ArrayAdapter<User>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, userList)
+            {
                 @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
+                public View getView(int position, View convertView, ViewGroup parent)
+                {
                     View view = super.getView(position, convertView, parent);
 
                     TextView text1 = (TextView) view.findViewById(android.R.id.text1);
@@ -53,14 +59,18 @@ public class UserListActivity extends Activity {
             final ListView listView = (ListView) findViewById(R.id.listUsers);
             listView.setAdapter(userArrayAdapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    if (position == selectedUserPosition) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    if (position == selectedUserPosition)
+                    {
                         listView.setItemChecked(position, false);
                         selectedUserPosition = -1;
-                    } else {
+                    }
+                    else
+                    {
                         listView.setItemChecked(position, true);
                         selectedUserPosition = position;
 

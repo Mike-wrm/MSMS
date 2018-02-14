@@ -3,8 +3,8 @@ package msms.comp3350.main.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import msms.comp3350.main.tests.buisness.AccessMoviesTest;
-import msms.comp3350.main.tests.buisness.AccessUserTest;
+import msms.comp3350.main.tests.business.AccessMoviesTest;
+import msms.comp3350.main.tests.business.AccessUserTest;
 import msms.comp3350.main.tests.objects.MovieTest;
 import msms.comp3350.main.tests.objects.UserTest;
 

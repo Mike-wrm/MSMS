@@ -1,4 +1,4 @@
-package msms.comp3350.main.tests.buisness;
+package msms.comp3350.main.tests.business;
 
 import junit.framework.TestCase;
 import java.util.ArrayList;
@@ -66,8 +66,6 @@ public class AccessUserTest extends TestCase
         assertEquals("'John Doe' cannot be found.", list.updateUser(testUser1));
 
         assertNull(list.insertUser(testUser1));
-
-
 
     }
 

@@ -90,7 +90,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
     // Handles a selection from the genre spinner
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
     {
-
         switch(parent.getId())// Which spinner was changed?
         {
             case R.id.month_spinner:

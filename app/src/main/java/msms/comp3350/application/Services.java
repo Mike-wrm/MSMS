@@ -3,12 +3,9 @@ package msms.comp3350.application;
 import msms.comp3350.persistence.TempData;
 import msms.comp3350.presentation.MainActivity;
 
-/**
- * Created by Chris on 2018-02-13.
- */
 
-public class Services {
-
+public class Services
+{
     public static TempData dataAccessService = null;
 
     public static TempData createDataAccess(String dbName)
@@ -21,7 +18,7 @@ public class Services {
         return dataAccessService;
     }
 
-    public static TempData getDataAccess(String dbName)
+    public static TempData getDataAccess()
     {
         if(null == dataAccessService)
         {
