@@ -5,14 +5,28 @@ import java.util.Calendar;
 
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.presentation.MainActivity;
 
 
 public class TempData
 {
+    private String dbName;
+    private String dbType = "stub";
+
     private ArrayList<Movie> movies;
     private ArrayList<User> users;
 
+    public TempData(String dbName)
+    {
+        this.dbName = dbName;
+    }
+
     public TempData()
+    {
+        this(MainActivity.dbName);
+    }
+
+    public void open(String dbName)
     {
         Movie movie;
         User user;
@@ -67,6 +81,11 @@ public class TempData
         users.add(user);
         user = new User(6, "Diana Prince", "wonderwoman", 86, 'f', date6);
         users.add(user);
+    }
+
+    public void close()
+    {
+        System.out.println("Closed " + dbType + " database " + dbName);
     }
 
     public String getMoviesAll(ArrayList<Movie> currentMovies)

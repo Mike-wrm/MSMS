@@ -6,19 +6,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import msms.comp3350.application.Services;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String dbName = "temp";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Services.createDataAccess(dbName);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
+        Services.closeDataAccess();
     }
 
     @Override

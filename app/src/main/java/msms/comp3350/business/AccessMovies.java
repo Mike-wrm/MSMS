@@ -2,8 +2,10 @@ package msms.comp3350.business;
 
 import java.util.ArrayList;
 
+import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.persistence.TempData;
+import msms.comp3350.presentation.MainActivity;
 
 
 public class AccessMovies
@@ -12,7 +14,7 @@ public class AccessMovies
 
     public AccessMovies()
     {
-        dataAccess = new TempData();
+        dataAccess = (TempData) Services.getDataAccess(MainActivity.dbName);
     }
 
     public String getMovies(ArrayList<Movie> movies)
