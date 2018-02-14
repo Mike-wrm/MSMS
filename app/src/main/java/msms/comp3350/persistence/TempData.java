@@ -5,14 +5,28 @@ import java.util.Calendar;
 
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.presentation.MainActivity;
 
 
 public class TempData
 {
+    private String dbName;
+    private String dbType = "stub";
+
     private ArrayList<Movie> movies;
     private ArrayList<User> users;
 
+    public TempData(String dbName)
+    {
+        this.dbName = dbName;
+    }
+
     public TempData()
+    {
+        this(MainActivity.dbName);
+    }
+
+    public void open(String dbName)
     {
         Movie movie;
         User user;
@@ -30,15 +44,15 @@ public class TempData
         Calendar date1 = Calendar.getInstance(); // Obviously, each object  should get their own date object
         date1.set(2021, 1, 1);  // But for the sake of my time and sanity, I'm making them share
         Calendar date2 = Calendar.getInstance();
-        date2.set(2022, 2, 2);
+        date2.set(2021, 2, 2);
         Calendar date3 = Calendar.getInstance();
-        date3.set(2023, 3, 3);
+        date3.set(2021, 3, 3);
         Calendar date4 = Calendar.getInstance();
-        date4.set(2024, 4, 4);
+        date4.set(2021, 4, 4);
         Calendar date5 = Calendar.getInstance();
-        date5.set(2025, 5, 5);
+        date5.set(2021, 5, 5);
         Calendar date6 = Calendar.getInstance();
-        date6.set(2025, 6, 6);
+        date6.set(2021, 6, 6);
 
         movies = new ArrayList<Movie>();
         users = new ArrayList<User>();
@@ -67,6 +81,11 @@ public class TempData
         users.add(user);
         user = new User(6, "Diana Prince", "wonderwoman", 86, 'f', date6);
         users.add(user);
+    }
+
+    public void close()
+    {
+        System.out.println("Closed " + dbType + " database " + dbName);
     }
 
     public String getMoviesAll(ArrayList<Movie> currentMovies)
