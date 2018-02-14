@@ -154,7 +154,8 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
             Integer.parseInt(expYear);
             Integer.parseInt(releaseYear);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e)
+        {
             Messages.warning(this, "Year must be a number");
             return;
         }
