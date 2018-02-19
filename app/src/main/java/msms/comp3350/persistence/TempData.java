@@ -8,7 +8,7 @@ import msms.comp3350.objects.User;
 import msms.comp3350.presentation.MainActivity;
 
 
-public class TempData
+public class TempData implements DataAccessor
 {
     private String dbName;
     private String dbType = "stub";
