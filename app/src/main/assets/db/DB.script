@@ -1,0 +1,17 @@
+CREATE SCHEMA PUBLIC AUTHORIZATION DBA
+CREATE MEMORY TABLE MOVIES (mID INTEGER NOT NULL PRIMARY KEY, title VARCHAR(50), releaseYear INTEGER, userScore INTEGER,
+                            category1 VARCHAR(20), category2 VARCHAR(20), category3 VARCHAR(20), description VARCHAR(200))
+CREATE MEMORY TABLE USERS (uID INTEGER NOT NULL PRIMARY KEY, userName VARCHAR(50), password VARCHAR(20), age INTEGER,
+                            gender CHAR(1))
+CREATE USER GROUPD PASSWORD ""
+GRANT DBA TO GROUPD
+SET WRITE_DELAY 20
+SET SCHEMA PUBLIC
+INSERT INTO MOVIES VALUES(1,'Shrek',2001,8,'Comedy','Family','Trending','Ipsum Lorem...')
+INSERT INTO MOVIES VALUES(2,'Mission Impossible: Rogue Nation',2015,7,'Action','Trending',null,'Ipsum Lorem...')
+INSERT INTO USERS VALUES(1,"Miggles", "anime4life", 21, 'M')
+INSERT INTO USERS VALUES(2,"Smoo","getoffmylawn",32,'M')
+INSERT INTO USERS VALUES(3,"Andrew_Sempai","iheartmybeard",23,'M')
+INSERT INTO USERS VALUES(4,"TestBoi","supertester",24,'M')
+INSERT INTO USERS VALUES(5,"JiffyPB","walmartisevil", 21, 'M')
+INSERT INTO USERS VALUES(6,"Wonder_Woman","DCU", 82, 'F')
