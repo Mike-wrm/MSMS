@@ -11,6 +11,9 @@ public class User implements Serializable
 	private int age;
 	private char gender;
 	private Calendar endDate;
+	private int endMonth;
+	private int endDay;
+	private int endYear;
 
 
 	public User (int uID, String userName, String password, int age, char gender, Calendar endDate)
@@ -21,6 +24,15 @@ public class User implements Serializable
 		this.age = age;
 		this.gender = gender;
 		this.endDate = endDate;
+		processDate();
+	}
+
+	public void processDate()
+	{
+		endYear = endDate.get(Calendar.YEAR);
+		endMonth = (endDate.get(Calendar.MONTH)) + 1;  //January = 0 in calendar
+		endDay = endDate.get(Calendar.DAY_OF_MONTH);
+
 	}
 
 	//getters
@@ -44,6 +56,18 @@ public class User implements Serializable
 	{
 		return endDate;
 	}
+    public int getEndMonth()
+    {
+        return endMonth;
+    }
+    public int getEndDay()
+    {
+        return endDay;
+    }
+    public int getEndYear()
+    {
+        return endYear;
+    }
     public char getGender()
 	{
   		return gender;
@@ -68,7 +92,8 @@ public class User implements Serializable
 	}
 	public void setEndDate(Calendar endDate)
 	{
-		this.endDate = endDate;
+        this.endDate = endDate;
+        processDate();
 	}
 	public void setGender(char gender)
 	{
