@@ -21,7 +21,7 @@ public class DataAccessorObject implements DataAccessor
 
     private Connection connectionX;
     private Statement statement1, statement2;
-    private ResultSet resultSet1, resultSet2, resultSet3;
+    private ResultSet resultSet1, resultSet2;
 
     private ArrayList<Movie> movies;
     private ArrayList<User> users;
@@ -73,6 +73,7 @@ public class DataAccessorObject implements DataAccessor
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
+    //TODO possible adjustment of month offset in calendar?
     public String getMoviesAll(ArrayList<Movie> currentMovies)
     {
         Movie movieX;
@@ -125,15 +126,42 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
+    //TODO possible conversion to strings?
     public String insertMovie(Movie currentMovie)
     {
-        return null;
+        String values;
+        result = null;
+
+        try
+        {
+            values = currentMovie.getmID()
+                    +", '" +currentMovie.getTitle()
+                    +"', '" +currentMovie.getReleaseYear()
+                    +"', '" +currentMovie.getUserScore()
+                    +"', '" +currentMovie.getCategory1()
+                    +"', '" +currentMovie.getCategory2()
+                    +"', '" +currentMovie.getEndMonth()
+                    +"', '" +currentMovie.getEndDay()
+                    +"', '" +currentMovie.getEndYear()
+                    +"', '" +currentMovie.getDescription()
+                    +"'";
+            command = "Insert into Movies " +" Values(" +values +")";
+            updateCount = statement1.executeUpdate(command);
+            result = checkWarning(statement1, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
 
     public String updateMovie(Movie currentMovie)
     {
         return null;
     }
+
     public String deleteMovie(Movie currentMovie)
     {
         return null;
@@ -163,7 +191,7 @@ public class DataAccessorObject implements DataAccessor
 
         try
         {
-            while (resultSet1.next())
+            while (resultSet2.next())
             {
                 myID = resultSet2.getInt("uID");
                 myUserName = resultSet2.getString("userName");
@@ -190,17 +218,65 @@ public class DataAccessorObject implements DataAccessor
     }
     public String insertUser(User currentUser)
     {
-        return null;
+        String values;
+        result = null;
+
+        try
+        {
+            values = currentUser.getuID()
+                    +", '" +currentUser.getName()
+                    +"', '" +currentUser.getPass()
+                    +"', '" +currentUser.getAge()
+                    +"', '" +currentUser.getGender()
+                    +"', '" +currentUser.getEndMonth()
+                    +"', '" +currentUser.getEndDay()
+                    +"', '" +currentUser.getEndYear()
+                    +"'";
+            command = "Insert into Users " +" Values(" +values +")";
+            updateCount = statement2.executeUpdate(command);
+            result = checkWarning(statement2, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
+
     public String updateUser(User currentUser)
     {
         return null;
     }
+    
     public String deleteUser(User currentUser)
     {
         return null;
     }
 
+    public String checkWarning(Statement st, int updateCount)
+    {
+        String result;
+
+        result = null;
+        try
+        {
+            SQLWarning warning = st.getWarnings();
+            if (warning != null)
+            {
+                result = warning.getMessage();
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+        if (updateCount != 1)
+        {
+            result = "Tuple not inserted correctly.";
+        }
+        return result;
+    }
 
     public String processSQLError(Exception e)
     {
