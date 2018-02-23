@@ -143,7 +143,50 @@ public class DataAccessorObject implements DataAccessor
 
     public String getUsersAll(ArrayList<User> currentUsers)
     {
-        return null;
+        User userX;
+        int myID, myAge, myEndMonth, myEndDay, myEndYear;
+        String myUserName, myPassword, myGender;
+        myUserName = myPassword = myGender = EOF;
+        myID = myAge = myEndDay = myEndMonth = myEndYear = 0;
+
+        result = null;
+
+        try
+        {
+            command = "Select * from Movies";
+            resultSet2 = statement2.executeQuery(command);
+        }
+        catch (Exception e)
+        {
+            processSQLError(e);
+        }
+
+        try
+        {
+            while (resultSet1.next())
+            {
+                myID = resultSet2.getInt("uID");
+                myUserName = resultSet2.getString("userName");
+                myPassword = resultSet2.getString("password");
+                myAge = resultSet2.getInt("age");
+                myGender = resultSet2.getString("gender");
+                char myGenderChar = myGender.charAt(0);
+                myEndMonth = resultSet2.getInt("expMonth");
+                myEndDay = resultSet2.getInt("expDay");
+                myEndYear = resultSet2.getInt("expYear");
+                Calendar expDate = Calendar.getInstance();
+                expDate.set(myEndYear, myEndMonth-1, myEndDay);
+
+                userX = new User (myID, myUserName, myPassword, myAge, myGenderChar, expDate);
+                currentUsers.add(userX);
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
     public String insertUser(User currentUser)
     {

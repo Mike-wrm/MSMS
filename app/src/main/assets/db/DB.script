@@ -3,7 +3,7 @@ CREATE MEMORY TABLE MOVIES (mID INTEGER NOT NULL PRIMARY KEY, title VARCHAR(50),
                             category1 VARCHAR(20), category2 VARCHAR(20), endMonth INTEGER, endDay INTEGER,
                             endYear INTEGER, description VARCHAR(200))
 CREATE MEMORY TABLE USERS (uID INTEGER NOT NULL PRIMARY KEY, userName VARCHAR(50), password VARCHAR(20), age INTEGER,
-                            gender CHAR(1))
+                            gender CHAR(1), expMonth INTEGER, expDay INTEGER, expYear INTEGER,)
 CREATE USER GROUPD PASSWORD ""
 GRANT DBA TO GROUPD
 SET WRITE_DELAY 20
