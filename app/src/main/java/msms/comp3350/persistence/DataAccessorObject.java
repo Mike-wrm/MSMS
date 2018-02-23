@@ -23,9 +23,6 @@ public class DataAccessorObject implements DataAccessor
     private Statement statement1, statement2;
     private ResultSet resultSet1, resultSet2;
 
-    private ArrayList<Movie> movies;
-    private ArrayList<User> users;
-
     private String command;
     private int updateCount;
     private String result;
@@ -158,14 +155,40 @@ public class DataAccessorObject implements DataAccessor
 
     public String updateMovie(Movie currentMovie)
     {
-        return null;
+        String values;
+        String where;
+
+        result = null;
+        try
+        {
+            //TODO Should check for empty values and not update them
+            values = "title='" +currentMovie.getTitle()
+                    +"', releaseYear=" +currentMovie.getReleaseYear()
+                    +", userScore=" +currentMovie.getUserScore()
+                    +", category1='" +currentMovie.getCategory1()
+                    +"', category2='" +currentMovie.getCategory2()
+                    +"', endMonth=" +currentMovie.getEndMonth()
+                    +", endDay=" +currentMovie.getEndDay()
+                    +", endYear=" +currentMovie.getEndYear()
+                    +", description='" +currentMovie.getDescription()
+                    +"";
+            where = "where mID=" +currentMovie.getmID();
+            command = "Update Movies " +" Set " +values +" " +where;
+            updateCount = statement1.executeUpdate(command);
+            result = checkWarning(statement1, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
 
     public String deleteMovie(Movie currentMovie)
     {
         return null;
     }
-
 
 
     public String getUsersAll(ArrayList<User> currentUsers)
@@ -215,6 +238,7 @@ public class DataAccessorObject implements DataAccessor
 
         return result;
     }
+
     public String insertUser(User currentUser)
     {
         String values;
@@ -245,11 +269,37 @@ public class DataAccessorObject implements DataAccessor
 
     public String updateUser(User currentUser)
     {
-        return null;
+        String values;
+        String where;
+
+        result = null;
+        try
+        {
+            //TODO Should check for empty values and not update them
+            values = "userName='" +currentUser.getName()
+                    +"', password='" +currentUser.getPass()
+                    +"', age=" +currentUser.getAge()
+                    +", gender='" +currentUser.getGender()
+                    +"', expMonth=" +currentUser.getEndMonth()
+                    +", expDay=" +currentUser.getEndDay()
+                    +", expYear=" +currentUser.getEndYear()
+                    +"";
+            where = "where uID=" +currentUser.getuID();
+            command = "Update Users " +" Set " +values +" " +where;
+            updateCount = statement2.executeUpdate(command);
+            result = checkWarning(statement2, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
     
     public String deleteUser(User currentUser)
     {
+        //
         return null;
     }
 
