@@ -126,7 +126,6 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
-    //TODO possible conversion to strings?
     public String insertMovie(Movie currentMovie)
     {
         String values;
@@ -136,14 +135,14 @@ public class DataAccessorObject implements DataAccessor
         {
             values = currentMovie.getmID()
                     +", '" +currentMovie.getTitle()
-                    +"', '" +currentMovie.getReleaseYear()
-                    +"', '" +currentMovie.getUserScore()
-                    +"', '" +currentMovie.getCategory1()
+                    +"', " +currentMovie.getReleaseYear()
+                    +", " +currentMovie.getUserScore()
+                    +", '" +currentMovie.getCategory1()
                     +"', '" +currentMovie.getCategory2()
-                    +"', '" +currentMovie.getEndMonth()
-                    +"', '" +currentMovie.getEndDay()
-                    +"', '" +currentMovie.getEndYear()
-                    +"', '" +currentMovie.getDescription()
+                    +"', " +currentMovie.getEndMonth()
+                    +", " +currentMovie.getEndDay()
+                    +", " +currentMovie.getEndYear()
+                    +", '" +currentMovie.getDescription()
                     +"'";
             command = "Insert into Movies " +" Values(" +values +")";
             updateCount = statement1.executeUpdate(command);
@@ -226,12 +225,12 @@ public class DataAccessorObject implements DataAccessor
             values = currentUser.getuID()
                     +", '" +currentUser.getName()
                     +"', '" +currentUser.getPass()
-                    +"', '" +currentUser.getAge()
-                    +"', '" +currentUser.getGender()
-                    +"', '" +currentUser.getEndMonth()
-                    +"', '" +currentUser.getEndDay()
-                    +"', '" +currentUser.getEndYear()
-                    +"'";
+                    +"', " +currentUser.getAge()
+                    +", '" +currentUser.getGender()
+                    +"', " +currentUser.getEndMonth()
+                    +", " +currentUser.getEndDay()
+                    +", " +currentUser.getEndYear()
+                    +"";
             command = "Insert into Users " +" Values(" +values +")";
             updateCount = statement2.executeUpdate(command);
             result = checkWarning(statement2, updateCount);
