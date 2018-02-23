@@ -187,7 +187,21 @@ public class DataAccessorObject implements DataAccessor
 
     public String deleteMovie(Movie currentMovie)
     {
-        return null;
+        result = null;
+
+        try
+        {
+            command = "Delete from Movies where mID=" +currentMovie.getmID() +"";
+            //System.out.println(cmdString);
+            updateCount = statement1.executeUpdate(command);
+            result = checkWarning(statement1, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
 
 
@@ -299,8 +313,21 @@ public class DataAccessorObject implements DataAccessor
     
     public String deleteUser(User currentUser)
     {
-        //
-        return null;
+        result = null;
+
+        try
+        {
+            command = "Delete from Users where uID=" +currentUser.getuID() +"";
+            //System.out.println(cmdString);
+            updateCount = statement2.executeUpdate(command);
+            result = checkWarning(statement2, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
 
     public String checkWarning(Statement st, int updateCount)
