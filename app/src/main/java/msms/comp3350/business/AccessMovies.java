@@ -36,4 +36,28 @@ public class AccessMovies
     {
         return dataAccess.deleteMovie(currentMovie);
     }
+
+
+    public ArrayList<Movie> searchMovie(String targetStr)
+    /* Searches all movies, and returns an ArrayList<Movie> referencing movies whose titles contain
+     * targetStr (partially or fully; case insensitive).
+     */
+    {
+        ArrayList<Movie> results = null;
+
+        if (targetStr != null)
+        {
+            ArrayList<Movie> allMovies = null;
+            dataAccess.getMoviesAll(allMovies);
+
+            // Add movies whose titles contain targetStr:
+            for (Movie currMovie : allMovies)
+            {
+                String currMovieTitle = currMovie.getTitle().toLowerCase();
+                if (currMovieTitle.contains(targetStr.toLowerCase()))
+                    results.add(currMovie);// Shallow copy
+            }
+        }
+        return results;
+    }
 }
