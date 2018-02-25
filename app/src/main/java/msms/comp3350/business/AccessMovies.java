@@ -48,14 +48,17 @@ public class AccessMovies
         if (targetStr != null)
         {
             ArrayList<Movie> allMovies = null;
-            dataAccess.getMoviesAll(allMovies);
+            String returnCode = dataAccess.getMoviesAll(allMovies);
 
-            // Add movies whose titles contain targetStr:
-            for (Movie currMovie : allMovies)
+            if (returnCode != null)
             {
-                String currMovieTitle = currMovie.getTitle().toLowerCase();
-                if (currMovieTitle.contains(targetStr.toLowerCase()))
-                    results.add(currMovie);// Shallow copy
+                // Add movies whose titles contain targetStr:
+                for (Movie currMovie : allMovies)
+                {
+                    String currMovieTitle = currMovie.getTitle().toLowerCase();
+                    if (currMovieTitle.contains(targetStr.toLowerCase()))
+                        results.add(currMovie);// Shallow copy
+                }
             }
         }
         return results;

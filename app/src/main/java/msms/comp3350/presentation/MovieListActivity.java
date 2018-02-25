@@ -3,6 +3,8 @@ package msms.comp3350.presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,7 +18,7 @@ import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
-public class MovieListActivity extends Activity
+public class MovieListActivity extends AppCompatActivity
 {
     private ArrayList<Movie> movieList;
     private ArrayAdapter<Movie> movieArrayAdapter;
@@ -29,6 +31,10 @@ public class MovieListActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+
+        // Setup the app bar:
+        Toolbar movieListToolbar = (Toolbar) findViewById(R.id.movie_list_toolbar);
+        setSupportActionBar(movieListToolbar);
 
         movieList = new ArrayList<Movie>();
         // use accessor to grab the list of movies from BUSINESS
