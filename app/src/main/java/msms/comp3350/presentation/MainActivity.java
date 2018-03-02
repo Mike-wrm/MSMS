@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import msms.comp3350.application.Services;
+import msms.comp3350.charts.ChartActivity;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
@@ -48,5 +49,11 @@ public class MainActivity extends AppCompatActivity
     {
         Intent userListActivity = new Intent(MainActivity.this, UserListActivity.class);
         MainActivity.this.startActivity(userListActivity);
+    }
+
+    public void buttonChartDemo(View v)
+    {
+        Intent chartActivity = new Intent(MainActivity.this, ChartActivity.class);
+        MainActivity.this.startActivity(chartActivity);
     }
 }
