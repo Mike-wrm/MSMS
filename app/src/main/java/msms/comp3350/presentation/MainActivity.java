@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.sql.Array;
+
 import msms.comp3350.application.Services;
 import msms.comp3350.charts.ChartActivity;
 import msms.comp3350.charts.PieChartActivity;
@@ -55,6 +57,12 @@ public class MainActivity extends AppCompatActivity
     public void buttonChartDemo(View v)
     {
         Intent pieChartActivity = new Intent(MainActivity.this, PieChartActivity.class);
+        String[] labels = { "Males", "Females", "Hamsters", "Draugr" };
+        int[] data = { 35, 30, 8, 12 };
+        Bundle args = new Bundle();
+        args.putStringArray("labels", labels);
+        args.putIntArray("data", data);
+        pieChartActivity.putExtras(args);
         MainActivity.this.startActivity(pieChartActivity);
     }
 }

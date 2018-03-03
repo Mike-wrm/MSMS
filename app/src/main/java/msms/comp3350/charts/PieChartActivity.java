@@ -1,6 +1,7 @@
 package msms.comp3350.charts;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,28 +15,68 @@ import msms.comp3350.main.R;
 public class PieChartActivity extends Activity {
 
     private PieChart pie;
+    private enum PieColor { RED, BLUE, GREEN, YELLOW };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pie_chart);
 
-        pie = (PieChart) findViewById(R.id.pie);
+        String[] labels;
+        int[] data;
+        Segment[] segments;
+        SegmentFormatter[] formats;
 
-        int m = 35;
-        int f = 30;
+        // create view
+        pie = findViewById(R.id.pie);
 
-        Segment males = new Segment("Males", m);
-        Segment females = new Segment("Females", f);
+        // extract passed data
+        Bundle args = getIntent().getExtras();
+        if(!args.isEmpty())
+        {
+            labels = args.getStringArray("labels");
+            data = args.getIntArray("data");
+            segments = new Segment[labels.length];
+            formats = new SegmentFormatter[labels.length];
+        }
+        else
+        {
+            labels = new String[] { "empty list" };
+            data = new int[] { 1 };
+            segments = new Segment[1];
+            formats = new SegmentFormatter[1];
+        }
 
-        SegmentFormatter formatM = new SegmentFormatter(Color.BLUE);
-        SegmentFormatter formatF = new SegmentFormatter(Color.RED);
-        formatM.getLabelPaint().setTextSize(80);
-        formatF.getLabelPaint().setTextSize(80);
+        // calculate number of colors needed
+        int numColors = 3;
+        while(labels.length % numColors == 1)
+        {
+            numColors++;
+        }
+        int[] colors = new int[labels.length];
+        for(int i = 0 ; i < colors.length ; i++)
+        {
+            switch(i % numColors)
+            {
+                case 0: colors[i] = Color.RED; break;
+                case 1: colors[i] = Color.BLUE; break;
+                case 2: colors[i] = Color.GREEN; break;
+                case 3: colors[i] = Color.MAGENTA; break;
+                case 4: colors[i] = Color.CYAN; break;
+                default: colors[i] = Color.BLACK;
+            }
+        }
 
-        pie.addSegment(males, formatM);
-        pie.addSegment(females, formatF);
+        // create segments
+        for(int i = 0 ; i < labels.length ; i++)
+        {
+            segments[i] = new Segment(labels[i], data[i]);
+            formats[i] = new SegmentFormatter(colors[i]);
+            formats[i].getLabelPaint().setTextSize(50);
+            pie.addSegment(segments[i], formats[i]);
+        }
 
+        // fill donut hole
         pie.getRenderer(PieRenderer.class).setDonutSize(0, PieRenderer.DonutMode.PERCENT);
     }
 }
