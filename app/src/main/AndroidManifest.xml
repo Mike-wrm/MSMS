@@ -47,7 +47,7 @@
                 android:value="msms.comp3350.presentation.UserDisplayActivity" />
         </activity>
         <activity android:name="msms.comp3350.presentation.AddMovieActivity" />
-        <activity android:name="msms.comp3350.presentation.MovieSearch">
+        <activity android:name="msms.comp3350.presentation.MovieSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>

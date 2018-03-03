@@ -1,6 +1,8 @@
 package msms.comp3350.presentation;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -181,21 +183,45 @@ public class MovieListActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)// Sets up the SearchView in the ToolBar
+    public boolean onCreateOptionsMenu(Menu menu)
+    /* Sets up the SearchView in the ToolBar
+     * This setup method was taken (and modified) from:
+     * https://developer.android.com/guide/topics/search/search-dialog.html
+     * http://www.viralandroid.com/2016/03/implementing-searchview-in-android-actionbar.html
+     */
     {
+        /*
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_view_menu_item, menu);
+
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
+        // Assumes current activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+        return true;*/
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_view_menu_item, menu);
         MenuItem searchViewItem = menu.findItem(R.id.search_view);
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
-        searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String query)// Start MovieSearchActivity intent
+            {
+                Intent MovieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
+                MovieListActivity.this.startActivity(MovieSearchActivity);
                 searchViewAndroidActionBar.clearFocus();
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String newText)
+            {
                 return false;
             }
         });

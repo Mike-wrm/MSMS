@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import msms.comp3350.main.R;
 
-public class MovieSearch extends Activity {
+public class MovieSearchActivity extends Activity {
     private ArrayList<Movie> matches = null;
     private ArrayAdapter<Movie> adapter;
     private AccessMovies accessor;
@@ -74,7 +74,7 @@ public class MovieSearch extends Activity {
                             Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
                             // note class Movie must implement Serializable for this to work
                             movieDisplay.putExtra("SelectedMovie", matches.get(position));
-                            MovieSearch.this.startActivityForResult(movieDisplay, 1000);
+                            MovieSearchActivity.this.startActivityForResult(movieDisplay, 1000);
                         }
                     }
                 });
