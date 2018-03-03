@@ -3,14 +3,10 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <com.androidplot.xy.XYPlot
+<com.androidplot.pie.PieChart
         style="@style/APDefacto.Dark"
-        android:id="@+id/plot"
+        android:id="@+id/pie"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        ap:title="A Simple XY Plot"
-        ap:rangeTitle="range"
-        ap:domainTitle="domain"
-        ap:lineLabels="left|bottom"
-        ap:lineLabelRotationBottom="-45"/>
+        ap:title="Pie Chart Test" />
 </LinearLayout>
