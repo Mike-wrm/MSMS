@@ -47,8 +47,8 @@
                 android:value="msms.comp3350.presentation.UserDisplayActivity" />
         </activity>
         <activity android:name="msms.comp3350.presentation.AddMovieActivity" />
-        <activity android:name="msms.comp3350.charts.ChartActivity" />
-        <activity android:name="msms.comp3350.charts.PieChartActivity"></activity>
+        <activity android:name="msms.comp3350.charts.PieChartActivity" />
+        <activity android:name="msms.comp3350.charts.BarChartActivity"></activity>
     </application>
 
 </manifest>

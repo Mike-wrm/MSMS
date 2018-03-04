@@ -3,10 +3,9 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <com.androidplot.pie.PieChart
+    <com.androidplot.xy.XYPlot
         style="@style/APDefacto.Light"
-        android:id="@+id/pie"
+        android:id="@+id/bar"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        ap:title="Pie Chart Test" />
+        android:layout_height="fill_parent" />
 </LinearLayout>

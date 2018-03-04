@@ -6,7 +6,6 @@ import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.persistence.TempData;
 
-
 public class AccessMovies
 {
     private TempData dataAccess;

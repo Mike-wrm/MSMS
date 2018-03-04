@@ -15,13 +15,13 @@ import msms.comp3350.main.R;
 public class PieChartActivity extends Activity {
 
     private PieChart pie;
-    private enum PieColor { RED, BLUE, GREEN, YELLOW };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pie_chart);
 
+        String title;
         String[] labels;
         int[] data;
         Segment[] segments;
@@ -34,6 +34,7 @@ public class PieChartActivity extends Activity {
         Bundle args = getIntent().getExtras();
         if(!args.isEmpty())
         {
+            title = args.getString("title");
             labels = args.getStringArray("labels");
             data = args.getIntArray("data");
             segments = new Segment[labels.length];
@@ -41,11 +42,13 @@ public class PieChartActivity extends Activity {
         }
         else
         {
+            title = "Unknown Chart";
             labels = new String[] { "empty list" };
             data = new int[] { 1 };
             segments = new Segment[1];
             formats = new SegmentFormatter[1];
         }
+        setTitle(title);
 
         // calculate number of colors needed
         int numColors = 3;
@@ -70,10 +73,13 @@ public class PieChartActivity extends Activity {
         // create segments
         for(int i = 0 ; i < labels.length ; i++)
         {
-            segments[i] = new Segment(labels[i], data[i]);
-            formats[i] = new SegmentFormatter(colors[i]);
-            formats[i].getLabelPaint().setTextSize(50);
-            pie.addSegment(segments[i], formats[i]);
+            if(data[i] > 0)
+            {
+                segments[i] = new Segment(labels[i], data[i]);
+                formats[i] = new SegmentFormatter(colors[i]);
+                formats[i].getLabelPaint().setTextSize(50);
+                pie.addSegment(segments[i], formats[i]);
+            }
         }
 
         // fill donut hole

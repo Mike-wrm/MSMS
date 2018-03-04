@@ -9,8 +9,8 @@ import android.view.View;
 import java.sql.Array;
 
 import msms.comp3350.application.Services;
-import msms.comp3350.charts.ChartActivity;
-import msms.comp3350.charts.PieChartActivity;
+import msms.comp3350.business.AccessCharts;
+import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity
 
     public void buttonChartDemo(View v)
     {
-        Intent pieChartActivity = new Intent(MainActivity.this, PieChartActivity.class);
-        String[] labels = { "Males", "Females", "Hamsters", "Draugr" };
-        int[] data = { 35, 30, 8, 12 };
+        Intent barChartActivity = new Intent(MainActivity.this, BarChartActivity.class);
+        String[][] data = AccessCharts.getUserAges();
         Bundle args = new Bundle();
-        args.putStringArray("labels", labels);
-        args.putIntArray("data", data);
-        pieChartActivity.putExtras(args);
-        MainActivity.this.startActivity(pieChartActivity);
+        args.putString("title", "Pie Chart");
+        args.putStringArray("labels", data[0]);
+        args.putStringArray("data", data[1]);
+        barChartActivity.putExtras(args);
+        MainActivity.this.startActivity(barChartActivity);
     }
 }
