@@ -20,7 +20,6 @@ import msms.comp3350.main.R;
 public class MovieSearchActivity extends Activity {
     private ArrayList<Movie> matches = null;
     private ArrayAdapter<Movie> adapter;
-    private AccessMovies accessor;
     private int selectedMoviePosition = -1;
 
     @Override
@@ -30,11 +29,9 @@ public class MovieSearchActivity extends Activity {
 
         // Search for movies matching the string provided with the intent:
         Intent intent = getIntent();
-        String query = intent.getStringExtra(SearchManager.QUERY);
-         accessor = new AccessMovies();
-         matches = accessor.searchMovie(query);
+        matches = (ArrayList<Movie>) intent.getSerializableExtra("Search Results");
 
-        if (matches != null)// Matches found: display them in the list view
+        if (matches != null && !matches.isEmpty())
         {
              adapter = new ArrayAdapter<Movie>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, matches)
             {
@@ -77,10 +74,6 @@ public class MovieSearchActivity extends Activity {
                     }
                 }
             });
-        }
-        else// Nothing found: display error
-        {
-            //TODO: display error
         }
     }
 }

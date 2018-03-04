@@ -30,11 +30,12 @@ import static android.app.SearchManager.QUERY;
 
 public class MovieListActivity extends AppCompatActivity
 {
-    private ArrayList<Movie> movieList;
+    private ArrayList<Movie> movieList;// All movies
     private ArrayAdapter<Movie> movieArrayAdapter;
     private AccessMovies movieAccessor;
     private int selectedMoviePosition = -1;
-
+    private ArrayList<Movie> searchResults;
+    private MovieListActivity thisClass = this;// For use with Messages.warning()
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -200,13 +201,26 @@ public class MovieListActivity extends AppCompatActivity
         searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
-            public boolean onQueryTextSubmit(String query)// Deliver query to MovieSearchActivity
+            public boolean onQueryTextSubmit(String query)
+            /* Note: a blank query is not considered a QueryTextSubmit event, and therefore does not
+             * need to handled */
             {
-                Intent movieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
-                movieSearchActivity.putExtra(QUERY, query);
-                MovieListActivity.this.startActivity(movieSearchActivity);
-                searchViewAndroidActionBar.clearFocus();
-                return true;
+                searchResults = movieAccessor.searchMovie(query);
+
+                if (searchResults.isEmpty())
+                {
+                    Messages.warning(thisClass, "No matches found");
+                    return false;
+                }
+
+                else// Matches found: launch MovieSearchActivity
+                {
+                    Intent movieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
+                    movieSearchActivity.putExtra("Search Results", searchResults);
+                    MovieListActivity.this.startActivity(movieSearchActivity);
+                    searchViewAndroidActionBar.clearFocus();
+                    return true;
+                }
             }
 
             @Override
