@@ -73,7 +73,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         }
 
         // Set the "back" button to go back to the list of users
-        Button backButton = (Button) findViewById(R.id.buttonBackToUserList);
+        Button backButton = (Button) findViewById(R.id.cancel_button);
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

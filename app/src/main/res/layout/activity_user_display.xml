@@ -107,41 +107,43 @@
         app:layout_constraintTop_toBottomOf="@+id/gender_textView" />
 
     <Button
-        android:id="@+id/buttonBackToUserList"
+        android:id="@+id/delete_button"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:text="@android:string/cancel"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/deleteUserButton"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="12dp"
         android:onClick="buttonUserDeleteOnClick"
         android:text="@string/delete"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/update_button" />
 
     <Button
-        android:id="@+id/updateUserButton"
+        android:id="@+id/cancel_button"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="24dp"
+        android:text="@android:string/cancel"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/update_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
         android:onClick="buttonUserUpdateOnClick"
         android:text="@string/update"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteUserButton"
-        app:layout_constraintStart_toEndOf="@+id/buttonBackToUserList" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button"
+        app:layout_constraintEnd_toStartOf="@+id/delete_button"
+        app:layout_constraintStart_toEndOf="@+id/cancel_button" />
 
     <TextView
         android:id="@+id/userid_textView"
@@ -181,8 +183,9 @@
     <TextView
         android:id="@+id/subend_year_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_marginStart="24dp"
+        android:gravity="center"
         android:ems="10"
         android:hint="@string/movie_release_hint"
         android:textAlignment="center"
