@@ -1,6 +1,7 @@
 package msms.comp3350.presentation;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
+
+import static android.app.SearchManager.QUERY;
 
 public class MovieListActivity extends AppCompatActivity
 {
@@ -186,23 +189,9 @@ public class MovieListActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu)
     /* Sets up the SearchView in the ToolBar
      * This setup method was taken (and modified) from:
-     * https://developer.android.com/guide/topics/search/search-dialog.html
      * http://www.viralandroid.com/2016/03/implementing-searchview-in-android-actionbar.html
      */
     {
-        /*
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_view_menu_item, menu);
-
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
-
-        return true;*/
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_view_menu_item, menu);
         MenuItem searchViewItem = menu.findItem(R.id.search_view);
@@ -211,10 +200,11 @@ public class MovieListActivity extends AppCompatActivity
         searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
-            public boolean onQueryTextSubmit(String query)// Start MovieSearchActivity intent
+            public boolean onQueryTextSubmit(String query)// Deliver query to MovieSearchActivity
             {
-                Intent MovieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
-                MovieListActivity.this.startActivity(MovieSearchActivity);
+                Intent movieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
+                movieSearchActivity.putExtra(QUERY, query);
+                MovieListActivity.this.startActivity(movieSearchActivity);
                 searchViewAndroidActionBar.clearFocus();
                 return true;
             }
