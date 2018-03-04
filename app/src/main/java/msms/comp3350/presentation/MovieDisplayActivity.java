@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private Spinner scoreSpinner = null;
 
     private EditText movieNameText = null;
-    private EditText expDateText = null;
+    private TextView expDateText = null;
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
 
@@ -108,7 +109,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
         // Setup textEdit boxes:
         movieNameText = (EditText) findViewById(R.id.movie_name_text);
-        expDateText = (EditText) findViewById(R.id.exp_year_text);
+        expDateText = (TextView) findViewById(R.id.exp_year_text);
         releaseYearText = (EditText) findViewById(R.id.release_year_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
 
