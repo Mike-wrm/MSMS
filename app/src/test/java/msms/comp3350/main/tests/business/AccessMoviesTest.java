@@ -17,7 +17,7 @@ public class AccessMoviesTest extends TestCase
 
     public void testAccessMovie()
     {
-        Services.createDataAccess("test");
+        Services.createDataAccess("temp");
         AccessMovies list = new AccessMovies();
         ArrayList<Movie> movies = new ArrayList<>();
 

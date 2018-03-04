@@ -18,7 +18,7 @@ public class AccessUserTest extends TestCase
 
     public void testAccessUser()
     {
-        Services.createDataAccess("test");
+        Services.createDataAccess("temp");
         AccessUsers list = new AccessUsers();
         ArrayList<User> users = new ArrayList<>();
 

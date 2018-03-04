@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.User;
-import msms.comp3350.persistence.TempData;
+import msms.comp3350.persistence.DataAccessor;
 
 public class AccessUsers
 {
-    private TempData dataAccess;
+    private DataAccessor dataAccess;
 
     public AccessUsers()
     {
-        dataAccess = (TempData) Services.getDataAccess();
+        dataAccess = Services.getDataAccess();
     }
 
     public String getUsers(ArrayList<User> users)
