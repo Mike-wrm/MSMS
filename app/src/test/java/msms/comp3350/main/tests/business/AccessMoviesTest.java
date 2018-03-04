@@ -47,8 +47,27 @@ public class AccessMoviesTest extends TestCase
         assertNull(list.deleteMovie(testMovie1));
         assertEquals("'testMovie' cannot be found.", list.deleteMovie(testMovie1));
 
-        // We cant test on an empty list because we cant delete them without knowing thier mID which we would have to set manually, and because we set it manually, we are not sure if
-        // the testMovie file ran first, which would creat different movies first, meaning that we would rely on the order of the methods were called, and that is a no-no
+        list.insertMovie(testMovie1);
+        list.insertMovie(testMovie2);
+
+        assertNotNull(list.searchMovie("test"));
+        assertEquals(2, list.searchMovie("test").size());
+        assertEquals(0, list.searchMovie("noMovie").size());
+        assertEquals(testMovie1, list.searchMovie("test").get(0));
+        assertEquals(testMovie2, list.searchMovie("test").get(1));
+        assertNull(list.searchMovie(null));
+        assertEquals(0, list.searchMovie("").size());
+        assertEquals(0, list.searchMovie(" ").size());
+        assertEquals(0, list.searchMovie("                ").size());
+        assertEquals(2, list.searchMovie(" test").size());
+        assertEquals(2, list.searchMovie("test ").size());
+        assertEquals(2, list.searchMovie(" test ").size());
+        assertEquals(2, list.searchMovie("TEST").size());
+        assertEquals(2, list.searchMovie("TeSt").size());
+        assertEquals(2, list.searchMovie("estMovie").size());
+        assertEquals(1, list.searchMovie("Movie2").size());
+        assertEquals(4, list.searchMovie("a").size());
+        assertEquals(0, list.searchMovie("tests").size());
     }
 
 }

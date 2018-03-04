@@ -1,14 +1,24 @@
 package msms.comp3350.presentation;
 
 import android.app.Activity;
+import android.app.DownloadManager;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -16,19 +26,26 @@ import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
-public class MovieListActivity extends Activity
+import static android.app.SearchManager.QUERY;
+
+public class MovieListActivity extends AppCompatActivity
 {
-    private ArrayList<Movie> movieList;
+    private ArrayList<Movie> movieList;// All movies
     private ArrayAdapter<Movie> movieArrayAdapter;
     private AccessMovies movieAccessor;
     private int selectedMoviePosition = -1;
-
+    private ArrayList<Movie> searchResults;
+    private MovieListActivity thisClass = this;// For use with Messages.warning()
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+
+        // Setup the app bar:
+        Toolbar movieListToolbar = (Toolbar) findViewById(R.id.movie_list_toolbar);
+        setSupportActionBar(movieListToolbar);
 
         movieList = new ArrayList<Movie>();
         // use accessor to grab the list of movies from BUSINESS
@@ -167,6 +184,52 @@ public class MovieListActivity extends Activity
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    /* Sets up the SearchView in the ToolBar
+     * This setup method was taken (and modified) from:
+     * http://www.viralandroid.com/2016/03/implementing-searchview-in-android-actionbar.html
+     */
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_view_menu_item, menu);
+        MenuItem searchViewItem = menu.findItem(R.id.search_view);
+        final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+
+        searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            /* Note: a blank query is not considered a QueryTextSubmit event, and therefore does not
+             * need to handled */
+            {
+                searchResults = movieAccessor.searchMovie(query);
+
+                if (searchResults.isEmpty())
+                {
+                    Messages.warning(thisClass, "No matches found");
+                    return false;
+                }
+
+                else// Matches found: launch MovieSearchActivity
+                {
+                    Intent movieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
+                    movieSearchActivity.putExtra("Search Results", searchResults);
+                    MovieListActivity.this.startActivity(movieSearchActivity);
+                    searchViewAndroidActionBar.clearFocus();
+                    return true;
+                }
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void openAddMovie (View view)
