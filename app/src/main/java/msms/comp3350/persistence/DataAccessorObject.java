@@ -217,7 +217,7 @@ public class DataAccessorObject implements DataAccessor
 
         try
         {
-            command = "Select * from Movies";
+            command = "Select * from Users";
             resultSet2 = statement2.executeQuery(command);
         }
         catch (Exception e)
