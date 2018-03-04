@@ -26,6 +26,11 @@ public abstract class SpinnerArrays
             "Recent", "Trending"
     };
 
+    private static final String[] GENDERS =
+    {
+            "Male", "Female"
+    };
+
     // Getters:
     public static String[] getDays()
     {
@@ -43,4 +48,5 @@ public abstract class SpinnerArrays
     {
         return CATEGORIES;
     }
+    public static String[] getGenders() { return GENDERS; }
 }
