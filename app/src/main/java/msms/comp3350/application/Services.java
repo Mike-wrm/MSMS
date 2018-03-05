@@ -14,14 +14,15 @@ public class Services
     {
         if(null == dataAccessService)
         {
-            if (dbName.equals("temp")) {
+            if (dbName.equals("temp"))
+            {
                 dataAccessService = new TempData(dbName);
                 dataAccessService.open(MainActivity.dbName);
             }
             else
             {
                 dataAccessService = new DataAccessorObject(dbName);
-                dataAccessService.open("database/DB");
+                dataAccessService.open(MainActivity.getDBPathName());
             }
         }
         return dataAccessService;
