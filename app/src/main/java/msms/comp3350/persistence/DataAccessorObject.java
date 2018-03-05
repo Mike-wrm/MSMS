@@ -83,7 +83,8 @@ public class DataAccessorObject implements DataAccessor
 
         try
         {
-            command = "Select * from Movies";
+            command = "Select * from Movies ORDER BY RELEASEYEAR ASC";
+            //command = "Select * from Movies";
             resultSet1 = statement1.executeQuery(command);
         }
         catch (Exception e)

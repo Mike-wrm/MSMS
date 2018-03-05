@@ -31,7 +31,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
     private Spinner monthSpinner = null;
     private Spinner categorySpinner = null;
     private Spinner categorySpinner2 = null;
-    private Spinner categorySpinner3 = null;
     private Spinner scoreSpinner = null;
 
     private EditText movieNameText = null;
@@ -62,16 +61,13 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         // Setup category spinners:
         categorySpinner = (Spinner) findViewById(R.id.category_spinner);
         categorySpinner2 = (Spinner) findViewById(R.id.category_spinner2);
-        categorySpinner3 = (Spinner) findViewById(R.id.category_spinner3);
         ArrayAdapter<CharSequence> categoryAdapter = new ArrayAdapter<CharSequence>(this,
                 android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getCategories());
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner2.setAdapter(categoryAdapter);
-        categorySpinner3.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
         categorySpinner2.setOnItemSelectedListener(this);
-        categorySpinner3.setOnItemSelectedListener(this);
 
         // Setup score spinner:
         scoreSpinner = (Spinner) findViewById(R.id.score_spinner);
@@ -119,10 +115,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
             case R.id.category_spinner2:
                 selectedCategories[1] = (String) categorySpinner2.getItemAtPosition(pos);
-                break;
-
-            case R.id.category_spinner3:
-                selectedCategories[2] = (String) categorySpinner3.getItemAtPosition(pos);
                 break;
 
             case R.id.score_spinner:
