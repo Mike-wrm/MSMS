@@ -4,59 +4,58 @@ import msms.comp3350.objects.Movie;
 
 import msms.comp3350.main.R;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-public class AddMovieActivity extends Activity implements AdapterView.OnItemSelectedListener
+public class AddMovieActivity extends Activity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener
 {
     private String name = "";
-    private String selectedDay = "";
-    private String selectedMonth = "";
-    private String expYear = "";
+    private int expYear = 0;
+    private int expMonth = 0;
+    private int expDay = 0;
     private String[] selectedCategories = {"", "", ""};
     private String releaseYear = "";
     private String selectedScore = "";
     private String description = "";
 
-    private Spinner daySpinner = null;
-    private Spinner monthSpinner = null;
     private Spinner categorySpinner = null;
     private Spinner categorySpinner2 = null;
     private Spinner scoreSpinner = null;
 
     private EditText movieNameText = null;
-    private EditText expYearText = null;
+    private TextView expDateText = null;
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
 
-    // For populating the day spinner based on the month spinner's selection:
-    private String[] monthsOf30Days = {"4", "6", "9", "11"};
-    private String[] myMonthsDays = null;
-    private ArrayAdapter<CharSequence> dayAdapter = null;
+    private Button pickDateButton = null;
+
+    private DatePickerDialog datePickerDialog;
+    public void onDateSet(DatePicker view, int year,
+                          int monthOfYear, int dayOfMonth) {
+        expYear = year;
+        expMonth = monthOfYear;
+        expDay = dayOfMonth;
+        displayData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
-
-        // Setup month spinner:
-        monthSpinner = (Spinner) findViewById(R.id.month_spinner);
-        ArrayAdapter<CharSequence> monthAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getMonths());
-        monthSpinner.setAdapter(monthAdapter);
-        monthSpinner.setOnItemSelectedListener(this);
-
-        daySpinner = (Spinner) findViewById(R.id.day_spinner);
 
         // Setup category spinners:
         categorySpinner = (Spinner) findViewById(R.id.category_spinner);
@@ -78,9 +77,25 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         // Setup textEdit boxes:
         movieNameText = (EditText) findViewById(R.id.movie_name_text);
-        expYearText = (EditText) findViewById(R.id.exp_year_text);
+        expDateText = (TextView) findViewById(R.id.exp_year_text);
         releaseYearText = (EditText) findViewById(R.id.release_year_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
+
+        // Setup expiry date textbox and button
+        Calendar defaultDate = Calendar.getInstance();
+        expYear = defaultDate.get(Calendar.YEAR);
+        expMonth = defaultDate.get(Calendar.MONTH);
+        expDay = defaultDate.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(AddMovieActivity.this, AddMovieActivity.this, expYear, expMonth, expDay);
+        // add a click listener to the select a date button
+        pickDateButton = (Button) findViewById(R.id.pickDate);
+        pickDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
+            }
+        });
+        displayData();
     }
 
     // Handles a selection from the genre spinner
@@ -88,27 +103,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
     {
         switch(parent.getId())// Which spinner was changed?
         {
-            case R.id.month_spinner:
-                selectedMonth = (String) monthSpinner.getItemAtPosition(pos);
-
-                // Populate the day spinner based on the month selected:
-                if (Arrays.asList(monthsOf30Days).contains(selectedMonth))
-                    myMonthsDays = Arrays.copyOfRange(SpinnerArrays.getDays(), 0, 30);
-                else if (selectedMonth.equals("2"))
-                    myMonthsDays = Arrays.copyOfRange(SpinnerArrays.getDays(), 0, 28);
-                else
-                    myMonthsDays = SpinnerArrays.getDays();
-
-                dayAdapter = new ArrayAdapter<CharSequence>(this,
-                        android.R.layout.simple_spinner_dropdown_item, myMonthsDays);
-                daySpinner.setAdapter(dayAdapter);
-                daySpinner.setOnItemSelectedListener(this);
-                break;
-
-            case R.id.day_spinner:
-                selectedDay = (String) daySpinner.getItemAtPosition(pos);
-                break;
-
             case R.id.category_spinner:
                 selectedCategories[0] = (String) categorySpinner.getItemAtPosition(pos);
                 break;
@@ -125,43 +119,53 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
     public void onNothingSelected(AdapterView<?> parent) {}
 
+    private void displayData()
+    {
+
+        datePickerDialog = new DatePickerDialog(AddMovieActivity.this, AddMovieActivity.this, expYear, expMonth, expDay);
+        // set expDate in EditText
+        expDateText.setText(
+                new StringBuilder()
+                        // Month is 0 based so add 1
+                        .append(expMonth + 1).append("/")
+                        .append(expDay).append("/")
+                        .append(expYear).append(" "));
+    }
+
     // Called when add_movie_button is pressed
     public void addMovie(View view)
     {
         // Grab text input:
         name = movieNameText.getText().toString();
-        expYear = expYearText.getText().toString();
         releaseYear = releaseYearText.getText().toString();
         description = descriptionText.getText().toString();
 
         // error checking
-        if(name.equals("") || name == null)
+        if(null == name)
         {
-            Messages.warning(this, "Please enter a movie name");
+            Messages.warning(this, "You need to name your movie.");
             return;
         }
 
         try
         {
-            Integer.parseInt(expYear);
             Integer.parseInt(releaseYear);
         }
-        catch (NumberFormatException e)
-        {
-            Messages.warning(this, "Year must be a number");
+        catch (NumberFormatException e) {
+            Messages.warning(this, "Year must be a number.");
             return;
         }
 
-        int checkExpYear = Integer.parseInt(expYear);
+        int checkExpYear = expYear;
 
         if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
         {
-            Messages.warning(this, "Invalid year entry: can't enter movie with expired rights");
+            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
             return;
         }
         else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
         {
-            Messages.warning(this, "Invalid year entry: can't acquire movie rights beyond 5 years");
+            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
             return;
         }
 
@@ -169,22 +173,23 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
         if (checkReleaseYear < 1900)
         {
-            Messages.warning(this, "Invalid year entry: movies did not exist during this time");
+            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
             return;
         }
         else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
         {
-            Messages.warning(this, "Invalid year entry: can't add movies from beyond current year");
+            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
             return;
         }
 
         // Convert selectedCategories into ArrayList:
         ArrayList<String> categoriesAL = new ArrayList<String>();
         for (int i=0; i<3; i++)
-            categoriesAL.add(selectedCategories[i]);
+            if (!selectedCategories[i].equals(""))
+                categoriesAL.add(selectedCategories[i]);
 
         Calendar expDate = Calendar.getInstance();
-        expDate.set(Integer.parseInt(expYear), Integer.parseInt(selectedMonth), Integer.parseInt(selectedDay));
+        expDate.set(expYear, expMonth, expDay);
 
         // New movie is created and added here:
         Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),

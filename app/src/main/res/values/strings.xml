@@ -24,4 +24,12 @@
     <string name="movie_description">Description:</string>
     <string name="movie_description_hint">What is the movie about?</string>
     <string name="movie_release_hint">YYYY</string>
+    <string name="movie_search_hint">Search Movies</string>
+    <string name="user_userid">User ID:</string>
+    <string name="user_name">Name:</string>
+    <string name="user_password">Password:</string>
+    <string name="user_age">Age:</string>
+    <string name="user_gender">Gender:</string>
+    <string name="user_subend">Subscription End Date:</string>
+    <string name="change_date">Change Date</string>
 </resources>
