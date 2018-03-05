@@ -21,7 +21,7 @@ public class Services
             else
             {
                 dataAccessService = new DataAccessorObject(dbName);
-                dataAccessService.open("database/DB");
+                dataAccessService.open(MainActivity.getDBPathName());
             }
         }
         return dataAccessService;
