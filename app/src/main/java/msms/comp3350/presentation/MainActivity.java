@@ -65,4 +65,10 @@ public class MainActivity extends AppCompatActivity
         barChartActivity.putExtras(args);
         MainActivity.this.startActivity(barChartActivity);
     }
+
+    public void buttonReportsOnClick(View v)
+    {
+        Intent reportList = new Intent(MainActivity.this, ReportList.class);
+        MainActivity.this.startActivity(reportList);
+    }
 }
