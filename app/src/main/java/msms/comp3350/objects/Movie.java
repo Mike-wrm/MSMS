@@ -53,7 +53,7 @@ public class Movie implements Serializable
             category1 = category.get(0);
             if (category.size() == 2)
             {
-                category2 = category.get(0);
+                category2 = category.get(1);
             }
         }
     }
