@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import msms.comp3350.objects.User;
 
-public class AccessCharts
+public abstract class UserCharts
 {
     public static String[][] getUserAges()
     {

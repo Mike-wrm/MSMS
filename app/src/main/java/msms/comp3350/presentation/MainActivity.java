@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.sql.Array;
-
 import msms.comp3350.application.Services;
-import msms.comp3350.business.AccessCharts;
+import msms.comp3350.business.UserCharts;
 import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity
     public void buttonChartDemo(View v)
     {
         Intent barChartActivity = new Intent(MainActivity.this, BarChartActivity.class);
-        String[][] data = AccessCharts.getUserAges();
+        String[][] data = UserCharts.getUserAges();
         Bundle args = new Bundle();
         args.putString("title", "Pie Chart");
         args.putStringArray("labels", data[0]);

@@ -2,12 +2,8 @@ package msms.comp3350.charts;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.os.Bundle;
 
-import com.androidplot.pie.Segment;
-import com.androidplot.pie.SegmentFormatter;
-import com.androidplot.util.PixelUtils;
 import com.androidplot.xy.*;
 
 import java.text.DecimalFormat;

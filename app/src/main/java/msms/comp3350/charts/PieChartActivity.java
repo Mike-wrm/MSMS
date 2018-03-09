@@ -1,14 +1,10 @@
 package msms.comp3350.charts;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.androidplot.pie.PieChart;
-import com.androidplot.pie.PieRenderer;
-import com.androidplot.pie.Segment;
-import com.androidplot.pie.SegmentFormatter;
+import com.androidplot.pie.*;
 
 import msms.comp3350.main.R;
 
