@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import msms.comp3350.application.Services;
-import msms.comp3350.business.UserCharts;
+import msms.comp3350.business.MovieCharts;
 import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
@@ -54,19 +54,19 @@ public class MainActivity extends AppCompatActivity
 
     public void buttonChartDemo(View v)
     {
-        Intent barChartActivity = new Intent(MainActivity.this, BarChartActivity.class);
-        String[][] data = UserCharts.getUserAges();
+        Intent pieChartActivity = new Intent(MainActivity.this, PieChartActivity.class);
+        String[][] data = MovieCharts.getMovieCategories();
         Bundle args = new Bundle();
         args.putString("title", "Pie Chart");
         args.putStringArray("labels", data[0]);
         args.putStringArray("data", data[1]);
-        barChartActivity.putExtras(args);
-        MainActivity.this.startActivity(barChartActivity);
+        pieChartActivity.putExtras(args);
+        MainActivity.this.startActivity(pieChartActivity);
     }
 
     public void buttonReportsOnClick(View v)
     {
-        Intent reportList = new Intent(MainActivity.this, ReportList.class);
+        Intent reportList = new Intent(MainActivity.this, ReportListActivity.class);
         MainActivity.this.startActivity(reportList);
     }
 }

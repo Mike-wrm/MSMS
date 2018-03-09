@@ -13,11 +13,10 @@ import java.util.Arrays;
 
 import msms.comp3350.business.MovieCharts;
 import msms.comp3350.business.UserCharts;
-import msms.comp3350.charts.BarChartActivity;
-import msms.comp3350.charts.PieChartActivity;
+import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
-public class ReportList extends Activity {
+public class ReportListActivity extends Activity {
     private int selectedPosition = -1;
     private ListView reportList = null;
 
@@ -59,24 +58,24 @@ public class ReportList extends Activity {
                     switch(position)
                     {
                         case 0: // User Age Summary
-                            Intent userAges = new Intent(ReportList.this, BarChartActivity.class);
+                            Intent userAges = new Intent(ReportListActivity.this, BarChartActivity.class);
                             data = UserCharts.getUserAges();
                             args = new Bundle();
                             args.putString("title", "Users by Age Range");
                             args.putStringArray("labels", data[0]);
                             args.putStringArray("data", data[1]);
                             userAges.putExtras(args);
-                            ReportList.this.startActivity(userAges);
+                            ReportListActivity.this.startActivity(userAges);
                             break;
                         case 1: // Movie Category Summary
-                            Intent movieCats = new Intent(ReportList.this, PieChartActivity.class);
+                            Intent movieCats = new Intent(ReportListActivity.this, PieChartActivity.class);
                             data = MovieCharts.getMovieCategories();
                             args = new Bundle();
                             args.putString("title", "Movies by Category");
                             args.putStringArray("labels", data[0]);
                             args.putStringArray("data", data[1]);
                             movieCats.putExtras(args);
-                            ReportList.this.startActivity(movieCats);
+                            ReportListActivity.this.startActivity(movieCats);
                             break;
                     }
                 }

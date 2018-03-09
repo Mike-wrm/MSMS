@@ -14,12 +14,14 @@ import java.util.Arrays;
 
 import msms.comp3350.main.R;
 
-public class BarChartActivity extends Activity {
+public class BarChartActivity extends Activity
+{
 
     private XYPlot plot;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
 

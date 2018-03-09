@@ -10,7 +10,7 @@ public abstract class MovieCharts
     public static String[][] getMovieCategories()
     {
         AccessMovies access = new AccessMovies();
-        ArrayList<Movie> movies = new ArrayList<Movie>();
+        ArrayList<Movie> movies = new ArrayList();
         access.getMovies(movies);
         int numMovies = movies.size();
         String[] categories = SpinnerArrays.getCategories();
@@ -23,7 +23,7 @@ public abstract class MovieCharts
             {
                 for(int k = 1 ; k < categories.length ; k++)
                 {
-                    if(catList.get(i).equals(categories[k]))
+                    if(catList.get(j).equals(categories[k]))
                     {
                         rawData[k]++;
                         break;
@@ -31,7 +31,7 @@ public abstract class MovieCharts
                 }
             }
         }
-        String[] data = new String[8];
+        String[] data = new String[rawData.length];
         for(int i = 0 ; i < data.length ; i++)
         {
             data[i] = Integer.toString(rawData[i]);
