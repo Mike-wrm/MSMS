@@ -7,7 +7,7 @@
     tools:context="msms.comp3350.presentation.ReportList">
 
     <ListView
-        android:id="@+id/report_listview"
+        android:id="@+id/listReports"
         android:layout_width="584dp"
         android:layout_height="807dp"
         android:layout_marginBottom="8dp"

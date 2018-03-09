@@ -19,6 +19,7 @@ import msms.comp3350.main.R;
 
 public class ReportList extends Activity {
     private int selectedPosition = -1;
+    private ListView reportList = null;
 
     private ArrayList<String> reports = new ArrayList<>(Arrays.asList(
             "User Age Summary",
@@ -32,11 +33,11 @@ public class ReportList extends Activity {
 
         // Setup the ListView:
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, reports);
-        final ListView listView = findViewById(R.id.listMovies);
-        listView.setAdapter(adapter);
+        reportList = findViewById(R.id.listReports);
+        reportList.setAdapter(adapter);
 
         // Called when an item is selected from the list
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        reportList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -44,12 +45,12 @@ public class ReportList extends Activity {
 
                 if (position == selectedPosition)// Same item selected: deselect this item
                 {
-                    listView.setItemChecked(position, false);
+                    reportList.setItemChecked(position, false);
                     selectedPosition = -1;
                 }
                 else// New item selected
                 {
-                    listView.setItemChecked(position, true);
+                    reportList.setItemChecked(position, true);
                     selectedPosition = position;
                     String[][] data;
                     Bundle args;
