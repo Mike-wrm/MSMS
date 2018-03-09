@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
     public void buttonReportsOnClick(View v)
     {
-        Intent reportList = new Intent(MainActivity.this, ReportList.class);
+        Intent reportList = new Intent(MainActivity.this, ReportListActivity.class);
         MainActivity.this.startActivity(reportList);
     }
 }
