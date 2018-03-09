@@ -5,22 +5,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import msms.comp3350.business.MovieCharts;
+import msms.comp3350.business.UserCharts;
+import msms.comp3350.charts.BarChartActivity;
+import msms.comp3350.charts.PieChartActivity;
 import msms.comp3350.main.R;
 
 public class ReportList extends Activity {
     private int selectedPosition = -1;
+
+    private ArrayList<String> reports = new ArrayList<>(Arrays.asList(
+            "User Age Summary",
+            "Movie Category Summary"
+    ));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_list);
 
-        /* TODO: 1. Uncomment lines 19-51
         // Setup the ListView:
-        // TODO: 2. Tell the array adapter the source array, and array type
-        ArrayAdapter<SOME_TYPE> adapter = new ArrayAdapter<SOME_TYPE>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, SOME_ARRAY);
-        final ListView listView = (ListView) findViewById(R.id.listMovies);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, reports);
+        final ListView listView = findViewById(R.id.listMovies);
         listView.setAdapter(adapter);
 
         // Called when an item is selected from the list
@@ -39,15 +51,35 @@ public class ReportList extends Activity {
                 {
                     listView.setItemChecked(position, true);
                     selectedPosition = position;
+                    String[][] data;
+                    Bundle args;
 
                     // Launch a new intent:
-                    // TODO: 3. Start a new intent, depending on the value of: position
-                    Intent SOME_REPORT_INTENT = new Intent(getApplicationContext(), SOME_REPORT_CLASS.class);
-//                    SOME_REPORT_INTENT.putExtra(STRING_NAME, SOME_VALUE); Optional: can add an extra to the intent
-                    ReportList.this.startActivity(SOME_REPORT_CLASS);
+                    switch(position)
+                    {
+                        case 0: // User Age Summary
+                            Intent userAges = new Intent(ReportList.this, BarChartActivity.class);
+                            data = UserCharts.getUserAges();
+                            args = new Bundle();
+                            args.putString("title", "Users by Age Range");
+                            args.putStringArray("labels", data[0]);
+                            args.putStringArray("data", data[1]);
+                            userAges.putExtras(args);
+                            ReportList.this.startActivity(userAges);
+                            break;
+                        case 1: // Movie Category Summary
+                            Intent movieCats = new Intent(ReportList.this, PieChartActivity.class);
+                            data = MovieCharts.getMovieCategories();
+                            args = new Bundle();
+                            args.putString("title", "Movies by Category");
+                            args.putStringArray("labels", data[0]);
+                            args.putStringArray("data", data[1]);
+                            movieCats.putExtras(args);
+                            ReportList.this.startActivity(movieCats);
+                            break;
+                    }
                 }
             }
         });
-        */
     }
 }
