@@ -70,8 +70,32 @@ public class DataAccessorObject implements DataAccessor
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
-    //TODO possible adjustment of month offset in calendar?
+    //generates basic select movies from DB
     public String getMoviesAll(ArrayList<Movie> currentMovies)
+    {
+        String strCommand = "Select * from Movies";
+        return getMoviesSQL(currentMovies, strCommand);
+    }
+
+    //generates sorted select movies from DB
+    public String getMoviesAllSorted(ArrayList<Movie> currentMovies, String sortBy, boolean ascending)
+    {
+        String order;
+        if (ascending)
+        {
+            order = " ASC";
+        }
+        else
+        {
+            order = " DESC";
+        }
+
+        String strCommand = "Select * from Movies ORDER BY " + sortBy + order;
+        return getMoviesSQL(currentMovies, strCommand);
+    }
+
+    //Handles DB processing for getting movies, strCommand varies based on caller
+    public String getMoviesSQL (ArrayList<Movie> currentMovies, String strCommand)
     {
         Movie movieX;
         int myID, myReleaseYear, myUserScore, myEndMonth, myEndDay, myEndYear;
@@ -83,8 +107,7 @@ public class DataAccessorObject implements DataAccessor
 
         try
         {
-            command = "Select * from Movies ORDER BY RELEASEYEAR ASC";
-            //command = "Select * from Movies";
+            command = strCommand;
             resultSet1 = statement1.executeQuery(command);
         }
         catch (Exception e)
@@ -205,8 +228,32 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
-
+    //generates basic select movies from DB
     public String getUsersAll(ArrayList<User> currentUsers)
+    {
+        String strCommand = "Select * from Users";
+        return getUsersSQL(currentUsers, strCommand);
+    }
+
+    //generates basic select movies from DB
+    public String getUsersAllSorted(ArrayList<User> currentUsers, String sortBy, boolean ascending)
+    {
+        String order;
+        if (ascending)
+        {
+            order = " ASC";
+        }
+        else
+        {
+            order = " DESC";
+        }
+
+        String strCommand = "Select * from Users ORDER BY " + sortBy + order;
+        return getUsersSQL(currentUsers, strCommand);
+    }
+
+    //Handles DB processing for getting users, strCommand varies based on caller
+    public String getUsersSQL (ArrayList<User> currentUsers, String strCommand)
     {
         User userX;
         int myID, myAge, myEndMonth, myEndDay, myEndYear;
@@ -218,7 +265,7 @@ public class DataAccessorObject implements DataAccessor
 
         try
         {
-            command = "Select * from Users";
+            command = strCommand;
             resultSet2 = statement2.executeQuery(command);
         }
         catch (Exception e)

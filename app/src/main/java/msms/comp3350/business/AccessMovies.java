@@ -7,10 +7,18 @@ import msms.comp3350.objects.Movie;
 import msms.comp3350.persistence.DataAccessor;
 
 
-
 public class AccessMovies
 {
     private DataAccessor dataAccess;
+    private static boolean currSorted = false;
+    private static String currField = null;
+    private static boolean currAscending = false;
+
+    //TODO move to appropriate location and process such that only certain fields become input strings
+    enum mSortField
+    {
+        TITLE, RELEASEYEAR
+    }
 
     public AccessMovies()
     {
@@ -20,7 +28,23 @@ public class AccessMovies
     public String getMovies(ArrayList<Movie> movies)
     {
         movies.clear();
+
+        if (currSorted)
+        {
+            return getSortedMovies(movies, currField, currAscending);
+        }
+
         return dataAccess.getMoviesAll(movies);
+    }
+
+    //TODO create something in MovieDisplay/ListActivity to allow for toggle of sort
+    public String getSortedMovies(ArrayList<Movie> movies, String sortBy, boolean ascending)
+    {
+        movies.clear();
+        currSorted = true;
+        currField = sortBy;
+        currAscending = ascending;
+        return dataAccess.getMoviesAllSorted(movies, currField, currAscending);
     }
 
     public String insertMovie(Movie currentMovie) {

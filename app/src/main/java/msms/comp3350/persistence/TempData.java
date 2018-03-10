@@ -1,6 +1,7 @@
 package msms.comp3350.persistence;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Calendar;
 
 import msms.comp3350.objects.Movie;
@@ -94,6 +95,15 @@ public class TempData implements DataAccessor
         return null;
     }
 
+    public String getMoviesAllSorted(ArrayList<Movie> currentMovies, String sortBy, boolean ascending)
+    {
+        if (!ascending)
+        {
+            Collections.reverse(currentMovies);
+        }
+        return getMoviesAll(currentMovies);
+    }
+
     public String insertMovie(Movie currentMovie)
     {
         int index = movies.indexOf(currentMovie);
@@ -143,6 +153,15 @@ public class TempData implements DataAccessor
     {
         currentUsers.addAll(users);
         return null;
+    }
+
+    public String getUsersAllSorted(ArrayList<User> currentUsers, String sortBy, boolean ascending)
+    {
+        if (!ascending)
+        {
+            Collections.reverse(currentUsers);
+        }
+        return getUsersAll(currentUsers);
     }
 
     public String insertUser(User currentUser)

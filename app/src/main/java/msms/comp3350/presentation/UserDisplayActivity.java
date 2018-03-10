@@ -74,9 +74,11 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
 
         // Set the "back" button to go back to the list of users
         Button backButton = (Button) findViewById(R.id.cancel_button);
-        backButton.setOnClickListener(new View.OnClickListener(){
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view){
+            public void onClick(View view)
+            {
                 finish();
             }
         });
@@ -103,9 +105,11 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         datePickerDialog = new DatePickerDialog(UserDisplayActivity.this, UserDisplayActivity.this, expYear, expMonth, expDay);
         // add a click listener to the select a date button
         pickDateButton = (Button) findViewById(R.id.pickDate);
-        pickDateButton.setOnClickListener(new View.OnClickListener() {
+        pickDateButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 datePickerDialog.show();
             }
         });

@@ -78,9 +78,11 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
         // Set the "back" button to go back to the list of movies
         Button backButton = (Button) findViewById(R.id.cancel_button);
-        backButton.setOnClickListener(new View.OnClickListener(){
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view){
+            public void onClick(View view)
+            {
                 finish();
             }
         });
@@ -117,9 +119,11 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
         // add a click listener to the select a date button
         pickDateButton = (Button) findViewById(R.id.pickDate);
-        pickDateButton.setOnClickListener(new View.OnClickListener() {
+        pickDateButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 datePickerDialog.show();
             }
         });
@@ -195,8 +199,10 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             AlertDialog.Builder builder = new AlertDialog.Builder(MovieDisplayActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setMessage("Are you sure you want to delete this Movie ?\n" + inputMovie.getTitle());
-            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
                     dialog.dismiss();
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
@@ -205,8 +211,10 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                     finish();
                 }
             });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
                     dialog.dismiss();
                 }
             });
@@ -237,7 +245,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         {
             Integer.parseInt(releaseYear);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e)
+        {
             Messages.warning(this, "Year must be a number.");
             return;
         }

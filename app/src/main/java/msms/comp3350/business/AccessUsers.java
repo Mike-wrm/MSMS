@@ -9,6 +9,15 @@ import msms.comp3350.persistence.DataAccessor;
 public class AccessUsers
 {
     private DataAccessor dataAccess;
+    private static boolean currSorted = false;
+    private static String currField = null;
+    private static boolean currAscending = false;
+
+    //TODO move to appropriate location and process such that only certain fields become input strings
+    enum uSortField
+    {
+        USERNAME, GENDER
+    }
 
     public AccessUsers()
     {
@@ -18,7 +27,22 @@ public class AccessUsers
     public String getUsers(ArrayList<User> users)
     {
         users.clear();
+
+        if (currSorted)
+        {
+            return getSortedUsers(users, currField, currAscending);
+        }
         return dataAccess.getUsersAll(users);
+    }
+
+    //TODO create something in UserDisplay/ListActivity to allow for toggle of sort
+    public String getSortedUsers(ArrayList<User> users, String sortBy, boolean ascending)
+    {
+        users.clear();
+        currSorted = true;
+        currField = sortBy;
+        currAscending = ascending;
+        return dataAccess.getUsersAllSorted(users, currField, currAscending);
     }
 
     public String insertUser(User currentUser)
