@@ -172,7 +172,7 @@ public class DataAccessorObject implements DataAccessor
                     +", endDay=" +currentMovie.getEndDay()
                     +", endYear=" +currentMovie.getEndYear()
                     +", description='" +currentMovie.getDescription()
-                    +"";
+                    +"'";
             where = "where mID=" +currentMovie.getmID();
             command = "Update Movies " +" Set " +values +" " +where;
             updateCount = statement1.executeUpdate(command);

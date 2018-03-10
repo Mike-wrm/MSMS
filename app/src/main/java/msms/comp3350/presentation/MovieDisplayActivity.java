@@ -49,8 +49,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     static final int DATE_DIALOG_ID = 0;
 
     private DatePickerDialog datePickerDialog;
-    public void onDateSet(DatePicker view, int year,
-                          int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+    {
         expYear = year;
         expMonth = monthOfYear;
         expDay = dayOfMonth;

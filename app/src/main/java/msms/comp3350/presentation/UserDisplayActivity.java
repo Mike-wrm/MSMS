@@ -45,8 +45,8 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
     private Button pickDateButton = null;
 
     private DatePickerDialog datePickerDialog;
-    public void onDateSet(DatePicker view, int year,
-                          int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+    {
         expYear = year;
         expMonth = monthOfYear;
         expDay = dayOfMonth;
@@ -241,7 +241,8 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         {
             Integer.parseInt(userID);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e)
+        {
             Messages.warning(this, "User ID must be a number.");
             return;
         }
@@ -250,7 +251,8 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         {
             Integer.parseInt(age);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e)
+        {
             Messages.warning(this, "Age must be a number.");
             return;
         }

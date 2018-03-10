@@ -43,8 +43,10 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
     private Button pickDateButton = null;
 
     private DatePickerDialog datePickerDialog;
-    public void onDateSet(DatePicker view, int year,
-                          int monthOfYear, int dayOfMonth) {
+
+
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+    {
         expYear = year;
         expMonth = monthOfYear;
         expDay = dayOfMonth;
@@ -121,7 +123,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
 
     private void displayData()
     {
-
         datePickerDialog = new DatePickerDialog(AddMovieActivity.this, AddMovieActivity.this, expYear, expMonth, expDay);
         // set expDate in EditText
         expDateText.setText(

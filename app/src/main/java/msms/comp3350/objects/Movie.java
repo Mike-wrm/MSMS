@@ -63,7 +63,6 @@ public class Movie implements Serializable
         endYear = endDate.get(Calendar.YEAR);
         endMonth = (endDate.get(Calendar.MONTH)) + 1;  //January = 0 in calendar
         endDay = endDate.get(Calendar.DAY_OF_MONTH);
-
     }
 
 	// getters
