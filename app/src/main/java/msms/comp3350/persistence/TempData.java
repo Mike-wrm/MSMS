@@ -97,11 +97,12 @@ public class TempData implements DataAccessor
 
     public String getMoviesAllSorted(ArrayList<Movie> currentMovies, String sortBy, boolean ascending)
     {
+        currentMovies.addAll(movies);
         if (!ascending)
         {
             Collections.reverse(currentMovies);
         }
-        return getMoviesAll(currentMovies);
+        return null;
     }
 
     public String insertMovie(Movie currentMovie)
@@ -157,11 +158,12 @@ public class TempData implements DataAccessor
 
     public String getUsersAllSorted(ArrayList<User> currentUsers, String sortBy, boolean ascending)
     {
+        currentUsers.addAll(users);
         if (!ascending)
         {
             Collections.reverse(currentUsers);
         }
-        return getUsersAll(currentUsers);
+        return null;
     }
 
     public String insertUser(User currentUser)

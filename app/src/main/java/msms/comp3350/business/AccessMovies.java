@@ -10,7 +10,7 @@ import msms.comp3350.persistence.DataAccessor;
 public class AccessMovies
 {
     private DataAccessor dataAccess;
-    private static boolean currSorted = false;
+    private static boolean currSorted = true;
     private static String currField = null;
     private static boolean currAscending = false;
 
