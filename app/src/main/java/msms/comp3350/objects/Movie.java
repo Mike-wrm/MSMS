@@ -55,6 +55,9 @@ public class Movie implements Serializable
             {
                 category2 = category.get(1);
             }
+            else{
+            	category2 = null;
+			}
         }
     }
 
