@@ -223,4 +223,15 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/exp_year_text"
         app:layout_constraintStart_toEndOf="@+id/exp_year_text" />
 
+    <Button
+        android:id="@+id/add_movie_button"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="8dp"
+        android:onClick="addMovie"
+        android:text="@string/add"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score_spinner" />
+
 </android.support.constraint.ConstraintLayout>

@@ -234,7 +234,7 @@ public class MovieListActivity extends AppCompatActivity
 
     public void openAddMovie (View view)
     {
-        Intent addMovieIntent = new Intent(this, AddMovieActivity.class);
+        Intent addMovieIntent = new Intent(this, MovieDisplayActivity.class);
         MovieListActivity.this.startActivityForResult(addMovieIntent, 1001);
     }
 }
