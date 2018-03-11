@@ -1,9 +1,5 @@
 package msms.comp3350.presentation;
 
-import android.app.Activity;
-import android.app.DownloadManager;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -25,8 +21,6 @@ import java.util.ArrayList;
 import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
-
-import static android.app.SearchManager.QUERY;
 
 public class MovieListActivity extends AppCompatActivity
 {
@@ -216,7 +210,7 @@ public class MovieListActivity extends AppCompatActivity
                 else// Matches found: launch MovieSearchActivity
                 {
                     Intent movieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
-                    movieSearchActivity.putExtra("Search Results", searchResults);
+                    movieSearchActivity.putExtra("SearchResults", searchResults);
                     MovieListActivity.this.startActivity(movieSearchActivity);
                     searchViewAndroidActionBar.clearFocus();
                     return true;
@@ -232,9 +226,11 @@ public class MovieListActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void openAddMovie (View view)
+    public void ButtonOpenAddMovieOnClick (View view)
     {
-        Intent addMovieIntent = new Intent(this, AddMovieActivity.class);
+        Intent addMovieIntent = new Intent(this, MovieDisplayActivity.class);
+        // Tells MovieDisplayActivity to use activity_add_movie.xml instead of activity_movie_display.xml
+        addMovieIntent.putExtra("NewMovie", "activity_add_movie");
         MovieListActivity.this.startActivityForResult(addMovieIntent, 1001);
     }
 }
