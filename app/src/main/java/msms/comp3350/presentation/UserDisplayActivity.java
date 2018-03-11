@@ -197,7 +197,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), UserListActivity.class);
                     previousScreen.putExtra("DeleteUserKey", inputUser);
-                    setResult(1002, previousScreen);
+                    setResult(UserListActivity.DELETE_USER_CODE, previousScreen);
                     finish();
                 }
             });
@@ -225,20 +225,6 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         password = passwordText.getText().toString();
         age = ageText.getText().toString();
 
-        // error checking
-        if(null == name)
-        {
-            Messages.warning(this, "You need to name your user.");
-            return;
-        }
-
-        // error checking
-        if(null == password)
-        {
-            Messages.warning(this, "You need to specify a password.");
-            return;
-        }
-
         // Note: This should not occur, since User ID cannot be changed;
         // Keep here just in case
         try
@@ -261,28 +247,79 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
             return;
         }
 
-        int checkExpYear = expYear;
-
-        if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
-        {
-            Messages.warning(this, "Invalid year entry. Can't enter user with expired account");
-            return;
-        }
-
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        inputUser.setuID(Integer.parseInt(userID));
-        inputUser.setName(name);
-        inputUser.setPass(password);
-        inputUser.setAge(Integer.parseInt(age));
-        inputUser.setGender(selectedGender);
-        inputUser.setEndDate(expDate);
+        String errorString = checkInputUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expYear, expMonth, expDay);
+        if (null == errorString) {
+            inputUser.setuID(Integer.parseInt(userID));
+            inputUser.setName(name);
+            inputUser.setPass(password);
+            inputUser.setAge(Integer.parseInt(age));
+            inputUser.setGender(selectedGender);
+            inputUser.setEndDate(expDate);
 
-        //Starting the previous Intent
-        Intent previousScreen = new Intent(getApplicationContext(), UserListActivity.class);
-        previousScreen.putExtra("UpdateUserKey", inputUser);
-        setResult(1002, previousScreen);
-        finish();
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), UserListActivity.class);
+            previousScreen.putExtra("UpdateUserKey", inputUser);
+            setResult(UserListActivity.UPDATE_USER_CODE, previousScreen);
+            finish();
+        }
+        else
+        {
+            Messages.warning(this, errorString);
+        }
+    }
+
+    public static String checkInputUser (int uID, String userName, String password, int age, char gender, int expYear, int expMonth, int expDay)
+    {
+        String errorString = null;
+        // error checking
+        if(null == userName || userName.equals(""))
+        {
+            errorString = "You need to name your user.";
+        }
+        if(null == password || password.equals(""))
+        {
+            errorString = "You need to enter a password.";
+        }
+
+        if(age < 1)
+        {
+            errorString = "Invalid age entered.";
+        }
+
+        if(uID < 1)
+        {
+            errorString = "Invalid user ID entered.";
+        }
+
+        if(!(gender == 'f' || gender == 'm'))
+        {
+            errorString = "Invalid gender entered.";
+        }
+
+        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
+        {
+            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
+            {
+                errorString = "Invalid date entry. Can't enter user with expired account";
+            }
+            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
+            {
+                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter user with expired account";
+                }
+                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter user with expired account";
+                }
+            }
+
+        }
+
+
+        return errorString;
     }
 }

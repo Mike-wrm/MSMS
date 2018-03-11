@@ -65,15 +65,23 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
         // Get the passed Movie
         Bundle extras = getIntent().getExtras();
+        inputMovie = null;
         if (extras != null)
         {
             //The key argument here must match that used in the other activity
             inputMovie = (Movie) extras.getSerializable("SelectedMovie");
+            // Disable the "add" button
+            Button addButton = (Button) findViewById(R.id.add_movie_button);
+            addButton.setEnabled(false);
         }
         else
         {
-            //Error getting extra value
-            finish();
+            //No extra value: we are in "Add Movie" mode
+            // Disable the "update" and "delete" buttons
+            Button updateButton = (Button) findViewById(R.id.update_button);
+            updateButton.setEnabled(false);
+            Button deleteButton = (Button) findViewById(R.id.delete_button);
+            deleteButton.setEnabled(false);
         }
 
         // Set the "back" button to go back to the list of movies
@@ -112,7 +120,15 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         descriptionText = (EditText) findViewById(R.id.description_text);
 
         // Setup expiry date textbox and button
-        Calendar expDate = inputMovie.getEndDate();
+        Calendar expDate;
+        if (inputMovie != null)
+        {
+            expDate = inputMovie.getEndDate();
+        }
+        else
+        {
+            expDate = Calendar.getInstance();
+        }
         expYear = expDate.get(Calendar.YEAR);
         expMonth = expDate.get(Calendar.MONTH);
         expDay = expDate.get(Calendar.DAY_OF_MONTH);
@@ -157,6 +173,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     {
         if (inputMovie != null)
         {
+            // If we have an input movie, set all the entries to the input Movie's values
             movieNameText.setText(inputMovie.getTitle());
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
             scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
@@ -188,7 +205,15 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         }
         else
         {
-            Messages.fatalError(this, "Movie was not found.");
+            // Only do this if we are in "Add Movie"
+            datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
+            // set expDate in EditText
+            expDateText.setText(
+                    new StringBuilder()
+                            // Month is 0 based so add 1
+                            .append(expMonth + 1).append("/")
+                            .append(expDay).append("/")
+                            .append(expYear).append(" "));
         }
     }
 
@@ -207,7 +232,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
                     previousScreen.putExtra("DeleteMovieKey", inputMovie);
-                    setResult(1000, previousScreen);
+                    setResult(MovieListActivity.DELETE_MOVIE_CODE, previousScreen);
                     finish();
                 }
             });
@@ -234,46 +259,22 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         releaseYear = releaseYearText.getText().toString();
         description = descriptionText.getText().toString();
 
-        // error checking
-        if(null == name)
+        try
         {
-            Messages.warning(this, "You need to name your movie.");
+            Integer.parseInt(releaseYear);
+        }
+        catch (NumberFormatException e) {
+            Messages.warning(this, "Year must be a number.");
             return;
         }
 
         try
         {
-            Integer.parseInt(releaseYear);
+            Integer.parseInt(selectedScore);
         }
         catch (NumberFormatException e)
         {
             Messages.warning(this, "Year must be a number.");
-            return;
-        }
-
-        int checkExpYear = expYear;
-
-        if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
-        {
-            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
-            return;
-        }
-        else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
-        {
-            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
-            return;
-        }
-
-        int checkReleaseYear = Integer.parseInt(releaseYear);
-
-        if (checkReleaseYear < 1900)
-        {
-            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
-            return;
-        }
-        else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
-        {
-            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
             return;
         }
 
@@ -286,24 +287,152 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        // Movie is updated here:
-        inputMovie.setTitle(name);
-        inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
-        inputMovie.setUserScore(Integer.parseInt(selectedScore));
-        inputMovie.setCategory(categoriesAL);
-        inputMovie.setEndDate(expDate);
-        inputMovie.setDescription(description);
+        String errorString = checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
+        if (errorString == null)
+        {
+            // Movie is updated here:
+            inputMovie.setTitle(name);
+            inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
+            inputMovie.setUserScore(Integer.parseInt(selectedScore));
+            inputMovie.setCategory(categoriesAL);
+            inputMovie.setEndDate(expDate);
+            inputMovie.setDescription(description);
 
-        //Starting the previous Intent
-        Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-        previousScreen.putExtra("UpdateMovieKey", inputMovie);
-        setResult(1000, previousScreen);
-        finish();
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("UpdateMovieKey", inputMovie);
+            setResult(MovieListActivity.UPDATE_MOVIE_CODE, previousScreen);
+            finish();
+        }
+        else
+        {
+            Messages.warning(this, errorString);
+        }
+    }
+
+    // Called when add_movie_button is pressed
+    public void addMovie(View view)
+    {
+        // Grab text input:
+        name = movieNameText.getText().toString();
+        releaseYear = releaseYearText.getText().toString();
+        description = descriptionText.getText().toString();
+
+        try
+        {
+            Integer.parseInt(releaseYear);
+        }
+        catch (NumberFormatException e) {
+            Messages.warning(this, "Year must be a number.");
+            return;
+        }
+
+        try
+        {
+            Integer.parseInt(selectedScore);
+        }
+        catch (NumberFormatException e) {
+            Messages.warning(this, "User score must be a number.");
+            return;
+        }
+
+        // Convert selectedCategories into ArrayList:
+        ArrayList<String> categoriesAL = new ArrayList<String>();
+        for (int i=0; i<3; i++)
+            if (!selectedCategories[i].equals(""))
+                categoriesAL.add(selectedCategories[i]);
+
+        Calendar expDate = Calendar.getInstance();
+        expDate.set(expYear, expMonth, expDay);
+
+        String errorString = MovieDisplayActivity.checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
+        if (null == errorString)
+        {
+            // New movie is created and added here:
+            Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
+
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("AddMovieKey", newMovie);
+            setResult(MovieListActivity.ADD_MOVIE_CODE, previousScreen);
+            finish();
+        }
+        else
+        {
+            Messages.warning(this, errorString);
+        }
     }
 
     public void buttonCancelOnClick(View v)
     {
         finish();
+    }
+
+    public static String checkInputMovie (String title, int releaseYear, int userScore, ArrayList<String> category, String description, int expYear, int expMonth, int expDay)
+    {
+        String errorString = null;
+        // error checking
+        if(null == title || title.equals(""))
+        {
+            errorString = "You need to name your movie.";
+        }
+        if(null == description || description.equals(""))
+        {
+            errorString = "You need to enter a description.";
+        }
+
+        if(userScore > 10 || userScore < 0)
+        {
+            errorString = "Invalid user score entered.";
+        }
+
+        boolean atLeastOneCategory = false;
+        for (int i = 0; i < category.size(); i++)
+        {
+            if (category.get(i) != null && !category.get(i).equals(SpinnerArrays.getCategories()[0]))
+            {
+                atLeastOneCategory = true;
+            }
+        }
+        if(!atLeastOneCategory)
+        {
+            errorString = "Invalid category entry. Enter at least one category.";
+        }
+
+        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
+        {
+            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
+            {
+                errorString = "Invalid date entry. Can't enter movie with expired rights";
+            }
+            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
+            {
+                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter movie with expired rights";
+                }
+                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter movie with expired rights";
+                }
+            }
+
+        }
+        else if (expYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
+        {
+            errorString = "Invalid date entry. Can't acquire movie rights beyond 5 years.";
+        }
+
+        if (releaseYear < 1900)
+        {
+            errorString = "Invalid year entry. Movies did not exist during this time.";
+        }
+        else if (releaseYear > Calendar.getInstance().get(Calendar.YEAR))
+        {
+            errorString = "Invalid year entry. Can't add movies from beyond current year.";
+        }
+
+        return errorString;
     }
 
 }

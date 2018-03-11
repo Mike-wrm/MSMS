@@ -37,6 +37,10 @@ public class MovieListActivity extends AppCompatActivity
     private ArrayList<Movie> searchResults;
     private MovieListActivity thisClass = this;// For use with Messages.warning()
 
+    public static final int DELETE_MOVIE_CODE = 1000;
+    public static final int UPDATE_MOVIE_CODE = 1001;
+    public static final int ADD_MOVIE_CODE = 1002;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -123,10 +127,10 @@ public class MovieListActivity extends AppCompatActivity
                 //The key argument here must match that used in the other activity
                 movieToDelete = (Movie) extras.getSerializable("DeleteMovieKey");
                 movieToUpdate = (Movie) extras.getSerializable("UpdateMovieKey");
-                movieToAdd = (Movie) extras.getSerializable("AddKey");
+                movieToAdd = (Movie) extras.getSerializable("AddMovieKey");
             }
 
-            if (movieToDelete != null && resultCode == 1000)
+            if (movieToDelete != null && resultCode == DELETE_MOVIE_CODE)
             {
                 result = movieAccessor.deleteMovie(movieToDelete);
                 if (result != null)
@@ -145,7 +149,7 @@ public class MovieListActivity extends AppCompatActivity
                     movieArrayAdapter.notifyDataSetChanged();
                 }
             }
-            else if (movieToUpdate != null && resultCode == 1000)
+            else if (movieToUpdate != null && resultCode == UPDATE_MOVIE_CODE)
             {
                 result = movieAccessor.updateMovie(movieToUpdate);
                 if (result != null)
@@ -164,7 +168,7 @@ public class MovieListActivity extends AppCompatActivity
                     movieArrayAdapter.notifyDataSetChanged();
                 }
             }
-            else if (movieToAdd != null && resultCode == 1001)
+            else if (movieToAdd != null && resultCode == ADD_MOVIE_CODE)
             {
                 result = movieAccessor.insertMovie(movieToAdd);
                 if (result != null)
@@ -234,7 +238,7 @@ public class MovieListActivity extends AppCompatActivity
 
     public void openAddMovie (View view)
     {
-        Intent addMovieIntent = new Intent(this, AddMovieActivity.class);
+        Intent addMovieIntent = new Intent(this, MovieDisplayActivity.class);
         MovieListActivity.this.startActivityForResult(addMovieIntent, 1001);
     }
 }

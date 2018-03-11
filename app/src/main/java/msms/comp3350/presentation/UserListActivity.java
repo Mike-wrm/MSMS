@@ -24,6 +24,10 @@ public class UserListActivity extends Activity
 
     private int selectedUserPosition = -1;
 
+    public static final int DELETE_USER_CODE = 1003;
+    public static final int UPDATE_USER_CODE = 1004;
+    public static final int ADD_USER_CODE = 1005;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -107,7 +111,7 @@ public class UserListActivity extends Activity
                 userToAdd = (User) extras.getSerializable("AddUserKey");
             }
 
-            if (userToDelete != null && resultCode == 1002)
+            if (userToDelete != null && resultCode == DELETE_USER_CODE)
             {
                 result = userAccessor.deleteUser(userToDelete);
                 if (result != null)
@@ -126,7 +130,7 @@ public class UserListActivity extends Activity
                     userArrayAdapter.notifyDataSetChanged();
                 }
             }
-            else if (userToUpdate != null && resultCode == 1002)
+            else if (userToUpdate != null && resultCode == UPDATE_USER_CODE)
             {
                 result = userAccessor.updateUser(userToUpdate);
                 if (result != null)
@@ -145,7 +149,7 @@ public class UserListActivity extends Activity
                     userArrayAdapter.notifyDataSetChanged();
                 }
             }
-            else if (userToAdd != null && resultCode == 1003)
+            else if (userToAdd != null && resultCode == ADD_USER_CODE)
             {
                 result = userAccessor.insertUser(userToAdd);
                 if (result != null)

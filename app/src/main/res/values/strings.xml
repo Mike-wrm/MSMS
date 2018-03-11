@@ -16,6 +16,7 @@
     <string name="back">Back</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="add">Add</string>
     <string name="movie_category2">Category 2:</string>
     <string name="movie_category3">Category 3:</string>
     <string name="movie_license">License Expiration Date (M/D/Y):</string>
