@@ -1,9 +1,11 @@
 package msms.comp3350.presentation;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import java.util.ArrayList;
+import msms.comp3350.business.AccessMovies;
 import msms.comp3350.objects.Movie;
 
 import android.view.View;
@@ -27,7 +29,7 @@ public class MovieSearchActivity extends Activity {
 
         // Search for movies matching the string provided with the intent:
         Intent intent = getIntent();
-        matches = (ArrayList<Movie>) intent.getSerializableExtra("SearchResults");
+        matches = (ArrayList<Movie>) intent.getSerializableExtra("Search Results");
 
         if (matches != null && !matches.isEmpty())
         {
@@ -68,7 +70,7 @@ public class MovieSearchActivity extends Activity {
                         Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
                         // note class Movie must implement Serializable for this to work
                         movieDisplay.putExtra("SelectedMovie", matches.get(position));
-                        MovieSearchActivity.this.startActivity(movieDisplay);
+                        MovieSearchActivity.this.startActivityForResult(movieDisplay, 1000);
                     }
                 }
             });

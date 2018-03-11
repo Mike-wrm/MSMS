@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="msms.comp3350.presentation.MovieDisplayActivity"
+    tools:context="msms.comp3350.presentation.AddMovieActivity"
     tools:layout_editor_absoluteY="89dp">
 
     <TextView
@@ -68,7 +68,7 @@
         android:layout_height="64dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="12dp"
-        android:onClick="buttonAddOnClick"
+        android:onClick="addMovie"
         android:text="@string/add_movie"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button"
@@ -103,7 +103,7 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="12dp"
         android:layout_marginStart="24dp"
-        android:onClick="buttonCancelOnClick"
+        android:onClick="cancel"
         android:text="@android:string/cancel"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
