@@ -13,26 +13,6 @@ public class AccessUsers
     private static String currField = null;
     private static boolean currAscending = false;
 
-    //TODO move to appropriate location and process such that only certain fields become input strings
-    enum uSortField
-    {
-        USERNAME
-        {
-            public String toString()
-            {
-                return "UPPER(USERNAME)";
-            }
-        },
-
-        GENDER
-        {
-            public String toString()
-            {
-                return "GENDER";
-            }
-        }
-    }
-
     public AccessUsers()
     {
         dataAccess = Services.getDataAccess();

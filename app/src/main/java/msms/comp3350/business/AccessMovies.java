@@ -13,25 +13,6 @@ public class AccessMovies
     private static String currField = null;
     private static boolean currAscending = true;
 
-    //TODO move to appropriate location and process such that only certain fields become input strings
-    enum mSortField
-    {
-        TITLE
-        {
-            public String toString()
-            {
-                return "UPPER(TITLE)";
-            }
-        },
-
-        RELEASEYEAR
-        {
-            public String toString()
-            {
-                return "RELEASEYEAR";
-            }
-        }
-    }
 
     public AccessMovies()
     {
