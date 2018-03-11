@@ -193,7 +193,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), UserListActivity.class);
                     previousScreen.putExtra("DeleteUserKey", inputUser);
-                    setResult(1002, previousScreen);
+                    setResult(UserListActivity.DELETE_USER_CODE, previousScreen);
                     finish();
                 }
             });
@@ -256,7 +256,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
             //Starting the previous Intent
             Intent previousScreen = new Intent(getApplicationContext(), UserListActivity.class);
             previousScreen.putExtra("UpdateUserKey", inputUser);
-            setResult(1002, previousScreen);
+            setResult(UserListActivity.UPDATE_USER_CODE, previousScreen);
             finish();
         }
         else

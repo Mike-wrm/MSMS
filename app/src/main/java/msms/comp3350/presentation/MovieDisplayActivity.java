@@ -226,7 +226,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
                     previousScreen.putExtra("DeleteMovieKey", inputMovie);
-                    setResult(1000, previousScreen);
+                    setResult(MovieListActivity.DELETE_MOVIE_CODE, previousScreen);
                     finish();
                 }
             });
@@ -292,7 +292,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             //Starting the previous Intent
             Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
             previousScreen.putExtra("UpdateMovieKey", inputMovie);
-            setResult(1000, previousScreen);
+            setResult(MovieListActivity.UPDATE_MOVIE_CODE, previousScreen);
             finish();
         }
         else
@@ -344,8 +344,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
             //Starting the previous Intent
             Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-            previousScreen.putExtra("AddKey", newMovie);
-            setResult(1001, previousScreen);
+            previousScreen.putExtra("AddMovieKey", newMovie);
+            setResult(MovieListActivity.ADD_MOVIE_CODE, previousScreen);
             finish();
         }
         else
