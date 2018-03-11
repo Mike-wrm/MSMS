@@ -140,13 +140,6 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         releaseYear = releaseYearText.getText().toString();
         description = descriptionText.getText().toString();
 
-        // error checking
-        if(null == name)
-        {
-            Messages.warning(this, "You need to name your movie.");
-            return;
-        }
-
         try
         {
             Integer.parseInt(releaseYear);
@@ -156,29 +149,12 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
             return;
         }
 
-        int checkExpYear = expYear;
-
-        if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
+        try
         {
-            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
-            return;
+            Integer.parseInt(selectedScore);
         }
-        else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
-        {
-            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
-            return;
-        }
-
-        int checkReleaseYear = Integer.parseInt(releaseYear);
-
-        if (checkReleaseYear < 1900)
-        {
-            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
-            return;
-        }
-        else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
-        {
-            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
+        catch (NumberFormatException e) {
+            Messages.warning(this, "User score must be a number.");
             return;
         }
 
@@ -191,15 +167,22 @@ public class AddMovieActivity extends Activity implements AdapterView.OnItemSele
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        // New movie is created and added here:
-        Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
-                categoriesAL, expDate, description);
+        String errorString = MovieDisplayActivity.checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
+        if (null == errorString)
+        {
+            // New movie is created and added here:
+            Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
 
-        //Starting the previous Intent
-        Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-        previousScreen.putExtra("AddKey", newMovie);
-        setResult(1001, previousScreen);
-        finish();
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("AddKey", newMovie);
+            setResult(1001, previousScreen);
+            finish();
+        }
+        else
+        {
+            Messages.warning(this, errorString);
+        }
     }
 
     public void cancel(View view)

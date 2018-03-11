@@ -226,13 +226,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         releaseYear = releaseYearText.getText().toString();
         description = descriptionText.getText().toString();
 
-        // error checking
-        if(null == name)
-        {
-            Messages.warning(this, "You need to name your movie.");
-            return;
-        }
-
         try
         {
             Integer.parseInt(releaseYear);
@@ -242,29 +235,12 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             return;
         }
 
-        int checkExpYear = expYear;
-
-        if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
+        try
         {
-            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
-            return;
+            Integer.parseInt(selectedScore);
         }
-        else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
-        {
-            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
-            return;
-        }
-
-        int checkReleaseYear = Integer.parseInt(releaseYear);
-
-        if (checkReleaseYear < 1900)
-        {
-            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
-            return;
-        }
-        else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
-        {
-            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
+        catch (NumberFormatException e) {
+            Messages.warning(this, "User score must be a number.");
             return;
         }
 
@@ -277,24 +253,99 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        // Movie is updated here:
-        inputMovie.setTitle(name);
-        inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
-        inputMovie.setUserScore(Integer.parseInt(selectedScore));
-        inputMovie.setCategory(categoriesAL);
-        inputMovie.setEndDate(expDate);
-        inputMovie.setDescription(description);
+        String errorString = checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
+        if (errorString == null)
+        {
+            // Movie is updated here:
+            inputMovie.setTitle(name);
+            inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
+            inputMovie.setUserScore(Integer.parseInt(selectedScore));
+            inputMovie.setCategory(categoriesAL);
+            inputMovie.setEndDate(expDate);
+            inputMovie.setDescription(description);
 
-        //Starting the previous Intent
-        Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-        previousScreen.putExtra("UpdateMovieKey", inputMovie);
-        setResult(1000, previousScreen);
-        finish();
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("UpdateMovieKey", inputMovie);
+            setResult(1000, previousScreen);
+            finish();
+        }
+        else
+        {
+            Messages.warning(this, errorString);
+        }
     }
 
     public void buttonCancelOnClick(View v)
     {
         finish();
+    }
+
+    public static String checkInputMovie (String title, int releaseYear, int userScore, ArrayList<String> category, String description, int expYear, int expMonth, int expDay)
+    {
+        String errorString = null;
+        // error checking
+        if(null == title || title.equals(""))
+        {
+            errorString = "You need to name your movie.";
+        }
+        if(null == description || description.equals(""))
+        {
+            errorString = "You need to enter a description.";
+        }
+
+        if(userScore > 10 || userScore < 0)
+        {
+            errorString = "Invalid user score entered.";
+        }
+
+        boolean atLeastOneCategory = false;
+        for (int i = 0; i < category.size(); i++)
+        {
+            if (category.get(i) != null && !category.get(i).equals(SpinnerArrays.getCategories()[0]))
+            {
+                atLeastOneCategory = true;
+            }
+        }
+        if(!atLeastOneCategory)
+        {
+            errorString = "Invalid category entry. Enter at least one category.";
+        }
+
+        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
+        {
+            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
+            {
+                errorString = "Invalid date entry. Can't enter movie with expired rights";
+            }
+            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
+            {
+                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter movie with expired rights";
+                }
+                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter movie with expired rights";
+                }
+            }
+
+        }
+        else if (expYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
+        {
+            errorString = "Invalid date entry. Can't acquire movie rights beyond 5 years.";
+        }
+
+        if (releaseYear < 1900)
+        {
+            errorString = "Invalid year entry. Movies did not exist during this time.";
+        }
+        else if (releaseYear > Calendar.getInstance().get(Calendar.YEAR))
+        {
+            errorString = "Invalid year entry. Can't add movies from beyond current year.";
+        }
+
+        return errorString;
     }
 
 }
