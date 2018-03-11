@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import msms.comp3350.application.Services;
+import msms.comp3350.business.MovieCharts;
+import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
@@ -130,5 +132,23 @@ public class MainActivity extends AppCompatActivity
     {
         Intent userListActivity = new Intent(MainActivity.this, UserListActivity.class);
         MainActivity.this.startActivity(userListActivity);
+    }
+
+    public void buttonChartDemo(View v)
+    {
+        Intent pieChartActivity = new Intent(MainActivity.this, PieChartActivity.class);
+        String[][] data = MovieCharts.getMovieCategories();
+        Bundle args = new Bundle();
+        args.putString("title", "Pie Chart");
+        args.putStringArray("labels", data[0]);
+        args.putStringArray("data", data[1]);
+        pieChartActivity.putExtras(args);
+        MainActivity.this.startActivity(pieChartActivity);
+    }
+
+    public void buttonReportsOnClick(View v)
+    {
+        Intent reportList = new Intent(MainActivity.this, ReportListActivity.class);
+        MainActivity.this.startActivity(reportList);
     }
 }

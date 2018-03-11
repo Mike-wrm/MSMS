@@ -53,6 +53,9 @@
             <meta-data android:name="android.app.searchable"
                         android:resource="@xml/searchable" />
         </activity>
+        <activity android:name="msms.comp3350.charts.BarChartActivity" />
+        <activity android:name="msms.comp3350.presentation.ReportListActivity" />
+        <activity android:name="msms.comp3350.charts.PieChartActivity" />
     </application>
 
 </manifest>

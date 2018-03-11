@@ -37,6 +37,20 @@
         app:layout_constraintStart_toEndOf="@+id/userImage"
         app:layout_constraintTop_toBottomOf="@+id/MovieButton" />
 
+    <Button
+        android:id="@+id/ChartButton"
+        android:layout_width="407dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:onClick="buttonChartDemo"
+        android:text="Chart Demo"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/reports_button" />
+
 
     <TextView
         android:id="@+id/appTitle"
@@ -73,4 +87,18 @@
         android:src="@drawable/user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movieImage" />
+
+    <Button
+        android:id="@+id/reports_button"
+        android:layout_width="407dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:onClick="buttonReportsOnClick"
+        android:text="@string/reports"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/UsersButton" />
 </android.support.constraint.ConstraintLayout>
