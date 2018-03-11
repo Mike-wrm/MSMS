@@ -61,14 +61,20 @@ public class PieChartActivity extends Activity
 
         // calculate number of colors needed
         int numColors = 3;
-        while(labels.length % numColors == 1)
+        int emptyFields = 0;
+        for(int i = 0 ; i < intData.length ; i++)
+        {
+            if(intData[i] == 0) emptyFields++;
+        }
+        while((labels.length - emptyFields) % numColors == 1)
         {
             numColors++;
         }
         int[] colors = new int[labels.length];
+        int offset = 0;
         for(int i = 0 ; i < colors.length ; i++)
         {
-            switch(i % numColors)
+            switch((i - offset) % numColors)
             {
                 case 0: colors[i] = Color.RED; break;
                 case 1: colors[i] = Color.BLUE; break;
@@ -77,6 +83,7 @@ public class PieChartActivity extends Activity
                 case 4: colors[i] = Color.CYAN; break;
                 default: colors[i] = Color.BLACK;
             }
+            if(intData[i] == 0) offset++;
         }
 
         // create segments
