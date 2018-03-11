@@ -1,13 +1,14 @@
 package msms.comp3350.main.tests.persistence;
 
+
 import junit.framework.TestCase;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.persistence.DataAccessor;
-import msms.comp3350.persistence.DataAccessorObject;
 
 
 public class DataAccessTest extends TestCase
@@ -21,26 +22,37 @@ public class DataAccessTest extends TestCase
 
     public void setUp()
     {
-        System.out.println("Starting Persistence Test");
-        testData = Services.createDataAccess("test");
+        //System.out.println("Starting a Persistence Test");
+        //testData = Services.createDataAccess("test");
+        testData = Services.createDataAccess("temp");
     }
 
     public void tearDown()
     {
-        System.out.println("Finishing Persistence Test");
+        System.out.println("Finishing a Persistence Test");
     }
 
-    public void testDataAccessReal()
+    public void resetMovies(ArrayList<Movie> movies)
+    {
+        movies.clear();
+        assertNull(testData.getMoviesAll(movies));
+    }
+
+    public void resetUsers(ArrayList<User> users)
+    {
+        users.clear();
+        assertNull(testData.getUsersAll(users));
+    }
+
+    public void testDataAccessMovie()
     {
         ArrayList<Movie> movies;
-        ArrayList<User> users;
-
         Movie movie;
-        User user;
 
         String result;
 
-        // Movie Testing ---------------------------------------
+        System.out.println("\nTesting Accessing the Data Access for the movies");
+
         movies = new ArrayList<Movie>();
 
         result = testData.getMoviesAll(movies);
@@ -155,8 +167,17 @@ public class DataAccessTest extends TestCase
         assertEquals(2020, movie.getEndYear());
         assertEquals("Ipsum Lorem...",movie.getDescription());
 
+    }
 
-        //Users Testing ---------------------------------------
+    public void testDateAccessUsers()
+    {
+        ArrayList<User> users;
+        User user;
+
+        String result;
+
+        System.out.println("\nTesting Accessing the Data Access for the users");
+
         users = new ArrayList<User>();
 
         result = testData.getUsersAll(users);
@@ -222,7 +243,197 @@ public class DataAccessTest extends TestCase
         assertEquals(12, user.getEndMonth());
         assertEquals(31, user.getEndDay());
         assertEquals(2020, user.getEndYear());
+    }
 
+    public void testMovieAccessChange()
+    {
+        ArrayList<Movie> movies;
+        Movie movie;
+
+        System.out.println("\nTesting Changing the Data Access for the movies");
+
+        ArrayList<String> categories = new ArrayList<String>();
+        categories.add("Comedy");
+        categories.add("Trending");
+
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 11, 21);
+
+        Calendar date2 = Calendar.getInstance();
+        date2.set(2022,10, 8);
+
+        movie = new Movie("Test Movie", 2018, 8, categories, date, "test.");
+        assertEquals("'Test Movie' cannot be found.", testData.deleteMovie(movie)); // delete something that isnt there.
+
+        assertNull(testData.insertMovie(movie)); // test basic add
+        assertEquals("'Test Movie' is already added.", testData.insertMovie(movie)); // test adding the same thing twice
+
+        movies = new ArrayList<Movie>();
+        assertNull(testData.getMoviesAll(movies));
+
+        assertEquals(10, movies.size()); // making sure the right size
+
+        movie.setTitle("NewTest"); //update the title
+        assertNull(testData.updateMovie(movie));
+        resetMovies(movies);
+        movie = movies.get(9);
+        assertEquals("NewTest", movie.getTitle());
+
+        movie.setReleaseYear(2002); //update the release year
+        assertNull(testData.updateMovie(movie));
+        resetMovies(movies);
+        movie = movies.get(9);
+        assertEquals(2002, movie.getReleaseYear());
+
+        movie.setUserScore(7); // update the score
+        assertNull(testData.updateMovie(movie));
+        resetMovies(movies);
+        movie = movies.get(9);
+        assertEquals(7, movie.getUserScore());
+
+        categories.clear(); // update the categories
+        categories.add("Family");
+        movie.setCategory(categories);
+        assertNull(testData.updateMovie(movie));
+        resetMovies(movies);
+        movie = movies.get(9);
+        assertEquals("Family", movie.getCategory1());
+        assertNull(movie.getCategory2());
+
+        movie.setEndDate(date2); //update the calendar
+        assertNull(testData.updateMovie(movie));
+        resetMovies(movies);
+        movie = movies.get(9);
+        assertEquals(date2, movie.getEndDate());
+
+        movie.setDescription("New Description"); // update the description
+        assertNull(testData.updateMovie(movie));
+        resetMovies(movies);
+        movie = movies.get(9);
+        assertEquals("New Description", movie.getDescription());
+
+        assertNull(testData.deleteMovie(movie)); // testing basic delete
+        resetMovies(movies);
+        assertEquals(9, movies.size());
+
+        assertEquals("'NewTest' cannot be found.", testData.updateMovie(movie)); // try to update something that doesnt exist
+
+        movie = movies.get(0); // lets clear it
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(1);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(2);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(3);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(4);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(5);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(6);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(7);
+        assertNull(testData.deleteMovie(movie));
+        movie = movies.get(8);
+        assertNull(testData.deleteMovie(movie));
+
+        resetMovies(movies);
+        assertEquals(0, movies.size()); // make sure its empty
+
+        assertEquals("'Terminator 2: Judgement Day' cannot be found.", testData.deleteMovie(movie)); // try to delete on an empty list
+        assertEquals("'Terminator 2: Judgement Day' cannot be found.", testData.updateMovie(movie)); // try to update on an empty list
+        assertNull(testData.insertMovie(movie)); // adding to an empty list
+
+        assertNull(testData.deleteMovie(movie));
+        assertNull(testData.insertMovie(movie)); // re-adding a movie that should have been deleted
+    }
+
+    public void testUserAccessChange(){
+        ArrayList<User> users;
+        User user;
+
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 11, 21);
+
+        Calendar date2 = Calendar.getInstance();
+        date2.set(2022,10, 8);
+
+        System.out.println("\nTesting Changing the Data Access for the users");
+
+        users = new ArrayList<User>();
+        user =  new User(50, "Tester", "pass", 21, 'M', date);
+
+        assertNull(testData.insertUser(user)); // test basic add
+        assertEquals("'Tester' is already added.", testData.insertUser(user)); // test adding the same thing twice
+
+        assertNull(testData.getUsersAll(users));
+
+        assertEquals(7, users.size()); // making sure the right size
+
+        user.setuID(51); // update the id
+        assertNull(testData.updateUser(user));
+        resetUsers(users);
+        user = users.get(6);
+        assertEquals(51, user.getuID());
+
+        user.setName("newTester"); // update the name
+        assertNull(testData.updateUser(user));
+        resetUsers(users);
+        user = users.get(6);
+        assertEquals("newTester", user.getName());
+
+        user.setPass("newPass"); // update the password
+        assertNull(testData.updateUser(user));
+        resetUsers(users);
+        user = users.get(6);
+        assertEquals("newPass", user.getPass());
+
+        user.setAge(22); // update the age
+        assertNull(testData.updateUser(user));
+        resetUsers(users);
+        user = users.get(6);
+        assertEquals(22, user.getAge());
+
+        user.setGender('F'); // update the gender
+        assertNull(testData.updateUser(user));
+        resetUsers(users);
+        user = users.get(6);
+        assertEquals('F', user.getGender());
+
+        user.setEndDate(date2); // update the end date
+        assertNull(testData.updateUser(user));
+        resetUsers(users);
+        user = users.get(6);
+        assertEquals(date2, user.getEndDate());
+
+        assertNull(testData.deleteUser(user)); // test basic delete
+        resetUsers(users);
+        assertEquals(6, users.size());
+
+        assertEquals("'newTester' cannot be found.", testData.deleteUser(user)); // delete something that doesnt
+
+        user = users.get(0); // delete everything
+        assertNull(testData.deleteUser(user));
+        user = users.get(1);
+        assertNull(testData.deleteUser(user));
+        user = users.get(2);
+        assertNull(testData.deleteUser(user));
+        user = users.get(3);
+        assertNull(testData.deleteUser(user));
+        user = users.get(4);
+        assertNull(testData.deleteUser(user));
+        user = users.get(5);
+        assertNull(testData.deleteUser(user));
+
+        resetUsers(users);
+        assertEquals(0, users.size()); // make sure its empty
+
+        assertEquals("'Wonder_Woman' cannot be found.", testData.deleteUser(user)); // try to delete on an empty list
+        assertEquals("'Wonder_Woman' cannot be found.", testData.updateUser(user)); // try to update on an empty list
+        assertNull(testData.insertUser(user)); // adding to an empty list
+
+        assertNull(testData.deleteUser(user));
+        assertNull(testData.insertUser(user)); // re-adding a movie that should have been deleted
     }
 
 }
