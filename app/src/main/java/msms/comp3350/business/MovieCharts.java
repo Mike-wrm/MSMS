@@ -3,7 +3,6 @@ package msms.comp3350.business;
 import java.util.ArrayList;
 
 import msms.comp3350.objects.Movie;
-import msms.comp3350.presentation.SpinnerArrays;
 
 public abstract class MovieCharts
 {
@@ -13,7 +12,7 @@ public abstract class MovieCharts
         ArrayList<Movie> movies = new ArrayList();
         access.getMovies(movies);
         int numMovies = movies.size();
-        String[] categories = SpinnerArrays.getCategories();
+        String[] categories = AccessMovies.CATEGORIES;
         int[] rawData = new int[categories.length];
         for(int i = 0 ; i < numMovies ; i++)
         {

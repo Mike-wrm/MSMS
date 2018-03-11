@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
@@ -99,7 +100,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         categorySpinner = (Spinner) findViewById(R.id.category_spinner);
         categorySpinner2 = (Spinner) findViewById(R.id.category_spinner2);
         ArrayAdapter<CharSequence> categoryAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getCategories());
+                android.R.layout.simple_spinner_dropdown_item, AccessMovies.CATEGORIES);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner2.setAdapter(categoryAdapter);
@@ -109,7 +110,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         // Setup score spinner:
         scoreSpinner = (Spinner) findViewById(R.id.score_spinner);
         ArrayAdapter<CharSequence> scoreAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getScores());
+                android.R.layout.simple_spinner_dropdown_item, AccessMovies.SCORES);
         scoreSpinner.setAdapter(scoreAdapter);
         scoreSpinner.setOnItemSelectedListener(this);
 
@@ -184,10 +185,10 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                 switch(i)
                 {
                     case 0:
-                        categorySpinner.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
+                        categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(categories.get(i)));
                         break;
                     case 1:
-                        categorySpinner2.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
+                        categorySpinner2.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(categories.get(i)));
                         break;
                 }
             }
@@ -287,7 +288,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        String errorString = checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
+        String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
         if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)
         {
             // New movie is created and added here:
@@ -329,72 +330,4 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     {
         finish();
     }
-
-    public static String checkInputMovie (String title, int releaseYear, int userScore, ArrayList<String> category, String description, int expYear, int expMonth, int expDay)
-    {
-        String errorString = null;
-        // error checking
-        if(null == title || title.equals(""))
-        {
-            errorString = "You need to name your movie.";
-        }
-        if(null == description || description.equals(""))
-        {
-            errorString = "You need to enter a description.";
-        }
-
-        if(userScore > 10 || userScore < 0)
-        {
-            errorString = "Invalid user score entered.";
-        }
-
-        boolean atLeastOneCategory = false;
-        for (int i = 0; i < category.size(); i++)
-        {
-            if (category.get(i) != null && !category.get(i).equals(SpinnerArrays.getCategories()[0]))
-            {
-                atLeastOneCategory = true;
-            }
-        }
-        if(!atLeastOneCategory)
-        {
-            errorString = "Invalid category entry. Enter at least one category.";
-        }
-
-        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
-        {
-            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
-            {
-                errorString = "Invalid date entry. Can't enter movie with expired rights";
-            }
-            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
-            {
-                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
-                {
-                    errorString = "Invalid date entry. Can't enter movie with expired rights";
-                }
-                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
-                {
-                    errorString = "Invalid date entry. Can't enter movie with expired rights";
-                }
-            }
-
-        }
-        else if (expYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
-        {
-            errorString = "Invalid date entry. Can't acquire movie rights beyond 5 years.";
-        }
-
-        if (releaseYear < 1900)
-        {
-            errorString = "Invalid year entry. Movies did not exist during this time.";
-        }
-        else if (releaseYear > Calendar.getInstance().get(Calendar.YEAR))
-        {
-            errorString = "Invalid year entry. Can't add movies from beyond current year.";
-        }
-
-        return errorString;
-    }
-
 }

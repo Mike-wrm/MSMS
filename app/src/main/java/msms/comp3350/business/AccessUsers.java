@@ -1,6 +1,7 @@
 package msms.comp3350.business;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.User;
@@ -12,6 +13,11 @@ public class AccessUsers
     private static boolean currSorted = false;
     private static String currField = null;
     private static boolean currAscending = false;
+
+    public static final String[] GENDERS =
+            {
+                    "Male", "Female"
+            };
 
     public AccessUsers()
     {
@@ -52,5 +58,57 @@ public class AccessUsers
     public String deleteUser(User currentUser)
     {
         return dataAccess.deleteUser(currentUser);
+    }
+
+    public static String validateUser (int uID, String userName, String password, int age, char gender, int expYear, int expMonth, int expDay)
+    {
+        String errorString = null;
+        // error checking
+        if(null == userName || userName.equals(""))
+        {
+            errorString = "You need to name your user.";
+        }
+        if(null == password || password.equals(""))
+        {
+            errorString = "You need to enter a password.";
+        }
+
+        if(age < 1)
+        {
+            errorString = "Invalid age entered.";
+        }
+
+        if(uID < 1)
+        {
+            errorString = "Invalid user ID entered.";
+        }
+
+        if(!(gender == 'f' || gender == 'm'))
+        {
+            errorString = "Invalid gender entered.";
+        }
+
+        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
+        {
+            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
+            {
+                errorString = "Invalid date entry. Can't enter user with expired account";
+            }
+            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
+            {
+                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter user with expired account";
+                }
+                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter user with expired account";
+                }
+            }
+
+        }
+
+
+        return errorString;
     }
 }

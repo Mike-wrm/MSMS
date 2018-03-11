@@ -1,6 +1,8 @@
 package msms.comp3350.business;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
@@ -13,6 +15,16 @@ public class AccessMovies
     private static String currField = null;
     private static boolean currAscending = true;
 
+    public static final String[] SCORES =
+            {
+                    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+            };
+
+    public static final String[] CATEGORIES =
+            {
+                    "None", "Action", "Childrens", "Comedy", "Drama", "Fantasy", "Horror", "Sci-Fi",
+                    "Recent", "Trending"
+            };
 
     public AccessMovies()
     {
@@ -79,5 +91,73 @@ public class AccessMovies
             }
         }
         return results;
+    }
+
+    public static String validateMovie(String title, int releaseYear, int userScore, ArrayList<String> category, String description, int expYear, int expMonth, int expDay)
+    {
+        String errorString = null;
+        // error checking
+        if(null == title || title.equals(""))
+        {
+            errorString = "You need to name your movie.";
+        }
+        if(null == description || description.equals(""))
+        {
+            errorString = "You need to enter a description.";
+        }
+
+        System.out.println("test: " + userScore);
+        if(!Arrays.asList(SCORES).contains(Integer.toString(userScore)))
+        {
+            errorString = "Invalid user score entered.";
+        }
+
+        boolean atLeastOneCategory = false;
+        for (int i = 0; i < category.size(); i++)
+        {
+            if (category.get(i) != null && !category.get(i).equals(CATEGORIES[0]))
+            {
+                atLeastOneCategory = true;
+            }
+        }
+        if(!atLeastOneCategory)
+        {
+            errorString = "Invalid category entry. Enter at least one category.";
+        }
+
+        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
+        {
+            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
+            {
+                errorString = "Invalid date entry. Can't enter movie with expired rights";
+            }
+            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
+            {
+                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter movie with expired rights";
+                }
+                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                {
+                    errorString = "Invalid date entry. Can't enter movie with expired rights";
+                }
+            }
+
+        }
+        else if (expYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
+        {
+            errorString = "Invalid date entry. Can't acquire movie rights beyond 5 years.";
+        }
+
+        if (releaseYear < 1900)
+        {
+            errorString = "Invalid year entry. Movies did not exist during this time.";
+        }
+        else if (releaseYear > Calendar.getInstance().get(Calendar.YEAR))
+        {
+            errorString = "Invalid year entry. Can't add movies from beyond current year.";
+        }
+
+        return errorString;
     }
 }

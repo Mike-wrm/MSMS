@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import msms.comp3350.business.AccessUsers;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.User;
 
@@ -86,7 +87,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         // Setup gender spinner:
         genderSpinner = (Spinner) findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> genderAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getGenders());
+                android.R.layout.simple_spinner_dropdown_item, AccessUsers.GENDERS);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderAdapter);
         genderSpinner.setOnItemSelectedListener(this);
@@ -250,7 +251,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        String errorString = checkInputUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expYear, expMonth, expDay);
+        String errorString = AccessUsers.validateUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expYear, expMonth, expDay);
         if (null == errorString) {
             inputUser.setuID(Integer.parseInt(userID));
             inputUser.setName(name);
@@ -269,57 +270,5 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         {
             Messages.warning(this, errorString);
         }
-    }
-
-    public static String checkInputUser (int uID, String userName, String password, int age, char gender, int expYear, int expMonth, int expDay)
-    {
-        String errorString = null;
-        // error checking
-        if(null == userName || userName.equals(""))
-        {
-            errorString = "You need to name your user.";
-        }
-        if(null == password || password.equals(""))
-        {
-            errorString = "You need to enter a password.";
-        }
-
-        if(age < 1)
-        {
-            errorString = "Invalid age entered.";
-        }
-
-        if(uID < 1)
-        {
-            errorString = "Invalid user ID entered.";
-        }
-
-        if(!(gender == 'f' || gender == 'm'))
-        {
-            errorString = "Invalid gender entered.";
-        }
-
-        if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
-        {
-            if (expYear < Calendar.getInstance().get(Calendar.YEAR))
-            {
-                errorString = "Invalid date entry. Can't enter user with expired account";
-            }
-            else if (expYear == Calendar.getInstance().get(Calendar.YEAR) && expMonth <= Calendar.getInstance().get(Calendar.MONTH))
-            {
-                if (expMonth < Calendar.getInstance().get(Calendar.MONTH))
-                {
-                    errorString = "Invalid date entry. Can't enter user with expired account";
-                }
-                else if (expMonth == Calendar.getInstance().get(Calendar.MONTH) && expDay <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
-                {
-                    errorString = "Invalid date entry. Can't enter user with expired account";
-                }
-            }
-
-        }
-
-
-        return errorString;
     }
 }
