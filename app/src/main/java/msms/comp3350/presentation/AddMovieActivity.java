@@ -1,9 +1,10 @@
 package msms.comp3350.presentation;
 
+import msms.comp3350.objects.Movie;
+
+import msms.comp3350.main.R;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,13 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import msms.comp3350.main.R;
-import msms.comp3350.objects.Movie;
-
-public class MovieDisplayActivity extends Activity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener
+public class AddMovieActivity extends Activity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener
 {
-    private Movie inputMovie;
-
     private String name = "";
     private int expYear = 0;
     private int expMonth = 0;
@@ -44,11 +40,11 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
 
-    private Button pickDateButton;
-
-    static final int DATE_DIALOG_ID = 0;
+    private Button pickDateButton = null;
 
     private DatePickerDialog datePickerDialog;
+
+
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
     {
         expYear = year;
@@ -61,31 +57,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_display);
-
-        // Get the passed Movie
-        Bundle extras = getIntent().getExtras();
-        if (extras != null)
-        {
-            //The key argument here must match that used in the other activity
-            inputMovie = (Movie) extras.getSerializable("SelectedMovie");
-        }
-        else
-        {
-            //Error getting extra value
-            finish();
-        }
-
-        // Set the "back" button to go back to the list of movies
-        Button backButton = (Button) findViewById(R.id.cancel_button);
-        backButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                finish();
-            }
-        });
+        setContentView(R.layout.activity_add_movie);
 
         // Setup category spinners:
         categorySpinner = (Spinner) findViewById(R.id.category_spinner);
@@ -112,29 +84,25 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         descriptionText = (EditText) findViewById(R.id.description_text);
 
         // Setup expiry date textbox and button
-        Calendar expDate = inputMovie.getEndDate();
-        expYear = expDate.get(Calendar.YEAR);
-        expMonth = expDate.get(Calendar.MONTH);
-        expDay = expDate.get(Calendar.DAY_OF_MONTH);
-        datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
+        Calendar defaultDate = Calendar.getInstance();
+        expYear = defaultDate.get(Calendar.YEAR);
+        expMonth = defaultDate.get(Calendar.MONTH);
+        expDay = defaultDate.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(AddMovieActivity.this, AddMovieActivity.this, expYear, expMonth, expDay);
         // add a click listener to the select a date button
         pickDateButton = (Button) findViewById(R.id.pickDate);
-        pickDateButton.setOnClickListener(new View.OnClickListener()
-        {
+        pickDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 datePickerDialog.show();
             }
         });
-
         displayData();
     }
 
     // Handles a selection from the genre spinner
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
     {
-        System.out.println("Run onItemSelected.");
         switch(parent.getId())// Which spinner was changed?
         {
             case R.id.category_spinner:
@@ -155,79 +123,18 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
     private void displayData()
     {
-        if (inputMovie != null)
-        {
-            movieNameText.setText(inputMovie.getTitle());
-            releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
-            scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
-            ArrayList<String> categories = inputMovie.getCategory();
-
-            for (int i = 0; i < categories.size(); i++)
-            {
-                switch(i)
-                {
-                    case 0:
-                        categorySpinner.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
-                        break;
-                    case 1:
-                        categorySpinner2.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
-                        break;
-                }
-            }
-
-            datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
-            // set expDate in EditText
-            expDateText.setText(
-                    new StringBuilder()
-                            // Month is 0 based so add 1
-                            .append(expMonth + 1).append("/")
-                            .append(expDay).append("/")
-                            .append(expYear).append(" "));
-
-            descriptionText.setText(inputMovie.getDescription());
-        }
-        else
-        {
-            Messages.fatalError(this, "Movie was not found.");
-        }
+        datePickerDialog = new DatePickerDialog(AddMovieActivity.this, AddMovieActivity.this, expYear, expMonth, expDay);
+        // set expDate in EditText
+        expDateText.setText(
+                new StringBuilder()
+                        // Month is 0 based so add 1
+                        .append(expMonth + 1).append("/")
+                        .append(expDay).append("/")
+                        .append(expYear).append(" "));
     }
 
-    public void buttonMovieDeleteOnClick(View v)
-    {
-        if (inputMovie != null)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MovieDisplayActivity.this);
-            builder.setTitle(R.string.app_name);
-            builder.setMessage("Are you sure you want to delete this Movie ?\n" + inputMovie.getTitle());
-            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int id)
-                {
-                    dialog.dismiss();
-                    //Starting the previous Intent
-                    Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-                    previousScreen.putExtra("DeleteMovieKey", inputMovie);
-                    setResult(1000, previousScreen);
-                    finish();
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int id)
-                {
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-        else
-        {
-            Messages.fatalError(this, "Movie was not found.");
-        }
-    }
-
-    public void buttonMovieUpdateOnClick(View v)
+    // Called when add_movie_button is pressed
+    public void addMovie(View view)
     {
         // Grab text input:
         name = movieNameText.getText().toString();
@@ -245,8 +152,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         {
             Integer.parseInt(releaseYear);
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             Messages.warning(this, "Year must be a number.");
             return;
         }
@@ -286,24 +192,19 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        // Movie is updated here:
-        inputMovie.setTitle(name);
-        inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
-        inputMovie.setUserScore(Integer.parseInt(selectedScore));
-        inputMovie.setCategory(categoriesAL);
-        inputMovie.setEndDate(expDate);
-        inputMovie.setDescription(description);
+        // New movie is created and added here:
+        Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore),
+                categoriesAL, expDate, description);
 
         //Starting the previous Intent
         Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-        previousScreen.putExtra("UpdateMovieKey", inputMovie);
-        setResult(1000, previousScreen);
+        previousScreen.putExtra("AddKey", newMovie);
+        setResult(1001, previousScreen);
         finish();
     }
 
-    public void buttonCancelOnClick(View v)
+    public void cancel(View view)
     {
         finish();
     }
-
 }
