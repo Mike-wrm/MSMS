@@ -9,14 +9,28 @@ import msms.comp3350.persistence.DataAccessor;
 public class AccessMovies
 {
     private DataAccessor dataAccess;
-    private static boolean currSorted = true;
+    private static boolean currSorted = false;
     private static String currField = null;
-    private static boolean currAscending = false;
+    private static boolean currAscending = true;
 
     //TODO move to appropriate location and process such that only certain fields become input strings
     enum mSortField
     {
-        TITLE, RELEASEYEAR
+        TITLE
+        {
+            public String toString()
+            {
+                return "UPPER(TITLE)";
+            }
+        },
+
+        RELEASEYEAR
+        {
+            public String toString()
+            {
+                return "RELEASEYEAR";
+            }
+        }
     }
 
     public AccessMovies()

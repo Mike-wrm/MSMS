@@ -16,7 +16,21 @@ public class AccessUsers
     //TODO move to appropriate location and process such that only certain fields become input strings
     enum uSortField
     {
-        USERNAME, GENDER
+        USERNAME
+        {
+            public String toString()
+            {
+                return "UPPER(USERNAME)";
+            }
+        },
+
+        GENDER
+        {
+            public String toString()
+            {
+                return "GENDER";
+            }
+        }
     }
 
     public AccessUsers()
