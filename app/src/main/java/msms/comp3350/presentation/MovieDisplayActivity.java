@@ -288,7 +288,18 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         expDate.set(expYear, expMonth, expDay);
 
         String errorString = checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
-        if (errorString == null)
+        if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)
+        {
+            // New movie is created and added here:
+            Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
+
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("AddMovieKey", newMovie);
+            setResult(MovieListActivity.ADD_MOVIE_CODE, previousScreen);
+            finish();
+        }
+        else if (null == errorString && v.getId()==R.id.update_button)
         {
             // Movie is updated here:
             inputMovie.setTitle(name);
@@ -304,62 +315,13 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             setResult(MovieListActivity.UPDATE_MOVIE_CODE, previousScreen);
             finish();
         }
-        else
+        else if(null != errorString)
         {
             Messages.warning(this, errorString);
         }
-    }
-
-    // Called when add_movie_button is pressed
-    public void addMovie(View view)
-    {
-        // Grab text input:
-        name = movieNameText.getText().toString();
-        releaseYear = releaseYearText.getText().toString();
-        description = descriptionText.getText().toString();
-
-        try
-        {
-            Integer.parseInt(releaseYear);
-        }
-        catch (NumberFormatException e) {
-            Messages.warning(this, "Year must be a number.");
-            return;
-        }
-
-        try
-        {
-            Integer.parseInt(selectedScore);
-        }
-        catch (NumberFormatException e) {
-            Messages.warning(this, "User score must be a number.");
-            return;
-        }
-
-        // Convert selectedCategories into ArrayList:
-        ArrayList<String> categoriesAL = new ArrayList<String>();
-        for (int i=0; i<3; i++)
-            if (!selectedCategories[i].equals(""))
-                categoriesAL.add(selectedCategories[i]);
-
-        Calendar expDate = Calendar.getInstance();
-        expDate.set(expYear, expMonth, expDay);
-
-        String errorString = MovieDisplayActivity.checkInputMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
-        if (null == errorString)
-        {
-            // New movie is created and added here:
-            Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
-
-            //Starting the previous Intent
-            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-            previousScreen.putExtra("AddMovieKey", newMovie);
-            setResult(MovieListActivity.ADD_MOVIE_CODE, previousScreen);
-            finish();
-        }
         else
         {
-            Messages.warning(this, errorString);
+            Messages.fatalError(this, "Unknown button pressed.");
         }
     }
 
