@@ -130,7 +130,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
                 {
                     selectedGender = AccessUsers.GENDERS_CHAR[0];
                 }
-                else if (selectedGenderString.equals(AccessUsers.GENDERS[0]))
+                else if (selectedGenderString.equals(AccessUsers.GENDERS[1]))
                 {
                     selectedGender = AccessUsers.GENDERS_CHAR[1];
                 }
