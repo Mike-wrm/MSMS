@@ -11,54 +11,35 @@ public class Movie implements Serializable
 	private String title;
 	private int releaseYear;
 	private int userScore;
-	private ArrayList<String> category = new ArrayList<>();
-	private String category1;
-	private String category2;
+	private String category;
 	private Calendar endDate;
 	private int endMonth;
 	private int endDay;
 	private int endYear;
 	private String description;
 
-	public Movie (String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
+	public Movie (String title, int releaseYear, int userScore, String category, Calendar endDate, String description)
 	{
 		mID = currID++;
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.userScore = userScore;
 		this.category = category;
-		processCategories();
 		this.endDate = endDate;
         processDate();
 		this.description = description;
 	}
 
-    public Movie (int mID, String title, int releaseYear, int userScore, ArrayList<String> category, Calendar endDate, String description)
+    public Movie (int mID, String title, int releaseYear, int userScore, String category, Calendar endDate, String description)
     {
         this.mID = mID;
         this.title = title;
         this.releaseYear = releaseYear;
         this.userScore = userScore;
-        this.category = category;
-        processCategories();
+		this.category = category;
         this.endDate = endDate;
         processDate();
         this.description = description;
-    }
-
-	public void processCategories ()
-    {
-        if (category != null)
-        {
-            category1 = category.get(0);
-            if (category.size() == 2)
-            {
-                category2 = category.get(1);
-            }
-            else{
-            	category2 = null;
-			}
-        }
     }
 
     public void processDate()
@@ -85,17 +66,9 @@ public class Movie implements Serializable
 	{
 		return userScore;
 	}
-	public ArrayList<String> getCategory()
-	{
-		return category;
-	}
-	public String getCategory1()
+	public String getCategory()
     {
-	    return category1;
-    }
-    public String getCategory2()
-    {
-        return category2;
+	    return category;
     }
 	public Calendar getEndDate()
 	{
@@ -135,10 +108,9 @@ public class Movie implements Serializable
 	{
 		this.userScore = userScore;
 	}
-	public void setCategory(ArrayList<String> category)
+	public void setCategory(String category)
 	{
 	    this.category = category;
-	    processCategories();
 	}
 	public void setEndDate(Calendar endDate)
 	{

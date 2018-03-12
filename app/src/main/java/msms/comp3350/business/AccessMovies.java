@@ -22,7 +22,7 @@ public class AccessMovies
 
     public static final String[] CATEGORIES =
             {
-                    "None", "Action", "Childrens", "Comedy", "Drama", "Fantasy", "Horror", "Sci-Fi",
+                    "None", "Action", "Family", "Comedy", "Drama", "Fantasy", "Horror", "Sci-Fi",
                     "Recent", "Trending"
             };
 
@@ -93,7 +93,7 @@ public class AccessMovies
         return results;
     }
 
-    public static String validateMovie(String title, int releaseYear, int userScore, ArrayList<String> category, Calendar expDate, String description)
+    public static String validateMovie(String title, int releaseYear, int userScore, String category, Calendar expDate, String description)
     {
         int expYear = expDate.get(Calendar.YEAR);
         int expMonth = expDate.get(Calendar.MONTH);
@@ -116,16 +116,12 @@ public class AccessMovies
         }
 
         boolean atLeastOneCategory = false;
-        if (category != null)
+
+        if (category != null && !category.equals(CATEGORIES[0]))
         {
-            for (int i = 0; i < category.size(); i++)
-            {
-                if (category.get(i) != null && !category.get(i).equals(CATEGORIES[0]))
-                {
-                    atLeastOneCategory = true;
-                }
-            }
+            atLeastOneCategory = true;
         }
+
         if(!atLeastOneCategory)
         {
             errorString = "Invalid category entry. Enter at least one category.";

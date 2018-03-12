@@ -31,13 +31,12 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private int expYear = 0;
     private int expMonth = 0;
     private int expDay = 0;
-    private String[] selectedCategories = {"", "", ""};
+    private String selectedCategory = "";
     private String releaseYear = "";
     private String selectedScore = "";
     private String description = "";
 
     private Spinner categorySpinner = null;
-    private Spinner categorySpinner2 = null;
     private Spinner scoreSpinner = null;
 
     private EditText movieNameText = null;
@@ -98,14 +97,11 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
         // Setup category spinners:
         categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-        categorySpinner2 = (Spinner) findViewById(R.id.category_spinner2);
         ArrayAdapter<CharSequence> categoryAdapter = new ArrayAdapter<CharSequence>(this,
                 android.R.layout.simple_spinner_dropdown_item, AccessMovies.CATEGORIES);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
-        categorySpinner2.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
-        categorySpinner2.setOnItemSelectedListener(this);
 
         // Setup score spinner:
         scoreSpinner = (Spinner) findViewById(R.id.score_spinner);
@@ -155,11 +151,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         switch(parent.getId())// Which spinner was changed?
         {
             case R.id.category_spinner:
-                selectedCategories[0] = (String) categorySpinner.getItemAtPosition(pos);
-                break;
-
-            case R.id.category_spinner2:
-                selectedCategories[1] = (String) categorySpinner2.getItemAtPosition(pos);
+                selectedCategory = (String) categorySpinner.getItemAtPosition(pos);
                 break;
 
             case R.id.score_spinner:
@@ -178,20 +170,9 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             movieNameText.setText(inputMovie.getTitle());
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
             scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
-            ArrayList<String> categories = inputMovie.getCategory();
+            String categories = inputMovie.getCategory();
 
-            for (int i = 0; i < categories.size(); i++)
-            {
-                switch(i)
-                {
-                    case 0:
-                        categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(categories.get(i)));
-                        break;
-                    case 1:
-                        categorySpinner2.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(categories.get(i)));
-                        break;
-                }
-            }
+            categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(categories));
 
             datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
             // set expDate in EditText
@@ -280,10 +261,12 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         }
 
         // Convert selectedCategories into ArrayList:
-        ArrayList<String> categoriesAL = new ArrayList<String>();
-        for (int i=0; i<3; i++)
-            if (!selectedCategories[i].equals(""))
-                categoriesAL.add(selectedCategories[i]);
+        String categoriesAL = "";
+
+        if (!selectedCategory.equals(""))
+        {
+            categoriesAL = selectedCategory;
+        }
 
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);

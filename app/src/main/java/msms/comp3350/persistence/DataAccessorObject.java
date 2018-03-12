@@ -100,8 +100,8 @@ public class DataAccessorObject implements DataAccessor
     {
         Movie movieX;
         int myID, myReleaseYear, myUserScore, myEndMonth, myEndDay, myEndYear;
-        String myTitle, myCat1, myCat2, myDescription;
-        myTitle = myCat1 = myCat2 = myDescription = EOF;
+        String myTitle, myCat, myDescription;
+        myTitle = myCat = myDescription = EOF;
         myID = myReleaseYear = myUserScore = myEndDay = myEndMonth = myEndYear = 0;
 
         result = null;
@@ -124,11 +124,7 @@ public class DataAccessorObject implements DataAccessor
                 myTitle = resultSet1.getString("title");
                 myReleaseYear = resultSet1.getInt("releaseYear");
                 myUserScore = resultSet1.getInt("userScore");
-                myCat1 = resultSet1.getString("category1");
-                myCat2 = resultSet1.getString("category2");
-                ArrayList<String> categories = new ArrayList<String>();
-                categories.add(myCat1);
-                categories.add(myCat2);
+                myCat = resultSet1.getString("category");
                 myEndMonth = resultSet1.getInt("endMonth");
                 myEndDay = resultSet1.getInt("endDay");
                 myEndYear = resultSet1.getInt("endYear");
@@ -136,7 +132,7 @@ public class DataAccessorObject implements DataAccessor
                 expDate.set(myEndYear, myEndMonth-1, myEndDay);
                 myDescription = resultSet1.getString("description");
 
-                movieX = new Movie (myID, myTitle, myReleaseYear, myUserScore, categories, expDate, myDescription);
+                movieX = new Movie (myID, myTitle, myReleaseYear, myUserScore, myCat, expDate, myDescription);
                 currentMovies.add(movieX);
             }
         }
@@ -159,8 +155,7 @@ public class DataAccessorObject implements DataAccessor
                     +", '" +currentMovie.getTitle()
                     +"', " +currentMovie.getReleaseYear()
                     +", " +currentMovie.getUserScore()
-                    +", '" +currentMovie.getCategory1()
-                    +"', '" +currentMovie.getCategory2()
+                    +", '" +currentMovie.getCategory()
                     +"', " +currentMovie.getEndMonth()
                     +", " +currentMovie.getEndDay()
                     +", " +currentMovie.getEndYear()
@@ -190,8 +185,7 @@ public class DataAccessorObject implements DataAccessor
             values = "title='" +currentMovie.getTitle()
                     +"', releaseYear=" +currentMovie.getReleaseYear()
                     +", userScore=" +currentMovie.getUserScore()
-                    +", category1='" +currentMovie.getCategory1()
-                    +"', category2='" +currentMovie.getCategory2()
+                    +", category='" +currentMovie.getCategory()
                     +"', endMonth=" +currentMovie.getEndMonth()
                     +", endDay=" +currentMovie.getEndDay()
                     +", endYear=" +currentMovie.getEndYear()

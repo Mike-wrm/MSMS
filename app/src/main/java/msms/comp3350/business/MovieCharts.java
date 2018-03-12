@@ -17,18 +17,17 @@ public abstract class MovieCharts
         for(int i = 0 ; i < numMovies ; i++)
         {
             Movie currMovie = movies.get(i);
-            ArrayList<String> catList = currMovie.getCategory();
-            for(int j = 0 ; j < catList.size() ; j++)
+            String catList = currMovie.getCategory();
+
+            for(int k = 1 ; k < categories.length ; k++)
             {
-                for(int k = 1 ; k < categories.length ; k++)
+                if(catList.equals(categories[k]))
                 {
-                    if(catList.get(j).equals(categories[k]))
-                    {
-                        rawData[k]++;
-                        break;
-                    }
+                    rawData[k]++;
+                    break;
                 }
             }
+
         }
         String[] data = new String[rawData.length];
         for(int i = 0 ; i < data.length ; i++)
