@@ -15,8 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 import msms.comp3350.business.AccessMovies;
@@ -27,6 +25,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 {
     private Movie inputMovie;
 
+    // Movie data:
     private String name = "";
     private int expYear = 0;
     private int expMonth = 0;
@@ -34,16 +33,17 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private String selectedCategory = "";
     private String releaseYear = "";
     private String selectedScore = "";
+    private String movieID = "";
     private String description = "";
 
+    // UI Widget Objects:
     private Spinner categorySpinner = null;
     private Spinner scoreSpinner = null;
-
     private EditText movieNameText = null;
     private TextView expDateText = null;
+    private TextView movieIDText = null;
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
-
     private Button pickDateButton;
 
     static final int DATE_DIALOG_ID = 0;
@@ -113,6 +113,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         // Setup textEdit boxes:
         movieNameText = (EditText) findViewById(R.id.movie_name_text);
         expDateText = (TextView) findViewById(R.id.exp_year_text);
+        movieIDText = (EditText) findViewById(R.id.movie_id_text);
         releaseYearText = (EditText) findViewById(R.id.release_year_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
 
@@ -121,6 +122,10 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         if (inputMovie != null)
         {
             expDate = inputMovie.getEndDate();
+
+            // Don't allow mID to be changed:
+            movieIDText.setKeyListener(null);
+            movieIDText.setEnabled(false);
         }
         else
         {
@@ -170,9 +175,9 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             movieNameText.setText(inputMovie.getTitle());
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
             scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
-            String categories = inputMovie.getCategory();
+            String category = inputMovie.getCategory();
 
-            categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(categories));
+            categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(category));
 
             datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
             // set expDate in EditText
@@ -183,6 +188,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                             .append(expDay).append("/")
                             .append(expYear).append(" "));
 
+            movieIDText.setText("" + inputMovie.getmID());
             descriptionText.setText(inputMovie.getDescription());
         }
         else
@@ -239,7 +245,18 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         // Grab text input:
         name = movieNameText.getText().toString();
         releaseYear = releaseYearText.getText().toString();
+        movieID = movieIDText.getText().toString();
         description = descriptionText.getText().toString();
+
+        // Error checking Integer inputs:
+        try
+        {
+            Integer.parseInt(movieID);
+        }
+        catch (NumberFormatException e) {
+            Messages.warning(this, "Movie ID must be a number.");
+            return;
+        }
 
         try
         {
@@ -260,22 +277,29 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             return;
         }
 
-        // Convert selectedCategories into ArrayList:
-        String categoriesAL = "";
-
+        String category = "";
         if (!selectedCategory.equals(""))
         {
-            categoriesAL = selectedCategory;
+            category = selectedCategory;
         }
 
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
-        if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)
+        String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear),
+                Integer.parseInt(selectedScore), category, expDate, description);
+
+        if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)// Add movie
         {
+            if (!AccessMovies.mIDUnique(Integer.parseInt(movieID)))
+            {
+                Messages.warning(this, "Invalid movie ID entry. This ID already exists.");
+                return;
+            }
+
             // New movie is created and added here:
-            Movie newMovie = new Movie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
+            Movie newMovie = new Movie(Integer.parseInt(movieID), name, Integer.parseInt(releaseYear),
+                    Integer.parseInt(selectedScore), category, expDate, description);
 
             //Starting the previous Intent
             Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
@@ -283,13 +307,12 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             setResult(MovieListActivity.ADD_MOVIE_CODE, previousScreen);
             finish();
         }
-        else if (null == errorString && v.getId()==R.id.update_button)
+        else if (null == errorString && v.getId()==R.id.update_button)// Update movie
         {
-            // Movie is updated here:
             inputMovie.setTitle(name);
             inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
             inputMovie.setUserScore(Integer.parseInt(selectedScore));
-            inputMovie.setCategory(categoriesAL);
+            inputMovie.setCategory(category);
             inputMovie.setEndDate(expDate);
             inputMovie.setDescription(description);
 

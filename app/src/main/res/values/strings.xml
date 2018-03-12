@@ -11,7 +11,7 @@
     <string name="warning">Warning</string>
     <string name="add_movie">Add Movie</string>
     <string name="movie_name">Name:</string>
-    <string name="movie_category">Category 1:</string>
+    <string name="movie_category">Category:</string>
     <string name="ok">OK</string>
     <string name="back">Back</string>
     <string name="update">Update</string>
@@ -34,4 +34,6 @@
     <string name="user_subend">Subscription End Date:</string>
     <string name="change_date">Change Date</string>
     <string name="reports">reports</string>
+    <string name="movie_id">Movie ID:</string>
+    <string name="movie_id_hint">Unique integer</string>
 </resources>

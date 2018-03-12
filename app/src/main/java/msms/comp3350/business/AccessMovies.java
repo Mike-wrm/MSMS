@@ -86,38 +86,37 @@ public class AccessMovies
         return results;
     }
 
+    public static boolean mIDUnique(int mID)// Checks that mID is unique
+    {
+        ArrayList<Movie> allMovies = new ArrayList<Movie>();
+        DataAccessor accessor = Services.getDataAccess();
+        accessor.getMoviesAll(allMovies);
+        for(Movie currMovie : allMovies)
+        {
+            if (currMovie.getmID() == mID)// mID already exists
+            {
+                return false;
+            }
+        }
+        return true;// mID is unique
+    }
+
+
     public static String validateMovie(String title, int releaseYear, int userScore, String category, Calendar expDate, String description)
+    /* Checks that user input is safe; if not, an error is returned as a String
+     * Note that mID is not checked here: it only
+     */
     {
         int expYear = expDate.get(Calendar.YEAR);
         int expMonth = expDate.get(Calendar.MONTH);
         int expDay = expDate.get(Calendar.DAY_OF_MONTH);
 
         String errorString = null;
+
         // error checking
         if(null == title || title.equals(""))
         {
             errorString = "You need to name your movie.";
-        }
-        if(null == description || description.equals(""))
-        {
-            errorString = "You need to enter a description.";
-        }
-
-        if(!Arrays.asList(SCORES).contains(Integer.toString(userScore)))
-        {
-            errorString = "Invalid user score entered.";
-        }
-
-        boolean atLeastOneCategory = false;
-
-        if (category != null && !category.equals(CATEGORIES[0]))
-        {
-            atLeastOneCategory = true;
-        }
-
-        if(!atLeastOneCategory)
-        {
-            errorString = "Invalid category entry. Enter at least one category.";
         }
 
         if (expYear <= Calendar.getInstance().get(Calendar.YEAR))
@@ -144,6 +143,11 @@ public class AccessMovies
             errorString = "Invalid date entry. Can't acquire movie rights beyond 5 years.";
         }
 
+        if(category == null || category.equals(CATEGORIES[0]))
+        {
+            errorString = "You need to select a category.";
+        }
+
         if (releaseYear < 1900)
         {
             errorString = "Invalid year entry. Movies did not exist during this time.";
@@ -151,6 +155,16 @@ public class AccessMovies
         else if (releaseYear > Calendar.getInstance().get(Calendar.YEAR))
         {
             errorString = "Invalid year entry. Can't add movies from beyond current year.";
+        }
+
+        if(!Arrays.asList(SCORES).contains(Integer.toString(userScore)))
+        {
+            errorString = "Invalid user score entered.";
+        }
+
+        if(null == description || description.equals(""))
+        {
+            errorString = "You need to enter a description.";
         }
 
         return errorString;
