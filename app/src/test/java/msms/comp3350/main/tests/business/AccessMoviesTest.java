@@ -66,8 +66,51 @@ public class AccessMoviesTest extends TestCase
         assertEquals(2, list.searchMovie("TeSt").size());
         assertEquals(2, list.searchMovie("estMovie").size());
         assertEquals(1, list.searchMovie("Movie2").size());
-        assertEquals(4, list.searchMovie("a").size());
+        assertEquals(6, list.searchMovie("a").size());
         assertEquals(0, list.searchMovie("tests").size());
+
+        Calendar yearInPast = Calendar.getInstance();
+        yearInPast.add(Calendar.YEAR, -1);
+
+        Calendar monthInPast = Calendar.getInstance();
+        monthInPast.add(Calendar.MONTH, -1);
+
+        Calendar dayInFuture = Calendar.getInstance();
+        dayInFuture.add(Calendar.DAY_OF_MONTH, 1);
+
+        Calendar dayInPast = Calendar.getInstance();
+        dayInPast.add(Calendar.DAY_OF_MONTH, -1);
+
+        Calendar yearInFarFuture = Calendar.getInstance();
+        yearInFarFuture.add(Calendar.YEAR, 20);
+
+        ArrayList<String> badCat = new ArrayList<>();
+        familyCat.add("THIS IS NOT A CATEGORY");
+
+        //Testing: validateMovie(String title, int releaseYear, int userScore, ArrayList<String> category, Calendar expDate, String description)
+        // Valid movie
+        assertNull(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, dayInFuture, "testing"));
+        // Invalid title
+        assertEquals(AccessMovies.validateMovie("", 1999, 5, familyCat, dayInFuture, "testing"), "You need to name your movie.");
+        assertEquals(AccessMovies.validateMovie(null, 1999, 5, familyCat, dayInFuture, "testing"), "You need to name your movie.");
+        // Invalid year
+        assertEquals(AccessMovies.validateMovie("testMovie", 1899, 5, familyCat, dayInFuture, "testing"), "Invalid year entry. Movies did not exist during this time.");
+        assertEquals(AccessMovies.validateMovie("testMovie", 9001, 5, familyCat, dayInFuture, "testing"), "Invalid year entry. Can't add movies from beyond current year.");
+        // Invalid score
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 0, familyCat, dayInFuture, "testing"), "Invalid user score entered.");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 9001, familyCat, dayInFuture, "testing"), "Invalid user score entered.");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, -9001, familyCat, dayInFuture, "testing"), "Invalid user score entered.");
+        // Invalid category
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, null, dayInFuture, "testing"), "Invalid category entry. Enter at least one category.");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, badCat, dayInFuture, "testing"), "Invalid category entry. Enter at least one category.");
+        // Invalid date
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, yearInFarFuture, "testing"), "Invalid date entry. Can't acquire movie rights beyond 5 years.");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, yearInPast, "testing"), "Invalid date entry. Can't enter movie with expired rights");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, monthInPast, "testing"), "Invalid date entry. Can't enter movie with expired rights");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, dayInPast, "testing"), "Invalid date entry. Can't enter movie with expired rights");
+        // Invalid description
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, dayInFuture, ""), "You need to enter a description.");
+        assertEquals(AccessMovies.validateMovie("testMovie", 1999, 5, familyCat, dayInFuture, null), "You need to enter a description.");
     }
 
 }

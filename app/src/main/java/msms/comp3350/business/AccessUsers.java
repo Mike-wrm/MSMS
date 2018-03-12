@@ -19,6 +19,11 @@ public class AccessUsers
                     "Male", "Female"
             };
 
+    public static final char[] GENDERS_CHAR =
+            {
+                    'M', 'F'
+            };
+
     public AccessUsers()
     {
         dataAccess = Services.getDataAccess();
@@ -87,7 +92,7 @@ public class AccessUsers
             errorString = "Invalid user ID entered.";
         }
 
-        if(!(gender == 'f' || gender == 'm'))
+        if(!(new String(GENDERS_CHAR).contains(Character.toString(gender))))
         {
             errorString = "Invalid gender entered.";
         }

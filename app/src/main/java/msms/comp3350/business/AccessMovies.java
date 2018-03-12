@@ -110,18 +110,20 @@ public class AccessMovies
             errorString = "You need to enter a description.";
         }
 
-        System.out.println("test: " + userScore);
         if(!Arrays.asList(SCORES).contains(Integer.toString(userScore)))
         {
             errorString = "Invalid user score entered.";
         }
 
         boolean atLeastOneCategory = false;
-        for (int i = 0; i < category.size(); i++)
+        if (category != null)
         {
-            if (category.get(i) != null && !category.get(i).equals(CATEGORIES[0]))
+            for (int i = 0; i < category.size(); i++)
             {
-                atLeastOneCategory = true;
+                if (category.get(i) != null && !category.get(i).equals(CATEGORIES[0]))
+                {
+                    atLeastOneCategory = true;
+                }
             }
         }
         if(!atLeastOneCategory)

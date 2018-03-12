@@ -29,7 +29,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
     private int expYear = 0;
     private int expMonth = 0;
     private int expDay = 0;
-    private char selectedGender = 'm';
+    private char selectedGender = AccessUsers.GENDERS_CHAR[0];
     private String name = "";
     private String userID = "";
     private String password = "";
@@ -126,16 +126,16 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         {
             case R.id.gender_spinner:
                 String selectedGenderString = (String) genderSpinner.getItemAtPosition(pos);
-                if (selectedGenderString.equals("Male"))
+                if (selectedGenderString.equals(AccessUsers.GENDERS[0]))
                 {
-                    selectedGender = 'm';
+                    selectedGender = AccessUsers.GENDERS_CHAR[0];
                 }
-                else if (selectedGenderString.equals("Female"))
+                else if (selectedGenderString.equals(AccessUsers.GENDERS[0]))
                 {
-                    selectedGender = 'f';
+                    selectedGender = AccessUsers.GENDERS_CHAR[1];
                 }
                 else{
-                    selectedGender = 'm'; // Default to male gender
+                    selectedGender = AccessUsers.GENDERS_CHAR[0]; // Default to male gender
                 }
                 break;
         }
