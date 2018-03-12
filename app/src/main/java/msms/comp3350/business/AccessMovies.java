@@ -31,9 +31,20 @@ public class AccessMovies
         dataAccess = Services.getDataAccess();
     }
 
+    public void cancelSort()
+    {
+        currSorted = false;
+        currField = null;
+        currAscending = true;
+    }
+
     public String getMovies(ArrayList<Movie> movies)
     {
         movies.clear();
+        if (currSorted)
+        {
+            return getSortedMovies(movies, currField, currAscending);
+        }
         return dataAccess.getMoviesAll(movies);
     }
 
@@ -41,6 +52,7 @@ public class AccessMovies
     public String getSortedMovies(ArrayList<Movie> movies, SortEnums.MovieSortField sortBy, boolean ascending)
     {
         movies.clear();
+        currSorted = true;
         currField = sortBy;
         currAscending = ascending;
         return dataAccess.getMoviesAllSorted(movies, currField, currAscending);
