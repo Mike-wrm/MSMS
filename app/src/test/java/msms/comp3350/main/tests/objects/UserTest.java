@@ -22,7 +22,7 @@ public class UserTest extends TestCase
             Calendar newDate = Calendar.getInstance();
             newDate.set(2022,12,20);
 
-            System.out.println("\nStarting testUser");
+            System.out.println("\nStarting a test for Users");
 
             user = new User(1,"JohnDoe", "password", 21, 'm', endDate);
             user2 = new User(2, "JaneDoe", "pass", 22, 'f', endDate);
@@ -70,5 +70,7 @@ public class UserTest extends TestCase
             assertTrue(user2.equals(dateChanged));
 
             assertFalse(user.equals(user2));
+
+            System.out.println("Finished a User Test");
         }
 }
