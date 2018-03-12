@@ -12,6 +12,7 @@ import java.util.List;
 
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.business.SortEnums;
 import msms.comp3350.presentation.MainActivity;
 
 public class DataAccessorObject implements DataAccessor
@@ -78,7 +79,7 @@ public class DataAccessorObject implements DataAccessor
     }
 
     //generates sorted select movies from DB
-    public String getMoviesAllSorted(ArrayList<Movie> currentMovies, String sortBy, boolean ascending)
+    public String getMoviesAllSorted(ArrayList<Movie> currentMovies, SortEnums.MovieSortField sortBy, boolean ascending)
     {
         String order;
         if (ascending)
@@ -90,7 +91,7 @@ public class DataAccessorObject implements DataAccessor
             order = " DESC";
         }
 
-        String strCommand = "Select * from Movies ORDER BY " + sortBy + order;
+        String strCommand = "Select * from Movies ORDER BY " + sortBy.toString() + order;
         return getMoviesSQL(currentMovies, strCommand);
     }
 
@@ -236,7 +237,7 @@ public class DataAccessorObject implements DataAccessor
     }
 
     //generates basic select movies from DB
-    public String getUsersAllSorted(ArrayList<User> currentUsers, String sortBy, boolean ascending)
+    public String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending)
     {
         String order;
         if (ascending)
@@ -248,7 +249,7 @@ public class DataAccessorObject implements DataAccessor
             order = " DESC";
         }
 
-        String strCommand = "Select * from Users ORDER BY " + sortBy + order;
+        String strCommand = "Select * from Users ORDER BY " + sortBy.toString() + order;
         return getUsersSQL(currentUsers, strCommand);
     }
 

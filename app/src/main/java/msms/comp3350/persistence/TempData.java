@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Calendar;
 
+import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.presentation.MainActivity;
@@ -159,7 +160,7 @@ public class TempData implements DataAccessor
         return null;
     }
 
-    public String getMoviesAllSorted(ArrayList<Movie> currentMovies, String sortBy, boolean ascending)
+    public String getMoviesAllSorted(ArrayList<Movie> currentMovies, SortEnums.MovieSortField sortBy, boolean ascending)
     {
         currentMovies.addAll(movies);
         if (!ascending)
@@ -220,7 +221,7 @@ public class TempData implements DataAccessor
         return null;
     }
 
-    public String getUsersAllSorted(ArrayList<User> currentUsers, String sortBy, boolean ascending)
+    public String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending)
     {
         currentUsers.addAll(users);
         if (!ascending)

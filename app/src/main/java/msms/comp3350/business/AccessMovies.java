@@ -12,7 +12,7 @@ public class AccessMovies
 {
     private DataAccessor dataAccess;
     private static boolean currSorted = false;
-    private static String currField = null;
+    private static SortEnums.MovieSortField currField = null;
     private static boolean currAscending = true;
 
     public static final String[] SCORES =
@@ -44,7 +44,7 @@ public class AccessMovies
     }
 
     //TODO create something in MovieDisplay/ListActivity to allow for toggle of sort
-    public String getSortedMovies(ArrayList<Movie> movies, String sortBy, boolean ascending)
+    public String getSortedMovies(ArrayList<Movie> movies, SortEnums.MovieSortField sortBy, boolean ascending)
     {
         movies.clear();
         currSorted = true;

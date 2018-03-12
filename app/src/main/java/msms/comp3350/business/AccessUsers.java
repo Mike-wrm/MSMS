@@ -11,7 +11,7 @@ public class AccessUsers
 {
     private DataAccessor dataAccess;
     private static boolean currSorted = false;
-    private static String currField = null;
+    private static SortEnums.UserSortField currField = null;
     private static boolean currAscending = false;
 
     public static final String[] GENDERS =
@@ -36,7 +36,7 @@ public class AccessUsers
     }
 
     //TODO create something in UserDisplay/ListActivity to allow for toggle of sort
-    public String getSortedUsers(ArrayList<User> users, String sortBy, boolean ascending)
+    public String getSortedUsers(ArrayList<User> users, SortEnums.UserSortField sortBy, boolean ascending)
     {
         users.clear();
         currSorted = true;

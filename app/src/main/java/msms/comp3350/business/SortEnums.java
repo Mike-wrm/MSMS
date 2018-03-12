@@ -1,9 +1,9 @@
 package msms.comp3350.business;
 
 
-public abstract class SortConstants
+public abstract class SortEnums
 {
-    enum uSortField
+    public enum UserSortField
     {
         USERNAME
         {
@@ -22,7 +22,7 @@ public abstract class SortConstants
         }
     }
 
-    enum mSortField
+    public enum MovieSortField
     {
         TITLE
         {
