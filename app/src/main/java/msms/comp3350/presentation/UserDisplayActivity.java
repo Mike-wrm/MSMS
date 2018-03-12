@@ -251,7 +251,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        String errorString = AccessUsers.validateUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expYear, expMonth, expDay);
+        String errorString = AccessUsers.validateUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expDate);
         if (null == errorString) {
             inputUser.setuID(Integer.parseInt(userID));
             inputUser.setName(name);

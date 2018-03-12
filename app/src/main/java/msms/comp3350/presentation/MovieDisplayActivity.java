@@ -288,7 +288,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         Calendar expDate = Calendar.getInstance();
         expDate.set(expYear, expMonth, expDay);
 
-        String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, description, expYear, expMonth, expDay);
+        String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear), Integer.parseInt(selectedScore), categoriesAL, expDate, description);
         if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)
         {
             // New movie is created and added here:

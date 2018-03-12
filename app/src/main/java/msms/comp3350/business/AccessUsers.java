@@ -60,8 +60,12 @@ public class AccessUsers
         return dataAccess.deleteUser(currentUser);
     }
 
-    public static String validateUser (int uID, String userName, String password, int age, char gender, int expYear, int expMonth, int expDay)
+    public static String validateUser (int uID, String userName, String password, int age, char gender, Calendar endDate)
     {
+        int expYear = endDate.get(Calendar.YEAR);
+        int expMonth = endDate.get(Calendar.MONTH);
+        int expDay = endDate.get(Calendar.DAY_OF_MONTH);
+
         String errorString = null;
         // error checking
         if(null == userName || userName.equals(""))

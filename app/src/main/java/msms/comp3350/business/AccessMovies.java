@@ -93,8 +93,12 @@ public class AccessMovies
         return results;
     }
 
-    public static String validateMovie(String title, int releaseYear, int userScore, ArrayList<String> category, String description, int expYear, int expMonth, int expDay)
+    public static String validateMovie(String title, int releaseYear, int userScore, ArrayList<String> category, Calendar expDate, String description)
     {
+        int expYear = expDate.get(Calendar.YEAR);
+        int expMonth = expDate.get(Calendar.MONTH);
+        int expDay = expDate.get(Calendar.DAY_OF_MONTH);
+
         String errorString = null;
         // error checking
         if(null == title || title.equals(""))
