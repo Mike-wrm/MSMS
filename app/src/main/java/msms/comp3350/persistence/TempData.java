@@ -129,14 +129,34 @@ public class TempData implements DataAccessor
         return null;
     }
 
+    //Hard coded for stub at this moment in time
     public String getMoviesAllSorted(ArrayList<Movie> currentMovies, SortEnums.MovieSortField sortBy, boolean ascending)
     {
         currentMovies.addAll(movies);
+        sortMovieArrList(currentMovies);
         if (!ascending)
         {
             Collections.reverse(currentMovies);
         }
         return null;
+    }
+
+    //temp solution in stub for now since only ordering by title here
+    public ArrayList<Movie> sortMovieArrList(ArrayList<Movie> currentMovies)
+    {
+        for (int i = 0; i < currentMovies.size()-1; i++)
+        {
+            for (int j = 0; j < (currentMovies.size()-1)-i; j++)
+            {
+                if (((currentMovies.get(j)).getTitle()).compareTo(((currentMovies.get(j+1)).getTitle())) > 0)
+                {
+                    Movie temp = currentMovies.get(j);
+                    currentMovies.set(j, currentMovies.get(j+1));
+                    currentMovies.set(j+1, temp);
+                }
+            }
+        }
+        return currentMovies;
     }
 
     public String insertMovie(Movie currentMovie)
@@ -190,14 +210,34 @@ public class TempData implements DataAccessor
         return null;
     }
 
+    //Hard coded for stub at this moment in time
     public String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending)
     {
         currentUsers.addAll(users);
+        sortUserArrList(currentUsers);
         if (!ascending)
         {
             Collections.reverse(currentUsers);
         }
         return null;
+    }
+
+    //temp solution in stub for now since only ordering by name here
+    public ArrayList<User> sortUserArrList(ArrayList<User> currentUsers)
+    {
+        for (int i = 0; i < currentUsers.size()-1; i++)
+        {
+            for (int j = 0; j < (currentUsers.size()-1)-i; j++)
+            {
+                if (((currentUsers.get(j)).getName()).compareTo(((currentUsers.get(j+1)).getName())) > 0)
+                {
+                    User temp = currentUsers.get(j);
+                    currentUsers.set(j, currentUsers.get(j+1));
+                    currentUsers.set(j+1, temp);
+                }
+            }
+        }
+        return currentUsers;
     }
 
     public String insertUser(User currentUser)

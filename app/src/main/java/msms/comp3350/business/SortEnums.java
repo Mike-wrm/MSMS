@@ -12,14 +12,6 @@ public abstract class SortEnums
                 return "UPPER(USERNAME)";
             }
         },
-
-        GENDER
-        {
-            public String toString()
-            {
-                return "GENDER";
-            }
-        }
     }
 
     public enum MovieSortField
@@ -31,14 +23,6 @@ public abstract class SortEnums
                 return "UPPER(TITLE)";
             }
         },
-
-        RELEASEYEAR
-        {
-            public String toString()
-            {
-                return "RELEASEYEAR";
-            }
-        }
     }
 
 }
