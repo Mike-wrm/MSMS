@@ -134,11 +134,18 @@ public class TempData implements DataAccessor
     {
         currentMovies.addAll(movies);
         sortMovieArrList(currentMovies);
+        flipList(currentMovies, ascending);
+
+        return null;
+    }
+
+    //Flips movie/user list if supposed to be descending
+    public void flipList(ArrayList list, boolean ascending)
+    {
         if (!ascending)
         {
-            Collections.reverse(currentMovies);
+            Collections.reverse(list);
         }
-        return null;
     }
 
     //temp solution in stub for now since only ordering by title here
@@ -148,7 +155,7 @@ public class TempData implements DataAccessor
         {
             for (int j = 0; j < (currentMovies.size()-1)-i; j++)
             {
-                if (((currentMovies.get(j)).getTitle()).compareTo(((currentMovies.get(j+1)).getTitle())) > 0)
+                if (((currentMovies.get(j)).getTitle()).compareToIgnoreCase(((currentMovies.get(j+1)).getTitle())) > 0)
                 {
                     Movie temp = currentMovies.get(j);
                     currentMovies.set(j, currentMovies.get(j+1));
@@ -215,10 +222,8 @@ public class TempData implements DataAccessor
     {
         currentUsers.addAll(users);
         sortUserArrList(currentUsers);
-        if (!ascending)
-        {
-            Collections.reverse(currentUsers);
-        }
+        flipList(currentUsers, ascending);
+
         return null;
     }
 
@@ -229,7 +234,7 @@ public class TempData implements DataAccessor
         {
             for (int j = 0; j < (currentUsers.size()-1)-i; j++)
             {
-                if (((currentUsers.get(j)).getName()).compareTo(((currentUsers.get(j+1)).getName())) > 0)
+                if (((currentUsers.get(j)).getName()).compareToIgnoreCase(((currentUsers.get(j+1)).getName())) > 0)
                 {
                     User temp = currentUsers.get(j);
                     currentUsers.set(j, currentUsers.get(j+1));
