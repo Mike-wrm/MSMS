@@ -24,6 +24,7 @@ public class UserListActivity extends Activity
 
     private int selectedUserPosition = -1;
 
+    public static final int USER_LIST_REQ_CODE = 998;
     public static final int DELETE_USER_CODE = 1003;
     public static final int UPDATE_USER_CODE = 1004;
     public static final int ADD_USER_CODE = 1005;
@@ -81,7 +82,7 @@ public class UserListActivity extends Activity
                         Intent userDisplay = new Intent(getApplicationContext(), UserDisplayActivity.class);
                         // note class User must implement Serializable for this to work
                         userDisplay.putExtra("SelectedUser", userList.get(position));
-                        UserListActivity.this.startActivityForResult(userDisplay, 1002);
+                        UserListActivity.this.startActivityForResult(userDisplay, USER_LIST_REQ_CODE);
                     }
                 }
             });
@@ -95,7 +96,7 @@ public class UserListActivity extends Activity
 
         // If we press the "back" button, then when we return to this activity input "Intent data" will be null.
         // This is expected behaviour, and in this case we do not need to check for any update or delete from the user.
-        if (data != null)
+        if (data != null && requestCode == USER_LIST_REQ_CODE)
         {
             Bundle extras = data.getExtras();
             User userToDelete = null;

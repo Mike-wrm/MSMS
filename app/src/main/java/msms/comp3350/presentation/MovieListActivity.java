@@ -38,6 +38,7 @@ public class MovieListActivity extends AppCompatActivity
     private AccessMovies movieAccessor;
     private int selectedMoviePosition = -1;
 
+    public static final int MOVIE_LIST_REQ_CODE = 999;
     public static final int DELETE_MOVIE_CODE = 1000;
     public static final int UPDATE_MOVIE_CODE = 1001;
     public static final int ADD_MOVIE_CODE = 1002;
@@ -102,7 +103,7 @@ public class MovieListActivity extends AppCompatActivity
                         Intent movieDisplay = new Intent(getApplicationContext(), MovieDisplayActivity.class);
                         // note class Movie must implement Serializable for this to work
                         movieDisplay.putExtra("SelectedMovie", movieList.get(position));
-                        MovieListActivity.this.startActivityForResult(movieDisplay, 1000);
+                        MovieListActivity.this.startActivityForResult(movieDisplay, MOVIE_LIST_REQ_CODE);
                     }
                 }
             });
@@ -116,7 +117,7 @@ public class MovieListActivity extends AppCompatActivity
 
         // If we press the "back" button, then when we return to this activity input "Intent data" will be null.
         // This is expected behaviour, and in this case we do not need to check for any update or delete from the user.
-        if (data != null)
+        if (data != null && requestCode == MOVIE_LIST_REQ_CODE)
         {
             Bundle extras = data.getExtras();
             Movie movieToDelete = null;
@@ -271,7 +272,7 @@ public class MovieListActivity extends AppCompatActivity
     public void openAddMovie (View view)
     {
         Intent addMovieIntent = new Intent(this, MovieDisplayActivity.class);
-        MovieListActivity.this.startActivityForResult(addMovieIntent, 1001);
+        MovieListActivity.this.startActivityForResult(addMovieIntent, MOVIE_LIST_REQ_CODE);
     }
 
     private String updateListView()

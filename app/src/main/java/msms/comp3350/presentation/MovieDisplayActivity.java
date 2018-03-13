@@ -273,7 +273,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         }
         catch (NumberFormatException e)
         {
-            Messages.warning(this, "Year must be a number.");
+            Messages.warning(this, "Score must be a number.");
             return;
         }
 
