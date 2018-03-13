@@ -21,10 +21,11 @@ public abstract class MovieCharts
 
             for(int k = 1 ; k < categories.length ; k++)
             {
-                if(catList.equals(categories[k]))
-                {
-                    rawData[k]++;
-                    break;
+                if(catList != null) {
+                    if (catList.equals(categories[k])) {
+                        rawData[k]++;
+                        break;
+                    }
                 }
             }
 
