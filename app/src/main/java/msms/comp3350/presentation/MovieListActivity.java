@@ -23,7 +23,6 @@ import msms.comp3350.business.SortEnums;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
-
 public class MovieListActivity extends AppCompatActivity
 {
     private enum MovieOrder
@@ -38,8 +37,6 @@ public class MovieListActivity extends AppCompatActivity
     private ArrayAdapter<Movie> movieArrayAdapter;
     private AccessMovies movieAccessor;
     private int selectedMoviePosition = -1;
-    private ArrayList<Movie> searchResults;
-    private MovieListActivity thisClass = this;// For use with Messages.warning()
 
     public static final int DELETE_MOVIE_CODE = 1000;
     public static final int UPDATE_MOVIE_CODE = 1001;
@@ -54,6 +51,7 @@ public class MovieListActivity extends AppCompatActivity
         // Setup the app bar:
         Toolbar movieListToolbar = (Toolbar) findViewById(R.id.movie_list_toolbar);
         setSupportActionBar(movieListToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);// Don't display activity title in toolbar
 
         movieList = new ArrayList<Movie>();
         // use accessor to grab the list of movies from BUSINESS
@@ -149,7 +147,7 @@ public class MovieListActivity extends AppCompatActivity
                         ListView listView = (ListView) findViewById(R.id.listMovies);
                         listView.setSelection(pos);
                     }
-                    updateMovieList();
+                    updateListView();
                 }
             }
             else if (movieToUpdate != null && resultCode == UPDATE_MOVIE_CODE)
@@ -167,7 +165,7 @@ public class MovieListActivity extends AppCompatActivity
                         ListView listView = (ListView) findViewById(R.id.listMovies);
                         listView.setSelection(pos);
                     }
-                    updateMovieList();
+                    updateListView();
                 }
             }
             else if (movieToAdd != null && resultCode == ADD_MOVIE_CODE)
@@ -185,7 +183,7 @@ public class MovieListActivity extends AppCompatActivity
                         ListView listView = (ListView) findViewById(R.id.listMovies);
                         listView.setSelection(pos);
                     }
-                    updateMovieList();
+                    updateListView();
                 }
             }
         }
@@ -209,30 +207,31 @@ public class MovieListActivity extends AppCompatActivity
         {
             @Override
             public boolean onQueryTextSubmit(String query)
-            /* Note: a blank query is not considered a QueryTextSubmit event, and therefore does not
-             * need to handled */
             {
-                searchResults = movieAccessor.searchMovie(query);
-
-                if (searchResults.isEmpty())
-                {
-                    Messages.warning(thisClass, "No matches found");
-                    return false;
-                }
-
-                else// Matches found: launch MovieSearchActivity
-                {
-                    Intent movieSearchActivity = new Intent(MovieListActivity.this, MovieSearchActivity.class);
-                    movieSearchActivity.putExtra("Search Results", searchResults);
-                    MovieListActivity.this.startActivity(movieSearchActivity);
-                    searchViewAndroidActionBar.clearFocus();
-                    return true;
-                }
+                searchViewAndroidActionBar.clearFocus();
+                return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText)
+            public boolean onQueryTextChange(String query)
             {
+                updateListView();
+
+                if (!query.equals(""))
+                {
+                    ArrayList<Movie> searchResults = movieAccessor.searchMovie(query);
+
+                    if (searchResults != null)
+                    {
+                        movieList.clear();
+                        movieList.addAll(searchResults);
+                        movieArrayAdapter.notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        Messages.fatalError(MovieListActivity.this, "Search query string is null.");
+                    }
+                }
                 return false;
             }
         });
@@ -265,7 +264,7 @@ public class MovieListActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-        updateMovieList();
+        updateListView();
         return true;
     }
 
@@ -275,7 +274,7 @@ public class MovieListActivity extends AppCompatActivity
         MovieListActivity.this.startActivityForResult(addMovieIntent, 1001);
     }
 
-    private String updateMovieList()
+    private String updateListView()
     // Attempts to refresh the ListView based on sorting order; returns an status code on failure
     {
         String status = null;

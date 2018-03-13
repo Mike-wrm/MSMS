@@ -5,10 +5,10 @@ http://www.viralandroid.com/2016/03/implementing-searchview-in-android-actionbar
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search_view"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="always"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="Search" />
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always" />
     <item
         android:id="@+id/option_unsorted"
         android:orderInCategory="1"
