@@ -48,7 +48,6 @@ public class AccessMovies
         return dataAccess.getMoviesAll(movies);
     }
 
-    //TODO create something in MovieDisplay/ListActivity to allow for toggle of sort
     public String getSortedMovies(ArrayList<Movie> movies, SortEnums.MovieSortField sortBy, boolean ascending)
     {
         movies.clear();

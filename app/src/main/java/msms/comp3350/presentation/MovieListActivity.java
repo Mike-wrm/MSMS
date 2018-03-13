@@ -1,9 +1,5 @@
 package msms.comp3350.presentation;
 
-import android.app.Activity;
-import android.app.DownloadManager;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -23,13 +19,21 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import msms.comp3350.business.AccessMovies;
+import msms.comp3350.business.SortEnums;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
-import static android.app.SearchManager.QUERY;
 
 public class MovieListActivity extends AppCompatActivity
 {
+    private enum MovieOrder
+    {
+        UNSORTED,
+        ASCENDING,
+        DESCENDING
+    }
+
+    private MovieOrder movieOrder = MovieOrder.UNSORTED;
     private ArrayList<Movie> movieList;// All movies
     private ArrayAdapter<Movie> movieArrayAdapter;
     private AccessMovies movieAccessor;
@@ -145,8 +149,7 @@ public class MovieListActivity extends AppCompatActivity
                         ListView listView = (ListView) findViewById(R.id.listMovies);
                         listView.setSelection(pos);
                     }
-                    movieAccessor.getMovies(movieList);
-                    movieArrayAdapter.notifyDataSetChanged();
+                    updateMovieList();
                 }
             }
             else if (movieToUpdate != null && resultCode == UPDATE_MOVIE_CODE)
@@ -164,8 +167,7 @@ public class MovieListActivity extends AppCompatActivity
                         ListView listView = (ListView) findViewById(R.id.listMovies);
                         listView.setSelection(pos);
                     }
-                    movieAccessor.getMovies(movieList);
-                    movieArrayAdapter.notifyDataSetChanged();
+                    updateMovieList();
                 }
             }
             else if (movieToAdd != null && resultCode == ADD_MOVIE_CODE)
@@ -183,8 +185,7 @@ public class MovieListActivity extends AppCompatActivity
                         ListView listView = (ListView) findViewById(R.id.listMovies);
                         listView.setSelection(pos);
                     }
-                    movieAccessor.getMovies(movieList);
-                    movieArrayAdapter.notifyDataSetChanged();
+                    updateMovieList();
                 }
             }
         }
@@ -192,13 +193,15 @@ public class MovieListActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
-    /* Sets up the SearchView in the ToolBar
-     * This setup method was taken (and modified) from:
+    /* This method for setting up the search_view menu item was taken and modified from:
      * http://www.viralandroid.com/2016/03/implementing-searchview-in-android-actionbar.html
      */
     {
+        // Inflate action_bar_menu_items.xml:
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_view_menu_item, menu);
+        inflater.inflate(R.menu.action_bar_menu_items, menu);
+
+        // Setup menu item Objects:
         MenuItem searchViewItem = menu.findItem(R.id.search_view);
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
 
@@ -236,9 +239,62 @@ public class MovieListActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    // Handles selections of option menu items in the ToolBar
+    {
+        switch (item.getItemId())
+        {
+            case R.id.option_unsorted:// Always default to unsorted
+                movieOrder = MovieOrder.UNSORTED; break;
+
+            case R.id.option_ascending:
+                if (movieOrder == MovieOrder.ASCENDING)
+                    movieOrder = MovieOrder.UNSORTED;
+                else
+                    movieOrder = MovieOrder.ASCENDING;
+                break;
+
+            case R.id.option_descending:
+                if (movieOrder == MovieOrder.DESCENDING)
+                    movieOrder = MovieOrder.UNSORTED;
+                else
+                    movieOrder = MovieOrder.DESCENDING;
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        updateMovieList();
+        return true;
+    }
+
     public void openAddMovie (View view)
     {
         Intent addMovieIntent = new Intent(this, MovieDisplayActivity.class);
         MovieListActivity.this.startActivityForResult(addMovieIntent, 1001);
+    }
+
+    private String updateMovieList()
+    // Attempts to refresh the ListView based on sorting order; returns an status code on failure
+    {
+        String status = null;
+
+        switch (movieOrder)
+        {
+            case UNSORTED:
+                status = movieAccessor.getMovies(movieList); break;
+            case ASCENDING:
+                status = movieAccessor.getSortedMovies(movieList, SortEnums.MovieSortField.TITLE, true); break;
+            case DESCENDING:
+                status = movieAccessor.getSortedMovies(movieList, SortEnums.MovieSortField.TITLE, false); break;
+            default:
+                status = "ERROR: movieOrder value is invalid.";
+        }
+
+        if (status == null)// No errors: refresh ListView
+            movieArrayAdapter.notifyDataSetChanged();
+
+        return status;
     }
 }

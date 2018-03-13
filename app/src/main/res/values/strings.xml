@@ -36,4 +36,7 @@
     <string name="reports">reports</string>
     <string name="movie_id">Movie ID:</string>
     <string name="movie_id_hint">Unique integer</string>
+    <string name="sort_ascending">Ascending</string>
+    <string name="sort_descending">Descending</string>
+    <string name="sort_none">Unsorted</string>
 </resources>
