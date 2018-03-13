@@ -24,7 +24,7 @@ public class MovieTest extends TestCase
         Calendar newDate = Calendar.getInstance();
         newDate.set(2021,3,15);
 
-        System.out.println("\nStarting a Movie test");
+        System.out.println("\nTesting the Movie object in Movie");
 
         family = new Movie("Shrek", 2001, 84, "family", endDate, "Ogre Saves Princess but gets unexpected suprise");
         comedy = new Movie("Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
