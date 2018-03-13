@@ -124,7 +124,7 @@ public class DataAccessorObject implements DataAccessor
                 myTitle = resultSet1.getString("title");
                 myReleaseYear = resultSet1.getInt("releaseYear");
                 myUserScore = resultSet1.getInt("userScore");
-                myCat = resultSet1.getString("category");
+                myCat = resultSet1.getString("category1");
                 myEndMonth = resultSet1.getInt("endMonth");
                 myEndDay = resultSet1.getInt("endDay");
                 myEndYear = resultSet1.getInt("endYear");
@@ -185,7 +185,7 @@ public class DataAccessorObject implements DataAccessor
             values = "title='" +currentMovie.getTitle()
                     +"', releaseYear=" +currentMovie.getReleaseYear()
                     +", userScore=" +currentMovie.getUserScore()
-                    +", category='" +currentMovie.getCategory()
+                    +", category1='" +currentMovie.getCategory()
                     +"', endMonth=" +currentMovie.getEndMonth()
                     +", endDay=" +currentMovie.getEndDay()
                     +", endYear=" +currentMovie.getEndYear()
