@@ -23,13 +23,14 @@ public class DataAccessTest extends TestCase
 
     public void setUp()
     {
-        //testData = Services.createDataAccess("test");
         testData = Services.createDataAccess("temp");
+        testData.open("temp");
     }
 
     public void tearDown()
     {
         System.out.println("Finishing a Persistence Test");
+        testData.close();
     }
 
     public void resetMovies(ArrayList<Movie> movies)
@@ -42,102 +43,6 @@ public class DataAccessTest extends TestCase
     {
         users.clear();
         assertNull(testData.getUsersAll(users));
-    }
-
-    public void rebuildMovie() //if we delete all of the items, we need to make sure it gets put back
-    {
-        Movie movie;
-
-        Calendar date1 = Calendar.getInstance(); // January = 0, December = 11.
-        date1.set(2018, 4, 3);
-
-        Calendar date2 = Calendar.getInstance();
-        date2.set(2018, 6, 23);
-
-        Calendar date3 = Calendar.getInstance();
-        date3.set(2018, 3, 11);
-
-        Calendar date4 = Calendar.getInstance();
-        date4.set(2019, 6, 7);
-
-        Calendar date5 = Calendar.getInstance();
-        date5.set(2021, 4, 1);
-
-        Calendar date6 = Calendar.getInstance();
-        date6.set(2018, 6, 23);
-
-        Calendar date7 = Calendar.getInstance();
-        date7.set(2018, 11, 31);
-
-        Calendar date8 = Calendar.getInstance();
-        date8.set(2019, 11, 31);
-
-        Calendar date9 = Calendar.getInstance();
-        date9.set(2020, 10, 1);
-
-        movie = new Movie("South Park: Bigger, Longer & Uncut", 1999, 7, "Comedy", date1, "Ipsum Lorem...");
-        movie.setmID(111);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Eddie Murphy: Raw", 1987, 5, "Comedy", date2, "Ipsum Lorem...");
-        movie.setmID(222);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Toy Story", 1995, 10, "Family", date3, "Ipsum Lorem...");
-        movie.setmID(333);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Shrek", 2001, 8, "Family", date4, "Ipsum Lorem...");
-        movie.setmID(444);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Friday the 13th", 2009, 3, "Horror", date5, "Ipsum Lorem...");
-        movie.setmID(555);
-        testData.insertMovie(movie);
-
-        movie = new Movie("The Ring", 2002, 6, "Horror", date6, "Ipsum Lorem...");
-        movie.setmID(666);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Mission Impossible: Rogue Nation", 2015, 8, "Action", date7, "Ipsum Lorem...");
-        movie.setmID(777);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Transformers: The Last Knight", 2017, 2, "Action", date8, "Ipsum Lorem...");
-        movie.setmID(888);
-        testData.insertMovie(movie);
-
-        movie = new Movie("Terminator 2: Judgement Day", 1991, 8, "Action", date9, "Ipsum Lorem...");
-        movie.setmID(999);
-        testData.insertMovie(movie);
-    }
-
-    public void rebuildUser()
-    {
-        User user;
-
-        Calendar userDate1 = Calendar.getInstance();
-        userDate1.set(2018,3,30);
-        Calendar userDate2 = Calendar.getInstance();
-        userDate2.set(2020,11,31);
-
-        user = new User(111, "Miggles", "anime4life", 21, 'M', userDate1);
-        testData.insertUser(user);
-
-        user = new User(222, "Smoo", "getoffmylawn", 32, 'M', userDate1);
-        testData.insertUser(user);
-
-        user = new User(333, "Andrew_Sempai", "iheartmybeard", 23, 'M', userDate1);
-        testData.insertUser(user);
-
-        user = new User(444, "TestBoi", "supertester", 24, 'M', userDate1);
-        testData.insertUser(user);
-
-        user = new User(555, "JiffyPB", "walmartisevil", 21, 'M', userDate1);
-        testData.insertUser(user);
-
-        user = new User(666, "Wonder_Woman", "DCU", 82, 'F', userDate2);
-        testData.insertUser(user);
     }
 
     public void testDataAccessMovie()
@@ -265,81 +170,135 @@ public class DataAccessTest extends TestCase
         assertNull(testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, false));
         assertEquals(9, movies.size());
 
+        // Lets Make sure everything is in order.
         movie = movies.get(0);
-        assertEquals(999, movie.getmID());
-        assertEquals("Terminator 2: Judgement Day", movie.getTitle());
-
-        movie = movies.get(1);
         assertEquals(888, movie.getmID());
         assertEquals("Transformers: The Last Knight", movie.getTitle());
 
-        movie = movies.get(2);
-        assertEquals(777, movie.getmID());
-        assertEquals("Mission Impossible: Rogue Nation", movie.getTitle());
+        movie = movies.get(1);
+        assertEquals(333, movie.getmID());
+        assertEquals("Toy Story", movie.getTitle());
 
-        movie = movies.get(3);
+        movie = movies.get(2);
         assertEquals(666, movie.getmID());
         assertEquals("The Ring", movie.getTitle());
 
+        movie = movies.get(3);
+        assertEquals(999, movie.getmID());
+        assertEquals("Terminator 2: Judgement Day", movie.getTitle());
+
         movie = movies.get(4);
-        assertEquals(555, movie.getmID());
-        assertEquals("Friday the 13th", movie.getTitle());
+        assertEquals(111, movie.getmID());
+        assertEquals("South Park: Bigger, Longer & Uncut", movie.getTitle());
 
         movie = movies.get(5);
         assertEquals(444, movie.getmID());
         assertEquals("Shrek", movie.getTitle());
 
         movie = movies.get(6);
-        assertEquals(333, movie.getmID());
-        assertEquals("Toy Story", movie.getTitle());
+        assertEquals(777, movie.getmID());
+        assertEquals("Mission Impossible: Rogue Nation", movie.getTitle());
 
         movie = movies.get(7);
-        assertEquals(222, movie.getmID());
-        assertEquals("Eddie Murphy: Raw", movie.getTitle());
+        assertEquals(555, movie.getmID());
+        assertEquals("Friday the 13th", movie.getTitle());
 
         movie = movies.get(8);
-        assertEquals(111, movie.getmID());
-        assertEquals("South Park: Bigger, Longer & Uncut", movie.getTitle());
+        assertEquals(222, movie.getmID());
+        assertEquals("Eddie Murphy: Raw", movie.getTitle());
 
         // sort it in ascending
         movies.clear();
         assertNull(testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true));
 
         movie = movies.get(0);
-        assertEquals(111, movie.getmID());
-        assertEquals("South Park: Bigger, Longer & Uncut", movie.getTitle());
-
-        movie = movies.get(1);
         assertEquals(222, movie.getmID());
         assertEquals("Eddie Murphy: Raw", movie.getTitle());
 
+        movie = movies.get(1);
+        assertEquals(555, movie.getmID());
+        assertEquals("Friday the 13th", movie.getTitle());
+
         movie = movies.get(2);
-        assertEquals(333, movie.getmID());
-        assertEquals("Toy Story", movie.getTitle());
+        assertEquals(777, movie.getmID());
+        assertEquals("Mission Impossible: Rogue Nation", movie.getTitle());
 
         movie = movies.get(3);
         assertEquals(444, movie.getmID());
         assertEquals("Shrek", movie.getTitle());
 
         movie = movies.get(4);
-        assertEquals(555, movie.getmID());
-        assertEquals("Friday the 13th", movie.getTitle());
+        assertEquals(111, movie.getmID());
+        assertEquals("South Park: Bigger, Longer & Uncut", movie.getTitle());
 
         movie = movies.get(5);
+        assertEquals(999, movie.getmID());
+        assertEquals("Terminator 2: Judgement Day", movie.getTitle());
+
+        movie = movies.get(6);
         assertEquals(666, movie.getmID());
         assertEquals("The Ring", movie.getTitle());
 
-        movie = movies.get(6);
-        assertEquals(777, movie.getmID());
-        assertEquals("Mission Impossible: Rogue Nation", movie.getTitle());
-
         movie = movies.get(7);
+        assertEquals(333, movie.getmID());
+        assertEquals("Toy Story", movie.getTitle());
+
+        movie = movies.get(8);
         assertEquals(888, movie.getmID());
         assertEquals("Transformers: The Last Knight", movie.getTitle());
 
-        movie = movies.get(8);
-        assertEquals(999, movie.getmID());
-        assertEquals("Terminator 2: Judgement Day", movie.getTitle());
+        //Lets see if I add something like a sequel
+        testData.insertMovie(new Movie(500, "Shrek 2",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(3);
+        assertEquals(444, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+
+        movie = movies.get(4);
+        assertEquals(500, movie.getmID());
+        assertEquals("Shrek 2", movie.getTitle());
+
+        // Lets see if I add something that is spelt almost the same
+        testData.insertMovie(new Movie(535, "Shrec",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(3);
+        assertEquals(535, movie.getmID());
+        assertEquals("Shrec", movie.getTitle());
+
+        movie = movies.get(4);
+        assertEquals(444, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+
+        // I add a movie that has no name
+        // Lets see if I add something that is spelt almost the same
+        testData.insertMovie(new Movie(25, "",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(0);
+        assertEquals(25, movie.getmID());
+        assertEquals("", movie.getTitle());
+
+        // What if I add two movies with the same name
+        testData.insertMovie(new Movie(26, "Shrek",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(5);
+        assertEquals(444, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+
+        movie = movies.get(6);
+        assertEquals(26, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
     }
 
     public void testDateAccessUsers()
@@ -432,52 +391,90 @@ public class DataAccessTest extends TestCase
         assertEquals("Wonder_Woman", user.getName());
 
         user = users.get(1);
-        assertEquals(555, user.getuID());
-        assertEquals("JiffyPB", user.getName());
-
-        user = users.get(2);
         assertEquals(444, user.getuID());
         assertEquals("TestBoi", user.getName());
 
-        user = users.get(3);
-        assertEquals(333, user.getuID());
-        assertEquals("Andrew_Sempai", user.getName());
-
-        user = users.get(4);
+        user = users.get(2);
         assertEquals(222, user.getuID());
         assertEquals("Smoo", user.getName());
 
-        user = users.get(5);
+        user = users.get(3);
         assertEquals(111, user.getuID());
         assertEquals("Miggles", user.getName());
+
+        user = users.get(4);
+        assertEquals(555, user.getuID());
+        assertEquals("JiffyPB", user.getName());
+
+        user = users.get(5);
+        assertEquals(333, user.getuID());
+        assertEquals("Andrew_Sempai", user.getName());
 
         // test ascending order
         users.clear();
         assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
 
         user = users.get(0);
-        assertEquals(111, user.getuID());
-        assertEquals("Miggles", user.getName());
-
-        user = users.get(1);
-        assertEquals(222, user.getuID());
-        assertEquals("Smoo", user.getName());
-
-        user = users.get(2);
         assertEquals(333, user.getuID());
         assertEquals("Andrew_Sempai", user.getName());
 
-        user = users.get(3);
-        assertEquals(444, user.getuID());
-        assertEquals("TestBoi", user.getName());
-
-        user = users.get(4);
+        user = users.get(1);
         assertEquals(555, user.getuID());
         assertEquals("JiffyPB", user.getName());
+
+        user = users.get(2);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        user = users.get(3);
+        assertEquals(222, user.getuID());
+        assertEquals("Smoo", user.getName());
+
+        user = users.get(4);
+        assertEquals(444, user.getuID());
+        assertEquals("TestBoi", user.getName());
 
         user = users.get(5);
         assertEquals(666, user.getuID());
         assertEquals("Wonder_Woman", user.getName());
+
+        // Lets try adding someone who is a JR
+        testData.insertUser(new User(11, "Miggles JR", "anime4life", 21, 'M', Calendar.getInstance()));
+
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(2);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        user = users.get(3);
+        assertEquals(11, user.getuID());
+        assertEquals("Miggles JR", user.getName());
+
+        // Lets try adding a similar name
+        testData.insertUser(new User(12, "Miggled", "anime4life", 21, 'M', Calendar.getInstance()));
+
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(2);
+        assertEquals(12, user.getuID());
+        assertEquals("Miggled", user.getName());
+
+        user = users.get(3);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        // Lets try adding a user with no name
+        testData.insertUser(new User(13, "", "anime4life", 21, 'M', Calendar.getInstance()));
+
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(0);
+        assertEquals(13, user.getuID());
+        assertEquals("", user.getName());
     }
 
     public void testMovieAccessChange()
@@ -576,8 +573,6 @@ public class DataAccessTest extends TestCase
 
         assertNull(testData.insertMovie(movie)); // re-adding a movie that should have been deleted
         assertNull(testData.deleteMovie(movie));
-
-        rebuildMovie();
     }
 
     public void testUserAccessChange(){
@@ -667,8 +662,6 @@ public class DataAccessTest extends TestCase
         assertNull(testData.deleteUser(user));
         assertNull(testData.insertUser(user)); // re-adding a movie that should have been deleted
         assertNull(testData.deleteUser(user));
-
-        rebuildUser();
     }
 
 }

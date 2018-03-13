@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import msms.comp3350.application.Services;
-import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.User;
 import msms.comp3350.business.AccessUsers;
+import msms.comp3350.persistence.DataAccessor;
 
 
 public class AccessUserTest extends TestCase
 {
+    private DataAccessor testData;
     private AccessUsers list;
 
     public AccessUserTest(String arg0)
@@ -21,54 +22,28 @@ public class AccessUserTest extends TestCase
 
     public void setUp()
     {
-        Services.createDataAccess("temp");
+        testData = Services.createDataAccess("temp");
+        testData.open("temp");
         list = new AccessUsers();
     }
 
     public void tearDown()
     {
-        list = null;
+        //list = null;
         System.out.println("Finished an AccessUser Test");
+        testData.close();
     }
 
-    public void resetUsers(ArrayList<User> users)
+    public void
+    resetUsers(ArrayList<User> users)
     {
         users.clear();
         assertNull(list.getUsers(users));
     }
 
-    public void rebuildList()
+    public void testAccessUserAccess()
     {
-        User user;
-
-        Calendar userDate1 = Calendar.getInstance();
-        userDate1.set(2018,3,30);
-        Calendar userDate2 = Calendar.getInstance();
-        userDate2.set(2020,11,31);
-
-
-        user = new User(111, "Miggles", "anime4life", 21, 'M', userDate1);
-        list.insertUser(user);
-
-        user = new User(222, "Smoo", "getoffmylawn", 32, 'M', userDate1);
-        list.insertUser(user);
-
-        user = new User(333, "Andrew_Sempai", "iheartmybeard", 23, 'M', userDate1);
-        list.insertUser(user);
-
-        user = new User(444, "TestBoi", "supertester", 24, 'M', userDate1);
-        list.insertUser(user);
-
-        user = new User(555, "JiffyPB", "walmartisevil", 21, 'M', userDate1);
-        list.insertUser(user);
-
-        user = new User(666, "Wonder_Woman", "DCU", 82, 'F', userDate2);
-        list.insertUser(user);
-    }
-
-    public void testAccessUserAcess()
-    {
-     ArrayList<User> users = new ArrayList<User>();
+     ArrayList<User> users;
      User user;
 
      // first lets just access them normally
@@ -78,6 +53,8 @@ public class AccessUserTest extends TestCase
 
         assertNull(list.getUsers(users));
         assertEquals(6, users.size());
+
+
 
         user = users.get(0);
         assertEquals(111, user.getuID());
@@ -140,71 +117,6 @@ public class AccessUserTest extends TestCase
         assertEquals(2020, user.getEndYear());
     }
 
-    public void testAccessUserSort()
-    {
-        ArrayList<User> users;
-        User user;
-
-        System.out.println("\nTesting Accessing the Data Access for the users");
-
-        users = new ArrayList<User>();
-
-        assertNull(list.getSortedUsers(users, SortEnums.UserSortField.USERNAME, false));
-
-        assertEquals(6, users.size());
-
-        user = users.get(0);
-        assertEquals(666, user.getuID());
-        assertEquals("Wonder_Woman", user.getName());
-
-        user = users.get(1);
-        assertEquals(555, user.getuID());
-        assertEquals("JiffyPB", user.getName());
-
-        user = users.get(2);
-        assertEquals(444, user.getuID());
-        assertEquals("TestBoi", user.getName());
-
-        user = users.get(3);
-        assertEquals(333, user.getuID());
-        assertEquals("Andrew_Sempai", user.getName());
-
-        user = users.get(4);
-        assertEquals(222, user.getuID());
-        assertEquals("Smoo", user.getName());
-
-        user = users.get(5);
-        assertEquals(111, user.getuID());
-        assertEquals("Miggles", user.getName());
-
-        // test ascending order
-        users.clear();
-        assertNull(list.getSortedUsers(users, SortEnums.UserSortField.USERNAME, true));
-
-        user = users.get(0);
-        assertEquals(111, user.getuID());
-        assertEquals("Miggles", user.getName());
-
-        user = users.get(1);
-        assertEquals(222, user.getuID());
-        assertEquals("Smoo", user.getName());
-
-        user = users.get(2);
-        assertEquals(333, user.getuID());
-        assertEquals("Andrew_Sempai", user.getName());
-
-        user = users.get(3);
-        assertEquals(444, user.getuID());
-        assertEquals("TestBoi", user.getName());
-
-        user = users.get(4);
-        assertEquals(555, user.getuID());
-        assertEquals("JiffyPB", user.getName());
-
-        user = users.get(5);
-        assertEquals(666, user.getuID());
-        assertEquals("Wonder_Woman", user.getName());
-    }
 
     public void testAccessUserChange()
     {
@@ -267,8 +179,6 @@ public class AccessUserTest extends TestCase
 
         assertNull(list.insertUser(testUser1));
 
-        // gotta rebuild the list afterwards
-        rebuildList();
     }
 
     public void testValidate(){
