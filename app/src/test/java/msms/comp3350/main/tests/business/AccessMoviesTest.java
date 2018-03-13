@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.business.AccessMovies;
+import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.persistence.DataAccessor;
 
@@ -151,6 +152,70 @@ public class AccessMoviesTest extends TestCase
         assertEquals("Ipsum Lorem...",movie.getDescription());
     }
 
+    public void testAccessMovieSort()
+    {
+        ArrayList<Movie> movies;
+        Movie movie;
+
+        System.out.println("\nTesting Accessing the Sort fucntion in AccessMovie");
+
+        movies = new ArrayList<Movie>();
+
+
+        //Lets see if I add something like a sequel
+        testData.insertMovie(new Movie(23, "Shrek 2",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(3);
+        assertEquals(444, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+
+        movie = movies.get(4);
+        assertEquals(23, movie.getmID());
+        assertEquals("Shrek 2", movie.getTitle());
+
+        // Lets see if I add something that is spelt almost the same
+        testData.insertMovie(new Movie(535, "Shrec",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(3);
+        assertEquals(535, movie.getmID());
+        assertEquals("Shrec", movie.getTitle());
+
+        movie = movies.get(4);
+        assertEquals(444, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+
+        // I add a movie that has no name
+        // Lets see if I add something that is spelt almost the same
+        testData.insertMovie(new Movie(25, "",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(0);
+        assertEquals(25, movie.getmID());
+        assertEquals("", movie.getTitle());
+
+        // What if I add two movies with the same name
+        testData.insertMovie(new Movie(26, "Shrek",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+
+        movies.clear();
+        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
+
+        movie = movies.get(5);
+        assertEquals(444, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+
+        movie = movies.get(6);
+        assertEquals(26, movie.getmID());
+        assertEquals("Shrek", movie.getTitle());
+    }
+
     public void testAccessMovieChange()
     {
         Movie movie;
@@ -166,8 +231,8 @@ public class AccessMoviesTest extends TestCase
         assertNotNull(movies);
         assertFalse(movies.isEmpty());
 
-        Movie testMovie1 = new Movie("testMovie", 1999, 84, "Family", endDate, "testing");
-        Movie testMovie2 = new Movie("testMovie2", 1998, 84, "Family", endDate, "testing");
+        Movie testMovie1 = new Movie(55, "testMovie", 1999, 84, "Family", endDate, "testing");
+        Movie testMovie2 = new Movie(56, "testMovie2", 1998, 84, "Family", endDate, "testing");
 
         assertNull(list.insertMovie(testMovie1));
         resetMovies(movies);
@@ -232,7 +297,7 @@ public class AccessMoviesTest extends TestCase
         Calendar yearInFarFuture = Calendar.getInstance();
         yearInFarFuture.add(Calendar.YEAR, 20);
 
-        System.out.println("\nStarting Validate test in AccessMovies");
+        System.out.println("\nTesting Validate Features in AccessMovies");
 
         // Valid movie
         assertNull(AccessMovies.validateMovie("testMovie", 1999, 5, "Family", dayInFuture, "testing"));
@@ -282,7 +347,7 @@ public class AccessMoviesTest extends TestCase
         Movie testMovie1 = new Movie("testMovie", 1999, 84, "Family", endDate, "testing");
         Movie testMovie2 = new Movie("testMovie2", 1998, 84, "Family", endDate, "testing");
 
-        System.out.println("\nStarting Test for Searching");
+        System.out.println("\nTesting Search Feature in AccessMovies");
 
         list.insertMovie(testMovie1);
         list.insertMovie(testMovie2);

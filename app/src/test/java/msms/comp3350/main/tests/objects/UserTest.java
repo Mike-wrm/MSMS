@@ -22,7 +22,7 @@ public class UserTest extends TestCase
             Calendar newDate = Calendar.getInstance();
             newDate.set(2022,12,20);
 
-            System.out.println("\nStarting a test for Users");
+            System.out.println("\nTesting the Movie object in Movie");
 
             user = new User(1,"JohnDoe", "password", 21, 'm', endDate);
             user2 = new User(2, "JaneDoe", "pass", 22, 'f', endDate);

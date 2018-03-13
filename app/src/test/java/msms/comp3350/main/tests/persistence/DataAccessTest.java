@@ -246,59 +246,6 @@ public class DataAccessTest extends TestCase
         movie = movies.get(8);
         assertEquals(888, movie.getmID());
         assertEquals("Transformers: The Last Knight", movie.getTitle());
-
-        //Lets see if I add something like a sequel
-        testData.insertMovie(new Movie(500, "Shrek 2",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
-
-        movies.clear();
-        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
-
-        movie = movies.get(3);
-        assertEquals(444, movie.getmID());
-        assertEquals("Shrek", movie.getTitle());
-
-        movie = movies.get(4);
-        assertEquals(500, movie.getmID());
-        assertEquals("Shrek 2", movie.getTitle());
-
-        // Lets see if I add something that is spelt almost the same
-        testData.insertMovie(new Movie(535, "Shrec",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
-
-        movies.clear();
-        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
-
-        movie = movies.get(3);
-        assertEquals(535, movie.getmID());
-        assertEquals("Shrec", movie.getTitle());
-
-        movie = movies.get(4);
-        assertEquals(444, movie.getmID());
-        assertEquals("Shrek", movie.getTitle());
-
-        // I add a movie that has no name
-        // Lets see if I add something that is spelt almost the same
-        testData.insertMovie(new Movie(25, "",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
-
-        movies.clear();
-        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
-
-        movie = movies.get(0);
-        assertEquals(25, movie.getmID());
-        assertEquals("", movie.getTitle());
-
-        // What if I add two movies with the same name
-        testData.insertMovie(new Movie(26, "Shrek",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
-
-        movies.clear();
-        testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
-
-        movie = movies.get(5);
-        assertEquals(444, movie.getmID());
-        assertEquals("Shrek", movie.getTitle());
-
-        movie = movies.get(6);
-        assertEquals(26, movie.getmID());
-        assertEquals("Shrek", movie.getTitle());
     }
 
     public void testDateAccessUsers()
@@ -437,44 +384,6 @@ public class DataAccessTest extends TestCase
         user = users.get(5);
         assertEquals(666, user.getuID());
         assertEquals("Wonder_Woman", user.getName());
-
-        // Lets try adding someone who is a JR
-        testData.insertUser(new User(11, "Miggles JR", "anime4life", 21, 'M', Calendar.getInstance()));
-
-        users.clear();
-        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
-
-        user = users.get(2);
-        assertEquals(111, user.getuID());
-        assertEquals("Miggles", user.getName());
-
-        user = users.get(3);
-        assertEquals(11, user.getuID());
-        assertEquals("Miggles JR", user.getName());
-
-        // Lets try adding a similar name
-        testData.insertUser(new User(12, "Miggled", "anime4life", 21, 'M', Calendar.getInstance()));
-
-        users.clear();
-        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
-
-        user = users.get(2);
-        assertEquals(12, user.getuID());
-        assertEquals("Miggled", user.getName());
-
-        user = users.get(3);
-        assertEquals(111, user.getuID());
-        assertEquals("Miggles", user.getName());
-
-        // Lets try adding a user with no name
-        testData.insertUser(new User(13, "", "anime4life", 21, 'M', Calendar.getInstance()));
-
-        users.clear();
-        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
-
-        user = users.get(0);
-        assertEquals(13, user.getuID());
-        assertEquals("", user.getName());
     }
 
     public void testMovieAccessChange()

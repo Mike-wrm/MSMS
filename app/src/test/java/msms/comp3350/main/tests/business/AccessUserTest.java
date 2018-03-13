@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import msms.comp3350.application.Services;
+import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.User;
 import msms.comp3350.business.AccessUsers;
 import msms.comp3350.persistence.DataAccessor;
@@ -117,6 +118,53 @@ public class AccessUserTest extends TestCase
         assertEquals(2020, user.getEndYear());
     }
 
+    public void testAccessUserSort()
+    {
+        ArrayList<User> users;
+        User user;
+
+        System.out.println("\nTesting Accessing the Sort function in AccessUser");
+
+        users = new ArrayList<User>();
+
+        // Lets try adding someone who is a JR
+        testData.insertUser(new User(11, "Miggles JR", "anime4life", 21, 'M', Calendar.getInstance()));
+
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(2);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        user = users.get(3);
+        assertEquals(11, user.getuID());
+        assertEquals("Miggles JR", user.getName());
+
+        // Lets try adding a similar name
+        testData.insertUser(new User(12, "Miggled", "anime4life", 21, 'M', Calendar.getInstance()));
+
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(2);
+        assertEquals(12, user.getuID());
+        assertEquals("Miggled", user.getName());
+
+        user = users.get(3);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        // Lets try adding a user with no name
+        testData.insertUser(new User(13, "", "anime4life", 21, 'M', Calendar.getInstance()));
+
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(0);
+        assertEquals(13, user.getuID());
+        assertEquals("", user.getName());
+    }
 
     public void testAccessUserChange()
     {
@@ -130,7 +178,7 @@ public class AccessUserTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(2020,11,19);
 
-        System.out.println("\nStarting testAccessUser");
+        System.out.println("\nTesting Accessing Data after change in AccessUser");
 
         list.getUsers(users);
 
@@ -181,7 +229,8 @@ public class AccessUserTest extends TestCase
 
     }
 
-    public void testValidate(){
+    public void testValidate()
+    {
         // Testing: String validateUser (int uID, String userName, String password, int age, char gender, Calendar endDate)
         Calendar userDate1 = Calendar.getInstance();
         userDate1.set(2018,3,30);
@@ -195,7 +244,7 @@ public class AccessUserTest extends TestCase
         Calendar dayInPast = Calendar.getInstance();
         dayInPast.add(Calendar.DAY_OF_MONTH, -1);
 
-        System.out.println("\nStarting Validate test in AccessMovies");
+        System.out.println("\nTesting Validate Features in AccessUsers");
 
         // Valid user
         assertNull(AccessUsers.validateUser(111, "Miggles", "anime4life", 21, 'M', userDate1));
