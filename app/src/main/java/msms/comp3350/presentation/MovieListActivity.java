@@ -283,6 +283,7 @@ public class MovieListActivity extends AppCompatActivity
         switch (movieOrder)
         {
             case UNSORTED:
+                movieAccessor.cancelSort();
                 status = movieAccessor.getMovies(movieList); break;
             case ASCENDING:
                 status = movieAccessor.getSortedMovies(movieList, SortEnums.MovieSortField.TITLE, true); break;
