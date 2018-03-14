@@ -23,7 +23,7 @@ public class TempData implements DataAccessor
         this.dbName = dbName;
     }
 
-    public TempData()
+    public TempData()   //used for testing
     {
         this(MainActivity.dbName);
     }

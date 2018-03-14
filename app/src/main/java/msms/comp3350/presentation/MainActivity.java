@@ -18,7 +18,10 @@ import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
 {
-    public static final String dbName = "temp";//must be DB when wanting to use database because file is DB.script
+    //At this stage, to use this either use "temp" for stub
+    //or use "DB" to use database
+    //other strings will not work for dbName
+    public static final String dbName = "temp";
     private static String dbPathName = "database/DB";
 
     @Override

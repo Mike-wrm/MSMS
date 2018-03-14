@@ -16,7 +16,6 @@ import msms.comp3350.main.R;
 
 public class BarChartActivity extends Activity
 {
-
     private XYPlot plot;
 
     @Override

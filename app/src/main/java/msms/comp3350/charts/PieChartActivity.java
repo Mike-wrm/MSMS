@@ -29,9 +29,7 @@ public class PieChartActivity extends Activity
 
         // create view
         pie = findViewById(R.id.pie);
-//        Segment segment = new Segment("my segment", 10);
-//        SegmentFormatter formatter = new SegmentFormatter(Color.RED);
-//        pie.addSegment(segment, formatter);
+
 
         // extract passed data
         Bundle args = getIntent().getExtras();

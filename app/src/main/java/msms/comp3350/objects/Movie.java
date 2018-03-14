@@ -1,7 +1,6 @@
 package msms.comp3350.objects;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Movie implements Serializable

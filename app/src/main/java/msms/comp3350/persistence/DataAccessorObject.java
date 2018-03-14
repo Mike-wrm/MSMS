@@ -5,15 +5,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLWarning;
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.business.SortEnums;
-import msms.comp3350.presentation.MainActivity;
 
 public class DataAccessorObject implements DataAccessor
 {
