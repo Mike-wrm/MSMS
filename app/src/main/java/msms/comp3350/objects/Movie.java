@@ -17,18 +17,6 @@ public class Movie implements Serializable
 	private int endYear;
 	private String description;
 
-	public Movie (String title, int releaseYear, int userScore, String category, Calendar endDate, String description)
-	{
-		mID = currID++;
-		this.title = title;
-		this.releaseYear = releaseYear;
-		this.userScore = userScore;
-		this.category = category;
-		this.endDate = endDate;
-        processDate();
-		this.description = description;
-	}
-
     public Movie (int mID, String title, int releaseYear, int userScore, String category, Calendar endDate, String description)
     {
         this.mID = mID;

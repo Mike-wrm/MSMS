@@ -343,8 +343,8 @@ public class AccessMoviesTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(5,2,20);
 
-        Movie testMovie1 = new Movie("testMovie", 1999, 84, "Family", endDate, "testing");
-        Movie testMovie2 = new Movie("testMovie2", 1998, 84, "Family", endDate, "testing");
+        Movie testMovie1 = new Movie(1, "testMovie", 1999, 84, "Family", endDate, "testing");
+        Movie testMovie2 = new Movie(2, "testMovie2", 1998, 84, "Family", endDate, "testing");
 
         System.out.println("\nTesting Search Feature in AccessMovies");
 

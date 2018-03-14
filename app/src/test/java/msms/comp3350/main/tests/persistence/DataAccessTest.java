@@ -334,7 +334,7 @@ public class DataAccessTest extends TestCase
         Calendar date2 = Calendar.getInstance();
         date2.set(2022,10, 8);
 
-        movie = new Movie("Test Movie", 2018, 8, "Comedy", date, "test.");
+        movie = new Movie(778, "Test Movie", 2018, 8, "Comedy", date, "test.");
         assertEquals("'Test Movie' cannot be found.", testData.deleteMovie(movie)); // delete something that isnt there.
 
         assertNull(testData.insertMovie(movie)); // test basic add

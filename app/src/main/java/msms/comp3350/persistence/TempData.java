@@ -62,40 +62,32 @@ public class TempData implements DataAccessor
         users = new ArrayList<User>();
 
 
-        movie = new Movie("South Park: Bigger, Longer & Uncut", 1999, 7, "Comedy", date1, "Ipsum Lorem...");
-        movie.setmID(111);
+        movie = new Movie(111, "South Park: Bigger, Longer & Uncut", 1999, 7, "Comedy", date1, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("Eddie Murphy: Raw", 1987, 5, "Comedy", date2, "Ipsum Lorem...");
-        movie.setmID(222);
+        movie = new Movie(222,"Eddie Murphy: Raw", 1987, 5, "Comedy", date2, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("Toy Story", 1995, 10, "Family", date3, "Ipsum Lorem...");
-        movie.setmID(333);
+        movie = new Movie(333, "Toy Story", 1995, 10, "Family", date3, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("Shrek", 2001, 8, "Family", date4, "Ipsum Lorem...");
-        movie.setmID(444);
+        movie = new Movie(444, "Shrek", 2001, 8, "Family", date4, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("Friday the 13th", 2009, 3, "Horror", date5, "Ipsum Lorem...");
-        movie.setmID(555);
+        movie = new Movie(555, "Friday the 13th", 2009, 3, "Horror", date5, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("The Ring", 2002, 6, "Horror", date6, "Ipsum Lorem...");
+        movie = new Movie(666,"The Ring", 2002, 6, "Horror", date6, "Ipsum Lorem...");
         movie.setmID(666);
         movies.add(movie);
 
-        movie = new Movie("Mission Impossible: Rogue Nation", 2015, 8, "Action", date7, "Ipsum Lorem...");
-        movie.setmID(777);
+        movie = new Movie(777,"Mission Impossible: Rogue Nation", 2015, 8, "Action", date7, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("Transformers: The Last Knight", 2017, 2, "Action", date8, "Ipsum Lorem...");
-        movie.setmID(888);
+        movie = new Movie(888, "Transformers: The Last Knight", 2017, 2, "Action", date8, "Ipsum Lorem...");
         movies.add(movie);
 
-        movie = new Movie("Terminator 2: Judgement Day", 1991, 8, "Action", date9, "Ipsum Lorem...");
-        movie.setmID(999);
+        movie = new Movie(999, "Terminator 2: Judgement Day", 1991, 8, "Action", date9, "Ipsum Lorem...");
         movies.add(movie);
 
         user = new User(111, "Miggles", "anime4life", 21, 'M', userDate1);

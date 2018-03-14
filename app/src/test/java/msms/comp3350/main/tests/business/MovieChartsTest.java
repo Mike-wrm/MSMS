@@ -223,7 +223,7 @@ public class MovieChartsTest extends TestCase{
 
         // Lets add some movies!
         // Lets add an action movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Action", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(1,"TestMovie", 2002, 7, "Action", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -239,7 +239,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Adding a family movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Family", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(2, "TestMovie", 2002, 7, "Family", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -255,7 +255,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a comedy movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Comedy", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(3, "TestMovie", 2002, 7, "Comedy", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -271,7 +271,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a drama movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Drama", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(4,"TestMovie", 2002, 7, "Drama", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -287,7 +287,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a fantasy movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Fantasy", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(5, "TestMovie", 2002, 7, "Fantasy", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -303,7 +303,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a horror movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Horror", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(6,"TestMovie", 2002, 7, "Horror", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -319,7 +319,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a Sci-Fi movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Sci-Fi", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(7, "TestMovie", 2002, 7, "Sci-Fi", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -335,7 +335,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a Recent movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Recent", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(8, "TestMovie", 2002, 7, "Recent", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -351,7 +351,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][9]);
 
         // Add a Trending movie
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "Trending", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(9, "TestMovie", 2002, 7, "Trending", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -367,7 +367,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][9]);
 
         //Add a blank string
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(10,"TestMovie", 2002, 7, "", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -383,7 +383,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][9]);
 
         //Add a null string
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, null, Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(11,"TestMovie", 2002, 7, null, Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
@@ -399,7 +399,7 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][9]);
 
         //Add a string that isnt a category
-        testData.insertMovie(new Movie("TestMovie", 2002, 7, "test", Calendar.getInstance(), "Ipsum Lorem..." ));
+        testData.insertMovie(new Movie(12, "TestMovie", 2002, 7, "test", Calendar.getInstance(), "Ipsum Lorem..." ));
 
         data = MovieCharts.getMovieCategories();
 
