@@ -18,8 +18,6 @@ import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
 {
-    public static final String dbName = "temp";//must be DB when wanting to use database because file is DB.script
-    private static String dbPathName = "database/DB";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         copyDatabaseToDevice();
         setContentView(R.layout.activity_main);
-        Services.createDataAccess(dbName);
+        Services.createDataAccess();
     }
 
     @Override
@@ -47,19 +45,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public static String getDBPathName()
-    {
-        if (dbPathName == null)
-            return dbName;
-        else
-            return dbPathName;
-    }
 
-    private static void setDBPathName(String pathName)
-    {
-        System.out.println("Setting DB path to: " + pathName);
-        dbPathName = pathName;
-    }
 
     private void copyDatabaseToDevice()
     {
@@ -80,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
-            setDBPathName(dataDirectory.toString() + "/" + dbName);
+            Services.setDBPathName(dataDirectory.toString());
 
         }
         catch (IOException ioe)
