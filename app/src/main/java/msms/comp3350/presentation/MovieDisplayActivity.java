@@ -2,52 +2,59 @@ package msms.comp3350.presentation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
+import msms.comp3350.business.AccessMovies;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
-public class MovieDisplayActivity extends Activity implements AdapterView.OnItemSelectedListener
+public class MovieDisplayActivity extends Activity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener
 {
     private Movie inputMovie;
 
+    // Movie data:
     private String name = "";
-    private String selectedDay = "";
-    private String selectedMonth = "";
-    private String expYear = "";
-    private String[] selectedCategories = {"", "", ""};
+    private int expYear = 0;
+    private int expMonth = 0;
+    private int expDay = 0;
+    private String selectedCategory = "";
     private String releaseYear = "";
     private String selectedScore = "";
+    private String movieID = "";
     private String description = "";
 
-    private Spinner daySpinner = null;
-    private Spinner monthSpinner = null;
+    // UI Widget Objects:
     private Spinner categorySpinner = null;
-    private Spinner categorySpinner2 = null;
-    private Spinner categorySpinner3 = null;
     private Spinner scoreSpinner = null;
-
     private EditText movieNameText = null;
-    private EditText expYearText = null;
+    private TextView expDateText = null;
+    private TextView movieIDText = null;
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
+    private Button pickDateButton;
+    private DatePickerDialog datePickerDialog;
 
-    // For populating the day spinner based on the month spinner's selection:
-    private String[] monthsOf30Days = {"4", "6", "9", "11"};
-    private String[] myMonthsDays = null;
-    private ArrayAdapter<CharSequence> dayAdapter = null;
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+    {
+        expYear = year;
+        expMonth = monthOfYear;
+        expDay = dayOfMonth;
+        displayData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,104 +62,103 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_display);
 
+        // Disables keyboard auto-focusing when activity is started
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         // Get the passed Movie
         Bundle extras = getIntent().getExtras();
+        inputMovie = null;
         if (extras != null)
         {
             //The key argument here must match that used in the other activity
             inputMovie = (Movie) extras.getSerializable("SelectedMovie");
+            // Disable the "add" button
+            Button addButton = (Button) findViewById(R.id.add_movie_button);
+            addButton.setEnabled(false);
         }
         else
         {
-            //Error getting extra value
-            finish();
+            //No extra value: we are in "Add Movie" mode
+            // Disable the "update" and "delete" buttons
+            Button updateButton = (Button) findViewById(R.id.update_button);
+            updateButton.setEnabled(false);
+            Button deleteButton = (Button) findViewById(R.id.delete_button);
+            deleteButton.setEnabled(false);
         }
 
         // Set the "back" button to go back to the list of movies
         Button backButton = (Button) findViewById(R.id.cancel_button);
-        backButton.setOnClickListener(new View.OnClickListener(){
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view){
+            public void onClick(View view)
+            {
                 finish();
             }
         });
 
-        // Setup month spinner:
-        monthSpinner = (Spinner) findViewById(R.id.month_spinner);
-        ArrayAdapter<CharSequence> monthAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getMonths());
-        monthSpinner.setAdapter(monthAdapter);
-
-        daySpinner = (Spinner) findViewById(R.id.day_spinner);
-
         // Setup category spinners:
         categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-        categorySpinner2 = (Spinner) findViewById(R.id.category_spinner2);
-        categorySpinner3 = (Spinner) findViewById(R.id.category_spinner3);
         ArrayAdapter<CharSequence> categoryAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getCategories());
+                android.R.layout.simple_spinner_dropdown_item, AccessMovies.CATEGORIES);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
-        categorySpinner2.setAdapter(categoryAdapter);
-        categorySpinner3.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
-        categorySpinner2.setOnItemSelectedListener(this);
-        categorySpinner3.setOnItemSelectedListener(this);
 
         // Setup score spinner:
         scoreSpinner = (Spinner) findViewById(R.id.score_spinner);
         ArrayAdapter<CharSequence> scoreAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, SpinnerArrays.getScores());
+                android.R.layout.simple_spinner_dropdown_item, AccessMovies.SCORES);
         scoreSpinner.setAdapter(scoreAdapter);
         scoreSpinner.setOnItemSelectedListener(this);
 
         // Setup textEdit boxes:
         movieNameText = (EditText) findViewById(R.id.movie_name_text);
-        expYearText = (EditText) findViewById(R.id.exp_year_text);
+        expDateText = (TextView) findViewById(R.id.exp_year_text);
+        movieIDText = (EditText) findViewById(R.id.movie_id_text);
         releaseYearText = (EditText) findViewById(R.id.release_year_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
+
+        // Setup expiry date textbox and button
+        Calendar expDate;
+        if (inputMovie != null)
+        {
+            expDate = inputMovie.getEndDate();
+
+            // Don't allow mID to be changed:
+            movieIDText.setKeyListener(null);
+            movieIDText.setEnabled(false);
+        }
+        else
+        {
+            expDate = Calendar.getInstance();
+        }
+        expYear = expDate.get(Calendar.YEAR);
+        expMonth = expDate.get(Calendar.MONTH);
+        expDay = expDate.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
+        // add a click listener to the select a date button
+        pickDateButton = (Button) findViewById(R.id.pickDate);
+        pickDateButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                datePickerDialog.show();
+            }
+        });
 
         displayData();
     }
 
-    // Handles a selection from the genre spinner
+    // Handles a selection from a spinner
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
     {
         System.out.println("Run onItemSelected.");
         switch(parent.getId())// Which spinner was changed?
         {
-            case R.id.month_spinner:
-                System.out.println("Change the month spinner.");
-                selectedMonth = (String) monthSpinner.getItemAtPosition(pos);
-
-                // Populate the day spinner based on the month selected:
-                if (Arrays.asList(monthsOf30Days).contains(selectedMonth))
-                    myMonthsDays = Arrays.copyOfRange(SpinnerArrays.getDays(), 0, 30);
-                else if (selectedMonth.equals("2"))
-                    myMonthsDays = Arrays.copyOfRange(SpinnerArrays.getDays(), 0, 28);
-                else
-                    myMonthsDays = SpinnerArrays.getDays();
-
-                dayAdapter = new ArrayAdapter<CharSequence>(this,
-                        android.R.layout.simple_spinner_dropdown_item, myMonthsDays);
-                daySpinner.setAdapter(dayAdapter);
-                daySpinner.setOnItemSelectedListener(this);
-                break;
-
-            case R.id.day_spinner:
-                selectedDay = (String) daySpinner.getItemAtPosition(pos);
-                break;
-
             case R.id.category_spinner:
-                selectedCategories[0] = (String) categorySpinner.getItemAtPosition(pos);
-                break;
-
-            case R.id.category_spinner2:
-                selectedCategories[1] = (String) categorySpinner2.getItemAtPosition(pos);
-                break;
-
-            case R.id.category_spinner3:
-                selectedCategories[2] = (String) categorySpinner3.getItemAtPosition(pos);
+                selectedCategory = (String) categorySpinner.getItemAtPosition(pos);
                 break;
 
             case R.id.score_spinner:
@@ -167,57 +173,36 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     {
         if (inputMovie != null)
         {
+            // If we have an input movie, set all the entries to the input Movie's values
             movieNameText.setText(inputMovie.getTitle());
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
             scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
-            ArrayList<String> categories = inputMovie.getCategory();
+            String category = inputMovie.getCategory();
+            categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(category));
 
-            for (int i = 0; i < categories.size(); i++)
-            {
-                switch(i)
-                {
-                    case 0:
-                        categorySpinner.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
-                        break;
-                    case 1:
-                        categorySpinner2.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
-                        break;
-                    case 2:
-                        categorySpinner3.setSelection(java.util.Arrays.asList(SpinnerArrays.getCategories()).indexOf(categories.get(i)));
-                        break;
-                }
-            }
+            datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
+            // set expDate in EditText
+            expDateText.setText(
+                    new StringBuilder()
+                            // Month is 0 based so add 1
+                            .append(expMonth + 1).append("/")
+                            .append(expDay).append("/")
+                            .append(expYear).append(" "));
 
-            Calendar expDate = inputMovie.getEndDate();
-
-            // We must ensure our daySpinner adapter is set first before we set what day of the month it is
-            selectedMonth = (String) monthSpinner.getItemAtPosition(expDate.get(Calendar.MONTH) - 1);
-            // Populate the day spinner based on the month selected:
-            if (Arrays.asList(monthsOf30Days).contains(selectedMonth))
-                myMonthsDays = Arrays.copyOfRange(SpinnerArrays.getDays(), 0, 30);
-            else if (selectedMonth.equals("2"))
-                myMonthsDays = Arrays.copyOfRange(SpinnerArrays.getDays(), 0, 28);
-            else
-                myMonthsDays = SpinnerArrays.getDays();
-            dayAdapter = new ArrayAdapter<CharSequence>(this,
-                    android.R.layout.simple_spinner_dropdown_item, myMonthsDays);
-            daySpinner.setAdapter(dayAdapter);
-
-            monthSpinner.setSelection(expDate.get(Calendar.MONTH) - 1, false);
-
-            selectedDay = (String) daySpinner.getItemAtPosition(expDate.get(Calendar.DAY_OF_MONTH) - 1);
-            daySpinner.setSelection(expDate.get(Calendar.DAY_OF_MONTH) - 1, false);
-
-            daySpinner.setOnItemSelectedListener(this);
-            monthSpinner.setOnItemSelectedListener(this);
-
-            expYearText.setText(Integer.toString(expDate.get(Calendar.YEAR)));
-
+            movieIDText.setText("" + inputMovie.getmID());
             descriptionText.setText(inputMovie.getDescription());
         }
         else
         {
-            Messages.fatalError(this, "Movie was not found.");
+            // Only do this if we are in "Add Movie"
+            datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
+            // set expDate in EditText
+            expDateText.setText(
+                    new StringBuilder()
+                            // Month is 0 based so add 1
+                            .append(expMonth + 1).append("/")
+                            .append(expDay).append("/")
+                            .append(expYear).append(" "));
         }
     }
 
@@ -228,18 +213,22 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             AlertDialog.Builder builder = new AlertDialog.Builder(MovieDisplayActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setMessage("Are you sure you want to delete this Movie ?\n" + inputMovie.getTitle());
-            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
                     dialog.dismiss();
                     //Starting the previous Intent
                     Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
                     previousScreen.putExtra("DeleteMovieKey", inputMovie);
-                    setResult(1000, previousScreen);
+                    setResult(MovieListActivity.DELETE_MOVIE_CODE, previousScreen);
                     finish();
                 }
             });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
                     dialog.dismiss();
                 }
             });
@@ -256,20 +245,22 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     {
         // Grab text input:
         name = movieNameText.getText().toString();
-        expYear = expYearText.getText().toString();
         releaseYear = releaseYearText.getText().toString();
+        movieID = movieIDText.getText().toString();
         description = descriptionText.getText().toString();
 
-        // error checking
-        if(null == name)
+        // Error checking Integer inputs:
+        try
         {
-            Messages.warning(this, "You need to name your movie.");
+            Integer.parseInt(movieID);
+        }
+        catch (NumberFormatException e) {
+            Messages.warning(this, "Movie ID must be a number.");
             return;
         }
 
         try
         {
-            Integer.parseInt(expYear);
             Integer.parseInt(releaseYear);
         }
         catch (NumberFormatException e) {
@@ -277,59 +268,73 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             return;
         }
 
-        int checkExpYear = Integer.parseInt(expYear);
-
-        if (checkExpYear < Calendar.getInstance().get(Calendar.YEAR))
+        try
         {
-            Messages.warning(this, "Invalid year entry. Can't enter movie with expired rights");
-            return;
+            Integer.parseInt(selectedScore);
         }
-        else if (checkExpYear > Calendar.getInstance().get(Calendar.YEAR) + 5)
+        catch (NumberFormatException e)
         {
-            Messages.warning(this, "Invalid year entry. Can't acquire movie rights beyond 5 years.");
+            Messages.warning(this, "Score must be a number.");
             return;
         }
 
-        int checkReleaseYear = Integer.parseInt(releaseYear);
-
-        if (checkReleaseYear < 1900)
+        String category = "";
+        if (!selectedCategory.equals(""))
         {
-            Messages.warning(this, "Invalid year entry. Movies did not exist during this time.");
-            return;
+            category = selectedCategory;
         }
-        else if (checkReleaseYear > Calendar.getInstance().get(Calendar.YEAR))
-        {
-            Messages.warning(this, "Invalid year entry. Can't add movies from beyond current year.");
-            return;
-        }
-
-        // Convert selectedCategories into ArrayList:
-        ArrayList<String> categoriesAL = new ArrayList<String>();
-        for (int i=0; i<3; i++)
-            if (!selectedCategories[i].equals(""))
-                categoriesAL.add(selectedCategories[i]);
 
         Calendar expDate = Calendar.getInstance();
-        expDate.set(Integer.parseInt(expYear), Integer.parseInt(selectedMonth), Integer.parseInt(selectedDay));
+        expDate.set(expYear, expMonth, expDay);
 
-        // Movie is updated here:
-        inputMovie.setTitle(name);
-        inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
-        inputMovie.setUserScore(Integer.parseInt(selectedScore));
-        inputMovie.setCategory(categoriesAL);
-        inputMovie.setEndDate(expDate);
-        inputMovie.setDescription(description);
+        String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear),
+                Integer.parseInt(selectedScore), category, expDate, description);
 
-        //Starting the previous Intent
-        Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
-        previousScreen.putExtra("UpdateMovieKey", inputMovie);
-        setResult(1000, previousScreen);
-        finish();
+        if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)// Add movie
+        {
+            if (!AccessMovies.mIDUnique(Integer.parseInt(movieID)))
+            {
+                Messages.warning(this, "Invalid movie ID entry. This ID already exists.");
+                return;
+            }
+
+            // New movie is created and added here:
+            Movie newMovie = new Movie(Integer.parseInt(movieID), name, Integer.parseInt(releaseYear),
+                    Integer.parseInt(selectedScore), category, expDate, description);
+
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("AddMovieKey", newMovie);
+            setResult(MovieListActivity.ADD_MOVIE_CODE, previousScreen);
+            finish();
+        }
+        else if (null == errorString && v.getId()==R.id.update_button)// Update movie
+        {
+            inputMovie.setTitle(name);
+            inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
+            inputMovie.setUserScore(Integer.parseInt(selectedScore));
+            inputMovie.setCategory(category);
+            inputMovie.setEndDate(expDate);
+            inputMovie.setDescription(description);
+
+            //Starting the previous Intent
+            Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
+            previousScreen.putExtra("UpdateMovieKey", inputMovie);
+            setResult(MovieListActivity.UPDATE_MOVIE_CODE, previousScreen);
+            finish();
+        }
+        else if(null != errorString)
+        {
+            Messages.warning(this, errorString);
+        }
+        else
+        {
+            Messages.fatalError(this, "Unknown button pressed.");
+        }
     }
 
     public void buttonCancelOnClick(View v)
     {
         finish();
     }
-
 }

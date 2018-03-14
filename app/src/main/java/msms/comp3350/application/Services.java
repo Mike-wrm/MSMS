@@ -1,24 +1,34 @@
 package msms.comp3350.application;
 
+import msms.comp3350.persistence.DataAccessor;
+import msms.comp3350.persistence.DataAccessorObject;
 import msms.comp3350.persistence.TempData;
 import msms.comp3350.presentation.MainActivity;
 
 
 public class Services
 {
-    public static TempData dataAccessService = null;
+    public static DataAccessor dataAccessService = null;
 
-    public static TempData createDataAccess(String dbName)
+    public static DataAccessor createDataAccess(String dbName)
     {
         if(null == dataAccessService)
         {
-            dataAccessService = new TempData(dbName);
-            dataAccessService.open(MainActivity.dbName);
+            if (dbName.equals("temp"))
+            {
+                dataAccessService = new TempData(dbName);
+                dataAccessService.open(MainActivity.dbName);
+            }
+            else
+            {
+                dataAccessService = new DataAccessorObject(dbName);
+                dataAccessService.open(MainActivity.getDBPathName());
+            }
         }
         return dataAccessService;
     }
 
-    public static TempData getDataAccess()
+    public static DataAccessor getDataAccess()
     {
         if(null == dataAccessService)
         {

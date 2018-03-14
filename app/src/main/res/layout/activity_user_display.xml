@@ -2,48 +2,205 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relLayout"
+    android:id="@+id/title_activity_user_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
-    tools:layout_editor_absoluteY="89dp">
+    tools:context="msms.comp3350.presentation.UserDisplayActivity"
+    tools:layout_editor_absoluteY="25dp">
 
 
     <TextView
-        android:id="@+id/user_info_text"
-        android:layout_width="0dp"
-        android:layout_height="222dp"
-        android:layout_marginEnd="24dp"
+        android:id="@+id/name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:text="@string/user_name"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBackToUserList" />
+        app:layout_constraintTop_toBottomOf="@+id/userid_textView" />
 
+    <EditText
+        android:id="@+id/name_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/name_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/name_textView" />
+
+    <EditText
+        android:id="@+id/password_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/password_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/password_textView" />
+
+    <EditText
+        android:id="@+id/age_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/age_textView"
+        app:layout_constraintEnd_toEndOf="@+id/subenddate_textView"
+        app:layout_constraintStart_toEndOf="@+id/age_textView" />
+
+    <TextView
+        android:id="@+id/password_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/user_password"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
+
+    <TextView
+        android:id="@+id/age_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/user_age"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_textView" />
+
+    <TextView
+        android:id="@+id/gender_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/user_gender"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age_textView" />
+
+    <TextView
+        android:id="@+id/subenddate_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/user_subend"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gender_textView" />
 
     <Button
-        android:id="@+id/buttonBackToUserList"
-        android:layout_width="120dp"
+        android:id="@+id/delete_button"
+        android:layout_width="164dp"
         android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="12dp"
+        android:onClick="buttonUserDeleteOnClick"
+        android:text="@string/delete"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/update_button" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="164dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="24dp"
+        android:text="@android:string/cancel"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/update_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="176dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:onClick="buttonUserUpdateOnClick"
+        android:text="@string/update"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button"
+        app:layout_constraintEnd_toStartOf="@+id/delete_button"
+        app:layout_constraintStart_toEndOf="@+id/cancel_button" />
+
+    <TextView
+        android:id="@+id/userid_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/back"
+        android:text="@string/user_userid"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/deleteUserButton"
+    <TextView
+        android:id="@+id/userid_text"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:singleLine="false"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/userid_textView"
+        app:layout_constraintEnd_toEndOf="@+id/pickDate"
+        app:layout_constraintStart_toEndOf="@+id/userid_textView" />
+
+    <Spinner
+        android:id="@+id/gender_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/gender_textView"
+        app:layout_constraintTop_toBottomOf="@+id/age_text" />
+
+    <TextView
+        android:id="@+id/subend_year_text"
+        android:layout_width="107dp"
+        android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:onClick="buttonUserDeleteOnClick"
-        android:text="@string/delete"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/movie_release_hint"
+        android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_info_text" />
+        app:layout_constraintTop_toBottomOf="@+id/subenddate_textView" />
+
+    <Button
+        android:id="@+id/pickDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/change_date"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/subend_year_text"
+        app:layout_constraintStart_toEndOf="@+id/subend_year_text" />
+
 </android.support.constraint.ConstraintLayout>

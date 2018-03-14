@@ -11,11 +11,12 @@
     <string name="warning">Warning</string>
     <string name="add_movie">Add Movie</string>
     <string name="movie_name">Name:</string>
-    <string name="movie_category">Category 1:</string>
+    <string name="movie_category">Category:</string>
     <string name="ok">OK</string>
     <string name="back">Back</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="add">Add</string>
     <string name="movie_category2">Category 2:</string>
     <string name="movie_category3">Category 3:</string>
     <string name="movie_license">License Expiration Date (M/D/Y):</string>
@@ -24,4 +25,18 @@
     <string name="movie_description">Description:</string>
     <string name="movie_description_hint">What is the movie about?</string>
     <string name="movie_release_hint">YYYY</string>
+    <string name="movie_search_hint">Search Movies</string>
+    <string name="user_userid">User ID:</string>
+    <string name="user_name">Name:</string>
+    <string name="user_password">Password:</string>
+    <string name="user_age">Age:</string>
+    <string name="user_gender">Gender:</string>
+    <string name="user_subend">Subscription End Date:</string>
+    <string name="change_date">Change Date</string>
+    <string name="reports">reports</string>
+    <string name="movie_id">Movie ID:</string>
+    <string name="movie_id_hint">Unique integer</string>
+    <string name="sort_ascending">Ascending</string>
+    <string name="sort_descending">Descending</string>
+    <string name="sort_none">Unsorted</string>
 </resources>
