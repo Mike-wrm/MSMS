@@ -181,7 +181,6 @@ public class DataAccessorObject implements DataAccessor
         result = null;
         try
         {
-            //TODO Should check for empty values and not update them
             values = "title='" +currentMovie.getTitle()
                     +"', releaseYear=" +currentMovie.getReleaseYear()
                     +", userScore=" +currentMovie.getUserScore()
@@ -227,23 +226,6 @@ public class DataAccessorObject implements DataAccessor
     public String getUsersAll(ArrayList<User> currentUsers)
     {
         String strCommand = "Select * from Users";
-        return getUsersSQL(currentUsers, strCommand);
-    }
-
-    //generates basic select movies from DB
-    public String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending)
-    {
-        String order;
-        if (ascending)
-        {
-            order = " ASC";
-        }
-        else
-        {
-            order = " DESC";
-        }
-
-        String strCommand = "Select * from Users ORDER BY " + sortBy.toString() + order;
         return getUsersSQL(currentUsers, strCommand);
     }
 
@@ -332,7 +314,6 @@ public class DataAccessorObject implements DataAccessor
         result = null;
         try
         {
-            //TODO Should check for empty values and not update them
             values = "userName='" +currentUser.getName()
                     +"', password='" +currentUser.getPass()
                     +"', age=" +currentUser.getAge()

@@ -18,7 +18,6 @@ public interface DataAccessor
     String deleteMovie(Movie currentMovie);
 
     String getUsersAll(ArrayList<User> currentUsers);
-    String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending);
     String insertUser(User currentUser);
     String updateUser(User currentUser);
     String deleteUser(User currentUser);

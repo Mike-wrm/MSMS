@@ -10,52 +10,30 @@ import msms.comp3350.persistence.DataAccessor;
 public class AccessUsers
 {
     private DataAccessor dataAccess;
-    private static boolean currSorted = false;
-    private static SortEnums.UserSortField currField = null;
-    private static boolean currAscending = true;
+
 
     public static final String[] GENDERS =
-            {
+    {
                     "Male", "Female"
-            };
+    };
 
     public static final char[] GENDERS_CHAR =
-            {
+    {
                     'M', 'F'
-            };
+    };
 
     public AccessUsers()
     {
         dataAccess = Services.getDataAccess();
     }
 
-    public void cancelSort()
-    {
-        currSorted = false;
-        currField = null;
-        currAscending = true;
-    }
 
     public String getUsers(ArrayList<User> users)
     {
         users.clear();
-
-        if (currSorted)
-        {
-            return getSortedUsers(users, currField, currAscending);
-        }
         return dataAccess.getUsersAll(users);
     }
 
-    //TODO create something in UserDisplay/ListActivity to allow for toggle of sort
-    public String getSortedUsers(ArrayList<User> users, SortEnums.UserSortField sortBy, boolean ascending)
-    {
-        users.clear();
-        currSorted = true;
-        currField = sortBy;
-        currAscending = ascending;
-        return dataAccess.getUsersAllSorted(users, currField, currAscending);
-    }
 
     public String insertUser(User currentUser)
     {
