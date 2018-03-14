@@ -45,10 +45,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
     private Button pickDateButton;
-
-    static final int DATE_DIALOG_ID = 0;
-
     private DatePickerDialog datePickerDialog;
+
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
     {
         expYear = year;
@@ -149,7 +147,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         displayData();
     }
 
-    // Handles a selection from the genre spinner
+    // Handles a selection from a spinner
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
     {
         System.out.println("Run onItemSelected.");
@@ -176,7 +174,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
             scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
             String category = inputMovie.getCategory();
-
             categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(category));
 
             datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);

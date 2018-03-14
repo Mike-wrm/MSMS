@@ -38,6 +38,7 @@ public class MovieListActivity extends AppCompatActivity
     private AccessMovies movieAccessor;
     private int selectedMoviePosition = -1;
 
+    // Intent finish codes:
     public static final int MOVIE_LIST_REQ_CODE = 999;
     public static final int DELETE_MOVIE_CODE = 1000;
     public static final int UPDATE_MOVIE_CODE = 1001;
@@ -49,7 +50,7 @@ public class MovieListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
-        // Setup the app bar:
+        // Setup the toolbar:
         Toolbar movieListToolbar = (Toolbar) findViewById(R.id.movie_list_toolbar);
         setSupportActionBar(movieListToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);// Don't display activity title in toolbar
@@ -89,7 +90,6 @@ public class MovieListActivity extends AppCompatActivity
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-
                     if (position == selectedMoviePosition)
                     {
                         listView.setItemChecked(position, false);

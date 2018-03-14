@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import msms.comp3350.business.AccessUsers;
@@ -26,6 +25,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
 {
     private User inputUser;
 
+    // User data:
     private int expYear = 0;
     private int expMonth = 0;
     private int expDay = 0;
@@ -35,17 +35,16 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
     private String password = "";
     private String age = "";
 
+    // UI widget Objects:
     private Spinner genderSpinner = null;
-
     private TextView useridText = null;
     private EditText nameText = null;
     private EditText passwordText = null;
     private EditText ageText = null;
     private TextView expDateText = null;
-
     private Button pickDateButton = null;
-
     private DatePickerDialog datePickerDialog;
+
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
     {
         expYear = year;

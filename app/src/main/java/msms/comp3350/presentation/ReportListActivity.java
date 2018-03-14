@@ -16,7 +16,8 @@ import msms.comp3350.business.UserCharts;
 import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
-public class ReportListActivity extends Activity {
+public class ReportListActivity extends Activity
+{
     private int selectedPosition = -1;
     private ListView reportList = null;
 
@@ -26,7 +27,8 @@ public class ReportListActivity extends Activity {
     ));
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_list);
 

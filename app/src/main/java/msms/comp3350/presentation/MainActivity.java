@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import msms.comp3350.application.Services;
-import msms.comp3350.business.MovieCharts;
-import msms.comp3350.charts.*;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity

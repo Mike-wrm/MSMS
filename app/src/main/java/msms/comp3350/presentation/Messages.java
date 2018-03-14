@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 
 import msms.comp3350.main.R;
 
-
 public class Messages
 {
     public static void fatalError(final Activity owner, String message)
