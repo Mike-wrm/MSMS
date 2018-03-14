@@ -41,10 +41,13 @@ public class PieChartActivity extends Activity
             intData = new int[data.length];
             segments = new Segment[labels.length];
             formats = new SegmentFormatter[labels.length];
+            int movieCount = 0;
             for(int i = 0 ; i < data.length ; i++)
             {
                 intData[i] = Integer.parseInt(data[i]);
+                movieCount += intData[i];
             }
+            if(0 == movieCount) intData[0]++;
         }
         else
         {
