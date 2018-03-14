@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 public class Movie implements Serializable
 {
-	private static int currID = 1;
 	private int mID;
 	private String title;
 	private int releaseYear;
