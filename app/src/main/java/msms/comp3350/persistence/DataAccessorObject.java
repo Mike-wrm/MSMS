@@ -145,18 +145,27 @@ public class DataAccessorObject implements DataAccessor
     {
         String values;
         result = null;
+        String myTitle, myCat, myDescription;
+        myTitle = myCat = myDescription = "";
 
         try
         {
+            myTitle = currentMovie.getTitle();
+            myTitle = formatApostrophe(myTitle);
+            myCat = currentMovie.getCategory();
+            myCat = formatApostrophe(myCat);
+            myDescription = currentMovie.getDescription();
+            myDescription = formatApostrophe(myDescription);
+
             values = currentMovie.getmID()
-                    +", '" +currentMovie.getTitle()
+                    +", '" +myTitle
                     +"', " +currentMovie.getReleaseYear()
                     +", " +currentMovie.getUserScore()
-                    +", '" +currentMovie.getCategory()
+                    +", '" +myCat
                     +"', " +currentMovie.getEndMonth()
                     +", " +currentMovie.getEndDay()
                     +", " +currentMovie.getEndYear()
-                    +", '" +currentMovie.getDescription()
+                    +", '" +myDescription
                     +"'";
             command = "Insert into Movies " +" Values(" +values +")";
             updateCount = statement1.executeUpdate(command);
@@ -174,18 +183,27 @@ public class DataAccessorObject implements DataAccessor
     {
         String values;
         String where;
+        String myTitle, myCat, myDescription;
+        myTitle = myCat = myDescription = "";
 
         result = null;
         try
         {
-            values = "title='" +currentMovie.getTitle()
+            myTitle = currentMovie.getTitle();
+            myTitle = formatApostrophe(myTitle);
+            myCat = currentMovie.getCategory();
+            myCat = formatApostrophe(myCat);
+            myDescription = currentMovie.getDescription();
+            myDescription = formatApostrophe(myDescription);
+
+            values = "title='" +myTitle
                     +"', releaseYear=" +currentMovie.getReleaseYear()
                     +", userScore=" +currentMovie.getUserScore()
-                    +", category1='" +currentMovie.getCategory()
+                    +", category1='" +myCat
                     +"', endMonth=" +currentMovie.getEndMonth()
                     +", endDay=" +currentMovie.getEndDay()
                     +", endYear=" +currentMovie.getEndYear()
-                    +", description='" +currentMovie.getDescription()
+                    +", description='" +myDescription
                     +"'";
             where = "where mID=" +currentMovie.getmID();
             command = "Update Movies " +" Set " +values +" " +where;
@@ -279,12 +297,19 @@ public class DataAccessorObject implements DataAccessor
     {
         String values;
         result = null;
+        String myUserName, myPassword;
+        myUserName = myPassword = "";
 
         try
         {
+            myUserName = currentUser.getName();
+            myUserName = formatApostrophe(myUserName);
+            myPassword = currentUser.getPass();
+            myPassword = formatApostrophe(myPassword);
+
             values = currentUser.getuID()
-                    +", '" +currentUser.getName()
-                    +"', '" +currentUser.getPass()
+                    +", '" +myUserName
+                    +"', '" +myPassword
                     +"', " +currentUser.getAge()
                     +", '" +currentUser.getGender()
                     +"', " +currentUser.getEndMonth()
@@ -307,12 +332,19 @@ public class DataAccessorObject implements DataAccessor
     {
         String values;
         String where;
+        String myUserName, myPassword;
+        myUserName = myPassword = "";
 
         result = null;
         try
         {
-            values = "userName='" +currentUser.getName()
-                    +"', password='" +currentUser.getPass()
+            myUserName = currentUser.getName();
+            myUserName = formatApostrophe(myUserName);
+            myPassword = currentUser.getPass();
+            myPassword = formatApostrophe(myPassword);
+
+            values = "userName='" +myUserName
+                    +"', password='" +myPassword
                     +"', age=" +currentUser.getAge()
                     +", gender='" +currentUser.getGender()
                     +"', expMonth=" +currentUser.getEndMonth()
@@ -339,7 +371,6 @@ public class DataAccessorObject implements DataAccessor
         try
         {
             command = "Delete from Users where uID=" +currentUser.getuID() +"";
-            //System.out.println(cmdString);
             updateCount = statement2.executeUpdate(command);
             result = checkWarning(statement2, updateCount);
         }
@@ -349,6 +380,11 @@ public class DataAccessorObject implements DataAccessor
         }
 
         return result;
+    }
+
+    public String formatApostrophe (String string)
+    {
+        return string.replaceAll("'","''");
     }
 
     public String checkWarning(Statement st, int updateCount)
