@@ -83,4 +83,5 @@ public class MovieTest extends TestCase
 
         System.out.println("Finished a Movie Test");
     }
+
 }

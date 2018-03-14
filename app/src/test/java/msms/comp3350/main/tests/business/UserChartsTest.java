@@ -356,4 +356,5 @@ public class UserChartsTest extends TestCase{
         assertEquals("3", data[1][6]);
         assertEquals("0", data[1][7]);
     }
+
 }

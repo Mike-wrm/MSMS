@@ -11,7 +11,6 @@ import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.User;
 import msms.comp3350.persistence.DataAccessor;
 
-
 public class DataAccessTest extends TestCase
 {
     private DataAccessor testData;
@@ -484,7 +483,8 @@ public class DataAccessTest extends TestCase
         assertNull(testData.deleteMovie(movie));
     }
 
-    public void testUserAccessChange(){
+    public void testUserAccessChange()
+    {
         ArrayList<User> users;
         User user;
 

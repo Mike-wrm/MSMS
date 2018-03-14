@@ -10,7 +10,6 @@ import msms.comp3350.objects.User;
 import msms.comp3350.business.AccessUsers;
 import msms.comp3350.persistence.DataAccessor;
 
-
 public class AccessUserTest extends TestCase
 {
     private DataAccessor testData;
@@ -35,8 +34,7 @@ public class AccessUserTest extends TestCase
         testData.close();
     }
 
-    public void
-    resetUsers(ArrayList<User> users)
+    public void resetUsers(ArrayList<User> users)
     {
         users.clear();
         assertNull(list.getUsers(users));

@@ -10,7 +10,6 @@ import msms.comp3350.business.MovieCharts;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.persistence.DataAccessor;
 
-
 public class MovieChartsTest extends TestCase{
 
     DataAccessor testData;
@@ -416,6 +415,5 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][9]);
 
     }
-
 
 }

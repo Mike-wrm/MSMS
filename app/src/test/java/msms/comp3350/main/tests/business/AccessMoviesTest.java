@@ -33,7 +33,6 @@ public class AccessMoviesTest extends TestCase
         System.out.println("Finished an AccessMovies Test");
     }
 
-
     public void resetMovies(ArrayList<Movie> movies)
     {
         movies.clear();
@@ -374,4 +373,5 @@ public class AccessMoviesTest extends TestCase
         list.deleteMovie(testMovie1);
         list.deleteMovie(testMovie2);
     }
+
 }
