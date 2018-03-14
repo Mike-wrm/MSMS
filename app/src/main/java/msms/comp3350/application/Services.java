@@ -9,22 +9,20 @@ import msms.comp3350.presentation.MainActivity;
 public class Services
 {
     public static DataAccessor dataAccessService = null;
-    public static final String dbName = "temp";//change to DB for database
-    private static String dbPathName = "database/DB";
 
-    public static DataAccessor createDataAccess()
+    public static DataAccessor createDataAccess(String dbName)
     {
         if(null == dataAccessService)
         {
             if (dbName.equals("temp"))
             {
                 dataAccessService = new TempData(dbName);
-                dataAccessService.open(dbName);
+                dataAccessService.open(MainActivity.dbName);
             }
             else
             {
                 dataAccessService = new DataAccessorObject(dbName);
-                dataAccessService.open(getDBPathName());
+                dataAccessService.open(MainActivity.getDBPathName());
             }
         }
         return dataAccessService;
@@ -47,20 +45,4 @@ public class Services
             dataAccessService.close();
         }
     }
-
-    public static String getDBPathName()
-    {
-        if (dbPathName == null)
-            return dbName;
-        else
-            return dbPathName;
-    }
-
-    public static void setDBPathName(String pathName)
-    {
-        pathName += "/" + dbName;
-        System.out.println("Setting DB path to: " + pathName);
-        dbPathName = pathName;
-    }
-
 }
