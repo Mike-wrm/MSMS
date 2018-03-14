@@ -45,7 +45,6 @@ public class PieChartActivity extends Activity
             {
                 intData[i] = Integer.parseInt(data[i]);
             }
-            intData[1]++;
         }
         else
         {
