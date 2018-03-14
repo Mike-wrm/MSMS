@@ -16,15 +16,15 @@ public class AccessMovies
     private static boolean currAscending = true;
 
     public static final String[] SCORES =
-            {
-                    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-            };
+    {
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+    };
 
     public static final String[] CATEGORIES =
-            {
-                    "None", "Action", "Family", "Comedy", "Drama", "Fantasy", "Horror", "Sci-Fi",
-                    "Recent", "Trending"
-            };
+    {
+            "None", "Action", "Family", "Comedy", "Drama", "Fantasy", "Horror", "Sci-Fi",
+            "Recent", "Trending"
+    };
 
     public AccessMovies()
     {
