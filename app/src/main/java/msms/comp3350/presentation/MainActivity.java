@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
     //At this stage, to use this either use "temp" for stub
     //or use "DB" to use database
     //other strings will not work for dbName
-    public static final String dbName = "temp";
+    public static final String dbName = "DB";
     private static String dbPathName = "database/DB";
 
     @Override
