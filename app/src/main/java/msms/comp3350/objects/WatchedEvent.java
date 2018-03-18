@@ -1,6 +1,6 @@
 package msms.comp3350.objects;
 
-public class View
+public class WatchedEvent
 {
     private int uID;
     private int mID;
@@ -9,12 +9,12 @@ public class View
     private int rating;
 
 
-    public View (int uID, int mID, String title, String userName, int rating)
+    public WatchedEvent (int uID, int mID, String userName, String title, int rating)
     {
         this.uID = uID;
         this.mID = mID;
-        this.title = title;
         this.userName = userName;
+        this.title = title;
         this.rating = rating;
     }
 
@@ -55,17 +55,17 @@ public class View
 
     public String toString()
     {
-        return userName + " viewed " + title + " and rated it " + rating + " /10.";
+        return userName + " viewed " + title + " and rated it " + rating + "/10.";
     }
 
     public boolean equals (Object object)
     {
-        View test;
+        WatchedEvent test;
         boolean returnValue = false;
 
-        if (object instanceof View)
+        if (object instanceof WatchedEvent)
         {
-            test = (View) object;
+            test = (WatchedEvent) object;
 
             if ((test.getuID() == uID) && (test.getmID() == mID))
             {

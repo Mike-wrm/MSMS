@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
-import msms.comp3350.objects.View;
+import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.business.SortEnums;
 
 public class DataAccessorObject implements DataAccessor
@@ -388,10 +388,10 @@ public class DataAccessorObject implements DataAccessor
         return string.replaceAll("'","''");
     }
 
-    /**
-    String getMovieViews(ArrayList<View> currentMovieViews, Movie currentMovie)
+    //returns all WatchedEvent queries related to a movie (movie with all its users)
+    String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie)
     {
-        View viewX;
+        WatchedEvent viewX;
         int myMID, myUID, myRating;
         String myUserName, myTitle;
         myUserName = myTitle = EOF;
@@ -409,9 +409,11 @@ public class DataAccessorObject implements DataAccessor
                 myUID = resultSet3.getInt("uID");
                 myMID = resultSet3.getInt("mID");
                 myUserName = resultSet3.getString("userName");
+                myTitle = currentMovie.getTitle();
+                myRating = resultSet3.getInt("rating");
 
-                viewX = new View (myUID, myMID, myPassword, myAge, myGenderChar, expDate);
-                currentMovieViews.add(userX);
+                viewX = new WatchedEvent (myUID, myMID, myUserName, myTitle, myRating);
+                currentMovieViews.add(viewX);
             }
         }
         catch (Exception e)
@@ -421,10 +423,41 @@ public class DataAccessorObject implements DataAccessor
 
         return result;
     }
-**/
-    String getUserViews(ArrayList<View> currentUserViews, User currentUser)
+
+    //returns all WatchedEvent queries related to a user (user with all their movies)
+    String getUserViews(ArrayList<WatchedEvent> currentMovieViews, User currentUser)
     {
-        return null;
+        WatchedEvent viewX;
+        int myMID, myUID, myRating;
+        String myUserName, myTitle;
+        myUserName = myTitle = EOF;
+        myMID = myUID = myRating = 0;
+
+        result = null;
+
+        try
+        {
+            command = "Select * from Movies,Views where Movies.mID=Views.mID and uID=" + currentUser.getuID();
+            resultSet4 = statement4.executeQuery(command);
+
+            while (resultSet4.next())
+            {
+                myUID = resultSet4.getInt("uID");
+                myMID = resultSet4.getInt("mID");
+                myUserName = currentUser.getName();
+                myTitle = resultSet4.getString("title");
+                myRating = resultSet4.getInt("rating");
+
+                viewX = new WatchedEvent (myUID, myMID, myUserName, myTitle, myRating);
+                currentMovieViews.add(viewX);
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
     }
 
     public String checkWarning(Statement st, int updateCount)

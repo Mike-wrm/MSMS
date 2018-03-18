@@ -21,4 +21,7 @@ public interface DataAccessor
     String insertUser(User currentUser);
     String updateUser(User currentUser);
     String deleteUser(User currentUser);
+
+    //String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie);
+    //String getUserViews(ArrayList<WatchedEvent> currentMovieViews, User currentUser);
 }
