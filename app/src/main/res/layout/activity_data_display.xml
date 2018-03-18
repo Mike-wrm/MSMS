@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="History:"
+        android:text="@string/history"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="History List"
+        android:text="@string/history_list"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginStart="24dp"
-        android:text="Reports:"
+        android:text="@string/reports_list"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/listSpecificReports"
         app:layout_constraintStart_toStartOf="parent" />
