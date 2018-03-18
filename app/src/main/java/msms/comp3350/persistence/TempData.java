@@ -7,6 +7,7 @@ import java.util.Calendar;
 import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.presentation.MainActivity;
 
 
@@ -17,6 +18,7 @@ public class TempData implements DataAccessor
 
     private ArrayList<Movie> movies;
     private ArrayList<User> users;
+    private ArrayList<WatchedEvent> views;
 
     public TempData(String dbName)
     {
@@ -32,6 +34,7 @@ public class TempData implements DataAccessor
     {
         Movie movie;
         User user;
+        WatchedEvent viewed;
 
         Calendar date1 = Calendar.getInstance(); // January = 0, December = 11.
         date1.set(2018, 4, 3);
@@ -108,6 +111,17 @@ public class TempData implements DataAccessor
         user = new User(666, "Wonder_Woman", "DCU", 82, 'F', userDate2);
         users.add(user);
 
+        viewed = new WatchedEvent(111,111,"Miggles", "South Park: Bigger, Longer & Uncut", 7);
+        views.add(viewed);
+
+        viewed = new WatchedEvent(111,111,"Miggles", "Terminator 2: Judgement Day", 2);
+        views.add(viewed);
+
+        viewed = new WatchedEvent(222,111,"Smoo", "South Park: Bigger, Longer & Uncut", 5);
+        views.add(viewed);
+
+        viewed = new WatchedEvent(222,999,"Smoo", "Terminator 2: Judgement Day", 4);
+        views.add(viewed);
     }
 
     public void close()
@@ -254,4 +268,39 @@ public class TempData implements DataAccessor
 
         return null;
     }
+
+    public String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie)
+    {
+        currentMovieViews.clear();
+        int testmID = currentMovie.getmID();
+
+        for (int count = 0; count < views.size(); count++)
+        {
+            WatchedEvent test = views.get(count);
+            if (test.getmID() == testmID)
+            {
+                currentMovieViews.add(test);
+            }
+        }
+
+        return null;
+    }
+
+    public String getUserViews(ArrayList<WatchedEvent> currentUserViews, User currentUser)
+    {
+        currentUserViews.clear();
+        int testuID = currentUser.getuID();
+
+        for (int count = 0; count < views.size(); count++)
+        {
+            WatchedEvent test = views.get(count);
+            if (test.getuID() == testuID)
+            {
+                currentUserViews.add(test);
+            }
+        }
+
+        return null;
+    }
+
 }

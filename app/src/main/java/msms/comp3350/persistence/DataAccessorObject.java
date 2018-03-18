@@ -389,7 +389,7 @@ public class DataAccessorObject implements DataAccessor
     }
 
     //returns all WatchedEvent queries related to a movie (movie with all its users)
-    String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie)
+    public String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie)
     {
         WatchedEvent viewX;
         int myMID, myUID, myRating;
@@ -425,7 +425,7 @@ public class DataAccessorObject implements DataAccessor
     }
 
     //returns all WatchedEvent queries related to a user (user with all their movies)
-    String getUserViews(ArrayList<WatchedEvent> currentMovieViews, User currentUser)
+    public String getUserViews(ArrayList<WatchedEvent> currentUserViews, User currentUser)
     {
         WatchedEvent viewX;
         int myMID, myUID, myRating;
@@ -449,7 +449,7 @@ public class DataAccessorObject implements DataAccessor
                 myRating = resultSet4.getInt("rating");
 
                 viewX = new WatchedEvent (myUID, myMID, myUserName, myTitle, myRating);
-                currentMovieViews.add(viewX);
+                currentUserViews.add(viewX);
             }
         }
         catch (Exception e)
