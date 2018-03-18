@@ -209,6 +209,33 @@ public class TempData implements DataAccessor
         return null;
     }
 
+    //Hard coded for stub at this moment in time
+    public String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending)
+    {
+        currentUsers.addAll(users);
+        sortUserArrList(currentUsers);
+        flipList(currentUsers, ascending);
+
+        return null;
+    }
+
+    //temp solution in stub for now since only ordering by name here
+    public ArrayList<User> sortUserArrList(ArrayList<User> currentUsers)
+    {
+        for (int i = 0; i < currentUsers.size()-1; i++)
+        {
+            for (int j = 0; j < (currentUsers.size()-1)-i; j++)
+            {
+                if (((currentUsers.get(j)).getName()).compareToIgnoreCase(((currentUsers.get(j+1)).getName())) > 0)
+                {
+                    User temp = currentUsers.get(j);
+                    currentUsers.set(j, currentUsers.get(j+1));
+                    currentUsers.set(j+1, temp);
+                }
+            }
+        }
+        return currentUsers;
+    }
 
     public String insertUser(User currentUser)
     {

@@ -244,6 +244,23 @@ public class DataAccessorObject implements DataAccessor
         return getUsersSQL(currentUsers, strCommand);
     }
 
+    //generates basic select movies from DB
+    public String getUsersAllSorted(ArrayList<User> currentUsers, SortEnums.UserSortField sortBy, boolean ascending)
+    {
+        String order;
+        if (ascending)
+        {
+            order = " ASC";
+        }
+        else
+        {
+            order = " DESC";
+        }
+
+        String strCommand = "Select * from Users ORDER BY " + sortBy.toString() + order;
+        return getUsersSQL(currentUsers, strCommand);
+    }
+
     //Handles DB processing for getting users, strCommand varies based on caller
     public String getUsersSQL (ArrayList<User> currentUsers, String strCommand)
     {
