@@ -1,8 +1,12 @@
 package msms.comp3350.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,15 +17,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import msms.comp3350.business.AccessUsers;
+import msms.comp3350.business.SortEnums;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.User;
 
-public class UserListActivity extends Activity
+public class UserListActivity extends AppCompatActivity
 {
+    private enum UserOrder
+    {
+        UNSORTED,
+        ASCENDING,
+        DESCENDING
+    }
+
+    private UserOrder userOrder = UserOrder.UNSORTED;
     private ArrayList<User> userList;
     private AccessUsers userAccessor;
     private ArrayAdapter<User> userArrayAdapter;
-
     private int selectedUserPosition = -1;
 
     public static final int USER_LIST_REQ_CODE = 998;
@@ -34,6 +46,11 @@ public class UserListActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+
+        // Setup the toolbar:
+        Toolbar userListToolbar = (Toolbar) findViewById(R.id.user_list_toolbar);
+        setSupportActionBar(userListToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);// Don't display activity title in toolbar
 
         userList = new ArrayList<User>();
         userAccessor = new AccessUsers();
@@ -170,5 +187,68 @@ public class UserListActivity extends Activity
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate movie_list_action_bar.xml:
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.user_list_action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    // Handles selections of option menu items in the ToolBar
+    {
+        switch (item.getItemId())
+        {
+            case R.id.option_unsorted:// Always default to unsorted
+                userOrder = UserListActivity.UserOrder.UNSORTED; break;
+
+            case R.id.option_ascending:
+                if (userOrder == UserListActivity.UserOrder.ASCENDING)
+                    userOrder = UserListActivity.UserOrder.UNSORTED;
+                else
+                    userOrder = UserListActivity.UserOrder.ASCENDING;
+                break;
+
+            case R.id.option_descending:
+                if (userOrder == UserListActivity.UserOrder.DESCENDING)
+                    userOrder = UserListActivity.UserOrder.UNSORTED;
+                else
+                    userOrder = UserListActivity.UserOrder.DESCENDING;
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        updateListView();
+        return true;
+    }
+
+    private String updateListView()
+    // Attempts to refresh the ListView based on sorting order; returns an status code on failure
+    {
+        String status = null;
+
+        switch (userOrder)
+        {
+            case UNSORTED:
+                userAccessor.cancelSort();
+                status = userAccessor.getUsers(userList); break;
+            case ASCENDING:
+                status = userAccessor.getSortedUsers(userList, SortEnums.UserSortField.USERNAME, true); break;
+            case DESCENDING:
+                status = userAccessor.getSortedUsers(userList, SortEnums.UserSortField.USERNAME, false); break;
+            default:
+                status = "ERROR: userOrder value is invalid.";
+        }
+
+        if (status == null)// No errors: refresh ListView
+            userArrayAdapter.notifyDataSetChanged();
+
+        return status;
     }
 }

@@ -196,9 +196,9 @@ public class MovieListActivity extends AppCompatActivity
      * http://www.viralandroid.com/2016/03/implementing-searchview-in-android-actionbar.html
      */
     {
-        // Inflate action_bar_menu_items.xml:
+        // Inflate movie_list_action_bar.xml:
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.action_bar_menu_items, menu);
+        inflater.inflate(R.menu.movie_list_action_bar, menu);
 
         // Setup menu item Objects:
         MenuItem searchViewItem = menu.findItem(R.id.search_view);
