@@ -44,5 +44,6 @@ public class Services
         {
             dataAccessService.close();
         }
+        dataAccessService = null;
     }
 }
