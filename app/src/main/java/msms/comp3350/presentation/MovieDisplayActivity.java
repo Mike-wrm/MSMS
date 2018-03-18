@@ -337,4 +337,11 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     {
         finish();
     }
+
+    public void buttonUserDataOnClick(View v)
+    {
+        Intent dataDisplayIntent = new Intent(getApplicationContext(), DataDisplayActivity.class);
+        dataDisplayIntent.putExtra("Movie", inputMovie);
+        startActivity(dataDisplayIntent);
+    }
 }

@@ -33,10 +33,12 @@
     <string name="user_gender">Gender:</string>
     <string name="user_subend">Subscription End Date:</string>
     <string name="change_date">Change Date</string>
-    <string name="reports">reports</string>
+    <string name="reports">Reports</string>
     <string name="movie_id">Movie ID:</string>
     <string name="movie_id_hint">Unique integer</string>
     <string name="sort_ascending">Ascending</string>
     <string name="sort_descending">Descending</string>
     <string name="sort_none">Unsorted</string>
+    <string name="user_data">View User Data</string>
+    <string name="movie_data">View Movie Data</string>
 </resources>

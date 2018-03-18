@@ -123,12 +123,12 @@
         android:id="@+id/cancel_button"
         android:layout_width="164dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="12dp"
         android:layout_marginStart="24dp"
         android:text="@android:string/cancel"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/movie_data_button"
         app:layout_constraintEnd_toStartOf="@+id/update_button"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -202,5 +202,19 @@
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/subend_year_text"
         app:layout_constraintStart_toEndOf="@+id/subend_year_text" />
+
+    <Button
+        android:id="@+id/movie_data_button"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:onClick="buttonMovieDataOnClick"
+        android:text="@string/movie_data"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

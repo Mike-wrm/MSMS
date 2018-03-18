@@ -274,4 +274,11 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
             Messages.warning(this, errorString);
         }
     }
+
+    public void buttonMovieDataOnClick(View v)
+    {
+        Intent dataDisplayIntent = new Intent(getApplicationContext(), DataDisplayActivity.class);
+        dataDisplayIntent.putExtra("User", inputUser);
+        startActivity(dataDisplayIntent);
+    }
 }
