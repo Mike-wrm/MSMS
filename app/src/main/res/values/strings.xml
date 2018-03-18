@@ -41,4 +41,7 @@
     <string name="sort_none">Unsorted</string>
     <string name="user_data">View User Data</string>
     <string name="movie_data">View Movie Data</string>
+    <string name="history">History:</string>
+    <string name="history_list">History List</string>
+    <string name="reports_list">Reports:</string>
 </resources>

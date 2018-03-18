@@ -84,6 +84,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             updateButton.setEnabled(false);
             Button deleteButton = (Button) findViewById(R.id.delete_button);
             deleteButton.setEnabled(false);
+            Button dataButton = (Button) findViewById(R.id.user_data_button);
+            dataButton.setEnabled(false);
         }
 
         // Set the "back" button to go back to the list of movies
