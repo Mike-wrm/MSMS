@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.objects.View;
 import msms.comp3350.business.SortEnums;
 
 public class DataAccessorObject implements DataAccessor
@@ -18,8 +19,8 @@ public class DataAccessorObject implements DataAccessor
     private String dbType;
 
     private Connection connectionX;
-    private Statement statement1, statement2;
-    private ResultSet resultSet1, resultSet2;
+    private Statement statement1, statement2, statement3, statement4;
+    private ResultSet resultSet1, resultSet2, resultSet3, resultSet4;
 
     private String command;
     private int updateCount;
@@ -385,6 +386,45 @@ public class DataAccessorObject implements DataAccessor
     public String formatApostrophe (String string)
     {
         return string.replaceAll("'","''");
+    }
+
+    /**
+    String getMovieViews(ArrayList<View> currentMovieViews, Movie currentMovie)
+    {
+        View viewX;
+        int myMID, myUID, myRating;
+        String myUserName, myTitle;
+        myUserName = myTitle = EOF;
+        myMID = myUID = myRating = 0;
+
+        result = null;
+
+        try
+        {
+            command = "Select * from Users,Views where Users.uID=Views.uID and mID=" + currentMovie.getmID();
+            resultSet3 = statement3.executeQuery(command);
+
+            while (resultSet3.next())
+            {
+                myUID = resultSet3.getInt("uID");
+                myMID = resultSet3.getInt("mID");
+                myUserName = resultSet3.getString("userName");
+
+                viewX = new View (myUID, myMID, myPassword, myAge, myGenderChar, expDate);
+                currentMovieViews.add(userX);
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
+**/
+    String getUserViews(ArrayList<View> currentUserViews, User currentUser)
+    {
+        return null;
     }
 
     public String checkWarning(Statement st, int updateCount)
