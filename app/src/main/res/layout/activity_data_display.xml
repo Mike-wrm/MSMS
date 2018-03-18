@@ -27,6 +27,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/history_list"
         android:textSize="18sp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

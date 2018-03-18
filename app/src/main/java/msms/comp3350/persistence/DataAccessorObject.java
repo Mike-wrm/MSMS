@@ -45,6 +45,8 @@ public class DataAccessorObject implements DataAccessor
             connectionX = DriverManager.getConnection(url, "GROUPD", "");
             statement1 = connectionX.createStatement();
             statement2 = connectionX.createStatement();
+            statement3 = connectionX.createStatement();
+            statement4 = connectionX.createStatement();
         }
         catch (Exception e)
         {
