@@ -67,7 +67,7 @@ public class DataDisplayActivity extends Activity {
             }
             for (int i = 0; i < currentViews.size(); i++)
             {
-                historyText.append(currentViews.get(i).getUserName() + "\n");
+                historyText.append(currentViews.get(i) + "\n");
             }
 
             // TODO: populate reportsList here
@@ -84,7 +84,7 @@ public class DataDisplayActivity extends Activity {
             }
             for (int i = 0; i < currentViews.size(); i++)
             {
-                historyText.append(currentViews.get(i).getMovieTitle() + "\n");
+                historyText.append(currentViews.get(i) + "\n");
             }
 
             // TODO: populate reportsList here
