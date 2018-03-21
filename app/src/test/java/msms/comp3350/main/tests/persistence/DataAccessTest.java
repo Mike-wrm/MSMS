@@ -22,7 +22,8 @@ public class DataAccessTest extends TestCase
 
     public void setUp()
     {
-        testData = Services.createDataAccess("temp");
+        TempData newData = new TempData();
+        testData = Services.createDataAccess(newData);
         testData.open("temp");
     }
 

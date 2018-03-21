@@ -7,6 +7,7 @@ import java.util.Calendar;
 import msms.comp3350.application.Services;
 import msms.comp3350.business.AccessMovies;
 import msms.comp3350.business.SortEnums;
+import msms.comp3350.main.tests.persistence.TempData;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.persistence.DataAccessor;
 
@@ -22,7 +23,8 @@ public class AccessMoviesTest extends TestCase
 
     public void setUp()
     {
-        testData = Services.createDataAccess("temp");
+        TempData newData = new TempData();
+        testData = Services.createDataAccess(newData);
         testData.open("temp");
         list = new AccessMovies();
     }

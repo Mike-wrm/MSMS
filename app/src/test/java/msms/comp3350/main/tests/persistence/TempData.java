@@ -1,4 +1,4 @@
-package msms.comp3350.persistence;
+package msms.comp3350.main.tests.persistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,7 @@ import java.util.Calendar;
 import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.persistence.DataAccessor;
 import msms.comp3350.presentation.MainActivity;
 
 
