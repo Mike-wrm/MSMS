@@ -19,7 +19,7 @@ public class TempData implements DataAccessor
 
     private ArrayList<Movie> movies;
     private ArrayList<User> users;
-    private ArrayList<WatchedEvent> views;
+    private ArrayList<WatchedEvent> viewers;
 
     public TempData(String dbName)
     {
@@ -64,6 +64,7 @@ public class TempData implements DataAccessor
 
         movies = new ArrayList<Movie>();
         users = new ArrayList<User>();
+        viewers = new ArrayList<WatchedEvent>();
 
 
         movie = new Movie(111, "South Park: Bigger, Longer & Uncut", 1999, 7, "Comedy", date1, "Ipsum Lorem...");
@@ -113,16 +114,16 @@ public class TempData implements DataAccessor
         users.add(user);
 
         viewed = new WatchedEvent(111,111,"Miggles", "South Park: Bigger, Longer & Uncut", 7);
-        views.add(viewed);
+        viewers.add(viewed);
 
         viewed = new WatchedEvent(111,111,"Miggles", "Terminator 2: Judgement Day", 2);
-        views.add(viewed);
+        viewers.add(viewed);
 
         viewed = new WatchedEvent(222,111,"Smoo", "South Park: Bigger, Longer & Uncut", 5);
-        views.add(viewed);
+        viewers.add(viewed);
 
         viewed = new WatchedEvent(222,999,"Smoo", "Terminator 2: Judgement Day", 4);
-        views.add(viewed);
+        viewers.add(viewed);
     }
 
     public void close()
@@ -275,9 +276,9 @@ public class TempData implements DataAccessor
         currentMovieViews.clear();
         int testmID = currentMovie.getmID();
 
-        for (int count = 0; count < views.size(); count++)
+        for (int count = 0; count < viewers.size(); count++)
         {
-            WatchedEvent test = views.get(count);
+            WatchedEvent test = viewers.get(count);
             if (test.getmID() == testmID)
             {
                 currentMovieViews.add(test);
@@ -292,9 +293,9 @@ public class TempData implements DataAccessor
         currentUserViews.clear();
         int testuID = currentUser.getuID();
 
-        for (int count = 0; count < views.size(); count++)
+        for (int count = 0; count < viewers.size(); count++)
         {
-            WatchedEvent test = views.get(count);
+            WatchedEvent test = viewers.get(count);
             if (test.getuID() == testuID)
             {
                 currentUserViews.add(test);
