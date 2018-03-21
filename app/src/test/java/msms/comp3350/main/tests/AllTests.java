@@ -7,6 +7,7 @@ import msms.comp3350.main.tests.business.AccessMoviesTest;
 import msms.comp3350.main.tests.business.AccessUserTest;
 import msms.comp3350.main.tests.objects.MovieTest;
 import msms.comp3350.main.tests.objects.UserTest;
+import msms.comp3350.main.tests.objects.WatchedEventTest;
 import msms.comp3350.main.tests.persistence.DataAccessTest;
 
 public class AllTests
@@ -31,6 +32,7 @@ public class AllTests
     {
         suite.addTestSuite(MovieTest.class);
         suite.addTestSuite(UserTest.class);
+        suite.addTestSuite(WatchedEventTest.class);
     }
 
     public static void testBusiness()

@@ -11,10 +11,14 @@ public class UserTest extends TestCase
             super(arg0);
         }
 
-    public void testUser1()
+    public void tearDown()
+    {
+        System.out.println("Finishing a User Test");
+    }
+
+    public void testUserAccess()
     {
         User user;
-        User user2;
 
         Calendar endDate = Calendar.getInstance();
         endDate.set(2020,11,19);
@@ -22,10 +26,9 @@ public class UserTest extends TestCase
         Calendar newDate = Calendar.getInstance();
         newDate.set(2022,12,20);
 
-        System.out.println("\nTesting the Movie object in Movie");
+        System.out.println("\nTesting the Movie Accessing in Movie");
 
         user = new User(1,"JohnDoe", "password", 21, 'm', endDate);
-        user2 = new User(2, "JaneDoe", "pass", 22, 'f', endDate);
 
         assertNotNull(user);
 
@@ -50,7 +53,17 @@ public class UserTest extends TestCase
         assertEquals('f', user.getGender());
         user.setEndDate(newDate);
         assertEquals(newDate, user.getEndDate());
+    }
 
+    public void testUserEquals()
+    {
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2020,11,19);
+
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(2022,12,20);
+
+        User user2 = new User(2, "JaneDoe", "pass", 22, 'f', endDate);
 
         // Test out the equals -- the id has to be the same
         User idChanged = new User(999, "JaneDoe", "pass", 22, 'f', endDate);
@@ -60,7 +73,7 @@ public class UserTest extends TestCase
         User genderChanged = new User(2, "JaneDoe", "pass", 22, 'm', endDate);
         User dateChanged = new User(2, "JaneDoe", "pass", 22, 'f', newDate);
 
-        assertTrue(user.equals(user));
+        assertTrue(user2.equals(user2));
 
         assertFalse(user2.equals(idChanged));
         assertTrue(user2.equals(nameChanged));
@@ -69,9 +82,5 @@ public class UserTest extends TestCase
         assertTrue(user2.equals(genderChanged));
         assertTrue(user2.equals(dateChanged));
 
-        assertFalse(user.equals(user2));
-
-        System.out.println("Finished a User Test");
     }
-
 }

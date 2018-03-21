@@ -13,10 +13,14 @@ public class MovieTest extends TestCase
         super(arg0);
     }
 
-    public void testMovie()
+    public void tearDown()
+    {
+        System.out.println("Finished a Movie Test");
+    }
+
+    public void testAccessingMovie()
     {
         Movie family;
-        Movie comedy;
 
         Calendar endDate = Calendar.getInstance();
         endDate.set(2020,2,20);
@@ -24,10 +28,9 @@ public class MovieTest extends TestCase
         Calendar newDate = Calendar.getInstance();
         newDate.set(2021,3,15);
 
-        System.out.println("\nTesting the Movie object in Movie");
+        System.out.println("\nTesting the Movie Acessing in Movie");
 
         family = new Movie(13, "Shrek", 2001, 84, "family", endDate, "Ogre Saves Princess but gets unexpected suprise");
-        comedy = new Movie(14,"Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
 
         assertNotNull(family);
 
@@ -55,33 +58,36 @@ public class MovieTest extends TestCase
         assertEquals("New Description", family.getDescription());
         family.setCategory("family");
         assertEquals("family", family.getCategory());
-
-        // testing the equals
-        // it should be equal unless the id is not equal
-        Movie idChanged = new Movie(556,"Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
-        Movie nameChanged = new Movie(557,"newMovie", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
-        nameChanged.setmID(comedy.getmID());
-        Movie passChanged = new Movie(558,"Shrek 2", 2006, 99, "comedy", endDate, "Ogre saves princess again..");
-        passChanged.setmID(comedy.getmID());
-        Movie ageChanged = new Movie(559,"Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
-        ageChanged.setmID(comedy.getmID());
-        Movie genderChanged = new Movie(560, "Shrek 2", 2004, 76, "comedy", newDate, "Ogre saves princess again..");
-        genderChanged.setmID(comedy.getmID());
-        Movie dateChanged = new Movie(561, "Shrek 2", 2004, 76, "comedy", endDate, "newDescription");
-        dateChanged.setmID(comedy.getmID());
-
-        assertTrue(family.equals(family));
-
-        assertFalse(comedy.equals(idChanged));
-        assertTrue(comedy.equals(nameChanged));
-        assertTrue(comedy.equals(passChanged));
-        assertTrue(comedy.equals(ageChanged));
-        assertTrue(comedy.equals(genderChanged));
-        assertTrue(comedy.equals(dateChanged));
-
-        assertFalse(family.equals(comedy));
-
-        System.out.println("Finished a Movie Test");
     }
 
+    public void testEqualsMovie()
+    {
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2020,2,20);
+
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(2021,3,15);
+
+        Movie testMovie = new Movie(22, "Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
+
+
+        Movie idChanged = new Movie(556,"Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
+        Movie nameChanged = new Movie(22,"newMovie", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
+        Movie passChanged = new Movie(22,"Shrek 2", 2006, 99, "comedy", endDate, "Ogre saves princess again..");
+        Movie ageChanged = new Movie(22,"Shrek 2", 2004, 76, "comedy", endDate, "Ogre saves princess again..");
+        Movie genderChanged = new Movie(22, "Shrek 2", 2004, 76, "comedy", newDate, "Ogre saves princess again..");
+        Movie dateChanged = new Movie(22, "Shrek 2", 2004, 76, "comedy", endDate, "newDescription");
+
+        System.out.println("\nTesting the Movie Equals in Movie");
+
+        assertTrue(testMovie.equals(testMovie));
+
+        assertFalse(testMovie.equals(idChanged));
+        assertTrue(testMovie.equals(nameChanged));
+        assertTrue(testMovie.equals(passChanged));
+        assertTrue(testMovie.equals(ageChanged));
+        assertTrue(testMovie.equals(genderChanged));
+        assertTrue(testMovie.equals(dateChanged));
+    }
 }
+
