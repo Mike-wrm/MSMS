@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
+import msms.comp3350.objects.WatchedEvent;
 
 public interface DataAccessor
 {
@@ -21,4 +22,7 @@ public interface DataAccessor
     String insertUser(User currentUser);
     String updateUser(User currentUser);
     String deleteUser(User currentUser);
+
+    String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie);
+    String getUserViews(ArrayList<WatchedEvent> currentUserViews, User currentUser);
 }
