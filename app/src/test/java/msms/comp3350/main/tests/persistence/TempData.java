@@ -116,13 +116,37 @@ public class TempData implements DataAccessor
         viewed = new WatchedEvent(111,111,"Miggles", "South Park: Bigger, Longer & Uncut", 7);
         viewers.add(viewed);
 
-        viewed = new WatchedEvent(111,111,"Miggles", "Terminator 2: Judgement Day", 2);
+        viewed = new WatchedEvent(111,999,"Miggles", "Terminator 2: Judgement Day", 2);
         viewers.add(viewed);
 
         viewed = new WatchedEvent(222,111,"Smoo", "South Park: Bigger, Longer & Uncut", 5);
         viewers.add(viewed);
 
         viewed = new WatchedEvent(222,999,"Smoo", "Terminator 2: Judgement Day", 4);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(333,666,"Andrew_Sempai", "The Ring", 8);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(333,444,"Andrew_Sempai", "Shrek", 2);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(444,444,"TestBoi", "Shrek", 10);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(444,222,"TestBoi", "Eddie Murphy: Raw", 6);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(555,333,"JiffyPB", "Toy Story", 3);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(555,777,"JiffyPB", "Mission Impossible: Rogue Nation", 7);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(666,888,"Wonder_Woman", "Transformers: The Last Knight", 2);
+        viewers.add(viewed);
+
+        viewed = new WatchedEvent(666,666,"Wonder_Woman", "The Ring", 9);
         viewers.add(viewed);
     }
 

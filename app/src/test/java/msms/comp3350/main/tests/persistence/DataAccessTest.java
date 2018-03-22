@@ -9,6 +9,7 @@ import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.User;
+import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.persistence.DataAccessor;
 
 public class DataAccessTest extends TestCase
@@ -50,7 +51,7 @@ public class DataAccessTest extends TestCase
         ArrayList<Movie> movies;
         Movie movie;
 
-        System.out.println("\nTesting Accessing the Data Access for the movies");
+        System.out.println("\nTesting Accessing the Data Access for the movies in DataAccessTest");
 
         movies = new ArrayList<Movie>();
 
@@ -163,7 +164,7 @@ public class DataAccessTest extends TestCase
         ArrayList<Movie> movies;
         Movie movie;
 
-        System.out.println("\nTesting Accessing the Data Access for the movies");
+        System.out.println("\nTesting Accessing the Data Access for the movies in DataAccessTest");
 
         movies = new ArrayList<Movie>();
 
@@ -321,13 +322,12 @@ public class DataAccessTest extends TestCase
         assertEquals(2020, user.getEndYear());
     }
 
-
     public void testMovieAccessChange()
     {
         ArrayList<Movie> movies;
         Movie movie;
 
-        System.out.println("\nTesting Changing the Data Access for the movies");
+        System.out.println("\nTesting Changing the Data Access for the movies in DataAccessTest");
 
         Calendar date = Calendar.getInstance();
         date.set(2020, 11, 21);
@@ -431,7 +431,7 @@ public class DataAccessTest extends TestCase
         Calendar date2 = Calendar.getInstance();
         date2.set(2022,10, 8);
 
-        System.out.println("\nTesting Changing the Data Access for the users");
+        System.out.println("\nTesting Changing the Data Access for the users in DataAccessTest");
 
         users = new ArrayList<User>();
         user =  new User(50, "Tester", "pass", 21, 'M', date);
@@ -510,4 +510,296 @@ public class DataAccessTest extends TestCase
         assertNull(testData.deleteUser(user));
     }
 
+    public void testGetMovieViews()
+    {
+        ArrayList<WatchedEvent> watched = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
+
+        Movie movie;
+        WatchedEvent watch;
+
+        System.out.println("\nStarting an  getMoviesView test in DataAccessTest");
+
+        testData.getMoviesAll(movies);
+
+        // Check the first movie
+        movie = movies.get(0);
+        testData.getMovieViews(watched, movie);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(111, watch.getuID());
+        assertEquals(111, watch.getmID());
+        assertEquals("Miggles", watch.getUserName());
+        assertEquals("South Park: Bigger, Longer & Uncut", watch.getMovieTitle());
+        assertEquals(7, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(222, watch.getuID());
+        assertEquals(111, watch.getmID());
+        assertEquals("Smoo", watch.getUserName());
+        assertEquals("South Park: Bigger, Longer & Uncut", watch.getMovieTitle());
+        assertEquals(5, watch.getRating());
+
+        // Check the second movie
+        movie = movies.get(1);
+        testData.getMovieViews(watched, movie);
+        assertEquals(1, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(444, watch.getuID());
+        assertEquals(222, watch.getmID());
+        assertEquals("TestBoi", watch.getUserName());
+        assertEquals("Eddie Murphy: Raw", watch.getMovieTitle());
+        assertEquals(6, watch.getRating());
+
+        // Check the third movie
+        movie = movies.get(2);
+        testData.getMovieViews(watched, movie);
+        assertEquals(1, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(555, watch.getuID());
+        assertEquals(333, watch.getmID());
+        assertEquals("JiffyPB", watch.getUserName());
+        assertEquals("Toy Story", watch.getMovieTitle());
+        assertEquals(3, watch.getRating());
+
+        // Check the fourth Movie
+        movie = movies.get(3);
+        testData.getMovieViews(watched, movie);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(333, watch.getuID());
+        assertEquals(444, watch.getmID());
+        assertEquals("Andrew_Sempai", watch.getUserName());
+        assertEquals("Shrek", watch.getMovieTitle());
+        assertEquals(2, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(444, watch.getuID());
+        assertEquals(444, watch.getmID());
+        assertEquals("TestBoi", watch.getUserName());
+        assertEquals("Shrek", watch.getMovieTitle());
+        assertEquals(10, watch.getRating());
+
+        // Check the fifth movie
+        movie = movies.get(4);
+        testData.getMovieViews(watched, movie);
+        assertEquals(0,watched.size());
+
+        // Check the sixth movie
+        movie = movies.get(5);
+        testData.getMovieViews(watched, movie);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(333, watch.getuID());
+        assertEquals(666, watch.getmID());
+        assertEquals("Andrew_Sempai", watch.getUserName());
+        assertEquals("The Ring", watch.getMovieTitle());
+        assertEquals(8, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(666, watch.getuID());
+        assertEquals(666, watch.getmID());
+        assertEquals("Wonder_Woman", watch.getUserName());
+        assertEquals("The Ring", watch.getMovieTitle());
+        assertEquals(9, watch.getRating());
+
+        // Check the seventh movie
+        movie = movies.get(6);
+        testData.getMovieViews(watched, movie);
+        assertEquals(1, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(555, watch.getuID());
+        assertEquals(777, watch.getmID());
+        assertEquals("JiffyPB", watch.getUserName());
+        assertEquals("Mission Impossible: Rogue Nation", watch.getMovieTitle());
+        assertEquals(7, watch.getRating());
+
+        // Check the eighth movie
+        movie = movies.get(7);
+        testData.getMovieViews(watched, movie);
+        assertEquals(1, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(666, watch.getuID());
+        assertEquals(888, watch.getmID());
+        assertEquals("Wonder_Woman", watch.getUserName());
+        assertEquals("Transformers: The Last Knight", watch.getMovieTitle());
+        assertEquals(2, watch.getRating());
+
+        // Check the last movie
+        movie =  movies.get(8);
+        testData.getMovieViews(watched, movie);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(111, watch.getuID());
+        assertEquals(999, watch.getmID());
+        assertEquals("Miggles", watch.getUserName());
+        assertEquals("Terminator 2: Judgement Day", watch.getMovieTitle());
+        assertEquals(2, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(222, watch.getuID());
+        assertEquals(999, watch.getmID());
+        assertEquals("Smoo", watch.getUserName());
+        assertEquals("Terminator 2: Judgement Day", watch.getMovieTitle());
+        assertEquals(4, watch.getRating());
+    }
+
+    public void testGetUserViews()
+    {
+        ArrayList<WatchedEvent> watched = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
+
+        User user;
+        WatchedEvent watch;
+
+        System.out.println("\nStarting an getUserViews Test in DataAccessTest");
+
+        testData.getUsersAll(users);
+
+        // Check the first user
+        user = users.get(0);
+        testData.getUserViews(watched, user);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(111, watch.getuID());
+        assertEquals(111, watch.getmID());
+        assertEquals("Miggles", watch.getUserName());
+        assertEquals("South Park: Bigger, Longer & Uncut", watch.getMovieTitle());
+        assertEquals(7, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(111, watch.getuID());
+        assertEquals(999, watch.getmID());
+        assertEquals("Miggles", watch.getUserName());
+        assertEquals("Terminator 2: Judgement Day", watch.getMovieTitle());
+        assertEquals(2, watch.getRating());
+
+        // Check the second user
+        user = users.get(1);
+        testData.getUserViews(watched, user);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(222, watch.getuID());
+        assertEquals(111, watch.getmID());
+        assertEquals("Smoo", watch.getUserName());
+        assertEquals("South Park: Bigger, Longer & Uncut", watch.getMovieTitle());
+        assertEquals(5, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(222, watch.getuID());
+        assertEquals(999, watch.getmID());
+        assertEquals("Smoo", watch.getUserName());
+        assertEquals("Terminator 2: Judgement Day", watch.getMovieTitle());
+        assertEquals(4, watch.getRating());
+
+        // Check the third user
+        user = users.get(2);
+        testData.getUserViews(watched, user);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(333, watch.getuID());
+        assertEquals(666, watch.getmID());
+        assertEquals("Andrew_Sempai", watch.getUserName());
+        assertEquals("The Ring", watch.getMovieTitle());
+        assertEquals(8, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(333, watch.getuID());
+        assertEquals(444, watch.getmID());
+        assertEquals("Andrew_Sempai", watch.getUserName());
+        assertEquals("Shrek", watch.getMovieTitle());
+        assertEquals(2, watch.getRating());
+
+        // Check the fourth user
+        user = users.get(3);
+        testData.getUserViews(watched, user);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(444, watch.getuID());
+        assertEquals(444, watch.getmID());
+        assertEquals("TestBoi", watch.getUserName());
+        assertEquals("Shrek", watch.getMovieTitle());
+        assertEquals(10, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(444, watch.getuID());
+        assertEquals(222, watch.getmID());
+        assertEquals("TestBoi", watch.getUserName());
+        assertEquals("Eddie Murphy: Raw", watch.getMovieTitle());
+        assertEquals(6, watch.getRating());
+
+        // Check the fifth user
+        user = users.get(4);
+        testData.getUserViews(watched, user);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(555, watch.getuID());
+        assertEquals(333, watch.getmID());
+        assertEquals("JiffyPB", watch.getUserName());
+        assertEquals("Toy Story", watch.getMovieTitle());
+        assertEquals(3, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(555, watch.getuID());
+        assertEquals(777, watch.getmID());
+        assertEquals("JiffyPB", watch.getUserName());
+        assertEquals("Mission Impossible: Rogue Nation", watch.getMovieTitle());
+        assertEquals(7, watch.getRating());
+
+        // Check the sixth user
+        user = users.get(5);
+        testData.getUserViews(watched, user);
+        assertEquals(2, watched.size());
+
+        watch = watched.get(0);
+
+        assertEquals(666, watch.getuID());
+        assertEquals(888, watch.getmID());
+        assertEquals("Wonder_Woman", watch.getUserName());
+        assertEquals("Transformers: The Last Knight", watch.getMovieTitle());
+        assertEquals(2, watch.getRating());
+
+        watch = watched.get(1);
+
+        assertEquals(666, watch.getuID());
+        assertEquals(666, watch.getmID());
+        assertEquals("Wonder_Woman", watch.getUserName());
+        assertEquals("The Ring", watch.getMovieTitle());
+        assertEquals(9, watch.getRating());
+    }
 }

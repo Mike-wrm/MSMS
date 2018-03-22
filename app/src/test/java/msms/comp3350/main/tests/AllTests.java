@@ -5,6 +5,9 @@ import junit.framework.TestSuite;
 
 import msms.comp3350.main.tests.business.AccessMoviesTest;
 import msms.comp3350.main.tests.business.AccessUserTest;
+import msms.comp3350.main.tests.business.AccessWatchedEventsTest;
+import msms.comp3350.main.tests.business.MovieChartsTest;
+import msms.comp3350.main.tests.business.UserChartsTest;
 import msms.comp3350.main.tests.objects.MovieTest;
 import msms.comp3350.main.tests.objects.UserTest;
 import msms.comp3350.main.tests.objects.WatchedEventTest;
@@ -39,5 +42,8 @@ public class AllTests
     {
         suite.addTestSuite(AccessMoviesTest.class);
         suite.addTestSuite(AccessUserTest.class);
+        suite.addTestSuite(AccessWatchedEventsTest.class);
+        suite.addTestSuite(MovieChartsTest.class);
+        suite.addTestSuite(UserChartsTest.class);
     }
 }
