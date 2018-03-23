@@ -71,6 +71,7 @@ public class DataAccessorObject implements DataAccessor
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
+
     //generates basic select movies from DB
     public String getMoviesAll(ArrayList<Movie> currentMovies)
     {
@@ -390,6 +391,49 @@ public class DataAccessorObject implements DataAccessor
         return string.replaceAll("'","''");
     }
 
+
+    //returns a sublist of all users who have watched a certain movie
+    public String getUserSublist(ArrayList<User> userSublist, Movie currentMovie)
+    {
+        User userX;
+        int myID, myAge, myEndMonth, myEndDay, myEndYear;
+        String myUserName, myPassword, myGender;
+        myUserName = myPassword = myGender = EOF;
+        myID = myAge = myEndDay = myEndMonth = myEndYear = 0;
+
+        result = null;
+
+        try
+        {
+            command = "Select * from Users,Views where Users.uID=Views.uID and mID=" + currentMovie.getmID();
+            resultSet3 = statement3.executeQuery(command);
+
+            while (resultSet3.next())
+            {
+                myID = resultSet3.getInt("uID");
+                myUserName = resultSet3.getString("userName");
+                myPassword = resultSet3.getString("password");
+                myAge = resultSet3.getInt("age");
+                myGender = resultSet3.getString("gender");
+                char myGenderChar = myGender.charAt(0);
+                myEndMonth = resultSet3.getInt("expMonth");
+                myEndDay = resultSet3.getInt("expDay");
+                myEndYear = resultSet3.getInt("expYear");
+                Calendar expDate = Calendar.getInstance();
+                expDate.set(myEndYear, myEndMonth-1, myEndDay);
+
+                userX = new User (myID, myUserName, myPassword, myAge, myGenderChar, expDate);
+                userSublist.add(userX);
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
+
     //returns all WatchedEvent queries related to a movie (movie with all its users)
     public String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie)
     {
@@ -416,6 +460,48 @@ public class DataAccessorObject implements DataAccessor
 
                 viewX = new WatchedEvent (myUID, myMID, myUserName, myTitle, myRating);
                 currentMovieViews.add(viewX);
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
+
+    //returns a sublist of all movies watched by a user
+    public String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser)
+    {
+        Movie movieX;
+        int myID, myReleaseYear, myUserScore, myEndMonth, myEndDay, myEndYear;
+        String myTitle, myCat, myDescription;
+        myTitle = myCat = myDescription = EOF;
+        myID = myReleaseYear = myUserScore = myEndDay = myEndMonth = myEndYear = 0;
+
+        result = null;
+
+        try
+        {
+            command = "Select * from Movies,Views where Movies.mID=Views.mID and uID=" + currentUser.getuID();
+            resultSet4 = statement4.executeQuery(command);
+
+            while (resultSet4.next())
+            {
+                myID = resultSet4.getInt("mID");
+                myTitle = resultSet4.getString("title");
+                myReleaseYear = resultSet4.getInt("releaseYear");
+                myUserScore = resultSet4.getInt("userScore");
+                myCat = resultSet4.getString("category1");
+                myEndMonth = resultSet4.getInt("endMonth");
+                myEndDay = resultSet4.getInt("endDay");
+                myEndYear = resultSet4.getInt("endYear");
+                Calendar expDate = Calendar.getInstance();
+                expDate.set(myEndYear, myEndMonth-1, myEndDay);
+                myDescription = resultSet4.getString("description");
+
+                movieX = new Movie (myID, myTitle, myReleaseYear, myUserScore, myCat, expDate, myDescription);
+                movieSublist.add(movieX);
             }
         }
         catch (Exception e)
@@ -461,6 +547,9 @@ public class DataAccessorObject implements DataAccessor
 
         return result;
     }
+
+
+
 
     public String checkWarning(Statement st, int updateCount)
     {
