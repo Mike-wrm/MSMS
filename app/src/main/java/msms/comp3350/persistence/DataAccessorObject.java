@@ -224,18 +224,21 @@ public class DataAccessorObject implements DataAccessor
 
     public String deleteMovie(Movie currentMovie)
     {
-        result = null;
+        result = deleteMovieViews(currentMovie);
 
-        try
+        if (result != null)
         {
-            command = "Delete from Movies where mID=" +currentMovie.getmID() +"";
-            //System.out.println(cmdString);
-            updateCount = statement1.executeUpdate(command);
-            result = checkWarning(statement1, updateCount);
-        }
-        catch (Exception e)
-        {
-            result = processSQLError(e);
+            try
+            {
+                command = "Delete from Movies where mID=" +currentMovie.getmID() +"";
+                //System.out.println(cmdString);
+                updateCount = statement1.executeUpdate(command);
+                result = checkWarning(statement1, updateCount);
+            }
+            catch (Exception e)
+            {
+                result = processSQLError(e);
+            }
         }
 
         return result;
@@ -370,17 +373,20 @@ public class DataAccessorObject implements DataAccessor
     
     public String deleteUser(User currentUser)
     {
-        result = null;
+        result = deleteUserViews(currentUser);
 
-        try
+        if (result != null)
         {
-            command = "Delete from Users where uID=" +currentUser.getuID() +"";
-            updateCount = statement2.executeUpdate(command);
-            result = checkWarning(statement2, updateCount);
-        }
-        catch (Exception e)
-        {
-            result = processSQLError(e);
+            try
+            {
+                command = "Delete from Users where uID=" +currentUser.getuID() +"";
+                updateCount = statement2.executeUpdate(command);
+                result = checkWarning(statement2, updateCount);
+            }
+            catch (Exception e)
+            {
+                result = processSQLError(e);
+            }
         }
 
         return result;
@@ -470,6 +476,25 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
+    //want to delete all of the views of a particular movie
+    public String deleteMovieViews(Movie currentMovie)
+    {
+        result = null;
+
+        try
+        {
+            command = "Delete from Views where mID=" +currentMovie.getmID() +"";
+            updateCount = statement2.executeUpdate(command);
+            result = checkWarning(statement2, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
+
     //returns a sublist of all movies watched by a user
     public String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser)
     {
@@ -548,6 +573,24 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
+    //want to delete all of the views of a particular user
+    public String deleteUserViews(User currentUser)
+    {
+        result = null;
+
+        try
+        {
+            command = "Delete from Views where uID=" +currentUser.getuID() +"";
+            updateCount = statement2.executeUpdate(command);
+            result = checkWarning(statement2, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
 
 
 
