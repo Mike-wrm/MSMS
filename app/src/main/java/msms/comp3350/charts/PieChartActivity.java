@@ -11,7 +11,7 @@ import com.androidplot.pie.SegmentFormatter;
 
 import msms.comp3350.main.R;
 
-public class PieChartActivity extends Activity
+public class PieChartActivity extends ChartActivity
 {
     private PieChart pie;
 
@@ -21,8 +21,6 @@ public class PieChartActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pie_chart);
 
-        String title;
-        String[] labels, data;
         int[] intData;
         Segment[] segments;
         SegmentFormatter[] formats;
@@ -30,34 +28,17 @@ public class PieChartActivity extends Activity
         // create view
         pie = findViewById(R.id.pie);
 
-
-        // extract passed data
-        Bundle args = getIntent().getExtras();
-        if(!args.isEmpty())
+        // convert pie chart data
+        intData = new int[data.length];
+        int movieCount = 0;
+        for(int i = 0 ; i < data.length ; i++)
         {
-            title = args.getString("title");
-            labels = args.getStringArray("labels");
-            data = args.getStringArray("data");
-            intData = new int[data.length];
-            segments = new Segment[labels.length];
-            formats = new SegmentFormatter[labels.length];
-            int movieCount = 0;
-            for(int i = 0 ; i < data.length ; i++)
-            {
-                intData[i] = Integer.parseInt(data[i]);
-                movieCount += intData[i];
-            }
-            if(0 == movieCount) intData[0]++;
+            intData[i] = Integer.parseInt(data[i]);
+            movieCount += intData[i];
         }
-        else
-        {
-            title = "Unknown Chart";
-            labels = new String[] { "empty list" };
-            intData = new int[] { 1 };
-            segments = new Segment[1];
-            formats = new SegmentFormatter[1];
-        }
-        setTitle(title);
+        if(0 == movieCount) intData[0]++;
+        segments = new Segment[labels.length];
+        formats = new SegmentFormatter[labels.length];
 
         // calculate number of colors needed
         int numColors = 7;

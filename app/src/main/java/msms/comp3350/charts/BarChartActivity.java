@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 import msms.comp3350.main.R;
 
-public class BarChartActivity extends Activity
+public class BarChartActivity extends ChartActivity
 {
     private XYPlot plot;
 
@@ -24,30 +24,11 @@ public class BarChartActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
 
-        String title;
-        final String[] labels, data;
-        Number[] intData;
-
         // initialize our XYPlot reference:
         plot = findViewById(R.id.bar);
 
-        Bundle args = getIntent().getExtras();
-        if(!args.isEmpty())
-        {
-            title = args.getString("title");
-            labels = args.getStringArray("labels");
-            data = args.getStringArray("data");
-        }
-        else
-        {
-            title = "Unknown Chart";
-            labels = new String[] { "empty list" };
-            data = new String[] { "1" };
-        }
-        setTitle(title);
-
         // convert data to numbers
-        intData = new Number[data.length];
+        Number[] intData = new Number[data.length];
         for(int i = 0 ; i < data.length ; i++)
         {
             intData[i] = Integer.parseInt(data[i]);
