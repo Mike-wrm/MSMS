@@ -21,16 +21,18 @@ public class ReportListActivity extends Activity
     private int selectedPosition = -1;
     private ListView reportList = null;
 
-    private ArrayList<String> reports = new ArrayList<>(Arrays.asList(
-            "User Age Summary",
-            "Movie Category Summary"
-    ));
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_list);
+
+        // get the list bundle
+        Bundle listArgs = getIntent().getExtras();
+        String[] listInfo = listArgs.getStringArray("listinfo");
+        final String[] types = listArgs.getStringArray("types");
+        final String[] subjects = listArgs.getStringArray("subjects");
+        ArrayList<String> reports = new ArrayList<>(Arrays.asList(listInfo));
 
         // Setup the ListView:
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, reports);
@@ -44,43 +46,41 @@ public class ReportListActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
 
-                if (position == selectedPosition)// Same item selected: deselect this item
-                {
-                    reportList.setItemChecked(position, false);
-                    selectedPosition = -1;
-                }
-                else// New item selected
-                {
-                    reportList.setItemChecked(position, true);
-                    selectedPosition = position;
-                    String[][] data;
-                    Bundle args;
+            reportList.setItemChecked(position, true);
+            String title = "no data";
+            String[][] data = { { "none" }, { "1" } };
 
-                    // Launch a new intent:
-                    switch(position)
-                    {
-                        case 0: // User Age Summary
-                            Intent userAges = new Intent(ReportListActivity.this, BarChartActivity.class);
-                            data = UserCharts.getUserAges();
-                            args = new Bundle();
-                            args.putString("title", "Users by Age Range");
-                            args.putStringArray("labels", data[0]);
-                            args.putStringArray("data", data[1]);
-                            userAges.putExtras(args);
-                            ReportListActivity.this.startActivity(userAges);
-                            break;
-                        case 1: // Movie Category Summary
-                            Intent movieCats = new Intent(ReportListActivity.this, PieChartActivity.class);
-                            data = MovieCharts.getMovieCategories();
-                            args = new Bundle();
-                            args.putString("title", "Movies by Category");
-                            args.putStringArray("labels", data[0]);
-                            args.putStringArray("data", data[1]);
-                            movieCats.putExtras(args);
-                            ReportListActivity.this.startActivity(movieCats);
-                            break;
-                    }
+            // Launch a new intent:
+            Intent chart = null;
+            switch(types[position])
+            {
+                case "bar":
+                    chart = new Intent(ReportListActivity.this, BarChartActivity.class);
+                    break;
+                case "pie":
+                    chart = new Intent(ReportListActivity.this, PieChartActivity.class);
+                    break;
+            }
+            if(null != chart)
+            {
+                switch(subjects[position])
+                {
+                    case "categories":
+                        title = "Movie Categories";
+                        data = MovieCharts.getMovieCategories();
+                        break;
+                    case "ages":
+                        title = "User Ages";
+                        data = UserCharts.getUserAges();
+                        break;
                 }
+                Bundle chartArgs = new Bundle();
+                chartArgs.putString("title", title);
+                chartArgs.putStringArray("labels", data[0]);
+                chartArgs.putStringArray("data", data[1]);
+                chart.putExtras(chartArgs);
+                ReportListActivity.this.startActivity(chart);
+            }
             }
         });
     }

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import msms.comp3350.application.Services;
+import msms.comp3350.business.ChartData;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
@@ -138,6 +139,12 @@ public class MainActivity extends AppCompatActivity
     public void buttonReportsOnClick(View v)
     {
         Intent reportList = new Intent(MainActivity.this, ReportListActivity.class);
+        Bundle args = new Bundle();
+        String[][] listInfo = ChartData.getGlobal();
+        args.putStringArray("listinfo", listInfo[0]);
+        args.putStringArray("types", listInfo[1]);
+        args.putStringArray("subjects", listInfo[2]);
+        reportList.putExtras(args);
         MainActivity.this.startActivity(reportList);
     }
 }
