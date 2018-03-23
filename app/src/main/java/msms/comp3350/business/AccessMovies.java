@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
+import msms.comp3350.objects.User;
 import msms.comp3350.persistence.DataAccessor;
 
 public class AccessMovies
@@ -46,6 +47,12 @@ public class AccessMovies
             return getSortedMovies(movies, currField, currAscending);
         }
         return dataAccess.getMoviesAll(movies);
+    }
+
+    public String getMovies(ArrayList<Movie> movies, User user)
+    {
+        movies.clear();
+        return dataAccess.getMovieSublist(movies, user);
     }
 
     public String getSortedMovies(ArrayList<Movie> movies, SortEnums.MovieSortField sortBy, boolean ascending)

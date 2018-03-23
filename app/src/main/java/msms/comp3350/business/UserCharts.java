@@ -19,7 +19,7 @@ public abstract class UserCharts
     {
         AccessUsers access = new AccessUsers();
         ArrayList<User> users = new ArrayList<>();
-        //access.getUsers(users, movie);
+        access.getUsers(users, movie);
         return getUserAges(users);
     }
 

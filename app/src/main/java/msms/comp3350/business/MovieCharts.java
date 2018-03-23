@@ -19,7 +19,7 @@ public abstract class MovieCharts
     {
         AccessMovies access = new AccessMovies();
         ArrayList<Movie> movies = new ArrayList();
-        //access.getMovies(movies, user);
+        access.getMovies(movies, user);
         return getMovieCategories(movies);
     }
 

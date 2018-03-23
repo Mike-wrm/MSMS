@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import msms.comp3350.application.Services;
+import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.persistence.DataAccessor;
 
@@ -34,6 +35,11 @@ public class AccessUsers
         return dataAccess.getUsersAll(users);
     }
 
+    public String getUsers(ArrayList<User> users, Movie movie)
+    {
+        users.clear();
+        return dataAccess.getUserSublist(users, movie);
+    }
 
     public String insertUser(User currentUser)
     {
