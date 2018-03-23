@@ -311,6 +311,51 @@ public class TempData implements DataAccessor
 
         return null;
     }
+    public String getUserSublist(ArrayList<User> userSublist, Movie currentMovie)
+    {
+        ArrayList<WatchedEvent> Views = new ArrayList<WatchedEvent>();
+        getMovieViews(Views, currentMovie);
+
+        for (int count = 0; count < Views.size(); count++)
+        {
+            WatchedEvent currView = Views.get(count);
+
+            for (int count2 = 0; count2 < users.size(); count2++)
+            {
+                User currUser = users.get(count2);
+
+                if (currView.getuID() == currUser.getuID())
+                {
+                    userSublist.add(currUser);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser)
+    {
+        ArrayList<WatchedEvent> Views = new ArrayList<WatchedEvent>();
+        getUserViews(Views, currentUser);
+
+        for (int count = 0; count < Views.size(); count++)
+        {
+            WatchedEvent currView = Views.get(count);
+
+            for (int count2 = 0; count2 < movies.size(); count2++)
+            {
+                Movie currMovie = movies.get(count2);
+
+                if (currView.getmID() == currMovie.getmID())
+                {
+                    movieSublist.add(currMovie);
+                }
+            }
+        }
+
+        return null;
+    }
 
     public String getUserViews(ArrayList<WatchedEvent> currentUserViews, User currentUser)
     {
