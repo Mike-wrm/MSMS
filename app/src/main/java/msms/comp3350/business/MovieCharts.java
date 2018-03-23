@@ -3,6 +3,7 @@ package msms.comp3350.business;
 import java.util.ArrayList;
 
 import msms.comp3350.objects.Movie;
+import msms.comp3350.objects.User;
 
 public abstract class MovieCharts
 {
@@ -11,6 +12,19 @@ public abstract class MovieCharts
         AccessMovies access = new AccessMovies();
         ArrayList<Movie> movies = new ArrayList();
         access.getMovies(movies);
+        return getMovieCategories(movies);
+    }
+
+    public static String[][] getMovieCategories(User user)
+    {
+        AccessMovies access = new AccessMovies();
+        ArrayList<Movie> movies = new ArrayList();
+        //access.getMovies(movies, user);
+        return getMovieCategories(movies);
+    }
+
+    private static String[][] getMovieCategories(ArrayList<Movie> movies)
+    {
         int numMovies = movies.size();
 
         String[] categories = AccessMovies.CATEGORIES;

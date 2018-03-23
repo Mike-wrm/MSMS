@@ -2,6 +2,7 @@ package msms.comp3350.business;
 
 import java.util.ArrayList;
 
+import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 
 public abstract class UserCharts
@@ -9,8 +10,21 @@ public abstract class UserCharts
     public static String[][] getUserAges()
     {
         AccessUsers access = new AccessUsers();
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<User> users = new ArrayList<>();
         access.getUsers(users);
+        return getUserAges(users);
+    }
+
+    public static String[][] getUserAges(Movie movie)
+    {
+        AccessUsers access = new AccessUsers();
+        ArrayList<User> users = new ArrayList<>();
+        //access.getUsers(users, movie);
+        return getUserAges(users);
+    }
+
+    private static String[][] getUserAges(ArrayList<User> users)
+    {
         int numUsers = users.size();
         String[] categories = { "", "0-19", "20-29", "30-39", "40-49", "50-59", "60+", "" };
 
