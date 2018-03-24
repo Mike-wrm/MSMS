@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity
     {
         Intent reportList = new Intent(MainActivity.this, ReportListActivity.class);
         Bundle args = new Bundle();
-        String[][] listInfo = ChartData.getGlobal();
+        String[][] listInfo = ChartData.getGlobalLists();
         args.putStringArray("listinfo", listInfo[0]);
         args.putStringArray("types", listInfo[1]);
         args.putStringArray("subjects", listInfo[2]);
