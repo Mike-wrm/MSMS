@@ -108,36 +108,36 @@ public abstract class MovieCharts
     public static String[][] getMovieRatings()
     {
         AccessWatchedEvents access = new AccessWatchedEvents();
-        ArrayList<WatchedEvent> movies = new ArrayList();
-        //access.getUsersMovies(movies);
-        return getMovieRatings(movies);
+        ArrayList<WatchedEvent> events = new ArrayList();
+        access.getEvents(events);
+        return getMovieRatings(events);
     }
 
     public static String[][] getMovieRatings(Movie movie)
     {
         AccessWatchedEvents access = new AccessWatchedEvents();
-        ArrayList<WatchedEvent> movies = new ArrayList();
-        access.getMoviesUsers(movies, movie);
-        return getMovieRatings(movies);
+        ArrayList<WatchedEvent> events = new ArrayList();
+        access.getMoviesUsers(events, movie);
+        return getMovieRatings(events);
     }
 
     public static String[][] getMovieRatings(User user)
     {
         AccessWatchedEvents access = new AccessWatchedEvents();
-        ArrayList<WatchedEvent> movies = new ArrayList();
-        access.getUsersMovies(movies, user);
-        return getMovieRatings(movies);
+        ArrayList<WatchedEvent> events = new ArrayList();
+        access.getUsersMovies(events, user);
+        return getMovieRatings(events);
     }
 
-    private static String[][] getMovieRatings(ArrayList<WatchedEvent> movies)
+    private static String[][] getMovieRatings(ArrayList<WatchedEvent> events)
     {
-        int numMovies = movies.size();
+        int numMovies = events.size();
         String[] categories = new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "" };
         int[] rawData = new int[categories.length];
 
         for(int i = 0 ; i < numMovies ; i++)
         {
-            WatchedEvent currEvent = movies.get(i);
+            WatchedEvent currEvent = events.get(i);
             rawData[currEvent.getRating()]++;
         }
 
