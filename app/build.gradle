@@ -27,7 +27,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile "com.android.support:appcompat-v7:26.1.0"
+    compile 'com.android.support:appcompat-v7:26.1.0'
     implementation files('libs/hsqldb.jar')
-    compile "com.androidplot:androidplot-core:1.5.3"
+    compile 'com.androidplot:androidplot-core:1.5.3'
+    implementation files('libs/robotium-solo-5.3.1.jar')
 }

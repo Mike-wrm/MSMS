@@ -193,7 +193,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
             AlertDialog.Builder builder = new AlertDialog.Builder(UserDisplayActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setMessage("Are you sure you want to delete this User ?\n" + inputUser.getName());
-            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+            builder.setPositiveButton("Delete Me", new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog, int id)
                 {
