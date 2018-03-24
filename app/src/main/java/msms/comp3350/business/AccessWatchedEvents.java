@@ -9,6 +9,7 @@ import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.persistence.DataAccessor;
+import msms.comp3350.presentation.Messages;
 
 public class AccessWatchedEvents
 {
@@ -17,6 +18,12 @@ public class AccessWatchedEvents
     public AccessWatchedEvents()
     {
         dataAccess = Services.getDataAccess();
+    }
+
+    public String getEvents(ArrayList<WatchedEvent> eventList)
+    {
+        eventList.clear();
+        return dataAccess.getAllWatchedEvents(eventList);
     }
 
     public String getMoviesUsers(ArrayList<WatchedEvent> currentMovieViews, Movie curr)
