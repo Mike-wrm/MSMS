@@ -215,7 +215,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             AlertDialog.Builder builder = new AlertDialog.Builder(MovieDisplayActivity.this);
             builder.setTitle(R.string.app_name);
             builder.setMessage("Are you sure you want to delete this Movie ?\n" + inputMovie.getTitle());
-            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+            builder.setPositiveButton("Delete Me", new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog, int id)
                 {
