@@ -410,7 +410,7 @@ public class DataAccessorObject implements DataAccessor
 
         try
         {
-            command = "Select * from Users,Views where Users.uID=Views.uID";
+            command = "Select * from Users,Views,Movies where Users.uID=Views.uID and Movies.mID=Views.mID";
             resultSet3 = statement3.executeQuery(command);
 
             while (resultSet3.next())
