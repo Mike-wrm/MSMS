@@ -96,13 +96,26 @@ public class DataDisplayActivity extends Activity {
             {
                 switch(subjects[position])
                 {
+                    case "ages":
+                        title = "User Ages";
+                        data = UserCharts.getUserAges(movie);
+                        break;
                     case "categories":
                         title = "Movie Categories";
                         data = MovieCharts.getMovieCategories(user);
                         break;
-                    case "ages":
-                        title = "User Ages";
-                        data = UserCharts.getUserAges(movie);
+                    case "decades":
+                        title = "Movie Release Years";
+                        data = MovieCharts.getMovieDecades(user);
+                        break;
+                    case "genders":
+                        title = "User Genders";
+                        data = UserCharts.getUserGenders(movie);
+                        break;
+                    case "ratings":
+                        title = "Ratings";
+                        if(user != null) data = MovieCharts.getMovieRatings(user);
+                        else data = MovieCharts.getMovieRatings(movie);
                         break;
                 }
                 Bundle chartArgs = new Bundle();

@@ -65,13 +65,25 @@ public class ReportListActivity extends Activity
             {
                 switch(subjects[position])
                 {
+                    case "ages":
+                        title = "User Ages";
+                        data = UserCharts.getUserAges();
+                        break;
                     case "categories":
                         title = "Movie Categories";
                         data = MovieCharts.getMovieCategories();
                         break;
-                    case "ages":
-                        title = "User Ages";
-                        data = UserCharts.getUserAges();
+                    case "decades":
+                        title = "Movie Release Years";
+                        data = MovieCharts.getMovieDecades();
+                        break;
+                    case "genders":
+                        title = "User Genders";
+                        data = UserCharts.getUserGenders();
+                        break;
+                    case "ratings":
+                        title = "Ratings";
+                        data = MovieCharts.getMovieRatings();
                         break;
                 }
                 Bundle chartArgs = new Bundle();

@@ -3,10 +3,14 @@ package msms.comp3350.business;
 public abstract class ChartData
 {
     private static final String[] movieCharts = {
-            "Movies by Category // pie // categories"
+            "Movies by Category // pie // categories",
+            "Movies by Decade // bar // decades",
+            "Movies by Rating // bar // ratings"
     };
     private static final String[] userCharts = {
-            "Users by Age Range // bar // ages"
+            "Users by Age Range // bar // ages",
+            "Users by Gender // pie // genders",
+            "Users by Rating // bar // ratings"
     };
 
     public static String[][] getGlobalLists()
@@ -30,8 +34,6 @@ public abstract class ChartData
             lists[1][i] = temp[1];
             lists[2][i] = temp[2];
         }
-        //String[][] temp = new String[][] { { "Movies by Category", "Users by Age" }, { "pie", "bar"}, { "categories", "ages" } };
-        //return temp;
         return lists;
     }
 

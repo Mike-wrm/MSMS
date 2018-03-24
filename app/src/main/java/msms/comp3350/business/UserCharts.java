@@ -51,4 +51,44 @@ public abstract class UserCharts
 
         return new String[][]{ categories, data };
     }
+
+    public static String[][] getUserGenders()
+    {
+        AccessUsers access = new AccessUsers();
+        ArrayList<User> users = new ArrayList<>();
+        access.getUsers(users);
+        return getUserGenders(users);
+    }
+
+    public static String[][] getUserGenders(Movie movie)
+    {
+        AccessUsers access = new AccessUsers();
+        ArrayList<User> users = new ArrayList<>();
+        access.getUsers(users, movie);
+        return getUserGenders(users);
+    }
+
+    private static String[][] getUserGenders(ArrayList<User> users)
+    {
+        int numUsers = users.size();
+        String[] categories = { "None", "Males", "Females", "Other" };
+
+        int[] rawData = new int[categories.length];
+
+        for(int i = 0 ; i < numUsers ; i++)
+        {
+            char gender = users.get(i).getGender();
+            if(gender == 'm' || gender == 'M') rawData[1]++;
+            else if(gender == 'f' || gender == 'F') rawData[2]++;
+            else rawData[3]++;
+        }
+
+        String[] data = new String[rawData.length];
+        for(int i = 0 ; i < data.length ; i++)
+        {
+            data[i] = Integer.toString(rawData[i]);
+        }
+
+        return new String[][]{ categories, data };
+    }
 }
