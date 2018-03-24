@@ -397,6 +397,41 @@ public class DataAccessorObject implements DataAccessor
         return string.replaceAll("'","''");
     }
 
+    //returns all WatchedEvents
+    public String getAllWatchedEvents(ArrayList<WatchedEvent> allEvents)
+    {
+        WatchedEvent viewX;
+        int myMID, myUID, myRating;
+        String myUserName, myTitle;
+        myUserName = myTitle = EOF;
+        myMID = myUID = myRating = 0;
+
+        result = null;
+
+        try
+        {
+            command = "Select * from Users,Views where Users.uID=Views.uID";
+            resultSet3 = statement3.executeQuery(command);
+
+            while (resultSet3.next())
+            {
+                myUID = resultSet3.getInt("uID");
+                myMID = resultSet3.getInt("mID");
+                myUserName = resultSet3.getString("userName");
+                myTitle = resultSet3.getString("title");
+                myRating = resultSet3.getInt("rating");
+
+                viewX = new WatchedEvent (myUID, myMID, myUserName, myTitle, myRating);
+                allEvents.add(viewX);
+            }
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
 
     //returns a sublist of all users who have watched a certain movie
     public String getUserSublist(ArrayList<User> userSublist, Movie currentMovie)

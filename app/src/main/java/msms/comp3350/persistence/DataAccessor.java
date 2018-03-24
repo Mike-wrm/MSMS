@@ -23,6 +23,7 @@ public interface DataAccessor
     String updateUser(User currentUser);
     String deleteUser(User currentUser);
 
+    String getAllWatchedEvents(ArrayList<WatchedEvent> allEvents);
     String getUserSublist(ArrayList<User> userSublist, Movie currentMovie);
     String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser);
     String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie);

@@ -294,6 +294,11 @@ public class TempData implements DataAccessor
 
         return null;
     }
+    public String getAllWatchedEvents(ArrayList<WatchedEvent> allEvents)
+    {
+        allEvents.addAll(viewers);
+        return null;
+    }
 
     public String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie)
     {
