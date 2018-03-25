@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import msms.comp3350.business.AccessMovies;
+import msms.comp3350.business.Calculate;
 import msms.comp3350.main.R;
 import msms.comp3350.objects.Movie;
 
@@ -39,10 +40,10 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
     // UI Widget Objects:
     private Spinner categorySpinner = null;
-    private Spinner scoreSpinner = null;
     private EditText movieNameText = null;
     private TextView expDateText = null;
     private TextView movieIDText = null;
+    private TextView scoreText = null;
     private EditText releaseYearText = null;
     private EditText descriptionText = null;
     private Button pickDateButton;
@@ -107,19 +108,13 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
 
-        // Setup score spinner:
-        scoreSpinner = (Spinner) findViewById(R.id.score_spinner);
-        ArrayAdapter<CharSequence> scoreAdapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_dropdown_item, AccessMovies.SCORES);
-        scoreSpinner.setAdapter(scoreAdapter);
-        scoreSpinner.setOnItemSelectedListener(this);
-
-        // Setup textEdit boxes:
+        // Setup text boxes:
         movieNameText = (EditText) findViewById(R.id.movie_name_text);
         expDateText = (TextView) findViewById(R.id.exp_year_text);
         movieIDText = (EditText) findViewById(R.id.movie_id_text);
         releaseYearText = (EditText) findViewById(R.id.release_year_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
+        scoreText = (TextView) findViewById(R.id.score_text);
 
         // Setup expiry date textbox and button
         Calendar expDate;
@@ -162,10 +157,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             case R.id.category_spinner:
                 selectedCategory = (String) categorySpinner.getItemAtPosition(pos);
                 break;
-
-            case R.id.score_spinner:
-                selectedScore = (String) scoreSpinner.getItemAtPosition(pos);
-                break;
         }
     }
 
@@ -178,7 +169,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             // If we have an input movie, set all the entries to the input Movie's values
             movieNameText.setText(inputMovie.getTitle());
             releaseYearText.setText(Integer.toString(inputMovie.getReleaseYear()));
-            scoreSpinner.setSelection(inputMovie.getUserScore() - 1);
             String category = inputMovie.getCategory();
             categorySpinner.setSelection(java.util.Arrays.asList(AccessMovies.CATEGORIES).indexOf(category));
 
@@ -193,6 +183,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
             movieIDText.setText("" + inputMovie.getmID());
             descriptionText.setText(inputMovie.getDescription());
+            scoreText.setText(Calculate.avgRating(inputMovie));
         }
         else
         {

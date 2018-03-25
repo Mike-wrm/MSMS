@@ -21,7 +21,7 @@
     <string name="movie_category3">Category 3:</string>
     <string name="movie_license">License Expiration Date (M/D/Y):</string>
     <string name="movie_release">Release Year:</string>
-    <string name="movie_score">Score:</string>
+    <string name="movie_score">Average Score:</string>
     <string name="movie_description">Description:</string>
     <string name="movie_description_hint">What is the movie about?</string>
     <string name="movie_release_hint">YYYY</string>
