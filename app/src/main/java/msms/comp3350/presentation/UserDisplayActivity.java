@@ -158,17 +158,15 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
             ageText.setText(String.valueOf(inputUser.getAge()));
 
             char gender = inputUser.getGender();
-            switch(gender)
-            {
-                case 'm':
-                    genderSpinner.setSelection(0);
-                    break;
-                case 'f':
-                    genderSpinner.setSelection(1);
-                    break;
-                default:
-                    genderSpinner.setSelection(0);
-                    break;
+            if (gender == AccessUsers.GENDERS_CHAR[0]) {
+                genderSpinner.setSelection(0);
+            }
+            else if (gender == AccessUsers.GENDERS_CHAR[1]) {
+                genderSpinner.setSelection(1);
+            }
+            else {
+                Messages.warning(this, "Unknown gender: defaulted to first option");
+                genderSpinner.setSelection(0);
             }
 
             datePickerDialog = new DatePickerDialog(UserDisplayActivity.this, UserDisplayActivity.this, expYear, expMonth, expDay);
