@@ -29,7 +29,7 @@ public class Calculate
             }
 
             avgScore = ((double) totalScore) / ((double) listSize);
-            returnString = String.format("%.1f", avgScore);
+            returnString = String.format("%.1f/10", avgScore);
         }
 
         return returnString;

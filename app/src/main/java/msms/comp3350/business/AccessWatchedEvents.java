@@ -1,15 +1,12 @@
 package msms.comp3350.business;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 
 import msms.comp3350.application.Services;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.persistence.DataAccessor;
-import msms.comp3350.presentation.Messages;
 
 public class AccessWatchedEvents
 {

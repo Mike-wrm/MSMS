@@ -302,7 +302,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
             // New movie is created and added here:
             Movie newMovie = new Movie(Integer.parseInt(movieID), name, Integer.parseInt(releaseYear),
-                    Integer.parseInt(selectedScore), category, expDate, description);
+                    0, category, expDate, description);
 
             //Starting the previous Intent
             Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
@@ -314,7 +314,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         {
             inputMovie.setTitle(name);
             inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
-            inputMovie.setUserScore(Integer.parseInt(selectedScore));
+            inputMovie.setUserScore(0);
             inputMovie.setCategory(category);
             inputMovie.setEndDate(expDate);
             inputMovie.setDescription(description);
