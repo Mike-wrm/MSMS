@@ -12,6 +12,7 @@ public class AcceptanceTests
         suite = new TestSuite("Acceptance Tests");
         suite.addTestSuite(UsersTest.class);
         suite.addTestSuite(MoviesTest.class);
+        suite.addTestSuite(ReportsTest.class);
         return suite;
     }
 

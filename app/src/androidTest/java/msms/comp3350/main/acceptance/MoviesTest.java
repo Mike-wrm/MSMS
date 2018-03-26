@@ -35,6 +35,7 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.finishOpenedActivities();
     }
 
+
     // Big Story we want to be able to change movies
     public void testMovieAdd()
     {
@@ -67,7 +68,7 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
 
         Assert.assertTrue(solo.searchText("TestMovie"));
 
-        cleanUp.deleteMovie(new Movie(5, "TestMovie", 1995,  5, "Comedy", Calendar.getInstance(), "Ipsum Lorem..."));
+        cleanUp.deleteMovie(new Movie(5, "TestMovie", 1995, "Comedy", Calendar.getInstance(), "Ipsum Lorem..."));
     }
 
     public void testMovieDelete()
@@ -93,7 +94,7 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
 
         Calendar cleanCal = Calendar.getInstance();
         cleanCal.set(2018,3,11);
-        cleanUp.insertMovie(new Movie(333, "Toy Story", 1995, 10, "Family", cleanCal, "Ipsum Lorem..."));
+        cleanUp.insertMovie(new Movie(333, "Toy Story", 1995, "Family", cleanCal, "Ipsum Lorem..."));
     }
 
     public void testMovieEdit()

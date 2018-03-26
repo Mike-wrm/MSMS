@@ -56,7 +56,7 @@ public class AccessWatchedEventsTest extends TestCase{
         // Check the second movie
         movie = movies.get(1);
         list.getMoviesUsers(watched, movie);
-        assertEquals(1, watched.size());
+        assertEquals(0, watched.size());
 
         // Check the third movie
         movie = movies.get(2);
@@ -66,7 +66,7 @@ public class AccessWatchedEventsTest extends TestCase{
         // Check the fourth Movie
         movie = movies.get(3);
         list.getMoviesUsers(watched, movie);
-        assertEquals(2, watched.size());
+        assertEquals(1, watched.size());
 
         // Check the fifth movie
         movie = movies.get(4);
@@ -125,7 +125,7 @@ public class AccessWatchedEventsTest extends TestCase{
         // Check the fourth user
         user = users.get(3);
         list.getUsersMovies(watched, user);
-        assertEquals(2, watched.size());
+        assertEquals(0, watched.size());
 
         // Check the fifth user
         user = users.get(4);

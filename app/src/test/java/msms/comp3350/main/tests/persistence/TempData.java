@@ -131,12 +131,6 @@ public class TempData implements DataAccessor
         viewed = new WatchedEvent(333,444,"Andrew_Sempai", "Shrek", 2);
         viewers.add(viewed);
 
-        viewed = new WatchedEvent(444,444,"TestBoi", "Shrek", 10);
-        viewers.add(viewed);
-
-        viewed = new WatchedEvent(444,222,"TestBoi", "Eddie Murphy: Raw", 6);
-        viewers.add(viewed);
-
         viewed = new WatchedEvent(555,333,"JiffyPB", "Toy Story", 3);
         viewers.add(viewed);
 
@@ -249,7 +243,6 @@ public class TempData implements DataAccessor
         return null;
     }
 
-
     public String insertUser(User currentUser)
     {
         int index = users.indexOf(currentUser);
@@ -294,6 +287,7 @@ public class TempData implements DataAccessor
 
         return null;
     }
+
     public String getAllWatchedEvents(ArrayList<WatchedEvent> allEvents)
     {
         allEvents.addAll(viewers);
@@ -316,6 +310,7 @@ public class TempData implements DataAccessor
 
         return null;
     }
+
     public String getUserSublist(ArrayList<User> userSublist, Movie currentMovie)
     {
         ArrayList<WatchedEvent> Views = new ArrayList<WatchedEvent>();

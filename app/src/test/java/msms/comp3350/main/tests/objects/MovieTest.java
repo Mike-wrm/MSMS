@@ -1,10 +1,9 @@
 package msms.comp3350.main.tests.objects;
 
 import junit.framework.TestCase;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import msms.comp3350.objects.Movie;
-import msms.comp3350.objects.User;
 
 public class MovieTest extends TestCase
 {

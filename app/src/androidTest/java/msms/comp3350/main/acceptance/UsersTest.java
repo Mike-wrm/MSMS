@@ -31,6 +31,15 @@ public class UsersTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.finishOpenedActivities();
     }
 
+   /* public void testa()
+    {
+        DataAccessor cleanUp = Services.getDataAccess();
+        Calendar cleanCal = Calendar.getInstance();
+        cleanCal.set(2018,4,3);
+        cleanUp.insertUser(new User(111, "Miggles", "anime4life", 21, 'M', cleanCal));
+    }*/
+
+
     // Big Story - Changing Users ---------------------
     public void testEditUser()
     {
