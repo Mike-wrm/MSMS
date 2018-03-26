@@ -34,7 +34,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
     private int expDay = 0;
     private String selectedCategory = "";
     private String releaseYear = "";
-    private String selectedScore = "";
     private String movieID = "";
     private String description = "";
 
@@ -247,7 +246,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         {
             Integer.parseInt(movieID);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e)
+        {
             Messages.warning(this, "Movie ID must be a number.");
             return;
         }
@@ -256,18 +256,9 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         {
             Integer.parseInt(releaseYear);
         }
-        catch (NumberFormatException e) {
-            Messages.warning(this, "Year must be a number.");
-            return;
-        }
-
-        try
-        {
-            Integer.parseInt(selectedScore);
-        }
         catch (NumberFormatException e)
         {
-            Messages.warning(this, "Score must be a number.");
+            Messages.warning(this, "Year must be a number.");
             return;
         }
 
@@ -281,7 +272,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         expDate.set(expYear, expMonth, expDay);
 
         String errorString = AccessMovies.validateMovie(name, Integer.parseInt(releaseYear),
-                Integer.parseInt(selectedScore), category, expDate, description);
+                category, expDate, description);
 
         if (null == errorString && inputMovie == null && v.getId()==R.id.add_movie_button)// Add movie
         {
@@ -293,7 +284,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
 
             // New movie is created and added here:
             Movie newMovie = new Movie(Integer.parseInt(movieID), name, Integer.parseInt(releaseYear),
-                    0, category, expDate, description);
+                    category, expDate, description);
 
             //Starting the previous Intent
             Intent previousScreen = new Intent(getApplicationContext(), MovieListActivity.class);
@@ -305,7 +296,6 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         {
             inputMovie.setTitle(name);
             inputMovie.setReleaseYear(Integer.parseInt(releaseYear));
-            inputMovie.setUserScore(0);
             inputMovie.setCategory(category);
             inputMovie.setEndDate(expDate);
             inputMovie.setDescription(description);

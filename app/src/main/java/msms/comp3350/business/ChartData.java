@@ -2,12 +2,14 @@ package msms.comp3350.business;
 
 public abstract class ChartData
 {
-    private static final String[] movieCharts = {
+    private static final String[] movieCharts =
+    {
             "Movies by Category // pie // categories",
             "Movies by Decade // bar // decades",
             "Movies by Rating // bar // ratings"
     };
-    private static final String[] userCharts = {
+    private static final String[] userCharts =
+    {
             "Users by Age Range // bar // ages",
             "Users by Gender // pie // genders",
             "Users by Rating // bar // ratings"

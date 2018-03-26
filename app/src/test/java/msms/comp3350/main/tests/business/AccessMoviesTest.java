@@ -57,7 +57,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(111, movie.getmID());
         assertEquals("South Park: Bigger, Longer & Uncut", movie.getTitle());
         assertEquals(1999, movie.getReleaseYear());
-        assertEquals(7, movie.getUserScore());
         assertEquals("Comedy", movie.getCategory());
         assertEquals(5, movie.getEndMonth());
         assertEquals(3, movie.getEndDay());
@@ -68,7 +67,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(222, movie.getmID());
         assertEquals("Eddie Murphy: Raw", movie.getTitle());
         assertEquals(1987, movie.getReleaseYear());
-        assertEquals(5, movie.getUserScore());
         assertEquals("Comedy", movie.getCategory());
         assertEquals(7, movie.getEndMonth());
         assertEquals(23, movie.getEndDay());
@@ -79,7 +77,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(333, movie.getmID());
         assertEquals("Toy Story", movie.getTitle());
         assertEquals(1995, movie.getReleaseYear());
-        assertEquals(10, movie.getUserScore());
         assertEquals("Family", movie.getCategory());
         assertEquals(4, movie.getEndMonth());
         assertEquals(11, movie.getEndDay());
@@ -90,7 +87,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(444, movie.getmID());
         assertEquals("Shrek", movie.getTitle());
         assertEquals(2001, movie.getReleaseYear());
-        assertEquals(8, movie.getUserScore());
         assertEquals("Family", movie.getCategory());
         assertEquals(7, movie.getEndMonth());
         assertEquals(7, movie.getEndDay());
@@ -101,7 +97,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(555, movie.getmID());
         assertEquals("Friday the 13th", movie.getTitle());
         assertEquals(2009, movie.getReleaseYear());
-        assertEquals(3, movie.getUserScore());
         assertEquals("Horror", movie.getCategory());
         assertEquals(5, movie.getEndMonth());
         assertEquals(1, movie.getEndDay());
@@ -112,7 +107,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(666, movie.getmID());
         assertEquals("The Ring", movie.getTitle());
         assertEquals(2002, movie.getReleaseYear());
-        assertEquals(6, movie.getUserScore());
         assertEquals("Horror", movie.getCategory());
         assertEquals(7, movie.getEndMonth());
         assertEquals(23, movie.getEndDay());
@@ -123,7 +117,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(777, movie.getmID());
         assertEquals("Mission Impossible: Rogue Nation", movie.getTitle());
         assertEquals(2015, movie.getReleaseYear());
-        assertEquals(8, movie.getUserScore());
         assertEquals("Action", movie.getCategory());
         assertEquals(12, movie.getEndMonth());
         assertEquals(31, movie.getEndDay());
@@ -134,7 +127,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(888, movie.getmID());
         assertEquals("Transformers: The Last Knight", movie.getTitle());
         assertEquals(2017, movie.getReleaseYear());
-        assertEquals(2, movie.getUserScore());
         assertEquals("Action", movie.getCategory());
         assertEquals(12, movie.getEndMonth());
         assertEquals(31, movie.getEndDay());
@@ -145,7 +137,6 @@ public class AccessMoviesTest extends TestCase
         assertEquals(999, movie.getmID());
         assertEquals("Terminator 2: Judgement Day", movie.getTitle());
         assertEquals(1991, movie.getReleaseYear());
-        assertEquals(8, movie.getUserScore());
         assertEquals("Action", movie.getCategory());
         assertEquals(11, movie.getEndMonth());
         assertEquals(1, movie.getEndDay());
@@ -164,7 +155,7 @@ public class AccessMoviesTest extends TestCase
 
 
         //Lets see if I add something like a sequel
-        testData.insertMovie(new Movie(23, "Shrek 2",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+        testData.insertMovie(new Movie(23, "Shrek 2",2008,"Family", Calendar.getInstance(), "Ipsum Lorem..."));
 
         movies.clear();
         testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
@@ -178,7 +169,7 @@ public class AccessMoviesTest extends TestCase
         assertEquals("Shrek 2", movie.getTitle());
 
         // Lets see if I add something that is spelt almost the same
-        testData.insertMovie(new Movie(535, "Shrec",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+        testData.insertMovie(new Movie(535, "Shrec",2008,"Family", Calendar.getInstance(), "Ipsum Lorem..."));
 
         movies.clear();
         testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
@@ -193,7 +184,7 @@ public class AccessMoviesTest extends TestCase
 
         // I add a movie that has no name
         // Lets see if I add something that is spelt almost the same
-        testData.insertMovie(new Movie(25, "",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+        testData.insertMovie(new Movie(25, "",2008,"Family", Calendar.getInstance(), "Ipsum Lorem..."));
 
         movies.clear();
         testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
@@ -203,7 +194,7 @@ public class AccessMoviesTest extends TestCase
         assertEquals("", movie.getTitle());
 
         // What if I add two movies with the same name
-        testData.insertMovie(new Movie(26, "Shrek",2008, 8, "Family", Calendar.getInstance(), "Ipsum Lorem..."));
+        testData.insertMovie(new Movie(26, "Shrek",2008,"Family", Calendar.getInstance(), "Ipsum Lorem..."));
 
         movies.clear();
         testData.getMoviesAllSorted(movies, SortEnums.MovieSortField.TITLE, true);
@@ -232,8 +223,8 @@ public class AccessMoviesTest extends TestCase
         assertNotNull(movies);
         assertFalse(movies.isEmpty());
 
-        Movie testMovie1 = new Movie(55, "testMovie", 1999, 84, "Family", endDate, "testing");
-        Movie testMovie2 = new Movie(56, "testMovie2", 1998, 84, "Family", endDate, "testing");
+        Movie testMovie1 = new Movie(55, "testMovie", 1999,"Family", endDate, "testing");
+        Movie testMovie2 = new Movie(56, "testMovie2", 1998, "Family", endDate, "testing");
 
         assertNull(list.insertMovie(testMovie1));
         resetMovies(movies);
@@ -301,28 +292,24 @@ public class AccessMoviesTest extends TestCase
         System.out.println("\nTesting Validate Features in AccessMovies");
 
         // Valid movie
-        assertNull(AccessMovies.validateMovie("testMovie", 1999, 5, "Family", dayInFuture, "testing"));
+        assertNull(AccessMovies.validateMovie("testMovie", 1999, "Family", dayInFuture, "testing"));
         // Invalid title
-        assertEquals("You need to name your movie.", AccessMovies.validateMovie("", 1999, 5, "Family", dayInFuture, "testing") );
-        assertEquals("You need to name your movie.", AccessMovies.validateMovie(null, 1999, 5, "Family", dayInFuture, "testing"));
+        assertEquals("You need to name your movie.", AccessMovies.validateMovie("", 1999,"Family", dayInFuture, "testing") );
+        assertEquals("You need to name your movie.", AccessMovies.validateMovie(null, 1999,"Family", dayInFuture, "testing"));
         // Invalid year
-        assertEquals("Invalid year entry. Movies did not exist during this time.", AccessMovies.validateMovie("testMovie", 1899, 5, "Family", dayInFuture, "testing"));
-        assertEquals("Invalid year entry. Can't add movies from beyond current year.", AccessMovies.validateMovie("testMovie", 9001, 5, "Family", dayInFuture, "testing"));
-        // Invalid score
-        assertEquals("Invalid user score entered.", AccessMovies.validateMovie("testMovie", 1999, 0, "Family", dayInFuture, "testing"));
-        assertEquals("Invalid user score entered.", AccessMovies.validateMovie("testMovie", 1999, 9001, "Family", dayInFuture, "testing"));
-        assertEquals("Invalid user score entered.", AccessMovies.validateMovie("testMovie", 1999, -9001, "Family", dayInFuture, "testing"));
+        assertEquals("Invalid year entry. Movies did not exist during this time.", AccessMovies.validateMovie("testMovie", 1899,"Family", dayInFuture, "testing"));
+        assertEquals("Invalid year entry. Can't add movies from beyond current year.", AccessMovies.validateMovie("testMovie", 9001,"Family", dayInFuture, "testing"));
         // Invalid category
-        assertEquals("You need to select a category.", AccessMovies.validateMovie("testMovie", 1999, 5, null, dayInFuture, "testing"));
+        assertEquals("You need to select a category.", AccessMovies.validateMovie("testMovie", 1999,null, dayInFuture, "testing"));
         //assertEquals("Invalid category entry. Enter at least one category.", AccessMovies.validateMovie("testMovie", 1999, 5, "", dayInFuture, "testing"));
         // Invalid date
-        assertEquals("Invalid date entry. Can't acquire movie rights beyond 5 years.", AccessMovies.validateMovie("testMovie", 1999, 5, "Family", yearInFarFuture, "testing"));
-        assertEquals("Invalid date entry. Can't enter movie with expired rights", AccessMovies.validateMovie("testMovie", 1999, 5, "Family", yearInPast, "testing"));
-        assertEquals("Invalid date entry. Can't enter movie with expired rights", AccessMovies.validateMovie("testMovie", 1999, 5, "Family", monthInPast, "testing"));
-        assertEquals("Invalid date entry. Can't enter movie with expired rights", AccessMovies.validateMovie("testMovie", 1999, 5, "Family", dayInPast, "testing"));
+        assertEquals("Invalid date entry. Can't acquire movie rights beyond 5 years.", AccessMovies.validateMovie("testMovie", 1999,"Family", yearInFarFuture, "testing"));
+        assertEquals("Invalid date entry. Can't enter movie with expired rights", AccessMovies.validateMovie("testMovie", 1999,"Family", yearInPast, "testing"));
+        assertEquals("Invalid date entry. Can't enter movie with expired rights", AccessMovies.validateMovie("testMovie", 1999,"Family", monthInPast, "testing"));
+        assertEquals("Invalid date entry. Can't enter movie with expired rights", AccessMovies.validateMovie("testMovie", 1999,"Family", dayInPast, "testing"));
         // Invalid description
-        assertEquals("You need to enter a description.", AccessMovies.validateMovie("testMovie", 1999, 5, "Family", dayInFuture, ""));
-        assertEquals("You need to enter a description.", AccessMovies.validateMovie("testMovie", 1999, 5, "Family", dayInFuture, null));
+        assertEquals("You need to enter a description.", AccessMovies.validateMovie("testMovie", 1999,"Family", dayInFuture, ""));
+        assertEquals("You need to enter a description.", AccessMovies.validateMovie("testMovie", 1999,"Family", dayInFuture, null));
 
         // Test mID uniqueness
         assertFalse(AccessMovies.mIDUnique(111));
@@ -330,12 +317,12 @@ public class AccessMoviesTest extends TestCase
 
         // If we add it, it cant be unique
         assertTrue(AccessMovies.mIDUnique(113));
-        list.insertMovie(new Movie(113,"testMovie", 1999, 5, "Family", dayInFuture, ""));
+        list.insertMovie(new Movie(113,"testMovie", 1999,"Family", dayInFuture, ""));
         assertFalse(AccessMovies.mIDUnique(113));
 
         // If we delete it, the mID can be unique again.
         assertFalse(AccessMovies.mIDUnique(113));
-        list.deleteMovie(new Movie(113,"testMovie", 1999, 5, "Family", dayInFuture, ""));
+        list.deleteMovie(new Movie(113,"testMovie", 1999,"Family", dayInFuture, ""));
         assertTrue(AccessMovies.mIDUnique(113));
 
     }
@@ -345,8 +332,8 @@ public class AccessMoviesTest extends TestCase
         Calendar endDate = Calendar.getInstance();
         endDate.set(5,2,20);
 
-        Movie testMovie1 = new Movie(1, "testMovie", 1999, 84, "Family", endDate, "testing");
-        Movie testMovie2 = new Movie(2, "testMovie2", 1998, 84, "Family", endDate, "testing");
+        Movie testMovie1 = new Movie(1, "testMovie", 1999,"Family", endDate, "testing");
+        Movie testMovie2 = new Movie(2, "testMovie2", 1998,"Family", endDate, "testing");
 
         System.out.println("\nTesting Search Feature in AccessMovies");
 

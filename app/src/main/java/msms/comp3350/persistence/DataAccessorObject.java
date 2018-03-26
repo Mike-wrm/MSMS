@@ -100,10 +100,10 @@ public class DataAccessorObject implements DataAccessor
     public String getMoviesSQL (ArrayList<Movie> currentMovies, String strCommand)
     {
         Movie movieX;
-        int myID, myReleaseYear, myUserScore, myEndMonth, myEndDay, myEndYear;
+        int myID, myReleaseYear, myEndMonth, myEndDay, myEndYear;
         String myTitle, myCat, myDescription;
         myTitle = myCat = myDescription = EOF;
-        myID = myReleaseYear = myUserScore = myEndDay = myEndMonth = myEndYear = 0;
+        myID = myReleaseYear = myEndDay = myEndMonth = myEndYear = 0;
 
         result = null;
 
@@ -132,7 +132,7 @@ public class DataAccessorObject implements DataAccessor
                 expDate.set(myEndYear, myEndMonth-1, myEndDay);
                 myDescription = resultSet1.getString("description");
 
-                movieX = new Movie (myID, myTitle, myReleaseYear, myUserScore, myCat, expDate, myDescription);
+                movieX = new Movie (myID, myTitle, myReleaseYear, myCat, expDate, myDescription);
                 currentMovies.add(movieX);
             }
         }
@@ -531,10 +531,10 @@ public class DataAccessorObject implements DataAccessor
     public String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser)
     {
         Movie movieX;
-        int myID, myReleaseYear, myUserScore, myEndMonth, myEndDay, myEndYear;
+        int myID, myReleaseYear, myEndMonth, myEndDay, myEndYear;
         String myTitle, myCat, myDescription;
         myTitle = myCat = myDescription = EOF;
-        myID = myReleaseYear = myUserScore = myEndDay = myEndMonth = myEndYear = 0;
+        myID = myReleaseYear = myEndDay = myEndMonth = myEndYear = 0;
 
         result = null;
 
@@ -548,7 +548,6 @@ public class DataAccessorObject implements DataAccessor
                 myID = resultSet4.getInt("mID");
                 myTitle = resultSet4.getString("title");
                 myReleaseYear = resultSet4.getInt("releaseYear");
-                myUserScore = resultSet4.getInt("userScore");
                 myCat = resultSet4.getString("category1");
                 myEndMonth = resultSet4.getInt("endMonth");
                 myEndDay = resultSet4.getInt("endDay");
@@ -557,7 +556,7 @@ public class DataAccessorObject implements DataAccessor
                 expDate.set(myEndYear, myEndMonth-1, myEndDay);
                 myDescription = resultSet4.getString("description");
 
-                movieX = new Movie (myID, myTitle, myReleaseYear, myUserScore, myCat, expDate, myDescription);
+                movieX = new Movie (myID, myTitle, myReleaseYear, myCat, expDate, myDescription);
                 movieSublist.add(movieX);
             }
         }

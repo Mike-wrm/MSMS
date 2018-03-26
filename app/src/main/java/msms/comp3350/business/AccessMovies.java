@@ -1,7 +1,6 @@
 package msms.comp3350.business;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 import msms.comp3350.application.Services;
@@ -16,10 +15,6 @@ public class AccessMovies
     private static SortEnums.MovieSortField currField = null;
     private static boolean currAscending = true;
 
-    public static final String[] SCORES =
-    {
-            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-    };
 
     public static final String[] CATEGORIES =
     {
@@ -120,7 +115,7 @@ public class AccessMovies
     }
 
 
-    public static String validateMovie(String title, int releaseYear, int userScore, String category, Calendar expDate, String description)
+    public static String validateMovie(String title, int releaseYear, String category, Calendar expDate, String description)
     /* Checks that user input is safe; if not, an error is returned as a String
      * Note that mID is not checked here: it only
      */
@@ -173,11 +168,6 @@ public class AccessMovies
         else if (releaseYear > Calendar.getInstance().get(Calendar.YEAR))
         {
             errorString = "Invalid year entry. Can't add movies from beyond current year.";
-        }
-
-        if(!Arrays.asList(SCORES).contains(Integer.toString(userScore)))
-        {
-            errorString = "Invalid user score entered.";
         }
 
         if(null == description || description.equals(""))

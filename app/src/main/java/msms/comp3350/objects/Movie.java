@@ -8,7 +8,6 @@ public class Movie implements Serializable
 	private int mID;
 	private String title;
 	private int releaseYear;
-	private int userScore;
 	private String category;
 	private Calendar endDate;
 	private int endMonth;
@@ -16,12 +15,11 @@ public class Movie implements Serializable
 	private int endYear;
 	private String description;
 
-    public Movie (int mID, String title, int releaseYear, int userScore, String category, Calendar endDate, String description)
+    public Movie (int mID, String title, int releaseYear, String category, Calendar endDate, String description)
     {
         this.mID = mID;
         this.title = title;
         this.releaseYear = releaseYear;
-        this.userScore = userScore;
 		this.category = category;
         this.endDate = endDate;
         processDate();
@@ -47,10 +45,6 @@ public class Movie implements Serializable
 	public int getReleaseYear()
 	{
 		return releaseYear;
-	}
-	public int getUserScore()
-	{
-		return userScore;
 	}
 	public String getCategory()
     {
@@ -89,10 +83,6 @@ public class Movie implements Serializable
 	public void setReleaseYear(int releaseYear)
 	{
 		this.releaseYear = releaseYear;
-	}
-	public void setUserScore(int userScore)
-	{
-		this.userScore = userScore;
 	}
 	public void setCategory(String category)
 	{
