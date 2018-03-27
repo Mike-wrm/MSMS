@@ -598,6 +598,7 @@ public class DataAccessorObject implements DataAccessor
 
     public String insertWatchedEvent(WatchedEvent currEvent)
     {
+        // This method is only used for repairing the DB when we delete users that have ratings attached to them
         String values;
         result = null;
 
