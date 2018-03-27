@@ -13,13 +13,14 @@ public class BusinessTests
         suite.addTestSuite(AccessMoviesTest.class);
         suite.addTestSuite(AccessUserTest.class);
         suite.addTestSuite(AccessWatchedEventsTest.class);
+        suite.addTestSuite(CalculateTest.class);
+        suite.addTestSuite(ChartDataTest.class);
         suite.addTestSuite(MovieChartsTest.class);
         suite.addTestSuite(UserChartsTest.class);
         return suite;
     }
-
-
 }
+
 
 
 

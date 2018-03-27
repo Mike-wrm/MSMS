@@ -31,15 +31,6 @@ public class UsersTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.finishOpenedActivities();
     }
 
-   /* public void testa()
-    {
-        DataAccessor cleanUp = Services.getDataAccess();
-        Calendar cleanCal = Calendar.getInstance();
-        cleanCal.set(2018,4,3);
-        cleanUp.insertUser(new User(111, "Miggles", "anime4life", 21, 'M', cleanCal));
-    }*/
-
-
     // Big Story - Changing Users ---------------------
     public void testEditUser()
     {
@@ -74,7 +65,7 @@ public class UsersTest extends ActivityInstrumentationTestCase2<MainActivity>
         Assert.assertTrue(solo.searchText("Micheal"));
         Assert.assertTrue(solo.searchText("newPass"));
         Assert.assertTrue(solo.searchText("28"));
-        //Assert.assertTrue(solo.isSpinnerTextSelected("Female"));
+        Assert.assertTrue(solo.isSpinnerTextSelected("Female"));
 
 
         // Clean up
@@ -84,7 +75,7 @@ public class UsersTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.enterText(1, "anime4life");
         solo.clearEditText(2);
         solo.enterText(2, "21");
-        solo.pressSpinnerItem(0, 0);
+        solo.pressSpinnerItem(0, -1);
         solo.clickOnButton("Update");
     }
 
@@ -150,6 +141,36 @@ public class UsersTest extends ActivityInstrumentationTestCase2<MainActivity>
         Assert.assertTrue(solo.searchText("4/30/2018"));
         Assert.assertTrue(solo.isSpinnerTextSelected("Male"));
     }
+
+    // Big Story -  Sort ----------------------------------
+    public void testSortUser()
+    {
+        solo.waitForActivity("MainActivity");
+        solo.clickOnButton("Users");
+        solo.assertCurrentActivity("Expected activity UserListActivity", "UserListActivity");
+
+        // Check the Ascending sort
+        solo.clickOnScreen(1146, 65);
+        solo.clickOnScreen(1146, 192);
+
+
+        solo.clickOnScreen(107, 244);
+        Assert.assertTrue(solo.searchText("333"));
+
+        solo.goBack();
+        solo.goBack();
+
+
+        // Check the descending sort
+        solo.waitForActivity("MainActivity");
+        solo.clickOnButton("Users");
+        solo.assertCurrentActivity("Expected activity UserListActivity", "UserListActivity");
+
+        solo.clickOnScreen(1146, 65);
+        solo.clickOnScreen(1146, 297);
+
+        solo.clickOnScreen(150, 240);
+        Assert.assertTrue(solo.searchText("666")); }
 
 
 }

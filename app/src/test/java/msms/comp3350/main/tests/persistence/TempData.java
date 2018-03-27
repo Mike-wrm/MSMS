@@ -402,4 +402,9 @@ public class TempData implements DataAccessor
         return null;
     }
 
+    public String insertWatchedEvent(WatchedEvent currEvent)
+    {
+        viewers.add(currEvent);
+        return null;
+    }
 }
