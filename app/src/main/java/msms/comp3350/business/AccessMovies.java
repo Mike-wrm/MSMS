@@ -71,7 +71,6 @@ public class AccessMovies
         return dataAccess.deleteMovie(currentMovie);
     }
 
-
     public ArrayList<Movie> searchMovie(String targetStr)
     {
         /* Searches all movies, and returns an ArrayList<Movie> referencing movies whose titles contain
