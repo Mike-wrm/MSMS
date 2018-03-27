@@ -596,6 +596,28 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
+    public String insertWatchedEvent(WatchedEvent currEvent)
+    {
+        String values;
+        result = null;
+
+        try
+        {
+            values = currEvent.getuID()
+                    +", " +currEvent.getmID()
+                    +", " +currEvent.getRating()
+                    +"";
+            command = "Insert into Views " +" Values(" +values +")";
+            updateCount = statement1.executeUpdate(command);
+            result = checkWarning(statement1, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
+        }
+
+        return result;
+    }
 
     public String checkWarning(Statement st, int updateCount)
     {

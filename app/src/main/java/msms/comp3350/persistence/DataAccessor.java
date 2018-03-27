@@ -29,4 +29,5 @@ public interface DataAccessor
     String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser);
     String getMovieViews(ArrayList<WatchedEvent> currentMovieViews, Movie currentMovie);
     String getUserViews(ArrayList<WatchedEvent> currentUserViews, User currentUser);
+    String insertWatchedEvent(WatchedEvent currEvent);
 }
