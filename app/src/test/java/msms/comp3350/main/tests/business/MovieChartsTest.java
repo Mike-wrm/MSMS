@@ -10,7 +10,6 @@ import msms.comp3350.business.MovieCharts;
 import msms.comp3350.main.tests.persistence.TempData;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
-import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.persistence.DataAccessor;
 
 public class MovieChartsTest extends TestCase{

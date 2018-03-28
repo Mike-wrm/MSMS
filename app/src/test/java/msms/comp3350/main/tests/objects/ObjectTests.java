@@ -3,8 +3,6 @@ package msms.comp3350.main.tests.objects;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import msms.comp3350.objects.WatchedEvent;
-
 public class ObjectTests
 {
     public static TestSuite suite;
