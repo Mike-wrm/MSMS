@@ -31,7 +31,6 @@ public class AccessUserTest extends TestCase
 
     public void tearDown()
     {
-        //list = null;
         System.out.println("Finished an AccessUser Test");
         testData.close();
     }
@@ -226,7 +225,6 @@ public class AccessUserTest extends TestCase
         assertEquals("'John Doe' cannot be found.", list.updateUser(testUser1));
 
         assertNull(list.insertUser(testUser1));
-
     }
 
     public void testSortingAccessUser()

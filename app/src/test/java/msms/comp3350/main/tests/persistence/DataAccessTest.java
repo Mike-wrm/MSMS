@@ -987,7 +987,6 @@ public class DataAccessTest extends TestCase
         assertEquals("Wonder_Woman", watch.getUserName());
         assertEquals("Transformers: The Last Knight", watch.getMovieTitle());
         assertEquals(2, watch.getRating());
-
     }
 
     public void testGetMovieSublist()

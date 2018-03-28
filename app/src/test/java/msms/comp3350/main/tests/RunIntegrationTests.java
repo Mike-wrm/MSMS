@@ -17,4 +17,5 @@ public class RunIntegrationTests
         suite.addTest(IntegrationTests.suite());
         return suite;
     }
+
 }

@@ -92,7 +92,6 @@ public class AccessWatchedEventsTest extends TestCase{
         movie =  movies.get(8);
         list.getMoviesUsers(watched, movie);
         assertEquals(2, watched.size());
-
     }
 
     public void testWatchedEventsAccessUsers()
@@ -136,7 +135,5 @@ public class AccessWatchedEventsTest extends TestCase{
         user = users.get(5);
         list.getUsersMovies(watched, user);
         assertEquals(2, watched.size());
-
-
     }
 }

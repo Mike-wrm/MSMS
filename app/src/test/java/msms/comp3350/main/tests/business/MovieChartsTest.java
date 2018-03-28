@@ -417,7 +417,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][7]);
         assertEquals("1", data[1][8]);
         assertEquals("1", data[1][9]);
-
     }
 
     public void testMovieChartCategoriesUserGive()
@@ -519,7 +518,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][7]);
         assertEquals("0", data[1][8]);
         assertEquals("0", data[1][9]);
-
     }
 
     public void testMovieChartDecadesGet()
@@ -850,7 +848,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][6]);
         assertEquals("1", data[1][7]);
         assertEquals("2", data[1][8]);
-
     }
 
     public void testMovieChartDecadesUserGive()
@@ -946,7 +943,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][6]);
         assertEquals("1", data[1][7]);
         assertEquals("0", data[1][8]);
-
     }
 
     public void testMovieChartRatingsGet()
@@ -1104,9 +1100,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][9]);
         assertEquals("0", data[1][10]);
         assertEquals("0", data[1][11]);
-
-
-
     }
 
     public void testMovieChartRatingMovieGive()
