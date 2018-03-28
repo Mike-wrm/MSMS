@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 
 import msms.comp3350.business.AccessUsers;
@@ -53,7 +52,6 @@ public class UserListActivity extends AppCompatActivity
         Toolbar userListToolbar = (Toolbar) findViewById(R.id.user_list_toolbar);
         setSupportActionBar(userListToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);// Don't display activity title in toolbar
-
 
         userList = new ArrayList<User>();
         userAccessor = new AccessUsers();

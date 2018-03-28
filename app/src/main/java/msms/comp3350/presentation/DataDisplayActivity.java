@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,13 +25,14 @@ import msms.comp3350.objects.User;
 import msms.comp3350.objects.WatchedEvent;
 
 
-public class DataDisplayActivity extends Activity {
-
+public class DataDisplayActivity extends Activity
+{
     private ArrayList<WatchedEvent> currentViews;
     private AccessWatchedEvents accessEvents;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_display);
 
@@ -60,6 +60,7 @@ public class DataDisplayActivity extends Activity {
             finish();
             return;
         }
+
         ArrayList<String> reports = new ArrayList<>(Arrays.asList(listInfo[0]));
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, reports);
         final String[] types = listInfo[1];
@@ -92,6 +93,7 @@ public class DataDisplayActivity extends Activity {
                     chart = new Intent(DataDisplayActivity.this, PieChartActivity.class);
                     break;
             }
+
             if(null != chart)
             {
                 switch(subjects[position])
@@ -118,6 +120,7 @@ public class DataDisplayActivity extends Activity {
                         else data = MovieCharts.getMovieRatings(movie);
                         break;
                 }
+
                 Bundle chartArgs = new Bundle();
                 chartArgs.putString("title", title);
                 chartArgs.putStringArray("labels", data[0]);
