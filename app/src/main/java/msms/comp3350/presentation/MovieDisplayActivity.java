@@ -86,6 +86,8 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
             deleteButton.setEnabled(false);
             Button dataButton = (Button) findViewById(R.id.user_data_button);
             dataButton.setEnabled(false);
+            TextView averageScore = (TextView) findViewById(R.id.score_textview);
+            averageScore.setText("");
         }
 
         // Set the "back" button to go back to the list of movies
