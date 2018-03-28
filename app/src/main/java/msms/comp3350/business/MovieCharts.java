@@ -47,7 +47,6 @@ public abstract class MovieCharts
                     }
                 }
             }
-
         }
 
         String[] data = new String[rawData.length];

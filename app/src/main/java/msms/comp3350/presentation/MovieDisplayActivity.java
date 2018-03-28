@@ -53,7 +53,7 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
         expYear = year;
         expMonth = monthOfYear;
         expDay = dayOfMonth;
-        displayData();
+        updateDate();
     }
 
     @Override
@@ -196,6 +196,18 @@ public class MovieDisplayActivity extends Activity implements AdapterView.OnItem
                             .append(expDay).append("/")
                             .append(expYear).append(" "));
         }
+    }
+
+    public void updateDate()
+    {
+        datePickerDialog = new DatePickerDialog(MovieDisplayActivity.this, MovieDisplayActivity.this, expYear, expMonth, expDay);
+        // set expDate in EditText
+        expDateText.setText(
+                new StringBuilder()
+                        // Month is 0 based so add 1
+                        .append(expMonth + 1).append("/")
+                        .append(expDay).append("/")
+                        .append(expYear).append(" "));
     }
 
     public void buttonMovieDeleteOnClick(View v)

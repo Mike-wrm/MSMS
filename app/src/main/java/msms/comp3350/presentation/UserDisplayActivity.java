@@ -51,7 +51,7 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         expYear = year;
         expMonth = monthOfYear;
         expDay = dayOfMonth;
-        displayData();
+        updateDate();
     }
 
     @Override
@@ -184,6 +184,18 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         }
     }
 
+    public void updateDate()
+    {
+        datePickerDialog = new DatePickerDialog(UserDisplayActivity.this, UserDisplayActivity.this, expYear, expMonth, expDay);
+        // set expDate in EditText
+        expDateText.setText(
+                new StringBuilder()
+                        // Month is 0 based so add 1
+                        .append(expMonth + 1).append("/")
+                        .append(expDay).append("/")
+                        .append(expYear).append(" "));
+    }
+
     public void buttonUserDeleteOnClick(View v)
     {
         if (inputUser != null)
@@ -253,7 +265,8 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         expDate.set(expYear, expMonth, expDay);
 
         String errorString = AccessUsers.validateUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expDate);
-        if (null == errorString) {
+        if (null == errorString)
+        {
             inputUser.setuID(Integer.parseInt(userID));
             inputUser.setName(name);
             inputUser.setPass(password);

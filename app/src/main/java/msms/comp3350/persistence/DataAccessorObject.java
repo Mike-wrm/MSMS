@@ -221,21 +221,18 @@ public class DataAccessorObject implements DataAccessor
 
     public String deleteMovie(Movie currentMovie)
     {
-        result = deleteMovieViews(currentMovie);
+        result = null;
 
-        if (result != null)
+        try
         {
-            try
-            {
-                command = "Delete from Movies where mID=" +currentMovie.getmID() +"";
-                //System.out.println(cmdString);
-                updateCount = statement1.executeUpdate(command);
-                result = checkWarning(statement1, updateCount);
-            }
-            catch (Exception e)
-            {
-                result = processSQLError(e);
-            }
+            command = "Delete from Movies where mID=" +currentMovie.getmID() +"";
+            //System.out.println(cmdString);
+            updateCount = statement1.executeUpdate(command);
+            result = checkWarning(statement1, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
         }
 
         return result;
@@ -387,20 +384,17 @@ public class DataAccessorObject implements DataAccessor
     
     public String deleteUser(User currentUser)
     {
-        result = deleteUserViews(currentUser);
+        result = null;
 
-        if (result != null)
+        try
         {
-            try
-            {
-                command = "Delete from Users where uID=" +currentUser.getuID() +"";
-                updateCount = statement2.executeUpdate(command);
-                result = checkWarning(statement2, updateCount);
-            }
-            catch (Exception e)
-            {
-                result = processSQLError(e);
-            }
+            command = "Delete from Users where uID=" +currentUser.getuID() +"";
+            updateCount = statement2.executeUpdate(command);
+            result = checkWarning(statement2, updateCount);
+        }
+        catch (Exception e)
+        {
+            result = processSQLError(e);
         }
 
         return result;
@@ -525,25 +519,6 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
-    //want to delete all of the views of a particular movie
-    public String deleteMovieViews(Movie currentMovie)
-    {
-        result = null;
-
-        try
-        {
-            command = "Delete from Views where mID=" +currentMovie.getmID() +"";
-            updateCount = statement2.executeUpdate(command);
-            result = checkWarning(statement2, updateCount);
-        }
-        catch (Exception e)
-        {
-            result = processSQLError(e);
-        }
-
-        return result;
-    }
-
     //returns a sublist of all movies watched by a user
     public String getMovieSublist(ArrayList<Movie> movieSublist, User currentUser)
     {
@@ -621,16 +596,21 @@ public class DataAccessorObject implements DataAccessor
         return result;
     }
 
-    //want to delete all of the views of a particular user
-    public String deleteUserViews(User currentUser)
+    public String insertWatchedEvent(WatchedEvent currEvent)
     {
+        // This method is only used for repairing the DB when we delete users that have ratings attached to them
+        String values;
         result = null;
 
         try
         {
-            command = "Delete from Views where uID=" +currentUser.getuID() +"";
-            updateCount = statement2.executeUpdate(command);
-            result = checkWarning(statement2, updateCount);
+            values = currEvent.getuID()
+                    +", " +currEvent.getmID()
+                    +", " +currEvent.getRating()
+                    +"";
+            command = "Insert into Views " +" Values(" +values +")";
+            updateCount = statement1.executeUpdate(command);
+            result = checkWarning(statement1, updateCount);
         }
         catch (Exception e)
         {
@@ -639,8 +619,6 @@ public class DataAccessorObject implements DataAccessor
 
         return result;
     }
-
-
 
     public String checkWarning(Statement st, int updateCount)
     {

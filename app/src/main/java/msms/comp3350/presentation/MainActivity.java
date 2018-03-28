@@ -13,25 +13,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import msms.comp3350.application.Main;
 import msms.comp3350.application.Services;
 import msms.comp3350.business.ChartData;
 import msms.comp3350.main.R;
 
 public class MainActivity extends AppCompatActivity
 {
-    //At this stage, to use this either use "temp" for stub
-    //or use "DB" to use database
-    //other strings will not work for dbName
-    public static final String dbName = "DB";
-    private static String dbPathName = "database/DB";
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         copyDatabaseToDevice();
+        Main.startUp();
         setContentView(R.layout.activity_main);
-        Services.createDataAccess(dbName);
     }
 
     @Override
@@ -49,20 +44,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
-    }
-
-    public static String getDBPathName()
-    {
-        if (dbPathName == null)
-            return dbName;
-        else
-            return dbPathName;
-    }
-
-    private static void setDBPathName(String pathName)
-    {
-        System.out.println("Setting DB path to: " + pathName);
-        dbPathName = pathName;
     }
 
     private void copyDatabaseToDevice()
@@ -84,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
-            setDBPathName(dataDirectory.toString() + "/" + dbName);
+            Main.setDBPathName(dataDirectory.toString() + "/" + Main.dbName);
 
         }
         catch (IOException ioe)

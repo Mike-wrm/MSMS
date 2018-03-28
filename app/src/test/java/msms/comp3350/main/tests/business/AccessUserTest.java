@@ -31,7 +31,6 @@ public class AccessUserTest extends TestCase
 
     public void tearDown()
     {
-        //list = null;
         System.out.println("Finished an AccessUser Test");
         testData.close();
     }
@@ -226,7 +225,71 @@ public class AccessUserTest extends TestCase
         assertEquals("'John Doe' cannot be found.", list.updateUser(testUser1));
 
         assertNull(list.insertUser(testUser1));
+    }
 
+    public void testSortingAccessUser()
+    {
+        ArrayList<User> users;
+        User user;
+
+        System.out.println("\nTesting Accessing the Data Access for the users");
+
+        users = new ArrayList<User>();
+
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, false));
+        assertEquals(6, users.size());
+
+        user = users.get(0);
+        assertEquals(666, user.getuID());
+        assertEquals("Wonder_Woman", user.getName());
+
+        user = users.get(1);
+        assertEquals(444, user.getuID());
+        assertEquals("TestBoi", user.getName());
+
+        user = users.get(2);
+        assertEquals(222, user.getuID());
+        assertEquals("Smoo", user.getName());
+
+        user = users.get(3);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        user = users.get(4);
+        assertEquals(555, user.getuID());
+        assertEquals("JiffyPB", user.getName());
+
+        user = users.get(5);
+        assertEquals(333, user.getuID());
+        assertEquals("Andrew_Sempai", user.getName());
+
+        // test ascending order
+        users.clear();
+        assertNull(testData.getUsersAllSorted(users, SortEnums.UserSortField.USERNAME, true));
+
+        user = users.get(0);
+        assertEquals(333, user.getuID());
+        assertEquals("Andrew_Sempai", user.getName());
+
+        user = users.get(1);
+        assertEquals(555, user.getuID());
+        assertEquals("JiffyPB", user.getName());
+
+        user = users.get(2);
+        assertEquals(111, user.getuID());
+        assertEquals("Miggles", user.getName());
+
+        user = users.get(3);
+        assertEquals(222, user.getuID());
+        assertEquals("Smoo", user.getName());
+
+        user = users.get(4);
+        assertEquals(444, user.getuID());
+        assertEquals("TestBoi", user.getName());
+
+        user = users.get(5);
+        assertEquals(666, user.getuID());
+        assertEquals("Wonder_Woman", user.getName());
     }
 
     public void testValidate()

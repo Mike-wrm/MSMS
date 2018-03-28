@@ -65,7 +65,6 @@ public class CalculateTest extends TestCase{
 
         movie = movies.get(8);
         assertEquals("3.0/10", Calculate.avgRating(movie));
-
     }
 
 }

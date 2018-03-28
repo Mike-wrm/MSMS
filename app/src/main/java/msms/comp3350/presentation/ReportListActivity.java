@@ -18,7 +18,6 @@ import msms.comp3350.main.R;
 
 public class ReportListActivity extends Activity
 {
-    private int selectedPosition = -1;
     private ListView reportList = null;
 
     @Override
@@ -45,54 +44,54 @@ public class ReportListActivity extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                reportList.setItemChecked(position, true);
+                String title = "no data";
+                String[][] data = { { "none" }, { "1" } };
 
-            reportList.setItemChecked(position, true);
-            String title = "no data";
-            String[][] data = { { "none" }, { "1" } };
-
-            // Launch a new intent:
-            Intent chart = null;
-            switch(types[position])
-            {
-                case "bar":
-                    chart = new Intent(ReportListActivity.this, BarChartActivity.class);
-                    break;
-                case "pie":
-                    chart = new Intent(ReportListActivity.this, PieChartActivity.class);
-                    break;
-            }
-            if(null != chart)
-            {
-                switch(subjects[position])
+                // Launch a new intent:
+                Intent chart = null;
+                switch(types[position])
                 {
-                    case "ages":
-                        title = "User Ages";
-                        data = UserCharts.getUserAges();
+                    case "bar":
+                        chart = new Intent(ReportListActivity.this, BarChartActivity.class);
                         break;
-                    case "categories":
-                        title = "Movie Categories";
-                        data = MovieCharts.getMovieCategories();
-                        break;
-                    case "decades":
-                        title = "Movie Release Years";
-                        data = MovieCharts.getMovieDecades();
-                        break;
-                    case "genders":
-                        title = "User Genders";
-                        data = UserCharts.getUserGenders();
-                        break;
-                    case "ratings":
-                        title = "Ratings";
-                        data = MovieCharts.getMovieRatings();
+                    case "pie":
+                        chart = new Intent(ReportListActivity.this, PieChartActivity.class);
                         break;
                 }
-                Bundle chartArgs = new Bundle();
-                chartArgs.putString("title", title);
-                chartArgs.putStringArray("labels", data[0]);
-                chartArgs.putStringArray("data", data[1]);
-                chart.putExtras(chartArgs);
-                ReportListActivity.this.startActivity(chart);
-            }
+                if(null != chart)
+                {
+                    switch(subjects[position])
+                    {
+                        case "ages":
+                            title = "User Ages";
+                            data = UserCharts.getUserAges();
+                            break;
+                        case "categories":
+                            title = "Movie Categories";
+                            data = MovieCharts.getMovieCategories();
+                            break;
+                        case "decades":
+                            title = "Movie Release Years";
+                            data = MovieCharts.getMovieDecades();
+                            break;
+                        case "genders":
+                            title = "User Genders";
+                            data = UserCharts.getUserGenders();
+                            break;
+                        case "ratings":
+                            title = "Ratings";
+                            data = MovieCharts.getMovieRatings();
+                            break;
+                    }
+
+                    Bundle chartArgs = new Bundle();
+                    chartArgs.putString("title", title);
+                    chartArgs.putStringArray("labels", data[0]);
+                    chartArgs.putStringArray("data", data[1]);
+                    chart.putExtras(chartArgs);
+                    ReportListActivity.this.startActivity(chart);
+                }
             }
         });
     }

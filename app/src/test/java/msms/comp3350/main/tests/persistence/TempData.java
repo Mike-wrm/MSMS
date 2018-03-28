@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Calendar;
 
+import msms.comp3350.application.Main;
 import msms.comp3350.business.SortEnums;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
 import msms.comp3350.persistence.DataAccessor;
 import msms.comp3350.objects.WatchedEvent;
-import msms.comp3350.presentation.MainActivity;
 
 
 public class TempData implements DataAccessor
@@ -28,7 +28,7 @@ public class TempData implements DataAccessor
 
     public TempData()   //used for testing
     {
-        this(MainActivity.dbName);
+        this(Main.dbName);
     }
 
     public void open(String dbName)
@@ -125,10 +125,10 @@ public class TempData implements DataAccessor
         viewed = new WatchedEvent(222,999,"Smoo", "Terminator 2: Judgement Day", 4);
         viewers.add(viewed);
 
-        viewed = new WatchedEvent(333,666,"Andrew_Sempai", "The Ring", 8);
+        viewed = new WatchedEvent(333,444,"Andrew_Sempai", "Shrek", 2);
         viewers.add(viewed);
 
-        viewed = new WatchedEvent(333,444,"Andrew_Sempai", "Shrek", 2);
+        viewed = new WatchedEvent(333,666,"Andrew_Sempai", "The Ring", 8);
         viewers.add(viewed);
 
         viewed = new WatchedEvent(555,333,"JiffyPB", "Toy Story", 3);
@@ -137,10 +137,10 @@ public class TempData implements DataAccessor
         viewed = new WatchedEvent(555,777,"JiffyPB", "Mission Impossible: Rogue Nation", 7);
         viewers.add(viewed);
 
-        viewed = new WatchedEvent(666,888,"Wonder_Woman", "Transformers: The Last Knight", 2);
+        viewed = new WatchedEvent(666,666,"Wonder_Woman", "The Ring", 9);
         viewers.add(viewed);
 
-        viewed = new WatchedEvent(666,666,"Wonder_Woman", "The Ring", 9);
+        viewed = new WatchedEvent(666,888,"Wonder_Woman", "Transformers: The Last Knight", 2);
         viewers.add(viewed);
     }
 
@@ -402,4 +402,10 @@ public class TempData implements DataAccessor
         return null;
     }
 
+    public String insertWatchedEvent(WatchedEvent currEvent)
+    {
+        // This method is only used for repairing the DB when we delete users that have ratings attached to them
+        viewers.add(currEvent);
+        return null;
+    }
 }

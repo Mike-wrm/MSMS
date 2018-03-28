@@ -324,8 +324,7 @@ public class AccessMoviesTest extends TestCase
         assertFalse(AccessMovies.mIDUnique(113));
         list.deleteMovie(new Movie(113,"testMovie", 1999,"Family", dayInFuture, ""));
         assertTrue(AccessMovies.mIDUnique(113));
-
-    }
+        }
 
     public void testSearching()
     {

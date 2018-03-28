@@ -1,6 +1,5 @@
 package msms.comp3350.charts;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 

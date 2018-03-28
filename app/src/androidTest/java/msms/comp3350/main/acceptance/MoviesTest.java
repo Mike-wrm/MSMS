@@ -35,7 +35,6 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.finishOpenedActivities();
     }
 
-
     // Big Story we want to be able to change movies
     public void testMovieAdd()
     {
@@ -52,7 +51,6 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.enterText(2, "1995");
         solo.enterText(3, "5");
         solo.pressSpinnerItem(0,3);
-        solo.pressSpinnerItem(1, 4);
 
         solo.clickOnButton("Change Date");
         solo.setDatePicker(0, 2019, 11, 21);
@@ -71,15 +69,39 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         cleanUp.deleteMovie(new Movie(5, "TestMovie", 1995, "Comedy", Calendar.getInstance(), "Ipsum Lorem..."));
     }
 
-    public void testMovieDelete()
+    public void testMovieInvalid()
     {
-
         solo.waitForActivity("MainActivity");
         solo.clickOnButton("Movies");
         solo.assertCurrentActivity("Expected activity MovieListActivity", "MovieListActivity");
 
-        Assert.assertTrue(solo.searchText("Toy Story"));
-        solo.clickOnText("Toy Story");
+        Assert.assertTrue(solo.searchButton("Add Movie"));
+        solo.clickOnButton("Add Movie");
+
+        solo.enterText(0, "TestMovie");
+        solo.enterText(1, "Ipsum Lorem...");
+        solo.enterText(2, "1995");
+        solo.enterText(3, "test");
+        solo.pressSpinnerItem(0,3);
+
+        solo.clickOnButton("Change Date");
+        solo.setDatePicker(0, 2019, 11, 21);
+        solo.clickOnButton(7);
+
+        solo.clickOnButton("Add");
+
+        Assert.assertTrue(solo.searchText("Warning"));
+        Assert.assertTrue(solo.searchText("Movie ID must be a number."));
+    }
+
+    public void testMovieDelete()
+    {
+        solo.waitForActivity("MainActivity");
+        solo.clickOnButton("Movies");
+        solo.assertCurrentActivity("Expected activity MovieListActivity", "MovieListActivity");
+
+        Assert.assertTrue(solo.searchText("Eddie Murphy: Raw"));
+        solo.clickOnText("Eddie Murphy: Raw");
 
         solo.clickOnButton("Delete");
         solo.clickOnButton("Delete Me");
@@ -90,11 +112,11 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.clickOnButton("Movies");
         solo.assertCurrentActivity("Expected activity MovieListActivity", "MovieListActivity");
 
-        Assert.assertFalse(solo.searchText("Toy Story"));
+        Assert.assertFalse(solo.searchText("Eddie Murphy: Raw"));
 
         Calendar cleanCal = Calendar.getInstance();
-        cleanCal.set(2018,3,11);
-        cleanUp.insertMovie(new Movie(333, "Toy Story", 1995, "Family", cleanCal, "Ipsum Lorem..."));
+        cleanCal.set(2018,6,23);
+        cleanUp.insertMovie(new Movie(222,"Eddie Murphy: Raw", 1987,"Comedy", cleanCal, "Ipsum Lorem..."));
     }
 
     public void testMovieEdit()
@@ -106,6 +128,10 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         Assert.assertTrue(solo.searchText("Toy Story"));
         solo.clickOnText("Toy Story");
 
+        solo.clickOnButton("Change Date");
+        solo.setDatePicker(0, 2019, 11, 21);
+        solo.clickOnButton(7);
+
         solo.clearEditText(0);
         solo.enterText(0, "new movie");
         solo.clearEditText(1);
@@ -113,7 +139,6 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.clearEditText(2);
         solo.enterText(2, "2002");
         solo.pressSpinnerItem(0, 1);
-        solo.pressSpinnerItem(1, -4);
         solo.clickOnButton("Update");
 
         // Lets go back home
@@ -133,8 +158,10 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         Assert.assertTrue(solo.searchText("new description"));
         Assert.assertTrue(solo.searchText("2002"));
         Assert.assertTrue(solo.isSpinnerTextSelected(0, "Comedy"));
-        Assert.assertTrue(solo.isSpinnerTextSelected(1, "6"));
 
+        solo.clickOnButton("Change Date");
+        solo.setDatePicker(0, 2018, 3, 11);
+        solo.clickOnButton(7);
 
         solo.clearEditText(0);
         solo.enterText(0, "Toy Story");
@@ -143,7 +170,6 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.clearEditText(2);
         solo.enterText(2, "1995");
         solo.pressSpinnerItem(0, -1);
-        solo.pressSpinnerItem(1, 4);
         solo.clickOnButton("Update");
     }
 
@@ -181,7 +207,6 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         Assert.assertTrue(solo.searchText("2001"));
         Assert.assertTrue(solo.searchText("Ipsum Lorem..."));
         Assert.assertTrue(solo.isSpinnerTextSelected(0, "Family"));
-        Assert.assertTrue(solo.isSpinnerTextSelected(1, "8"));
     }
 
     //Big Story - Search Functionality
@@ -192,7 +217,7 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.clickOnButton("Movies");
         solo.assertCurrentActivity("Expected activity MovieListActivity", "MovieListActivity");
 
-        solo.clickOnScreen(695, 105);
+        solo.clickOnScreen(1042, 168);
 
         solo.typeText(0, "South Park");
 
@@ -216,11 +241,11 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.assertCurrentActivity("Expected activity MovieListActivity", "MovieListActivity");
 
         // Check the Ascending sort
-        solo.clickOnScreen(750, 105);
-        solo.clickOnScreen(750, 150);
+        solo.clickOnScreen(1101, 148);
+        solo.clickOnScreen(1101, 225);
 
-        solo.clickOnScreen(100, 160);
-        Assert.assertTrue(solo.searchText("Eddie Murphy: Raw"));
+        solo.clickOnScreen(150, 240);
+        Assert.assertTrue(solo.searchText("222"));
 
         solo.goBack();
         solo.goBack();
@@ -230,11 +255,11 @@ public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>
         solo.clickOnButton("Movies");
         solo.assertCurrentActivity("Expected activity MovieListActivity", "MovieListActivity");
 
-        solo.clickOnScreen(750, 105);
-        solo.clickOnScreen(750, 230);
+        solo.clickOnScreen(1101, 148);
+        solo.clickOnScreen(1101, 345);
 
-        solo.clickOnScreen(100, 160);
-        Assert.assertTrue(solo.searchText("Transformers: The Last Knight"));
+        solo.clickOnScreen(150, 240);
+        Assert.assertTrue(solo.searchText("888"));
     }
 
 }

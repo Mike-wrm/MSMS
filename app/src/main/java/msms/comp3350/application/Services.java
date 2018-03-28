@@ -2,7 +2,6 @@ package msms.comp3350.application;
 
 import msms.comp3350.persistence.DataAccessor;
 import msms.comp3350.persistence.DataAccessorObject;
-import msms.comp3350.presentation.MainActivity;
 
 
 public class Services
@@ -14,7 +13,7 @@ public class Services
             if(null == dataAccessService)
             {
                 dataAccessService = new DataAccessorObject(dbName);
-                dataAccessService.open(MainActivity.getDBPathName());
+                dataAccessService.open(Main.getDBPathName());
             }
             return dataAccessService;
     }
@@ -24,7 +23,7 @@ public class Services
         if(null == dataAccessService)
         {
            dataAccessService = altDataAccess;
-            dataAccessService.open("temp");
+           dataAccessService.open(Main.getDBPathName());
         }
         return dataAccessService;
     }

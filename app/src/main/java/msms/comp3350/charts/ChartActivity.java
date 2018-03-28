@@ -3,13 +3,14 @@ package msms.comp3350.charts;
 import android.app.Activity;
 import android.os.Bundle;
 
-public abstract class ChartActivity extends Activity {
-
+public abstract class ChartActivity extends Activity
+{
     String title;
     String[] labels, data;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         // extract the bundled data

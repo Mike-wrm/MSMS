@@ -485,7 +485,6 @@ public class UserChartsTest extends TestCase{
         assertEquals("0", data[1][5]);
         assertEquals("0", data[1][6]);
         assertEquals("0", data[1][7]);
-
     }
 
     public void testUserChartsGenderGet()
@@ -710,7 +709,6 @@ public class UserChartsTest extends TestCase{
         assertEquals("2", data[1][1]);
         assertEquals("0", data[1][2]);
         assertEquals("0", data[1][3]);
-
     }
 
 }

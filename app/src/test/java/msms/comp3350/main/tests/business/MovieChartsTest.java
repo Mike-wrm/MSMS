@@ -10,7 +10,6 @@ import msms.comp3350.business.MovieCharts;
 import msms.comp3350.main.tests.persistence.TempData;
 import msms.comp3350.objects.Movie;
 import msms.comp3350.objects.User;
-import msms.comp3350.objects.WatchedEvent;
 import msms.comp3350.persistence.DataAccessor;
 
 public class MovieChartsTest extends TestCase{
@@ -417,7 +416,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][7]);
         assertEquals("1", data[1][8]);
         assertEquals("1", data[1][9]);
-
     }
 
     public void testMovieChartCategoriesUserGive()
@@ -519,7 +517,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("0", data[1][7]);
         assertEquals("0", data[1][8]);
         assertEquals("0", data[1][9]);
-
     }
 
     public void testMovieChartDecadesGet()
@@ -850,7 +847,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][6]);
         assertEquals("1", data[1][7]);
         assertEquals("2", data[1][8]);
-
     }
 
     public void testMovieChartDecadesUserGive()
@@ -946,7 +942,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][6]);
         assertEquals("1", data[1][7]);
         assertEquals("0", data[1][8]);
-
     }
 
     public void testMovieChartRatingsGet()
@@ -1104,9 +1099,6 @@ public class MovieChartsTest extends TestCase{
         assertEquals("1", data[1][9]);
         assertEquals("0", data[1][10]);
         assertEquals("0", data[1][11]);
-
-
-
     }
 
     public void testMovieChartRatingMovieGive()
