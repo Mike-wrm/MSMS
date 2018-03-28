@@ -265,7 +265,8 @@ public class UserDisplayActivity extends Activity implements AdapterView.OnItemS
         expDate.set(expYear, expMonth, expDay);
 
         String errorString = AccessUsers.validateUser(Integer.parseInt(userID), name, password, Integer.parseInt(age), selectedGender, expDate);
-        if (null == errorString) {
+        if (null == errorString)
+        {
             inputUser.setuID(Integer.parseInt(userID));
             inputUser.setName(name);
             inputUser.setPass(password);
