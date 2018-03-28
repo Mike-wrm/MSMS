@@ -81,6 +81,5 @@ public class UserTest extends TestCase
         assertTrue(user2.equals(ageChanged));
         assertTrue(user2.equals(genderChanged));
         assertTrue(user2.equals(dateChanged));
-
     }
 }
