@@ -18,7 +18,6 @@ import msms.comp3350.main.R;
 
 public class ReportListActivity extends Activity
 {
-    private int selectedPosition = -1;
     private ListView reportList = null;
 
     @Override
@@ -86,6 +85,7 @@ public class ReportListActivity extends Activity
                         data = MovieCharts.getMovieRatings();
                         break;
                 }
+
                 Bundle chartArgs = new Bundle();
                 chartArgs.putString("title", title);
                 chartArgs.putStringArray("labels", data[0]);
