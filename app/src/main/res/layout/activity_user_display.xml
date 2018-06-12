@@ -5,7 +5,7 @@
     android:id="@+id/title_activity_user_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="msms.comp.presentation.UserDisplayActivity"
+    tools:context="msms.comp3350.presentation.UserDisplayActivity"
     tools:layout_editor_absoluteY="25dp">
 
 

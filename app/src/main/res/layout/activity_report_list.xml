@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="msms.comp.presentation.ReportListActivity">
+    tools:context="msms.comp3350.presentation.ReportListActivity">
 
     <ListView
         android:id="@+id/listReports"

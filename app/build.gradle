@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "msms.comp.msms"
+        applicationId "msms.comp3350.msms"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
@@ -31,6 +31,4 @@ dependencies {
     implementation files('libs/hsqldb.jar')
     compile 'com.androidplot:androidplot-core:1.5.3'
     implementation files('libs/robotium-solo-5.3.1.jar')
-    compile 'com.android.support:support-v4:13.0.+'
-    compile 'commons-io:commons-io:+'
 }
