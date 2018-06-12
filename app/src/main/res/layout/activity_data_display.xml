@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="msms.comp3350.presentation.DataDisplayActivity">
+    tools:context="msms.comp.presentation.DataDisplayActivity">
 
     <TextView
         android:id="@+id/history_info_text"
