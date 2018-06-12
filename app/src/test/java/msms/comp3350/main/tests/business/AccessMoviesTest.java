@@ -1,15 +1,15 @@
-package msms.comp3350.main.tests.business;
+package msms.comp.main.tests.business;
 
 import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import msms.comp3350.application.Services;
-import msms.comp3350.business.AccessMovies;
-import msms.comp3350.business.SortEnums;
-import msms.comp3350.main.tests.persistence.TempData;
-import msms.comp3350.objects.Movie;
-import msms.comp3350.persistence.DataAccessor;
+import msms.comp.application.Services;
+import msms.comp.business.AccessMovies;
+import msms.comp.business.SortEnums;
+import msms.comp.main.tests.persistence.TempData;
+import msms.comp.objects.Movie;
+import msms.comp.persistence.DataAccessor;
 
 public class AccessMoviesTest extends TestCase
 {

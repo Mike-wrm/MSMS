@@ -1,15 +1,15 @@
-package msms.comp3350.main.tests.persistence;
+package msms.comp.main.tests.persistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Calendar;
 
-import msms.comp3350.application.Main;
-import msms.comp3350.business.SortEnums;
-import msms.comp3350.objects.Movie;
-import msms.comp3350.objects.User;
-import msms.comp3350.persistence.DataAccessor;
-import msms.comp3350.objects.WatchedEvent;
+import msms.comp.application.Main;
+import msms.comp.business.SortEnums;
+import msms.comp.objects.Movie;
+import msms.comp.objects.User;
+import msms.comp.persistence.DataAccessor;
+import msms.comp.objects.WatchedEvent;
 
 
 public class TempData implements DataAccessor

@@ -1,8 +1,8 @@
-package msms.comp3350.main.tests.objects;
+package msms.comp.main.tests.objects;
 
 import junit.framework.TestCase;
 
-import msms.comp3350.objects.WatchedEvent;
+import msms.comp.objects.WatchedEvent;
 
 public class WatchedEventTest extends TestCase{
 

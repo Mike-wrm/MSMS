@@ -1,11 +1,11 @@
-package msms.comp3350.main.tests.integration;
+package msms.comp.main.tests.integration;
 
 import junit.framework.TestCase;
 
-import msms.comp3350.application.Main;
-import msms.comp3350.application.Services;
-import msms.comp3350.persistence.DataAccessor;
-import msms.comp3350.main.tests.persistence.DataAccessTest;
+import msms.comp.application.Main;
+import msms.comp.application.Services;
+import msms.comp.persistence.DataAccessor;
+import msms.comp.main.tests.persistence.DataAccessTest;
 
 public class DataAccessHSQLDBTest extends TestCase {
 

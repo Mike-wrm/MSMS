@@ -1,9 +1,9 @@
-package msms.comp3350.main.acceptance;
+package msms.comp.main.acceptance;
 
 import junit.framework.Assert;
 import com.robotium.solo.Solo;
 import android.test.ActivityInstrumentationTestCase2;
-import msms.comp3350.presentation.MainActivity;
+import msms.comp.presentation.MainActivity;
 
 
 public class ReportsTest extends ActivityInstrumentationTestCase2<MainActivity>

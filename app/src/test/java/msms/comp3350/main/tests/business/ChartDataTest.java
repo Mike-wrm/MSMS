@@ -1,8 +1,8 @@
-package msms.comp3350.main.tests.business;
+package msms.comp.main.tests.business;
 
 import junit.framework.TestCase;
 
-import msms.comp3350.business.ChartData;
+import msms.comp.business.ChartData;
 
 public class ChartDataTest extends TestCase {
 

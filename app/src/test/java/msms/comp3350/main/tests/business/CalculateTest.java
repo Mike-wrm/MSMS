@@ -1,14 +1,14 @@
-package msms.comp3350.main.tests.business;
+package msms.comp.main.tests.business;
 
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
-import msms.comp3350.application.Services;
-import msms.comp3350.business.Calculate;
-import msms.comp3350.main.tests.persistence.TempData;
-import msms.comp3350.objects.Movie;
-import msms.comp3350.persistence.DataAccessor;
+import msms.comp.application.Services;
+import msms.comp.business.Calculate;
+import msms.comp.main.tests.persistence.TempData;
+import msms.comp.objects.Movie;
+import msms.comp.persistence.DataAccessor;
 
 public class CalculateTest extends TestCase{
 

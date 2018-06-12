@@ -1,19 +1,19 @@
-package msms.comp3350.main.tests.integration;
+package msms.comp.main.tests.integration;
 
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import msms.comp3350.application.Main;
-import msms.comp3350.application.Services;
-import msms.comp3350.business.AccessMovies;
-import msms.comp3350.business.AccessUsers;
-import msms.comp3350.business.AccessWatchedEvents;
-import msms.comp3350.business.SortEnums;
-import msms.comp3350.objects.Movie;
-import msms.comp3350.objects.User;
-import msms.comp3350.objects.WatchedEvent;
+import msms.comp.application.Main;
+import msms.comp.application.Services;
+import msms.comp.business.AccessMovies;
+import msms.comp.business.AccessUsers;
+import msms.comp.business.AccessWatchedEvents;
+import msms.comp.business.SortEnums;
+import msms.comp.objects.Movie;
+import msms.comp.objects.User;
+import msms.comp.objects.WatchedEvent;
 
 public class BusinessPersistenceSeamTest extends TestCase {
 

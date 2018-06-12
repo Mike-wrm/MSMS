@@ -1,4 +1,4 @@
-package msms.comp3350.main.acceptance;
+package msms.comp.main.acceptance;
 
 
 import com.robotium.solo.Solo;
@@ -8,10 +8,10 @@ import junit.framework.Assert;
 
 import java.util.Calendar;
 
-import msms.comp3350.application.Services;
-import msms.comp3350.objects.Movie;
-import msms.comp3350.persistence.DataAccessor;
-import msms.comp3350.presentation.MainActivity;
+import msms.comp.application.Services;
+import msms.comp.objects.Movie;
+import msms.comp.persistence.DataAccessor;
+import msms.comp.presentation.MainActivity;
 
 
 public class MoviesTest extends ActivityInstrumentationTestCase2<MainActivity>

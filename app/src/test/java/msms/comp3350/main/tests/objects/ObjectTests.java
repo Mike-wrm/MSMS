@@ -1,4 +1,4 @@
-package msms.comp3350.main.tests.objects;
+package msms.comp.main.tests.objects;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

@@ -1,4 +1,4 @@
-package msms.comp3350.main.tests.persistence;
+package msms.comp.main.tests.persistence;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

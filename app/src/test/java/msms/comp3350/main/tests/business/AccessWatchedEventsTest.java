@@ -1,16 +1,16 @@
-package msms.comp3350.main.tests.business;
+package msms.comp.main.tests.business;
 
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
-import msms.comp3350.application.Services;
-import msms.comp3350.business.AccessWatchedEvents;
-import msms.comp3350.main.tests.persistence.TempData;
-import msms.comp3350.objects.Movie;
-import msms.comp3350.objects.User;
-import msms.comp3350.objects.WatchedEvent;
-import msms.comp3350.persistence.DataAccessor;
+import msms.comp.application.Services;
+import msms.comp.business.AccessWatchedEvents;
+import msms.comp.main.tests.persistence.TempData;
+import msms.comp.objects.Movie;
+import msms.comp.objects.User;
+import msms.comp.objects.WatchedEvent;
+import msms.comp.persistence.DataAccessor;
 
 public class AccessWatchedEventsTest extends TestCase{
 

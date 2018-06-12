@@ -1,4 +1,4 @@
-package msms.comp3350.main.acceptance;
+package msms.comp.main.acceptance;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

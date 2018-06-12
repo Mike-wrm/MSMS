@@ -1,4 +1,4 @@
-package msms.comp3350.main.acceptance;
+package msms.comp.main.acceptance;
 
 import junit.framework.Assert;
 
@@ -7,10 +7,10 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.Calendar;
 
-import msms.comp3350.application.Services;
-import msms.comp3350.objects.User;
-import msms.comp3350.persistence.DataAccessor;
-import msms.comp3350.presentation.MainActivity;
+import msms.comp.application.Services;
+import msms.comp.objects.User;
+import msms.comp.persistence.DataAccessor;
+import msms.comp.presentation.MainActivity;
 
 public class UsersTest extends ActivityInstrumentationTestCase2<MainActivity>
 {

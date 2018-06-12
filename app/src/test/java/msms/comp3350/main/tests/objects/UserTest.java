@@ -1,8 +1,8 @@
-package msms.comp3350.main.tests.objects;
+package msms.comp.main.tests.objects;
 
 import junit.framework.TestCase;
 import java.util.Calendar;
-import msms.comp3350.objects.User;
+import msms.comp.objects.User;
 
 public class UserTest extends TestCase
 {
